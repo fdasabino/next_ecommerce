@@ -1,0 +1,46 @@
+.colorful {
+  width: 31.4px;
+  height: 31.4px;
+  border-radius: 50%;
+  background: #ffd82e;
+  transform-origin: top;
+  display: grid;
+  animation: colorful-3vgb5t 1s infinite linear;
+
+  &:before,
+  &:after {
+    content: "";
+    grid-area: 1/1;
+    background: #ff6761;
+    border-radius: 50%;
+    transform-origin: top;
+    animation: inherit;
+    animation-name: colorful-k94uub;
+  }
+
+  &:after {
+    background: #474bff;
+    --s: 180deg;
+  }
+}
+
+@keyframes colorful-3vgb5t {
+  0%,
+  20% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes colorful-k94uub {
+  50% {
+    transform: rotate(var(--s, 90deg));
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}

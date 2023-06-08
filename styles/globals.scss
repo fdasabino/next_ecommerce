@@ -1,0 +1,70 @@
+@import url(https://fonts.googleapis.com/css?family=Mulish:200,300,regular,200italic,300italic,italic,500italic,600italic|Rajdhani:300,500,600,700);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 500;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: "Mulish", sans-serif;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

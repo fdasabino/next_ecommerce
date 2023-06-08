@@ -1,7 +1,8 @@
 {
-  "name": "next_ecommerce",
+  "name": "next_e-commerce",
   "version": "0.1.0",
   "private": true,
+  "owner": "Francisco Sabino",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +14,7 @@
     "eslint-config-next": "13.4.4",
     "next": "13.4.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sass": "^1.63.2"
   }
 }
