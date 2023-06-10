@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import Button from "../Button/Button";
 import styles from "./Header.module.scss";
 
 const Header = () => {
+  const router = useRouter();
   return (
     <div className={styles.header}>
       <div className={styles.overlay} />
@@ -9,7 +11,9 @@ const Header = () => {
         <p>Super Sale!!! Up to 50% off on selected products</p>
       </div>
       <div className={styles.right}>
-        <Button type="tertiary">Shop now!</Button>
+        <Button onClick={() => router.push("/browse")} type="tertiary">
+          Shop now!
+        </Button>
       </div>
     </div>
   );
