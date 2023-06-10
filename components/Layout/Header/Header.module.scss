@@ -1,5 +1,5 @@
 .header {
-  background-color: #dfdbe5;
+  background-color: $base-white;
   background-image: url("/svgs/glamorous.svg");
   background-position: center center;
   opacity: 1;
@@ -11,7 +11,7 @@
   align-items: center;
   gap: 2rem;
   opacity: 1;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: $base-shadow-3;
   position: relative;
 
   @media (max-width: 800px) {
@@ -19,7 +19,7 @@
   }
 
   .overlay {
-    background-color: rgba(255, 217, 3, 0.9);
+    background-color: $base-warning;
     height: 100%;
     width: 100%;
     position: absolute;
