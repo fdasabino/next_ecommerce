@@ -85,7 +85,7 @@ const Top = () => {
                 </span>
               </li>
             )}
-            {visible && <UserMenu isLoggedIn={isLoggedIn} user={user} />}
+            {visible && <UserMenu isLoggedIn={isLoggedIn} user={user} setVisible={setVisible} />}
           </div>
         </ul>
       </div>

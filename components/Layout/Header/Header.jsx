@@ -11,7 +11,7 @@ const Header = () => {
         <p>Super Sale!!! Up to 50% off on selected products</p>
       </div>
       <div className={styles.right}>
-        <Button onClick={() => router.push("/browse")} type="tertiary">
+        <Button onClick={() => router.push("/browse")} type="primary">
           Shop now!
         </Button>
       </div>

@@ -1,7 +1,7 @@
-.btnPrimary {
-  background-image: linear-gradient(92.88deg, #455eb5 9.16%, #5643cc 43.89%, #673fd7 64.72%);
-  border-radius: 6px;
-  border-style: none;
+//Mixins
+@mixin button-styles {
+  border-radius: 4px;
+  border: none;
   box-sizing: border-box;
   color: #ffffff;
   text-transform: uppercase;
@@ -12,108 +12,69 @@
   height: 2.2rem;
   text-align: center;
   text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.1s ease-in;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   padding: 0 1rem;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin button-background($bgColor, $hoverColor, $activeScale) {
+  background-color: $bgColor;
 
   &:hover {
-    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 10px;
-    transition-duration: 0.1s;
+    background-color: $hoverColor;
+    box-shadow: $base-shadow-3;
   }
+
   &:active {
-    scale: 0.95;
-    transition-duration: 0.1s;
+    transform: scale($activeScale);
+  }
+}
+
+//Buttons
+.btnPrimary {
+  @include button-styles;
+  @if (get-color-type(#008cff) == "blue") {
+    @include button-background(#008cff, lighten(#008cff, 10%), 0.95);
+  } @else if (get-color-type(#008cff) == "green") {
+    @include button-background(#008cff, lighten(#008cff, 15%), 0.95);
+  } @else {
+    @include button-background(#008cff, darken(#008cff, 10%), 0.95);
   }
 }
 
 .btnSecondary {
-  background-image: linear-gradient(92.88deg, #373738 9.16%, #29292b 43.89%, #413d4d 64.72%);
-  border-radius: 6px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #ffffff;
-  text-transform: uppercase;
-  flex-shrink: 0;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  height: 2.2rem;
-  text-align: center;
-  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
-  transition: all 0.5s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  padding: 0 1rem;
-
-  &:hover {
-    box-shadow: rgba(169, 163, 219, 0.5) 0 1px 10px;
-    transition-duration: 0.1s;
-  }
-  &:active {
-    scale: 0.95;
-    transition-duration: 0.1s;
+  @include button-styles;
+  @if (get-color-type(#373738) == "blue") {
+    @include button-background(#373738, lighten(#373738, 10%), 0.95);
+  } @else if (get-color-type(#373738) == "green") {
+    @include button-background(#373738, lighten(#373738, 15%), 0.95);
+  } @else {
+    @include button-background(#373738, darken(#373738, 10%), 0.95);
   }
 }
 
 .btnTertiary {
-  background-image: linear-gradient(92.88deg, #1cbd3f 9.16%, #10c236 43.89%, #5cc91e 64.72%);
-  border-radius: 6px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #ffffff;
-  text-transform: uppercase;
-  flex-shrink: 0;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  height: 2.2rem;
-  text-align: center;
-  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
-  transition: all 0.5s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  padding: 0 1rem;
-
-  &:hover {
-    box-shadow: rgba(16, 172, 68, 0.5) 0 1px 10px;
-    transition-duration: 0.1s;
-  }
-  &:active {
-    scale: 0.95;
-    transition-duration: 0.1s;
+  @include button-styles;
+  @if (get-color-type(#1cbd3f) == "blue") {
+    @include button-background(#1cbd3f, lighten(#1cbd3f, 10%), 0.95);
+  } @else if (get-color-type(#1cbd3f) == "green") {
+    @include button-background(#1cbd3f, lighten(#1cbd3f, 15%), 0.95);
+  } @else {
+    @include button-background(#1cbd3f, darken(#1cbd3f, 10%), 0.95);
   }
 }
 
 .btnDanger {
-  background-image: linear-gradient(92.88deg, #bd1c1c 9.16%, #c21010 43.89%, #c9401e 64.72%);
-  border-radius: 6px;
-  border-style: none;
-  box-sizing: border-box;
-  color: #ffffff;
-  text-transform: uppercase;
-  flex-shrink: 0;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  height: 2.2rem;
-  text-align: center;
-  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
-  transition: all 0.5s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  padding: 0 1rem;
-
-  &:hover {
-    box-shadow: rgba(172, 65, 16, 0.5) 0 1px 10px;
-    transition-duration: 0.1s;
-  }
-  &:active {
-    scale: 0.95;
-    transition-duration: 0.1s;
+  @include button-styles;
+  @if (get-color-type(#bd1c1c) == "blue") {
+    @include button-background(#bd1c1c, lighten(#bd1c1c, 10%), 0.95);
+  } @else if (get-color-type(#bd1c1c) == "green") {
+    @include button-background(#bd1c1c, lighten(#bd1c1c, 15%), 0.95);
+  } @else {
+    @include button-background(#bd1c1c, darken(#bd1c1c, 10%), 0.95);
   }
 }

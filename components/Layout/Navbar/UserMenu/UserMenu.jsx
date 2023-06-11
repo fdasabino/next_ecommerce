@@ -4,9 +4,9 @@ import Button from "../../Button/Button";
 import styles from "./UserMenu.module.scss";
 
 const UserMenu = (props) => {
-  const { isLoggedIn, user } = props;
+  const { isLoggedIn, user, setVisible } = props;
   return (
-    <ul className={styles.user_menu}>
+    <ul className={styles.user_menu} onMouseLeave={() => setVisible(false)}>
       {isLoggedIn ? (
         <div className={styles.user_menu__wrapper}>
           <Image
@@ -17,7 +17,9 @@ const UserMenu = (props) => {
             className={styles.user_menu__img}
           />
           <div className={styles.col}>
-            <span>Welcome back {user}!</span>
+            <span>
+              Welcome back, <br /> {user}!
+            </span>
             <Button type="danger">Sign out</Button>
           </div>
         </div>
@@ -27,21 +29,21 @@ const UserMenu = (props) => {
           <Button type="primary">Sign in</Button>
         </div>
       )}
-      <li>
-        <Link href="/profile">Account</Link>
-      </li>
-      <li>
-        <Link href="/profile/orders">My Orders</Link>
-      </li>
-      <li>
-        <Link href="/profile/messages">Message Center</Link>
-      </li>
-      <li>
-        <Link href="/profile/address">Addresses</Link>
-      </li>
-      <li>
-        <Link href="/profile/wishlist">Wishlist</Link>
-      </li>
+      <Link href="/profile">
+        <li>Account</li>
+      </Link>
+      <Link href="/profile/orders">
+        <li>My Orders</li>
+      </Link>
+      <Link href="/profile/messages">
+        <li>Message Center</li>
+      </Link>
+      <Link href="/profile/address">
+        <li>Addresses</li>
+      </Link>
+      <Link href="/profile/wishlist">
+        <li>Wishlist</li>
+      </Link>
     </ul>
   );
 };

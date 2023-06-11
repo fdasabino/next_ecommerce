@@ -40,7 +40,7 @@
     }
   }
 
-  li:not(:first-child) {
+  a li {
     list-style: none;
     cursor: pointer;
     padding: 0.5rem 1rem;
@@ -50,10 +50,11 @@
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
+    width: 100%;
 
     &:hover {
-      background-color: $base-grey;
-      color: $base-dark;
+      background-color: $base-grey !important;
+      color: $base-dark !important;
     }
   }
 }
