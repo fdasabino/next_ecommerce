@@ -21,7 +21,9 @@
     margin: 0;
     padding: 0.5rem 0;
 
-    li {
+    li,
+    div,
+    a {
       position: relative;
       display: flex;
       align-items: center;
@@ -56,21 +58,6 @@
         height: 1.3rem;
         object-fit: cover;
         border-radius: 50%;
-      }
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: -0.5rem;
-        transform: translateY(-50%);
-        width: 1px;
-        height: 1.5rem;
-        background: #ccc;
-      }
-      &:last-child {
-        &::after {
-          display: none;
-        }
       }
     }
   }

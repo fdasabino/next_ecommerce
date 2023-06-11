@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { BsSuitHeart } from "react-icons/bs";
 import { FiHelpCircle } from "react-icons/fi";
 import { MdOutlineSecurity } from "react-icons/md";
@@ -9,10 +10,23 @@ import {
   RiCustomerService2Line,
 } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
-
+import UserMenu from "../UserMenu/UserMenu";
 import styles from "./Top.module.scss";
+
 const Top = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const [visible, setVisible] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const user = "John Doe";
+
+  const handleMenuClick = () => {
+    if (visible) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+  };
 
   return (
     <div className={styles.top}>
@@ -27,12 +41,6 @@ const Top = () => {
               alt="placeholder"
             />
             <span>Sweden / usd</span>
-          </li>
-          <li>
-            <RiAccountPinCircleLine />
-            <span>
-              Account <RiArrowDropDownFill />
-            </span>
           </li>
           <li>
             <Link href="/profile/wishlist">
@@ -56,6 +64,29 @@ const Top = () => {
               </li>
             </>
           )}
+          <div onClick={handleMenuClick}>
+            {isLoggedIn ? (
+              <li>
+                <Image
+                  src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  height={100}
+                  width={100}
+                  alt={user}
+                />
+                <span>
+                  {user} <RiArrowDropDownFill />
+                </span>
+              </li>
+            ) : (
+              <li>
+                <RiAccountPinCircleLine />
+                <span>
+                  Account <RiArrowDropDownFill />
+                </span>
+              </li>
+            )}
+            {visible && <UserMenu isLoggedIn={isLoggedIn} user={user} />}
+          </div>
         </ul>
       </div>
     </div>

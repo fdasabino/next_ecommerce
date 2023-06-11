@@ -14,6 +14,9 @@ const Button = ({ children, type, className, ...rest }) => {
     case "tertiary":
       buttonClass = styles.btnTertiary;
       break;
+    case "danger":
+      buttonClass = styles.btnDanger;
+      break;
     default:
       buttonClass = styles.btnPrimary;
       break;
@@ -28,7 +31,7 @@ const Button = ({ children, type, className, ...rest }) => {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf(["primary", "secondary", "tertiary"]),
+  type: PropTypes.oneOf(["primary", "secondary", "tertiary", "danger"]),
   className: PropTypes.string,
 };
 
