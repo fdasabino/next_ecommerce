@@ -7,7 +7,7 @@
   text-transform: uppercase;
   flex-shrink: 0;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.1rem;
   height: 2.2rem;
   text-align: center;
@@ -23,9 +23,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 
   @media (max-width: 768px) {
     font-size: 0.8rem;
+  }
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 }
 
@@ -84,5 +90,21 @@
     @include button-background(#bd1c1c, lighten(#bd1c1c, 15%), 0.95);
   } @else {
     @include button-background(#bd1c1c, darken(#bd1c1c, 10%), 0.95);
+  }
+}
+
+.btnGoogle {
+  @include button-styles;
+  background-color: #0702ff;
+  background-image: linear-gradient(to bottom, #0702ff, lighten(#0702ff, 10%));
+  border-radius: 20px;
+  opacity: 0.95;
+
+  &:hover {
+    background-image: linear-gradient(to bottom, #0702ff, lighten(#0702ff, 5%));
+  }
+
+  &:active {
+    background-image: linear-gradient(to bottom, #0702ff, darken(#0702ff, 10%));
   }
 }
