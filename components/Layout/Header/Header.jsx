@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Typewriter from "typewriter-effect";
 import Button from "../Button/Button";
 import styles from "./Header.module.scss";
 
@@ -8,7 +9,15 @@ const Header = () => {
     <div className={styles.header}>
       <div className={styles.overlay} />
       <div className={styles.left}>
-        <p>Super Sale!!! Up to 50% off on selected products</p>
+        <p>
+          <Typewriter
+            options={{
+              strings: ["Up to 50% off on selected products"],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </p>
       </div>
       <div className={styles.right}>
         <Button onClick={() => router.push("/browse")} type="primary">
