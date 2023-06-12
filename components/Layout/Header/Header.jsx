@@ -9,7 +9,7 @@ const Header = () => {
     <div className={styles.header}>
       <div className={styles.overlay} />
       <div className={styles.left}>
-        <p>
+        <div>
           <Typewriter
             options={{
               strings: ["Up to 50% off on selected products"],
@@ -17,7 +17,7 @@ const Header = () => {
               loop: true,
             }}
           />
-        </p>
+        </div>
       </div>
       <div className={styles.right}>
         <Button onClick={() => router.push("/browse")} type="primary">

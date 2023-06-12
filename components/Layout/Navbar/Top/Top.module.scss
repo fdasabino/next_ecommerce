@@ -1,5 +1,5 @@
 .top {
-  background: $base-white;
+  background: $base-warning-secondary;
   border-top: 1px solid #eee;
 
   &__container {
@@ -26,11 +26,15 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 500;
       color: $base-dark;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+
+      @media (max-width: 768px) {
+        font-size: 0.7rem;
+      }
 
       svg {
         font-size: 1rem;
