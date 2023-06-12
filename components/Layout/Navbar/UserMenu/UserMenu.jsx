@@ -1,4 +1,4 @@
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../../Button/Button";
@@ -14,6 +14,11 @@ const UserMenu = (props) => {
   // Sign out
   const handleSignOut = async () => {
     await signOut();
+  };
+
+  // Sign in
+  const handleSignIn = async () => {
+    await signIn();
   };
 
   return (
@@ -39,7 +44,9 @@ const UserMenu = (props) => {
       ) : (
         <div className={styles.user_menu__wrapper}>
           <Link href="/register">Register</Link>
-          <Button type="primary">Sign in</Button>
+          <Button onClick={handleSignIn} type="primary">
+            Sign in
+          </Button>
         </div>
       )}
       <Link href="/profile">
