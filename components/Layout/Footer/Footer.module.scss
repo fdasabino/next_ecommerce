@@ -175,11 +175,21 @@
         }
       }
     }
-    p {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-align: center;
-      color: $base-dark;
+    .copyright {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      p {
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-align: center;
+        color: $base-dark;
+      }
     }
   }
 }

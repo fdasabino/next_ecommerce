@@ -14,10 +14,13 @@ import {
   FaTwitter,
   FaWhatsapp,
 } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {
+  const { country } = useSelector((state) => ({ ...state }));
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footer__wrapper}>
@@ -87,7 +90,15 @@ const Footer = () => {
             <FaDiscord />
           </li>
         </ul>
-        <p> ShoppyFlow© {new Date().getUTCFullYear()} All Rights Reserved</p>
+        <div className={styles.copyright}>
+          <Image
+            src={country.flag.wikimedia}
+            width={300}
+            height={300}
+            alt={`Flag of ${country.name}`}
+          />
+          <p> ShoppyFlow© {new Date().getUTCFullYear()} All Rights Reserved</p>
+        </div>
       </div>
     </footer>
   );

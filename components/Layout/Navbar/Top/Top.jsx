@@ -9,6 +9,7 @@ import {
   RiArrowDropDownFill,
   RiCustomerService2Line,
 } from "react-icons/ri";
+import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import UserMenu from "../UserMenu/UserMenu";
 import styles from "./Top.module.scss";
@@ -19,6 +20,9 @@ const Top = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const user = "John Doe";
+
+  // extract country from redux store
+  const { country } = useSelector((state) => ({ ...state }));
 
   const handleMenuClick = () => {
     if (visible) {
@@ -37,8 +41,8 @@ const Top = () => {
             <Image
               width={100}
               height={100}
-              src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Flag_of_Sweden_%28pre-1906%29.svg"
-              alt="placeholder"
+              src={country.flag.wikimedia}
+              alt={`Flag of ${country.name}`}
             />
             <span>Sweden / usd</span>
           </li>
