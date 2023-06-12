@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
+import Banner from "../Banner/Banner";
 import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 
 const RootLayout = ({ children }) => {
@@ -8,7 +8,7 @@ const RootLayout = ({ children }) => {
   return (
     <>
       <header>
-        {router.pathname === "/" && <Header />}
+        {router.pathname === "/" && <Banner />}
         <Navbar />
       </header>
       <main>{children}</main>

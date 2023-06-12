@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import Typewriter from "typewriter-effect";
 import Button from "../Button/Button";
-import styles from "./Header.module.scss";
+import styles from "./Banner.module.scss";
 
-const Header = () => {
+const Banner = () => {
   const router = useRouter();
   return (
-    <div className={styles.header}>
+    <div className={styles.banner}>
       <div className={styles.overlay} />
       <div className={styles.left}>
         <div>
@@ -28,4 +28,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Banner;
