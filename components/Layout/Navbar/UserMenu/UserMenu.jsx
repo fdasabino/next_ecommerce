@@ -1,26 +1,39 @@
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../../Button/Button";
 import styles from "./UserMenu.module.scss";
 
 const UserMenu = (props) => {
-  const { isLoggedIn, user, setVisible } = props;
+  // Get props
+  const { setVisible } = props;
+
+  // Get session
+  const { data: session } = useSession();
+
+  // Sign out
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <ul className={styles.user_menu} onMouseLeave={() => setVisible(false)}>
-      {isLoggedIn ? (
+      {session ? (
         <div className={styles.user_menu__wrapper}>
           <Image
-            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src={session?.user.image}
             width={100}
             height={100}
-            alt={user}
+            alt={session?.user.name}
             className={styles.user_menu__img}
           />
           <div className={styles.col}>
             <span>
-              Welcome back, <br /> {user}!
+              Welcome back, <br /> {session?.user.name}!
             </span>
-            <Button type="danger">Sign out</Button>
+            <Button onClick={handleSignOut} type="danger">
+              Sign out
+            </Button>
           </div>
         </div>
       ) : (

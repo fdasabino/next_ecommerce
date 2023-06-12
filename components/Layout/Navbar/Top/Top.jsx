@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -18,8 +19,9 @@ const Top = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [visible, setVisible] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const user = "John Doe";
+  // Get session
+  const { data: session, status } = useSession();
+  const user = session?.user.name.split(" ")[0];
 
   // extract country from redux store
   const { country } = useSelector((state) => ({ ...state }));
@@ -44,7 +46,7 @@ const Top = () => {
               src={country.flag.wikimedia}
               alt={`Flag of ${country.name}`}
             />
-            <span>Sweden / usd</span>
+            <span>{`${country.name} / USD`}</span>
           </li>
           <li>
             <Link href="/profile/wishlist">
@@ -69,14 +71,9 @@ const Top = () => {
             </>
           )}
           <div onClick={handleMenuClick}>
-            {isLoggedIn ? (
+            {session ? (
               <li>
-                <Image
-                  src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  height={100}
-                  width={100}
-                  alt={user}
-                />
+                <Image src={session?.user.image} height={100} width={100} alt={user} />
                 <span>
                   {user} <RiArrowDropDownFill />
                 </span>
@@ -89,7 +86,7 @@ const Top = () => {
                 </span>
               </li>
             )}
-            {visible && <UserMenu isLoggedIn={isLoggedIn} user={user} setVisible={setVisible} />}
+            {visible && <UserMenu setVisible={setVisible} />}
           </div>
         </ul>
       </div>

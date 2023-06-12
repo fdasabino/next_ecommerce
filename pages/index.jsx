@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 const Home = ({ country }) => {
   const dispatch = useDispatch();
-
   // Set country in redux store
   const setCountryToStore = useCallback(() => {
     dispatch(setCountry(country));
