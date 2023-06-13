@@ -2,6 +2,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  user-select: none;
 
   display: flex;
   justify-content: center;
@@ -95,6 +96,41 @@
           }
         }
       }
+    }
+  }
+
+  &__providers {
+    margin-top: 1rem;
+
+    span {
+      position: relative;
+      color: $base-grey;
+      padding-left: 8rem;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      &::before,
+      &::after {
+        content: "";
+        width: 130px;
+        height: 1px;
+        background: $base-grey;
+        position: absolute;
+        top: 50%;
+      }
+      &::before {
+        left: -10px;
+      }
+      &::after {
+        right: -140px;
+      }
+    }
+    .provider_container {
+      max-width: 350px;
+      margin-top: 1rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 }
