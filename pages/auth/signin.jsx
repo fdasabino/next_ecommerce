@@ -1,6 +1,6 @@
 import Button from "@/components/Layout/Button/Button";
 import FormInput from "@/components/Layout/Input/FormInput";
-import styles from "@/styles/SignIn.module.scss";
+import styles from "@/styles/pages/SignIn.module.scss";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useState } from "react";
@@ -74,6 +74,9 @@ const SignIn = () => {
                 <Button>
                   Sign in <AiOutlineArrowRight />
                 </Button>
+                <div className={styles.forgot_password}>
+                  <Link href="/forgot-password">Forgot your password?</Link>
+                </div>
               </Form>
             )}
           </Formik>

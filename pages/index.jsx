@@ -1,5 +1,5 @@
 import { setCountry } from "@/redux-store/countrySlice";
-import styles from "@/styles/Home.module.scss";
+import styles from "@/styles/pages/Home.module.scss";
 import axios from "axios";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
