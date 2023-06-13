@@ -29,20 +29,23 @@
       border: 1px solid $base-grey;
       border-radius: 50%;
 
+      transition: all 0.2s ease-in-out;
+
       display: grid;
       place-items: center;
       cursor: pointer;
 
       &:hover {
-        border-color: $base-blue;
+        background: $base-blue;
+        border-color: transparent;
         svg {
-          fill: $base-blue;
+          fill: $base-white;
         }
       }
       svg {
         width: 20px;
         height: 20px;
-        fill: $base-grey;
+        fill: $base-blue;
       }
     }
     span {
@@ -53,6 +56,21 @@
         color: $base-blue;
         text-decoration: underline;
       }
+    }
+  }
+
+  &__form {
+    margin-top: 1rem;
+
+    h1 {
+      font-size: 50px;
+      margin: 0;
+    }
+    p {
+      color: $base-grey;
+    }
+    form {
+      margin-top: 2rem;
     }
   }
 }

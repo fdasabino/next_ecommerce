@@ -1,4 +1,6 @@
+import FormInput from "@/components/Layout/Input/FormInput";
 import styles from "@/styles/SignIn.module.scss";
+import { Form, Formik } from "formik";
 import Link from "next/link";
 import { BiLeftArrowAlt } from "react-icons/bi";
 
@@ -13,6 +15,17 @@ const SignIn = () => {
           <span>
             Find the best prices and the best brands! <Link href="/">Explore our store</Link>
           </span>
+        </div>
+        <div className={styles.signin__form}>
+          <h1>Sign in</h1>
+          <p>Sign in with your account</p>
+          <Formik>
+            {(form) => (
+              <Form>
+                <FormInput icon="password" placeholder="Enter your password" />
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

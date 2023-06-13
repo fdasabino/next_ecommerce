@@ -1,0 +1,45 @@
+.form_input {
+  position: relative;
+  max-width: 380px;
+  width: 100%;
+
+  background: $base-white;
+  border: 1px solid $base-grey;
+
+  padding: 0.5rem;
+  margin: 10px 0;
+  border-radius: 55px;
+
+  display: grid;
+  grid-template-columns: 10% auto;
+  align-items: center;
+  justify-items: center;
+
+  margin-bottom: 1rem;
+
+  &:focus-within {
+    outline: 1px solid $base-info;
+  }
+
+  svg {
+    width: 25px;
+    height: 25px;
+    stroke: $base-info;
+    fill: $base-info;
+  }
+
+  input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0.5rem 0;
+    line-height: 1;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: $base-dark-secondary;
+
+    &::placeholder {
+      color: $base-grey;
+    }
+  }
+}
