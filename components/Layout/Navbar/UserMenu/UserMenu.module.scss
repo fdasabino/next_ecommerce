@@ -20,6 +20,13 @@
     cursor: default !important;
   }
 
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $base-dark;
+    cursor: default;
+  }
+
   &__img {
     width: 80px !important;
     height: 80px !important;

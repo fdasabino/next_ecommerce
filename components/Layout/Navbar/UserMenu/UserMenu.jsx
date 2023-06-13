@@ -43,7 +43,7 @@ const UserMenu = (props) => {
         </div>
       ) : (
         <div className={styles.user_menu__wrapper}>
-          <Link href="/register">Register</Link>
+          <h3>Welcome to ShoppyFlow</h3>
           <Button onClick={handleSignIn} type="primary">
             Sign in
           </Button>
