@@ -15,9 +15,9 @@ export const authOptions = {
     }),
     // ...add more providers here
   ],
-  // pages: {
-  //   signIn: "/api/auth/signin",
-  // },
+  pages: {
+    signIn: "/auth/signin",
+  },
   session: {
     strategy: "jwt",
   },

@@ -1,0 +1,58 @@
+.signin {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    padding: 3rem;
+
+    &:last-of-type {
+      margin-top: 3rem;
+    }
+  }
+
+  &__header {
+    max-width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+
+    text-align: center;
+
+    .back__svg {
+      width: 35px;
+      height: 35px;
+      border: 1px solid $base-grey;
+      border-radius: 50%;
+
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+
+      &:hover {
+        border-color: $base-blue;
+        svg {
+          fill: $base-blue;
+        }
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: $base-grey;
+      }
+    }
+    span {
+      font-weight: 600;
+      font-size: 0.8rem;
+
+      a {
+        color: $base-blue;
+        text-decoration: underline;
+      }
+    }
+  }
+}
