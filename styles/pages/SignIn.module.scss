@@ -1,8 +1,10 @@
 .signin {
   position: relative;
-  min-height: 100vh;
+  min-height: fit-content;
+  max-width: 1000px;
   overflow: hidden;
   user-select: none;
+  margin: 0 auto;
 
   display: flex;
   justify-content: space-evenly;
@@ -11,6 +13,7 @@
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 4rem;
   }
 
   &__container {
@@ -24,11 +27,20 @@
     }
 
     h1 {
-      font-size: 50px;
+      font-size: 45px;
       margin: 0;
+
+      @media (max-width: 768px) {
+        font-size: 35px;
+      }
     }
     p {
       color: $base-grey;
+      font-size: 0.9rem;
+
+      @media (max-width: 768px) {
+        font-size: 0.8rem;
+      }
     }
 
     form {
@@ -61,6 +73,7 @@
 }
 
 .signin__header {
+  user-select: none;
   max-width: 450px;
   display: flex;
   align-items: center;

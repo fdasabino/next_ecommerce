@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import Button from "../../Button/Button";
 import styles from "./UserMenu.module.scss";
 
@@ -45,7 +46,7 @@ const UserMenu = (props) => {
         <div className={styles.user_menu__wrapper}>
           <h3>Welcome to ShoppyFlow</h3>
           <Button onClick={handleSignIn} type="primary">
-            Sign in
+            Sign in <AiOutlineArrowRight />
           </Button>
         </div>
       )}

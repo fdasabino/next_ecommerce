@@ -6,7 +6,7 @@ import { getProviders, signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { AiOutlineArrowRight, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineArrowRight, AiOutlineUserAdd } from "react-icons/ai";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import * as Yup from "yup";
@@ -52,14 +52,17 @@ const SignIn = ({ providers }) => {
   });
   // Validation schema with Yup sign up
   const signUpValidation = Yup.object().shape({
-    full_name: Yup.string().required("Full name is required"),
+    full_name: Yup.string()
+      .min(2, "Name must be at least 2 letters long")
+      .max(25, "Name must shorter than 25 letters")
+      .required("Full name is required"),
     signup_email: Yup.string().email("Invalid email").required("Email is required"),
     signup_password: Yup.string()
       .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters`)
       .max(MAX_PASSWORD_LENGTH, `Password must be at most ${MAX_PASSWORD_LENGTH} characters`)
       .required("Password is required"),
     signup_confirm_password: Yup.string()
-      .oneOf([Yup.ref("signup_password"), null], "Passwords must match")
+      .oneOf([Yup.ref("signup_password"), null], "Your passwords must match")
       .required("Confirm password is required"),
   });
 
@@ -125,7 +128,7 @@ const SignIn = ({ providers }) => {
             </div>
           </div>
         </div>
-
+        <div className="vertical-line" />
         {/* Right */}
         <div className={styles.signin__container}>
           <div className={styles.signin__form}>
@@ -167,7 +170,7 @@ const SignIn = ({ providers }) => {
                     onChange={handleChange}
                   />
                   <Button>
-                    Sign up <AiOutlinePlus />
+                    Sign up <AiOutlineUserAdd />
                   </Button>
                 </Form>
               )}
