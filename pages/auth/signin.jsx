@@ -66,7 +66,6 @@ const SignIn = ({ providers }) => {
       .required("Confirm password is required"),
   });
 
-  console.log(providers);
   return (
     <>
       {/* header */}
