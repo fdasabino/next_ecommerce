@@ -1,3 +1,4 @@
+import { activationEmailTemplate } from "@/email_templates/activationEmailTemplate";
 import { google } from "googleapis";
 import nodemailer from "nodemailer";
 
@@ -41,13 +42,7 @@ export const sendEmail = async (to, url, txt, subject) => {
     from: MAILING_SERVICE_SENDER_EMAIL_ADDRESS,
     to: to,
     subject: subject,
-    html: `
-      <div>
-        <h1>Please use the following link to activate your account</h1>
-        <p>${txt}</p>
-        <a href=${url}>${url}</a>
-      </div>
-    `,
+    html: activationEmailTemplate(to, url),
   };
 
   smtpTransport.sendMail(mailOptions, (err, info) => {

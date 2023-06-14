@@ -1,5 +1,6 @@
 import User from "@/models/User";
 import db from "@/utils/db";
+import { sendEmail } from "@/utils/sendEmail";
 import { createActivationToken } from "@/utils/tokens";
 import { validateEmail } from "@/utils/validation";
 import bcrypt from "bcrypt";
@@ -43,7 +44,7 @@ const handler = async (req, res) => {
     const createdUser = await newUser.save();
     const activationToken = createActivationToken({ id: createdUser._id }); // to string?
     const activationLink = `${process.env.NEXTAUTH_URL}/activate/${activationToken}`;
-
+    sendEmail(email, activationLink, "", "Activate your account");
     res
       .status(201)
       .json({ message: "User created successfully...", user: createdUser, activationLink });
