@@ -41,12 +41,12 @@ const handler = async (req, res) => {
     });
 
     const createdUser = await newUser.save();
-
-    const activationToken = createActivationToken({ id: createdUser._id });
+    const activationToken = createActivationToken({ id: createdUser._id }); // to string?
+    const activationLink = `${process.env.NEXTAUTH_URL}/activate/${activationToken}`;
 
     res
       .status(201)
-      .json({ message: "User created successfully...", user: createdUser, activationToken });
+      .json({ message: "User created successfully...", user: createdUser, activationLink });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
