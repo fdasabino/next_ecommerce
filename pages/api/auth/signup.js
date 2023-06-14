@@ -1,5 +1,6 @@
 import User from "@/models/User";
 import db from "@/utils/db";
+import { createActivationToken } from "@/utils/tokens";
 import { validateEmail } from "@/utils/validation";
 import bcrypt from "bcrypt";
 
@@ -41,7 +42,11 @@ const handler = async (req, res) => {
 
     const createdUser = await newUser.save();
 
-    res.status(201).json({ message: "User created successfully...", user: createdUser });
+    const activationToken = createActivationToken({ id: createdUser._id });
+
+    res
+      .status(201)
+      .json({ message: "User created successfully...", user: createdUser, activationToken });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
