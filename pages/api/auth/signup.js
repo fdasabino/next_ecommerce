@@ -45,9 +45,13 @@ const handler = async (req, res) => {
     const activationToken = createActivationToken({ id: createdUser._id }); // to string?
     const activationLink = `${process.env.NEXTAUTH_URL}/activate/${activationToken}`;
     sendEmail(email, activationLink, "", "Activate your account");
-    res
-      .status(201)
-      .json({ message: "User created successfully...", user: createdUser, activationLink });
+    res.status(201).json({
+      message: `Sign up successful! Please check ${email} to activate your account.`,
+      user: createdUser,
+      activationLink,
+    });
+
+    await db.disconnectDB();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
