@@ -4,6 +4,7 @@ import Loader from "@/components/Layout/Loader/Loader";
 import styles from "@/styles/pages/SignIn.module.scss";
 import axios from "axios";
 import { Form, Formik } from "formik";
+import { set } from "mongoose";
 import { getProviders, signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -57,9 +58,13 @@ const SignIn = ({ providers }) => {
       });
       setUser({ ...user, error_message: null, success_message: data.message });
       setLoading(false);
+      setTimeout(() => {
+        setUser({ ...user, success_message: null });
+        router.push("/");
+      }, 2000);
     } catch (error) {
       setLoading(false);
-      setUser({ ...user, success_message: null, error_message: error.message });
+      setUser({ ...user, success_message: null, error_message: error.response.data.message });
     }
   };
 
