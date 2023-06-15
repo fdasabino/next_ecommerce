@@ -4,6 +4,8 @@ import "@/styles/globals.scss";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
@@ -26,6 +28,14 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
           </PersistGate>
         </Provider>
       </SessionProvider>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={false}
+        newestOnTop={false}
+        closeOnClick
+        draggable
+        theme="light"
+      />
     </>
   );
 };

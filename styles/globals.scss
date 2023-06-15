@@ -87,3 +87,14 @@ hr {
     display: none;
   }
 }
+
+// toast notification
+.Toastify__toast {
+  border-radius: 10px !important;
+  font-family: "Mulish", sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+
+  button {
+  }
+}

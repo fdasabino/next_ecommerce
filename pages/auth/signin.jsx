@@ -4,7 +4,6 @@ import Loader from "@/components/Layout/Loader/Loader";
 import styles from "@/styles/pages/SignIn.module.scss";
 import axios from "axios";
 import { Form, Formik } from "formik";
-import { set } from "mongoose";
 import { getProviders, signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,6 +11,7 @@ import { useState } from "react";
 import { AiOutlineArrowRight, AiOutlineUserAdd } from "react-icons/ai";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -48,7 +48,7 @@ const SignIn = ({ providers }) => {
     setUser({ ...user, [name]: value });
   };
 
-  const handleSignUp = async () => {
+  const handleSignUp = async ({ full_name, signup_email, signup_password }) => {
     try {
       setLoading(true);
       const { data } = await axios.post("/api/auth/signup", {
@@ -56,15 +56,26 @@ const SignIn = ({ providers }) => {
         email: signup_email,
         password: signup_password,
       });
-      setUser({ ...user, error_message: null, success_message: data.message });
-      setLoading(false);
-      setTimeout(() => {
-        setUser({ ...user, success_message: null });
-        router.push("/");
-      }, 2000);
+      setUser((prevUser) => ({
+        ...prevUser,
+        success_message: data.message,
+        error_message: null,
+      }));
+      toast.success(data.message);
+      await Promise.all([
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+        setUser(initialValues),
+        router.push("/"),
+      ]);
     } catch (error) {
+      toast.error(error.response.data.message);
+      setUser((prevUser) => ({
+        ...prevUser,
+        success_message: null,
+        error_message: error.response.data.message,
+      }));
+    } finally {
       setLoading(false);
-      setUser({ ...user, success_message: null, error_message: error.response.data.message });
     }
   };
 
@@ -212,10 +223,6 @@ const SignIn = ({ providers }) => {
                     </Form>
                   )}
                 </Formik>
-                <div className={styles.message_container}>
-                  {success_message && <span className={styles.success}>{success_message}</span>}
-                  {error_message && <span className={styles.error}>{error_message}</span>}
-                </div>
               </div>
             </div>
           </div>
