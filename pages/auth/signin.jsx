@@ -79,21 +79,25 @@ const SignIn = ({ providers }) => {
         email: login_email,
         password: login_password,
       };
-      await signIn("credentials", options);
-      setUser((prevUser) => ({
-        ...prevUser,
-      }));
+      const res = await signIn("credentials", options);
+      setUser({ ...user });
+
+      if (res?.error) {
+        toast.error(res.error);
+        return;
+      }
+
       toast.success("Successfully signed in!");
-      await Promise.all([
-        new Promise((resolve) => setTimeout(resolve, 2000)),
-        setUser(initialValues),
-        router.push("/"),
-      ]);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setLoading(false);
+      setUser(initialValues);
+      router.push("/");
     } catch (error) {
-      toast.error(error.response.data.message);
-      setUser((prevUser) => ({
-        ...prevUser,
-      }));
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred");
+      }
     } finally {
       setLoading(false);
     }
