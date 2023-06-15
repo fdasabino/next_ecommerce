@@ -34,7 +34,7 @@ export const authOptions = {
         if (user) {
           return signInUser(password, user);
         } else {
-          throw new Error("Invalid credentials...");
+          throw new Error("Invalid credentials...Please try again.");
         }
       },
     }),
@@ -56,6 +56,6 @@ async function signInUser(password, user) {
   }
 
   const enteredPassword = await bcrypt.compare(password, user.password);
-  if (!enteredPassword) throw new Error("Invalid credentials...Please try again");
+  if (!enteredPassword) throw new Error("Invalid credentials...Please try again.");
   return user;
 }
