@@ -22,7 +22,7 @@ const handler = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (user && user.email === email) {
-      return res.status(422).json({ message: "User already exists, please try again..." });
+      return res.status(422).json({ message: "Email address not available, please try again..." });
     }
 
     if (password.length < 6) {

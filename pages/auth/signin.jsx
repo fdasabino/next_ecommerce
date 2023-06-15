@@ -56,6 +56,14 @@ const SignIn = ({ providers }) => {
         ...prevUser,
       }));
       toast.success(data.message);
+
+      let options = {
+        redirect: false,
+        email: signup_email,
+        password: signup_password,
+      };
+      await signIn("credentials", options);
+
       await Promise.all([
         new Promise((resolve) => setTimeout(resolve, 2000)),
         setUser(initialValues),
