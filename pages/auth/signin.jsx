@@ -21,8 +21,6 @@ const initialValues = {
   signup_email: "",
   signup_password: "",
   signup_confirm_password: "",
-  success_message: "",
-  error_message: "",
 };
 
 const MIN_PASSWORD_LENGTH = 6;
@@ -39,8 +37,6 @@ const SignIn = ({ providers }) => {
     signup_email,
     signup_password,
     signup_confirm_password,
-    success_message,
-    error_message,
   } = user;
 
   const handleChange = (e) => {
@@ -58,8 +54,6 @@ const SignIn = ({ providers }) => {
       });
       setUser((prevUser) => ({
         ...prevUser,
-        success_message: data.message,
-        error_message: null,
       }));
       toast.success(data.message);
       await Promise.all([
@@ -71,8 +65,34 @@ const SignIn = ({ providers }) => {
       toast.error(error.response.data.message);
       setUser((prevUser) => ({
         ...prevUser,
-        success_message: null,
-        error_message: error.response.data.message,
+      }));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSignIn = async () => {
+    try {
+      setLoading(true);
+      let options = {
+        redirect: false,
+        email: login_email,
+        password: login_password,
+      };
+      await signIn("credentials", options);
+      setUser((prevUser) => ({
+        ...prevUser,
+      }));
+      toast.success("Successfully signed in!");
+      await Promise.all([
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+        setUser(initialValues),
+        router.push("/"),
+      ]);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setUser((prevUser) => ({
+        ...prevUser,
       }));
     } finally {
       setLoading(false);
@@ -131,6 +151,7 @@ const SignIn = ({ providers }) => {
                   enableReinitialize
                   initialValues={{ login_email, login_password }}
                   validationSchema={signInValidation}
+                  onSubmit={handleSignIn}
                 >
                   {(form) => (
                     <Form>

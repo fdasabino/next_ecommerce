@@ -94,7 +94,9 @@ hr {
   font-family: "Mulish", sans-serif !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
+  transition: all 0.1s ease-in-out !important;
 
-  button {
+  &:hover {
+    scale: 0.95 !important;
   }
 }
