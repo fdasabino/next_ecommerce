@@ -92,7 +92,7 @@ const Footer = () => {
         </ul>
         <div className={styles.copyright}>
           <Image
-            src={country.flag.wikimedia}
+            src={country?.flag?.wikimedia}
             width={300}
             height={300}
             alt={`Flag of ${country.name}`}

@@ -43,7 +43,7 @@ const Top = () => {
             <Image
               width={100}
               height={100}
-              src={country.flag.wikimedia}
+              src={country?.flag?.wikimedia}
               alt={`Flag of ${country.name}`}
             />
             <span>{`${country.name} / USD`}</span>
