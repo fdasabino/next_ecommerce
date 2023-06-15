@@ -155,5 +155,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &:last-child {
+      display: none;
+    }
   }
 }
