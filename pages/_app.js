@@ -31,7 +31,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       <ToastContainer
         position="bottom-right"
         autoClose={false}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick
         draggable
         theme="light"

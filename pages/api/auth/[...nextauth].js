@@ -21,10 +21,6 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: "credentials",
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
-      },
       async authorize(credentials, req) {
         const email = credentials.email;
         const password = credentials.password;
@@ -39,6 +35,14 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      let user = await User.findById(token.sub);
+      session.user._id = token.sub || user._id.toString();
+      session.user.role = user.role || "user";
+      return session;
+    },
+  },
   pages: {
     signIn: "/auth/signin",
   },

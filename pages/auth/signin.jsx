@@ -4,7 +4,7 @@ import Loader from "@/components/Layout/Loader/Loader";
 import styles from "@/styles/pages/SignIn.module.scss";
 import axios from "axios";
 import { Form, Formik } from "formik";
-import { getProviders, signIn } from "next-auth/react";
+import { getCsrfToken, getProviders, getSession, signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -26,7 +26,7 @@ const initialValues = {
 const MIN_PASSWORD_LENGTH = 6;
 const MAX_PASSWORD_LENGTH = 20;
 
-const SignIn = ({ providers }) => {
+const SignIn = ({ providers, callbackUrl, csrfToken }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValues);
@@ -67,7 +67,7 @@ const SignIn = ({ providers }) => {
       await Promise.all([
         new Promise((resolve) => setTimeout(resolve, 2000)),
         setUser(initialValues),
-        router.push("/"),
+        router.push(callbackUrl || "/"),
       ]);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -99,7 +99,7 @@ const SignIn = ({ providers }) => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setLoading(false);
       setUser(initialValues);
-      router.push("/");
+      router.push(callbackUrl || "/");
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         toast.error(error.response.data.message);
@@ -166,7 +166,8 @@ const SignIn = ({ providers }) => {
                   onSubmit={handleSignIn}
                 >
                   {(form) => (
-                    <Form>
+                    <Form method="post" action="/api/auth/signin/email">
+                      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
                       <FormInput
                         type="email"
                         icon="email"
@@ -193,13 +194,20 @@ const SignIn = ({ providers }) => {
                 {/* Providers */}
                 <div className={styles.signin__providers}>
                   <span>or sign in with:</span>
-                  {Object.values(providers).map((provider) => (
-                    <div key={provider.id} className={styles.provider_container}>
-                      <Button style="google" onClick={() => signIn(provider.id)}>
-                        <FcGoogle /> Google account
-                      </Button>
-                    </div>
-                  ))}
+                  {Object.values(providers).map((provider) => {
+                    // skip credentials provider since we already have it above
+                    if (provider.id === "credentials") return;
+                    return (
+                      <div key={provider.id} className={styles.provider_container}>
+                        <form method="post" action={`/api/auth/signin/${provider.name}`}>
+                          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+                          <Button style="google" onClick={() => signIn(provider.id)}>
+                            <FcGoogle /> Google account
+                          </Button>
+                        </form>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -267,12 +275,27 @@ const SignIn = ({ providers }) => {
 
 export default SignIn;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { req, query } = context;
+  const { callbackUrl } = query;
+  const session = await getSession({ req });
+  const csrfToken = await getCsrfToken(context);
+
+  console.log(session);
+  // redirect to home if user is already logged in
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+      },
+    };
+  }
+
   try {
     const providers = await getProviders();
 
     return {
-      props: { providers },
+      props: { providers, csrfToken, callbackUrl },
     };
   } catch (error) {
     console.error(error);
