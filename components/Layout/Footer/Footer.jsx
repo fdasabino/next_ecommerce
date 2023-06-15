@@ -42,7 +42,7 @@ const Footer = () => {
           <h3>Subscribe to our newsletter</h3>
           <div className={styles.footer__subscribe}>
             <input type="email" placeholder="Enter your email address" />
-            <Button type="primary">
+            <Button style="primary">
               Send <BiMailSend />
             </Button>
           </div>

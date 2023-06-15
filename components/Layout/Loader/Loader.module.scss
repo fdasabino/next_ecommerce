@@ -1,46 +1,61 @@
-.colorful {
-  width: 31.4px;
-  height: 31.4px;
-  border-radius: 50%;
-  background: #ffd82e;
-  transform-origin: top;
-  display: grid;
-  animation: colorful-3vgb5t 1s infinite linear;
+.loader {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 
-  &:before,
-  &:after {
-    content: "";
-    grid-area: 1/1;
-    background: #ff6761;
+  h2 {
+    font-size: 1.8rem;
+    padding-left: 1rem;
+  }
+
+  .colorful {
+    width: 31.4px;
+    height: 31.4px;
     border-radius: 50%;
+    background: #ffd82e;
     transform-origin: top;
-    animation: inherit;
-    animation-name: colorful-k94uub;
+    display: grid;
+    animation: colorful-3vgb5t 0.8s infinite linear;
+
+    &:before,
+    &:after {
+      content: "";
+      grid-area: 1/1;
+      background: #ff6761;
+      border-radius: 50%;
+      transform-origin: top;
+      animation: inherit;
+      animation-name: colorful-k94uub;
+    }
+
+    &:after {
+      background: #474bff;
+      --s: 180deg;
+    }
   }
 
-  &:after {
-    background: #474bff;
-    --s: 180deg;
-  }
-}
+  @keyframes colorful-3vgb5t {
+    0%,
+    20% {
+      transform: rotate(0);
+    }
 
-@keyframes colorful-3vgb5t {
-  0%,
-  20% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes colorful-k94uub {
-  50% {
-    transform: rotate(var(--s, 90deg));
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
-  100% {
-    transform: rotate(0);
+  @keyframes colorful-k94uub {
+    50% {
+      transform: rotate(var(--s, 90deg));
+    }
+
+    100% {
+      transform: rotate(0);
+    }
   }
 }

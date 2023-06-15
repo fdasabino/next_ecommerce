@@ -1,6 +1,8 @@
 import Button from "@/components/Layout/Button/Button";
 import FormInput from "@/components/Layout/Input/FormInput";
+import Loader from "@/components/Layout/Loader/Loader";
 import styles from "@/styles/pages/SignIn.module.scss";
+import axios from "axios";
 import { Form, Formik } from "formik";
 import { getProviders, signIn } from "next-auth/react";
 import Link from "next/link";
@@ -18,6 +20,8 @@ const initialValues = {
   signup_email: "",
   signup_password: "",
   signup_confirm_password: "",
+  success_message: "",
+  error_message: "",
 };
 
 const MIN_PASSWORD_LENGTH = 6;
@@ -25,6 +29,7 @@ const MAX_PASSWORD_LENGTH = 20;
 
 const SignIn = ({ providers }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValues);
   const {
     login_email,
@@ -33,11 +38,29 @@ const SignIn = ({ providers }) => {
     signup_email,
     signup_password,
     signup_confirm_password,
+    success_message,
+    error_message,
   } = user;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+  };
+
+  const handleSignUp = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/auth/signup", {
+        name: full_name,
+        email: signup_email,
+        password: signup_password,
+      });
+      setUser({ ...user, error_message: null, success_message: data.message });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setUser({ ...user, success_message: null, error_message: error.message });
+    }
   };
 
   // Validation schema with Yup sign in
@@ -68,115 +91,131 @@ const SignIn = ({ providers }) => {
 
   return (
     <>
-      {/* header */}
-      <div className={styles.signin__header}>
-        <button className={styles.back__svg} onClick={() => router.push("/")}>
-          <BiLeftArrowAlt />
-        </button>
-        <span>
-          Find the best prices and the best brands! <Link href="/">Explore our store</Link>
-        </span>
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {/* header */}
+          <div className={styles.signin__header}>
+            <button className={styles.back__svg} onClick={() => router.push("/")}>
+              <BiLeftArrowAlt />
+            </button>
+            <span>
+              Find the best prices and the best brands! <Link href="/">Explore our store</Link>
+            </span>
+          </div>
 
-      <div className={styles.signin}>
-        {/* Left */}
-        <div className={styles.signin__container}>
-          <div className={styles.signin__form}>
-            <h1>Sign in</h1>
-            <p>Sign in with your account</p>
-            <Formik
-              enableReinitialize
-              initialValues={{ login_email, login_password }}
-              validationSchema={signInValidation}
-            >
-              {(form) => (
-                <Form>
-                  <FormInput
-                    type="email"
-                    icon="email"
-                    name="login_email"
-                    placeholder="Email address"
-                    onChange={handleChange}
-                  />
-                  <FormInput
-                    type="password"
-                    icon="password"
-                    name="login_password"
-                    placeholder="Password"
-                    onChange={handleChange}
-                  />
-                  <Button>
-                    Sign in <AiOutlineArrowRight />
-                  </Button>
-                  <div className={styles.forgot_password}>
-                    <Link href="/forgot-password">Forgot your password?</Link>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-            {/* Providers */}
-            <div className={styles.signin__providers}>
-              <span>or sign in with:</span>
-              {Object.values(providers).map((provider) => (
-                <div key={provider.id} className={styles.provider_container}>
-                  <Button type="google" onClick={() => signIn(provider.id)}>
-                    <FcGoogle /> Google account
-                  </Button>
+          <div className={styles.signin}>
+            {/* Left */}
+            <div className={styles.signin__container}>
+              <div className={styles.signin__form}>
+                <h1>Sign in</h1>
+                <p>Sign in with your account</p>
+                <Formik
+                  enableReinitialize
+                  initialValues={{ login_email, login_password }}
+                  validationSchema={signInValidation}
+                >
+                  {(form) => (
+                    <Form>
+                      <FormInput
+                        type="email"
+                        icon="email"
+                        name="login_email"
+                        placeholder="Email address"
+                        onChange={handleChange}
+                      />
+                      <FormInput
+                        type="password"
+                        icon="password"
+                        name="login_password"
+                        placeholder="Password"
+                        onChange={handleChange}
+                      />
+                      <Button type="submit" style="primary">
+                        Sign in <AiOutlineArrowRight />
+                      </Button>
+                      <div className={styles.forgot_password}>
+                        <Link href="/forgot-password">Forgot your password?</Link>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+                {/* Providers */}
+                <div className={styles.signin__providers}>
+                  <span>or sign in with:</span>
+                  {Object.values(providers).map((provider) => (
+                    <div key={provider.id} className={styles.provider_container}>
+                      <Button style="google" onClick={() => signIn(provider.id)}>
+                        <FcGoogle /> Google account
+                      </Button>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+            </div>
+            <div className="vertical-line" />
+            {/* Right */}
+            <div className={styles.signin__container}>
+              <div className={styles.signin__form}>
+                <h1>Sign up</h1>
+                <p>Sign up with credentials</p>
+                <Formik
+                  enableReinitialize
+                  initialValues={{
+                    full_name,
+                    signup_email,
+                    signup_password,
+                    signup_confirm_password,
+                  }}
+                  validationSchema={signUpValidation}
+                  onSubmit={handleSignUp}
+                >
+                  {(form) => (
+                    <Form>
+                      <FormInput
+                        type="text"
+                        icon="user"
+                        name="full_name"
+                        placeholder="Full name"
+                        onChange={handleChange}
+                      />
+                      <FormInput
+                        type="email"
+                        icon="email"
+                        name="signup_email"
+                        placeholder="Email address"
+                        onChange={handleChange}
+                      />
+                      <FormInput
+                        type="password"
+                        icon="password"
+                        name="signup_password"
+                        placeholder="Create password"
+                        onChange={handleChange}
+                      />
+                      <FormInput
+                        type="password"
+                        icon="password"
+                        name="signup_confirm_password"
+                        placeholder="Confirm password"
+                        onChange={handleChange}
+                      />
+                      <Button type="submit" style="primary">
+                        Sign up <AiOutlineUserAdd />
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+                <div className={styles.message_container}>
+                  {success_message && <span className={styles.success}>{success_message}</span>}
+                  {error_message && <span className={styles.error}>{error_message}</span>}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="vertical-line" />
-        {/* Right */}
-        <div className={styles.signin__container}>
-          <div className={styles.signin__form}>
-            <h1>Sign up</h1>
-            <p>Sign up with credentials</p>
-            <Formik
-              enableReinitialize
-              initialValues={{ full_name, signup_email, signup_password, signup_confirm_password }}
-              validationSchema={signUpValidation}
-            >
-              {(form) => (
-                <Form>
-                  <FormInput
-                    type="text"
-                    icon="user"
-                    name="full_name"
-                    placeholder="Full name"
-                    onChange={handleChange}
-                  />
-                  <FormInput
-                    type="email"
-                    icon="email"
-                    name="signup_email"
-                    placeholder="Email address"
-                    onChange={handleChange}
-                  />
-                  <FormInput
-                    type="password"
-                    icon="password"
-                    name="signup_password"
-                    placeholder="Create password"
-                    onChange={handleChange}
-                  />
-                  <FormInput
-                    type="password"
-                    icon="password"
-                    name="signup_confirm_password"
-                    placeholder="Confirm password"
-                    onChange={handleChange}
-                  />
-                  <Button>
-                    Sign up <AiOutlineUserAdd />
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

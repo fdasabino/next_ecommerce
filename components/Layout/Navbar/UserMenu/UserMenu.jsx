@@ -37,7 +37,7 @@ const UserMenu = (props) => {
             <span>
               Welcome back, <br /> {session?.user.name}!
             </span>
-            <Button onClick={handleSignOut} type="danger">
+            <Button onClick={handleSignOut} style="danger">
               Sign out
             </Button>
           </div>
@@ -45,7 +45,7 @@ const UserMenu = (props) => {
       ) : (
         <div className={styles.user_menu__wrapper}>
           <h3>Welcome to ShoppyFlow</h3>
-          <Button onClick={handleSignIn} type="primary">
+          <Button onClick={handleSignIn} style="primary">
             Sign in <AiOutlineArrowRight />
           </Button>
         </div>

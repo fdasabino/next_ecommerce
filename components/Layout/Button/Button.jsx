@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
 
-const Button = ({ children, type, className, ...rest }) => {
+const Button = ({ children, style, className, ...rest }) => {
   let buttonClass;
 
-  switch (type) {
+  switch (style) {
     case "primary":
       buttonClass = styles.btnPrimary;
       break;
@@ -34,12 +34,12 @@ const Button = ({ children, type, className, ...rest }) => {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.oneOf(["primary", "secondary", "tertiary", "danger", "google"]),
+  style: PropTypes.oneOf(["primary", "secondary", "tertiary", "danger", "google"]),
   className: PropTypes.string,
 };
 
 Button.defaultProps = {
-  type: "primary",
+  style: "primary",
   className: "",
 };
 

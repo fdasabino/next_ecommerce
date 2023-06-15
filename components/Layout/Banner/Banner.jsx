@@ -20,7 +20,7 @@ const Banner = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <Button onClick={() => router.push("/browse")} type="primary">
+        <Button onClick={() => router.push("/browse")} style="primary">
           Shop now!
         </Button>
       </div>
