@@ -30,7 +30,8 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       </SessionProvider>
       <ToastContainer
         position="bottom-right"
-        autoClose={false}
+        autoClose={10000}
+        hideProgressBar
         newestOnTop={true}
         closeOnClick
         draggable
