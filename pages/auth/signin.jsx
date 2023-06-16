@@ -178,7 +178,7 @@ const SignIn = ({ providers, callbackUrl, csrfToken }) => {
                         Sign in <AiOutlineArrowRight />
                       </Button>
                       <div className={styles.forgot_password}>
-                        <Link href="/forgot-password">Forgot your password?</Link>
+                        <Link href="/auth/forgotpassword">Forgot your password?</Link>
                       </div>
                     </Form>
                   )}
