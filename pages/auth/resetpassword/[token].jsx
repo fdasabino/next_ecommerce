@@ -138,7 +138,6 @@ export async function getServerSideProps(context) {
     }
 
     const userId = decoded.id;
-    console.log(userId);
 
     return {
       props: {
