@@ -30,6 +30,7 @@ const ForgotPassword = () => {
       });
       toast.success(data.message);
       setTimeout(() => {
+        setEmail("");
         setLoading(false);
         router.push("/");
       }, 2000);
