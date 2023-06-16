@@ -1,6 +1,6 @@
+import AuthForms from "@/components/Auth/AuthForms/AuthForms";
+import SigninHeader from "@/components/Auth/SigninHeader/SigninHeader";
 import Loader from "@/components/Layout/Loader/Loader";
-import AuthForms from "@/components/Signin/AuthForms/AuthForms";
-import SigninHeader from "@/components/Signin/SigninHeader/SigninHeader";
 import styles from "@/styles/pages/SignIn.module.scss";
 import { getCsrfToken, getProviders, getSession } from "next-auth/react";
 import { useState } from "react";
