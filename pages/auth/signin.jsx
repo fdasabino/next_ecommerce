@@ -273,7 +273,6 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req });
   const csrfToken = await getCsrfToken(context);
 
-  console.log(session);
   // redirect to home if user is already logged in
   if (session) {
     return {
