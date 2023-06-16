@@ -1,6 +1,7 @@
 import Button from "@/components/Layout/Button/Button";
 import FormInput from "@/components/Layout/Input/FormInput";
 import Loader from "@/components/Layout/Loader/Loader";
+import SigninHeader from "@/components/Signin/SigninHeader/SigninHeader";
 import styles from "@/styles/pages/SignIn.module.scss";
 import axios from "axios";
 import { Form, Formik } from "formik";
@@ -9,7 +10,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineArrowRight, AiOutlineUserAdd } from "react-icons/ai";
-import { BiLeftArrowAlt } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -144,15 +144,7 @@ const SignIn = ({ providers, callbackUrl, csrfToken }) => {
       ) : (
         <>
           {/* header */}
-          <div className={styles.signin__header}>
-            <button className={styles.back__svg} onClick={() => router.push("/")}>
-              <BiLeftArrowAlt />
-            </button>
-            <span>
-              Find the best prices and the best brands! <Link href="/">Explore our store</Link>
-            </span>
-          </div>
-
+          <SigninHeader styles={styles} />
           <div className={styles.signin}>
             {/* Left */}
             <div className={styles.signin__container}>
