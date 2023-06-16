@@ -37,6 +37,7 @@ const UserMenu = (props) => {
             <span>
               Welcome back, <br /> {session?.user.name}!
             </span>
+            <small>{session?.user.email}</small>
             <Button onClick={handleSignOut} style="danger">
               Sign out
             </Button>

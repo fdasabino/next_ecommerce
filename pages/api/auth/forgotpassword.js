@@ -18,7 +18,7 @@ const handler = async (req, res) => {
     }
 
     const userId = createResetToken({ id: user._id.toString() });
-    const resetLink = `${process.env.NEXTAUTH_URL}/auth/reset/${userId}`;
+    const resetLink = `${process.env.NEXTAUTH_URL}/auth/resetpassword/${userId}`;
     sendEmail(email, resetLink, "", "Reset your password", forgotPasswordEmailTemplate);
     res.status(201).json({
       message: `We have sent an email to ${email}. Please check your inbox to reset your password.`,
