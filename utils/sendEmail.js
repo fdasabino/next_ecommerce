@@ -19,7 +19,7 @@ const oauth2Client = new OAuth2(
   OAUTH_PLAYGROUND
 );
 
-export const sendEmail = async (to, url, txt, subject) => {
+export const sendEmail = async (to, url, txt, subject, template) => {
   oauth2Client.setCredentials({
     refresh_token: MAILING_SERVICE_REFRESH_TOKEN,
   });
@@ -42,7 +42,7 @@ export const sendEmail = async (to, url, txt, subject) => {
     from: MAILING_SERVICE_SENDER_EMAIL_ADDRESS,
     to: to,
     subject: subject,
-    html: activationEmailTemplate(to, url),
+    html: template(to, url),
   };
 
   smtpTransport.sendMail(mailOptions, (err, info) => {

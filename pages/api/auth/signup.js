@@ -1,3 +1,4 @@
+import { activationEmailTemplate } from "@/email_templates/activationEmailTemplate";
 import User from "@/models/User";
 import db from "@/utils/db";
 import { sendEmail } from "@/utils/sendEmail";
@@ -10,7 +11,6 @@ const handler = async (req, res) => {
     await db.connectDB();
 
     const { name, email, password } = req.body;
-    console.log(req.body);
 
     if (!name || !email || !password) {
       return res.status(422).json({ message: "Please fill in all fields..." });
@@ -44,7 +44,7 @@ const handler = async (req, res) => {
     const createdUser = await newUser.save();
     const activationToken = createActivationToken({ id: createdUser._id }); // to string?
     const activationLink = `${process.env.NEXTAUTH_URL}/activate/${activationToken}`;
-    sendEmail(email, activationLink, "", "Activate your account");
+    sendEmail(email, activationLink, "", "Activate your account", activationEmailTemplate);
     res.status(201).json({
       message: `Sign up successful! Please check ${email} to activate your account.`,
       user: createdUser,
