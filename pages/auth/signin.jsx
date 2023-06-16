@@ -1,5 +1,5 @@
 import AuthForms from "@/components/Auth/AuthForms/AuthForms";
-import SigninHeader from "@/components/Auth/SigninHeader/SigninHeader";
+import AuthHeader from "@/components/Auth/AuthHeader/AuthHeader";
 import Loader from "@/components/Layout/Loader/Loader";
 import styles from "@/styles/pages/SignIn.module.scss";
 import { getCsrfToken, getProviders, getSession } from "next-auth/react";
@@ -14,7 +14,7 @@ const SignIn = ({ providers, callbackUrl, csrfToken }) => {
         <Loader />
       ) : (
         <>
-          <SigninHeader styles={styles} />
+          <AuthHeader />
           <div className={styles.signin}>
             <AuthForms
               styles={styles}

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BiLeftArrowAlt } from "react-icons/bi";
+import styles from "./AuthHeader.module.scss";
 
-const SigninHeader = ({ styles }) => {
+const AuthHeader = () => {
   const router = useRouter();
 
   return (
@@ -17,4 +18,4 @@ const SigninHeader = ({ styles }) => {
   );
 };
 
-export default SigninHeader;
+export default AuthHeader;
