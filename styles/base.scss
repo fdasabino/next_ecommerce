@@ -15,7 +15,7 @@ $base-warning: #fac80f;
 $base-warning-secondary: #f5b400;
 $base-info: #2f82ff;
 $base-info-secondary: #1a28f1dc;
-$base-white: #ffffffff;
+$base-white: #fafafa;
 $base-dark: rgb(43, 42, 42);
 $base-dark-secondary: rgb(22, 22, 22);
 
@@ -24,3 +24,9 @@ $base-shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 $base-shadow-3: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 $base-cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $base-button-transition: all 1s ease-in-out;
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem;
+}
