@@ -8,11 +8,13 @@ const NotFound = () => {
   return (
     <div className={styles.not_found}>
       <div className={styles.not_found__container}>
-        <Image src={NotFoundImg} width={500} height={500} alt="notfound" />
+        <Image src={NotFoundImg} width={500} height={500} alt="notfound" priority />
         <h1>OOPs!</h1>
         <h2>Page Not Found</h2>
         <p>
-          It seems like the page you are looking for does not exist! <br />
+          It seems like the page you are looking for does not exist!
+          <br />
+          <br />
           <Link href="/">
             <AiOutlineArrowLeft /> Please take me back!{" "}
           </Link>
