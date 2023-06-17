@@ -1,3 +1,4 @@
+import MainSection from "@/components/Home/MainSection/MainSection";
 import { setCountry } from "@/redux-store/countrySlice";
 import styles from "@/styles/pages/Home.module.scss";
 import axios from "axios";
@@ -19,7 +20,7 @@ const Home = ({ country }) => {
   return (
     <div className={styles.home}>
       <div className={styles.container}>
-        <h1>Home</h1>
+        <MainSection />
       </div>
     </div>
   );
