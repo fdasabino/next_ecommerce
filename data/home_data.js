@@ -192,7 +192,7 @@ export const menuArray = [
     images: [],
   },
   {
-    name: "Phones & Telecommunications",
+    name: "Phones & Tablets",
     link: "",
     subMenu: [
       {

@@ -1,6 +1,7 @@
 import { menuArray } from "@/data/home_data";
 import Link from "next/link";
 import { BiCategory } from "react-icons/bi";
+import { BsDashLg } from "react-icons/bs";
 import styles from "./HomeMenu.module.scss";
 
 const HomeMenu = () => {
@@ -17,6 +18,7 @@ const HomeMenu = () => {
           {menuArray.map((item, i) => (
             <li key={i}>
               <Link href={item.link}>
+                <BsDashLg />
                 <span>{item.name}</span>
               </Link>
             </li>
