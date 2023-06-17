@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./MainSwiper.module.scss";
@@ -21,13 +22,15 @@ const MainSwiper = () => {
         >
           {[...Array(10).keys()].map((_, i) => (
             <SwiperSlide key={i}>
-              <Image
-                src={`/images/main_swiper/${i + 1}.jpg`}
-                width={1000}
-                height={1000}
-                alt="promotion_banner_testing_purposes_only"
-                priority
-              />
+              <Link href="/">
+                <Image
+                  src={`/images/main_swiper/${i + 1}.jpg`}
+                  width={1000}
+                  height={1000}
+                  alt="promotion_banner_testing_purposes_only"
+                  priority
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
