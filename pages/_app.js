@@ -8,6 +8,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const persistor = persistStore(store);
 

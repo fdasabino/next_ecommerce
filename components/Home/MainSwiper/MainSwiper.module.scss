@@ -1,0 +1,16 @@
+.main_swiper {
+  height: 300px;
+  user-select: none;
+  grid-area: main_swiper;
+  background-color: $base-white;
+  border-radius: 5px;
+  box-shadow: $base-shadow-1;
+  overflow: hidden;
+
+  &__container {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+}
