@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import "swiper/css";
+import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 

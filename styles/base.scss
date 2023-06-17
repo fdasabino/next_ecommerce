@@ -91,3 +91,15 @@ $base-button-transition: all 1s ease-in-out;
   left: -13px !important;
   top: -43% !important;
 }
+
+.user_panel_swiper {
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+  }
+}

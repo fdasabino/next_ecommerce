@@ -5,7 +5,12 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["images.pexels.com", "lh3.googleusercontent.com", "res.cloudinary.com"],
+    domains: [
+      "images.pexels.com",
+      "lh3.googleusercontent.com",
+      "res.cloudinary.com",
+      "ae01.alicdn.com",
+    ],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
