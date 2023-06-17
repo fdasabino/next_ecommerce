@@ -1,16 +1,18 @@
+import HomeHeader from "../HomeHeader/HomeHeader";
 import HomeMenu from "../HomeMenu/HomeMenu";
 import MainSwiper from "../MainSwiper/MainSwiper";
 import Offers from "../Offers/Offers";
+import UserPanel from "../UserPanel/UserPanel";
 import styles from "./MainSection.module.scss";
 
 const MainSection = () => {
   return (
     <section className={styles.main_section}>
-      <header className={styles.header}>header</header>
+      <HomeHeader />
       <MainSwiper />
       <Offers />
       <HomeMenu />
-      <div className={styles.user}>user</div>
+      <UserPanel />
     </section>
   );
 };

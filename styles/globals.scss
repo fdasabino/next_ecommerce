@@ -49,6 +49,7 @@ input,
 textarea,
 select {
   font-family: "Mulish", sans-serif;
+  transition: all 0.5s ease-in-out !important;
 }
 
 img,
@@ -96,7 +97,7 @@ hr {
   font-family: "Mulish", sans-serif !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
-  transition: all 0.1s ease-in-out !important;
+  transition: all 0.5s ease-in-out !important;
 
   &:hover {
     scale: 0.95 !important;
