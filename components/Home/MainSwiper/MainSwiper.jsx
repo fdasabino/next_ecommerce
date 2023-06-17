@@ -1,4 +1,5 @@
-import { Pagination } from "swiper";
+import Image from "next/image";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./MainSwiper.module.scss";
 
@@ -7,21 +8,28 @@ const MainSwiper = () => {
     <div className={styles.main_swiper}>
       <>
         <Swiper
+          navigation={true}
           pagination={{
             dynamicBullets: true,
           }}
-          grabCursor={true}
-          modules={[Pagination]}
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: true,
+          }}
+          modules={[Pagination, Navigation, Autoplay]}
           className={styles.main_swiper__container}
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
+          {[...Array(10).keys()].map((_, i) => (
+            <SwiperSlide key={i}>
+              <Image
+                src={`/images/main_swiper/${i + 1}.jpg`}
+                width={1000}
+                height={1000}
+                alt="promotion_banner_testing_purposes_only"
+                priority
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </>
     </div>
