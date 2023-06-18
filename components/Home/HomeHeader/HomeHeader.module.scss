@@ -2,6 +2,46 @@
   grid-area: home_header;
   height: 40px;
   background-color: $base-white;
-  border-radius: 5px;
-  box-shadow: $base-shadow-1;
+  box-shadow: $base-shadow-2;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid $base-grey;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    list-style: none;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+      margin: 0;
+      transition: all 0.3s ease-in-out;
+      font-size: 0.9rem;
+
+      li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      &:hover {
+        background-color: $base-grey;
+      }
+
+      svg {
+        width: 10px;
+        height: 10px;
+        fill: $base-dark;
+        stroke: $base-dark;
+      }
+    }
+  }
 }

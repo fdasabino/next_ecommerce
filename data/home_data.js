@@ -43,6 +43,7 @@ export const offersAarray = [
     discount: "5",
   },
 ];
+
 export const menuArray = [
   {
     name: "Women's Fashion",
@@ -357,6 +358,7 @@ export const flashDealsArray = [
     sold: "49",
   },
 ];
+
 export const women_dresses = [
   {
     image:
@@ -389,6 +391,7 @@ export const women_dresses = [
     price: "",
   },
 ];
+
 export const women_shoes = [
   {
     image:
@@ -415,6 +418,7 @@ export const women_shoes = [
       "https://img.ltwebstatic.com/images3_pi/2022/04/27/1651047458260c8e9c705b77227c9acdba9104c367_thumbnail_600x.webp",
   },
 ];
+
 export const women_accessories = [
   {
     image:
@@ -542,6 +546,7 @@ export const gamingSwiper = [
     price: "",
   },
 ];
+
 export const homeImprovSwiper = [
   {
     name: "",
