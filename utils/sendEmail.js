@@ -1,4 +1,3 @@
-import { activationEmailTemplate } from "@/email_templates/activationEmailTemplate";
 import { google } from "googleapis";
 import nodemailer from "nodemailer";
 
