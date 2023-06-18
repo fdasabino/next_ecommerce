@@ -1,7 +1,11 @@
 .footer {
-  background: $base-lilac;
+  background: url("/svgs/world_map.svg");
+  background-color: $base-grey;
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
   padding: 1rem;
   user-select: none;
+  border-top: 2px solid $base-lilac;
 
   &__wrapper {
     display: flex;
