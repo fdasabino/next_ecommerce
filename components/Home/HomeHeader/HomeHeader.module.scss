@@ -1,4 +1,5 @@
 .home_header {
+  position: relative;
   grid-area: home_header;
   height: 40px;
   background-color: $base-white;
@@ -25,6 +26,7 @@
       margin: 0;
       transition: all 0.3s ease-in-out;
       font-size: 0.9rem;
+      cursor: pointer;
 
       li {
         list-style: none;

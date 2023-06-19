@@ -1,5 +1,4 @@
 import HomeHeader from "../HomeHeader/HomeHeader";
-import HomeMenu from "../HomeMenu/HomeMenu";
 import MainSwiper from "../MainSwiper/MainSwiper";
 import Offers from "../Offers/Offers";
 import UserPanel from "../UserPanel/UserPanel";
@@ -11,7 +10,6 @@ const MainSection = () => {
       <HomeHeader />
       <MainSwiper />
       <Offers />
-      <HomeMenu />
       <UserPanel />
     </section>
   );
