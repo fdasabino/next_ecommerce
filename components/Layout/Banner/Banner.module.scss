@@ -14,14 +14,14 @@
   box-shadow: $base-shadow-3;
   position: relative;
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     display: none;
   }
 
   // logo
   .main__logo {
     flex: 0.8;
-    width: 200px;
+    width: 250px;
     z-index: 2;
 
     img {
