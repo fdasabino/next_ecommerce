@@ -10,11 +10,13 @@ const Main = () => {
   return (
     <div className={styles.main}>
       <div className={styles.main__container}>
-        <Link href="/">
-          <Image src={Logo} width={1000} height={1000} alt="logo" priority />
-        </Link>
+        <div className={styles.main__logo}>
+          <Link href="/">
+            <Image src={Logo} width={1000} height={1000} alt="logo" priority />
+          </Link>
+        </div>
         <div className={styles.search_bar}>
-          <input type="search" placeholder="Search..." />
+          <input type="text" placeholder="Search..." />
           <button>
             <BsSearch />
           </button>

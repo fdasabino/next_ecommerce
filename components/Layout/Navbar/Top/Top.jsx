@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { BsSuitHeart } from "react-icons/bs";
+import { BsCart3, BsSuitHeart } from "react-icons/bs";
 import { FiHelpCircle } from "react-icons/fi";
 import { MdOutlineSecurity } from "react-icons/md";
 import {
@@ -24,7 +24,7 @@ const Top = () => {
   const user = session?.user.name.split(" ")[0];
 
   // extract country from redux store
-  const { country } = useSelector((state) => ({ ...state }));
+  const { country, cart } = useSelector((state) => ({ ...state }));
 
   const handleMenuClick = () => {
     if (visible) {
@@ -37,7 +37,13 @@ const Top = () => {
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
-        <div />
+        <div className={styles.empty} />
+        <div className={styles.top__cart}>
+          <Link href="/cart">
+            <BsCart3 />
+            <span>{cart && cart.length}</span>
+          </Link>
+        </div>
         <ul className={styles.top__list}>
           <li>
             <Image
@@ -48,14 +54,14 @@ const Top = () => {
             />
             <span>{`${country.name} / USD`}</span>
           </li>
-          <li>
-            <Link href="/profile/wishlist">
-              <BsSuitHeart />
-              <span>Wishlist</span>
-            </Link>
-          </li>
           {!isMobile && (
             <>
+              <li>
+                <Link href="/profile/wishlist">
+                  <BsSuitHeart />
+                  <span>Wishlist</span>
+                </Link>
+              </li>
               <li>
                 <MdOutlineSecurity />
                 <span>Buyer Protection</span>

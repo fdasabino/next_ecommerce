@@ -5,6 +5,7 @@
   background-color: $base-white;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 20px;
   box-shadow: $base-shadow-3;
 
@@ -12,45 +13,46 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 1rem;
 
     // logo
-    a {
-      width: 220px;
-      display: flex;
-      align-items: center;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .main__logo {
+      width: 250px;
+
+      @media (max-width: 800px) {
+        display: none;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     // search
     .search_bar {
       position: relative;
-      flex: 1;
       width: 100%;
+      max-width: 900px;
+      margin: 0 3rem 0 0;
       height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 5px;
+      border: 1px solid $base-grey;
       background-color: $base-white;
       box-shadow: $base-shadow-2;
-
-      @media (max-width: 768px) {
-        display: none;
-      }
 
       input {
         width: 100%;
         height: 100%;
-        padding: 0 1rem 0 3rem;
+        max-height: 40px;
+        padding: 0 1rem;
         border: none;
         outline: none;
         font-size: 0.9rem;
@@ -69,19 +71,20 @@
 
       button {
         position: absolute;
-        left: 0;
+        right: -40px;
         width: 40px;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: none;
+        border: 1px solid $base-dark-grey;
         outline: none;
-        background-color: transparent;
+        background-color: $base-grey;
+
         cursor: pointer;
         transition: all 0.2s ease-in-out;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
 
         svg {
           width: 20px;
@@ -91,6 +94,14 @@
 
         &:hover {
           background-color: $base-info;
+          border: none;
+          svg {
+            fill: $base-white;
+          }
+        }
+        &:focus {
+          background-color: $base-info;
+          border: none;
           svg {
             fill: $base-white;
           }
@@ -108,10 +119,19 @@
       cursor: pointer;
       transition: all 0.2s ease-in-out;
 
+      @media (max-width: 800px) {
+        display: none;
+      }
+
       svg {
         width: 25px;
         height: 25px;
         fill: $base-dark;
+
+        @media (max-width: 800px) {
+          width: 20px;
+          height: 20px;
+        }
       }
 
       span {

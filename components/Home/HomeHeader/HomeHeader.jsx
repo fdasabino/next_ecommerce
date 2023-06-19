@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { BiCategory } from "react-icons/bi";
-import { BsDashLg } from "react-icons/bs";
+import { RxDropdownMenu } from "react-icons/rx";
 import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import styles from "./HomeHeader.module.scss";
 
@@ -20,7 +19,9 @@ const HomeHeader = () => {
     <header className={styles.home_header}>
       <ul>
         <a onClick={handleMenuClick}>
-          <li>Categories</li>
+          <li>
+            <RxDropdownMenu /> Categories
+          </li>
         </a>
         <Link href="/">
           <li>Store</li>
