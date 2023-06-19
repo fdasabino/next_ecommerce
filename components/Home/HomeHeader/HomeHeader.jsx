@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import { BiCategory } from "react-icons/bi";
 import { BsDashLg } from "react-icons/bs";
 import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import styles from "./HomeHeader.module.scss";
@@ -19,29 +20,16 @@ const HomeHeader = () => {
     <header className={styles.home_header}>
       <ul>
         <a onClick={handleMenuClick}>
-          <li>
-            <BsDashLg /> Categories
-          </li>
+          <li>Categories</li>
         </a>
         <Link href="/">
-          <li>
-            <BsDashLg /> Store
-          </li>
+          <li>Store</li>
         </Link>
         <Link href="/">
-          <li>
-            <BsDashLg /> Men
-          </li>
+          <li>Men</li>
         </Link>
         <Link href="/">
-          <li>
-            <BsDashLg /> Women
-          </li>
-        </Link>
-        <Link href="/">
-          <li>
-            <BsDashLg /> Accessories
-          </li>
+          <li>Women</li>
         </Link>
       </ul>
       {visible && <CategoriesMenu setVisible={setVisible} />}

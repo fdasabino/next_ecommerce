@@ -6,4 +6,8 @@
     "home_header home_header"
     "main_swiper user_panel"
     "offers user_panel";
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
 }

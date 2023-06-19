@@ -5,6 +5,10 @@
   border-radius: 5px;
   box-shadow: $base-shadow-1;
 
+  @media (max-width: 900px) {
+    display: none;
+  }
+
   &__container {
     padding: 1rem 0;
     width: 100%;

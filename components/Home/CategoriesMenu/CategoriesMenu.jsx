@@ -10,7 +10,7 @@ const CategoriesMenu = (props) => {
     <div className={styles.categories_menu} onMouseLeave={() => setVisible(false)}>
       <ul>
         {menuArray.map((item, i) => (
-          <li key={i}>
+          <li key={i} onClick={() => setVisible(false)}>
             <Link href={item.link}>{item.name}</Link>
           </li>
         ))}

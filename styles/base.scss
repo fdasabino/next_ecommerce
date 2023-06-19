@@ -1,6 +1,7 @@
 $base-blue: #2f82ff;
 $base-dark-blue: #0617f8dc;
 $base-yellow: #fac80f;
+$base-orange: #ff9100;
 $base-violet: #5a31f4;
 $base-lilac: #a3a1f7;
 $base-green: #3c811f;
@@ -26,7 +27,7 @@ $base-cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $base-button-transition: all 1s ease-in-out;
 
 .container {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 1rem;
 }

@@ -7,11 +7,13 @@
   z-index: 99;
 
   width: 100%;
-  max-width: 20rem;
+  max-width: 16rem;
   max-height: 540px;
 
   overflow-y: auto;
   overflow-x: hidden;
+
+  padding: 0.5rem 0;
 
   ul {
     display: flex;
