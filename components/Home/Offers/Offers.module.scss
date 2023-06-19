@@ -8,4 +8,8 @@
   overflow: hidden;
   background-image: url("../../../public/images/offers/offer1.png");
   background-size: cover;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }

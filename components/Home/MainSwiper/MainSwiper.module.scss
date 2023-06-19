@@ -7,6 +7,10 @@
   box-shadow: $base-shadow-1;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    box-shadow: none;
+  }
+
   &__container {
     position: relative;
     overflow: hidden;

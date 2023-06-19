@@ -36,6 +36,10 @@ $base-button-transition: all 1s ease-in-out;
   width: 100%;
   height: 100%;
 
+  @media (max-width: 768px) {
+    height: 200px !important;
+  }
+
   &:hover {
     .swiper-button-next,
     .swiper-button-prev {
@@ -57,6 +61,10 @@ $base-button-transition: all 1s ease-in-out;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
+
+  @media (max-width: 768px) {
+    object-position: center center;
+  }
 }
 
 .swiper-pagination-bullet,
@@ -77,6 +85,10 @@ $base-button-transition: all 1s ease-in-out;
 
   display: none !important;
   place-items: center !important;
+
+  @media (max-width: 768px) {
+    opacity: 0 !important;
+  }
 
   &:hover {
     opacity: 1;
