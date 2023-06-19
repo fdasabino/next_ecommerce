@@ -1,5 +1,6 @@
 import { menuArray } from "@/data/home_data";
 import Link from "next/link";
+import { MdOutlineArrowRight } from "react-icons/md";
 import styles from "./CategoriesMenu.module.scss";
 
 const CategoriesMenu = (props) => {
@@ -11,7 +12,9 @@ const CategoriesMenu = (props) => {
       <ul>
         {menuArray.map((item, i) => (
           <li key={i} onClick={() => setVisible(false)}>
-            <Link href={item.link}>{item.name}</Link>
+            <Link href={item.link}>
+              <MdOutlineArrowRight /> {item.name}
+            </Link>
           </li>
         ))}
       </ul>
