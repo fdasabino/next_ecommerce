@@ -1,3 +1,6 @@
+import Logo from "@/public/images/logo.png";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import Typewriter from "typewriter-effect";
 import Button from "../Button/Button";
@@ -7,6 +10,11 @@ const Banner = () => {
   const router = useRouter();
   return (
     <div className={styles.banner}>
+      <div className={styles.main__logo}>
+        <Link href="/">
+          <Image src={Logo} width={1000} height={1000} alt="logo" priority />
+        </Link>
+      </div>
       <div className={styles.overlay} />
       <div className={styles.left}>
         <div>

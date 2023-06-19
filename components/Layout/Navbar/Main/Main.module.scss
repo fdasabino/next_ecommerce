@@ -11,27 +11,12 @@
 
   &__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 3rem;
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-
-    // logo
-    .main__logo {
-      width: 250px;
-
-      @media (max-width: 800px) {
-        display: none;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
 
     // search
     .search_bar {

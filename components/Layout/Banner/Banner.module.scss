@@ -1,13 +1,13 @@
 .banner {
+  background: url("/svgs/animated_shape_banner.svg");
+  background-repeat: center center;
   background-color: $base-white;
-  background-image: url("/svgs/wave_line.svg");
-  background-position: center center;
   opacity: 1;
   height: 60px;
   width: 100%;
   padding: 0rem 2rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
   opacity: 1;
@@ -18,8 +18,21 @@
     display: none;
   }
 
+  // logo
+  .main__logo {
+    flex: 0.8;
+    width: 200px;
+    z-index: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   .overlay {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(247, 245, 245, 0.5);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -30,10 +43,10 @@
     opacity: 1;
     flex: 2;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
-    z-index: 5;
+    z-index: 0;
     div {
       color: $base-dark;
       font-size: 1.2rem;
