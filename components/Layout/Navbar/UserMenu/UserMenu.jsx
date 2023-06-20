@@ -15,7 +15,9 @@ const UserMenu = (props) => {
 
   // Sign out
   const handleSignOut = async () => {
-    await signOut();
+    setTimeout(async () => {
+      await signOut();
+    }, 2000);
     toast.success("Signed out successfully");
   };
 
