@@ -1,19 +1,18 @@
+import Button from "@/components/Layout/Button/Button";
 import { flashDealsArray } from "@/data/home_data";
 import Image from "next/image";
 import Link from "next/link";
-import { Navigation, Pagination } from "swiper";
+import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./FlashDealsSwiper.module.scss";
 
 const FlashDealsSwiper = () => {
+  const router = useRouter();
   return (
     <Swiper
       slidesPerView={1}
       spaceBetween={30}
       grabCursor={true}
-      pagination={{
-        clickable: true,
-      }}
       breakpoints={{
         640: {
           slidesPerView: 2,
@@ -28,7 +27,6 @@ const FlashDealsSwiper = () => {
           spaceBetween: 50,
         },
       }}
-      modules={[Pagination]}
       className={styles.flash_deals_swiper}
     >
       {flashDealsArray.map((item, i) => (
@@ -36,7 +34,11 @@ const FlashDealsSwiper = () => {
           {" "}
           <Link href={item.link}>
             <Image src={item.image} width={1000} height={1000} alt="placeholder" />
+            <span>${(item.price - item.discount).toFixed(0)}</span>
           </Link>
+          <Button onClick={() => router.push(item.link)} style="secondary">
+            Check it out!
+          </Button>
         </SwiperSlide>
       ))}
     </Swiper>

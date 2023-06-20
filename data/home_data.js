@@ -312,7 +312,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/03/25/164818761997d2ccb1de50aed18da9d77502717405_thumbnail_405x552.webp",
-    price: "254",
+    price: "90",
     discount: "36",
     link: "",
     sold: "12",
@@ -320,7 +320,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/05/13/165244123600952e503ccab89dd363c9b71f9094f8_thumbnail_405x552.webp",
-    price: "1687",
+    price: "38",
     discount: "20",
     link: "",
     sold: "96",
@@ -352,7 +352,7 @@ export const flashDealsArray = [
   {
     image:
       "https://img.ltwebstatic.com/images3_pi/2022/09/01/1662028598b9164c30a8410fc9d71b81fc63748d4e_thumbnail_405x552.webp",
-    price: "288",
+    price: "105",
     discount: "35",
     link: "",
     sold: "49",
