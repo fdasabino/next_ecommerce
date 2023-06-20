@@ -99,6 +99,13 @@
     justify-content: center;
     gap: 1rem;
 
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
     h3 {
       font-size: 1.5rem;
       font-weight: 500;
