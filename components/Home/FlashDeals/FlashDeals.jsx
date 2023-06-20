@@ -1,5 +1,6 @@
 import CountDown from "@/components/Layout/CountDown/CountDown";
 import { MdFlashOn } from "react-icons/md";
+import FlashDealsSwiper from "../FlashDealsSwiper/FlashDealsSwiper";
 import styles from "./FlashDeals.module.scss";
 
 const FlashDeals = () => {
@@ -10,10 +11,12 @@ const FlashDeals = () => {
           Flash Deals
           <MdFlashOn />
         </h2>
-
         <div className={styles.flash_deals__countdown}>
           <CountDown date={new Date(2023, 6, 23)} />
         </div>
+      </div>
+      <div className={styles.flash_deals__container}>
+        <FlashDealsSwiper />
       </div>
     </div>
   );

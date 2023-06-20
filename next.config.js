@@ -10,6 +10,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "res.cloudinary.com",
       "ae01.alicdn.com",
+      "img.ltwebstatic.com",
     ],
   },
   sassOptions: {

@@ -1,5 +1,5 @@
 .flash_deals {
-  margin: 1rem 0;
+  margin: 2rem 0;
   background: $base-white;
 
   &__header {
@@ -40,5 +40,8 @@
         }
       }
     }
+  }
+
+  &__container {
   }
 }
