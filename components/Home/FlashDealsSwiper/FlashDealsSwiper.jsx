@@ -1,7 +1,7 @@
 import { flashDealsArray } from "@/data/home_data";
 import Image from "next/image";
 import Link from "next/link";
-import { Navigation } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./FlashDealsSwiper.module.scss";
 
@@ -26,7 +26,10 @@ const FlashDealsSwiper = () => {
           spaceBetween: 50,
         },
       }}
-      modules={[Navigation]}
+      pagination={{
+        dynamicBullets: true,
+      }}
+      modules={[Navigation, Pagination]}
       className={styles.flash_deals_swiper}
     >
       {flashDealsArray.map((item, i) => (
