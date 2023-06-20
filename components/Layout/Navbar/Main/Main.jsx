@@ -10,7 +10,7 @@ const Main = () => {
     <div className={styles.main}>
       <div className={styles.main__container}>
         <div className={styles.search_bar}>
-          <input type="text" placeholder="Search..." />
+          <input type="search" placeholder="Search..." />
           <button>
             <BsSearch />
           </button>

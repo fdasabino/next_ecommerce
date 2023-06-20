@@ -47,7 +47,7 @@ const Footer = () => {
             </Button>
           </div>
           <small>
-            *By subscribing you are automatically agreeing to our{" "}
+            *By subscribing you are automatically agreeing to our <br />
             <Link href="/policy">Privacy and Cookie Policy</Link>.
             <hr />
           </small>
