@@ -80,16 +80,12 @@ $base-button-transition: all 1s ease-in-out;
   transform: scale(0.5) !important;
 
   width: 50px !important;
-  height: 600px !important;
+  height: 100% !important;
 
   opacity: 0.5;
 
   display: none !important;
   place-items: center !important;
-
-  @media (max-width: 768px) {
-    opacity: 0 !important;
-  }
 
   &:hover {
     opacity: 1;
@@ -98,12 +94,14 @@ $base-button-transition: all 1s ease-in-out;
 
 .swiper-button-next {
   right: -13px !important;
-  top: -43% !important;
+  top: 0 !important;
+  bottom: 0 !important;
 }
 
 .swiper-button-prev {
   left: -13px !important;
-  top: -43% !important;
+  top: 0 !important;
+  bottom: 0 !important;
 }
 
 .user_panel_swiper {
