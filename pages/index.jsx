@@ -1,3 +1,4 @@
+import FlashDeals from "@/components/Home/FlashDeals/FlashDeals";
 import MainSection from "@/components/Home/MainSection/MainSection";
 import { setCountry } from "@/redux-store/countrySlice";
 import styles from "@/styles/pages/Home.module.scss";
@@ -21,6 +22,7 @@ const Home = ({ country }) => {
     <div className={styles.home}>
       <div className={styles.container}>
         <MainSection />
+        <FlashDeals />
       </div>
     </div>
   );
