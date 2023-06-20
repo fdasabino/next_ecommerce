@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { toast } from "react-toastify";
 import Button from "../../Button/Button";
 import styles from "./UserMenu.module.scss";
 
@@ -15,6 +16,7 @@ const UserMenu = (props) => {
   // Sign out
   const handleSignOut = async () => {
     await signOut();
+    toast.success("Signed out successfully");
   };
 
   // Sign in
