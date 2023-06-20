@@ -18,7 +18,7 @@ const UserMenu = (props) => {
     setTimeout(async () => {
       await signOut();
     }, 2000);
-    toast("Signing out...");
+    toast.success("Signing out...");
   };
 
   // Sign in
