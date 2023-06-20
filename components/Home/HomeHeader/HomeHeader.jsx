@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { RxDropdownMenu } from "react-icons/rx";
+import { RiArrowDropDownFill } from "react-icons/ri";
 import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import styles from "./HomeHeader.module.scss";
 
@@ -20,7 +20,7 @@ const HomeHeader = () => {
       <ul>
         <a onClick={handleMenuClick}>
           <li>
-            <RxDropdownMenu /> Categories
+            <RiArrowDropDownFill /> Categories
           </li>
         </a>
         <Link href="/">
