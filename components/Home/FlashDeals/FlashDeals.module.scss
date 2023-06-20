@@ -8,9 +8,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $base-white;
+    color: $base-dark;
     font-weight: 900;
-    background: $base-blue;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    box-shadow: $base-shadow-3;
     text-transform: uppercase;
 
     @media (max-width: 480px) {

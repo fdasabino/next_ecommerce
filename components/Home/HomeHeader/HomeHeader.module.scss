@@ -2,10 +2,12 @@
   position: relative;
   grid-area: home_header;
   height: 40px;
-  background-color: $base-blue;
-  box-shadow: $base-shadow-2;
-  width: 99.9%;
+  background-color: $base-white;
+  box-shadow: $base-shadow-3;
+  width: 100%;
   margin: 0 auto;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 
   ul {
     display: flex;
@@ -42,7 +44,7 @@
         align-items: center;
         gap: 0.5rem;
         transition: all 0.3s ease-in-out;
-        color: $base-white;
+        color: $base-dark;
 
         svg {
           width: 20px;
