@@ -22,7 +22,7 @@ const Home = ({ country }) => {
     <div className={styles.home}>
       <div className={styles.container}>
         <MainSection />
-        {/* <FlashDeals /> */}
+        <FlashDeals />
       </div>
     </div>
   );
