@@ -1,11 +1,10 @@
 .main_section {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0.5rem;
   grid-template-areas:
     "home_header home_header"
-    "main_swiper user_panel"
-    "offers user_panel";
+    "main_swiper main_swiper";
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
