@@ -1,14 +1,14 @@
 import { menuArray } from "@/data/home_data";
 import Link from "next/link";
 import { MdOutlineArrowRight } from "react-icons/md";
-import styles from "./CategoriesMenu.module.scss";
+import styles from "./CategoriesDropdown.module.scss";
 
-const CategoriesMenu = (props) => {
+const CategoriesDropdown = (props) => {
   // Get props
   const { setVisible } = props;
 
   return (
-    <div className={styles.categories_menu} onMouseLeave={() => setVisible(false)}>
+    <div className={styles.categories_dropdown} onMouseLeave={() => setVisible(false)}>
       <ul>
         {menuArray.map((item, i) => (
           <li key={i} onClick={() => setVisible(false)}>
@@ -22,4 +22,4 @@ const CategoriesMenu = (props) => {
   );
 };
 
-export default CategoriesMenu;
+export default CategoriesDropdown;
