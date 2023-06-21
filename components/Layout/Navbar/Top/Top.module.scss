@@ -1,6 +1,11 @@
 .top {
   border-bottom: 1px solid #eee;
 
+  @media (max-width: 800px) {
+    background-color: $base-warning-secondary;
+    border-bottom: none;
+  }
+
   &__container {
     margin: 0 auto;
     display: flex;
