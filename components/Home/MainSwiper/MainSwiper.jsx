@@ -13,7 +13,7 @@ const MainSwiper = () => {
     <div className={styles.main_swiper}>
       <>
         <Swiper
-          navigation={true}
+          navigation={isMobile ? false : true}
           pagination={{
             dynamicBullets: true,
           }}
