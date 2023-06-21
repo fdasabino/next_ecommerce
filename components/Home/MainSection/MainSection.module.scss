@@ -1,12 +1,6 @@
 .main_section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.5rem;
-  grid-template-areas:
-    "home_header home_header"
-    "main_swiper main_swiper";
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-areas: "main_swiper main_swiper";
+  height: 50vh;
 }

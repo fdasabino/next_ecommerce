@@ -21,7 +21,7 @@ const Home = ({ country }) => {
   return (
     <div className={styles.home}>
       <div className={styles.container}>
-        {/* <MainSection /> */}
+        <MainSection />
         {/* <FlashDeals /> */}
       </div>
     </div>

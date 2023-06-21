@@ -1,5 +1,7 @@
+import Button from "@/components/Layout/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
+import { BsArrowBarRight, BsLaptop, BsShopWindow, BsWallet2 } from "react-icons/bs";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./MainSwiper.module.scss";
@@ -20,17 +22,38 @@ const MainSwiper = () => {
           modules={[Pagination, Navigation, Autoplay]}
           className={styles.main_swiper__container}
         >
-          {[...Array(10).keys()].map((_, i) => (
+          {[...Array(5).keys()].map((_, i) => (
             <SwiperSlide key={i}>
-              <Link href="/">
+              <div className={styles.left}>
                 <Image
-                  src={`/images/main_swiper/${i + 1}.jpg`}
+                  src={`/images/main_swiper/swiper${i + 1}.webp`}
                   width={1000}
                   height={1000}
                   alt="promotion_banner_testing_purposes_only"
                   priority
                 />
-              </Link>
+              </div>
+              <div className={styles.right}>
+                <div className={styles.icons}>
+                  <BsLaptop />
+                  <BsWallet2 />
+                  <BsArrowBarRight />
+                  <BsShopWindow />
+                </div>
+                <h2>Find your style</h2>
+                <small>Where do you want to start?</small>
+                <div className={styles.ctas}>
+                  <Link href="/">
+                    <Button style="secondary">Women</Button>
+                  </Link>
+                  <Link href="/">
+                    <Button style="secondary">Men</Button>
+                  </Link>
+                  <Link href="/">
+                    <Button style="secondary">Kids</Button>
+                  </Link>
+                </div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
