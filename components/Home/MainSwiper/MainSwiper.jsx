@@ -2,11 +2,13 @@ import Button from "@/components/Layout/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
 import { BsArrowBarRight, BsLaptop, BsShopWindow, BsWallet2 } from "react-icons/bs";
+import { useMediaQuery } from "react-responsive";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./MainSwiper.module.scss";
 
 const MainSwiper = () => {
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   return (
     <div className={styles.main_swiper}>
       <>
@@ -22,7 +24,7 @@ const MainSwiper = () => {
           modules={[Pagination, Navigation, Autoplay]}
           className={styles.main_swiper__container}
         >
-          {[...Array(5).keys()].map((_, i) => (
+          {[...Array(isMobile ? 1 : 5).keys()].map((_, i) => (
             <SwiperSlide key={i}>
               <div className={styles.left}>
                 <Image
