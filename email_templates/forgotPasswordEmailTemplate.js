@@ -68,7 +68,7 @@ export const forgotPasswordEmailTemplate = (to, link) => {
   <td class="es-m-p0r" valign="top" align="center" style="padding:0;Margin:0;width:360px">
   <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
   <tr>
-  <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://shoppyflowse.vercel.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:14px"><img class="adapt-img" src="https://drqeyd.stripocdn.email/content/guids/CABINET_a04eb8dd4873af469a6ce18ae65342e37075ee511ea6f69ab61e3c7cc7da5266/images/logo.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="34" title="Logo"></a></td>
+  <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://shoppyflowsweden.vercel.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:14px"><img class="adapt-img" src="https://drqeyd.stripocdn.email/content/guids/CABINET_a04eb8dd4873af469a6ce18ae65342e37075ee511ea6f69ab61e3c7cc7da5266/images/logo.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="34" title="Logo"></a></td>
   </tr>
   </table></td>
   </tr>
@@ -189,7 +189,7 @@ export const forgotPasswordEmailTemplate = (to, link) => {
   <td align="left" style="padding:0;Margin:0;width:360px">
   <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
   <tr>
-  <td align="center" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:18px;margin-bottom:9px;color:#333333;font-size:12px">You are receiving this email because you have visited our site or asked us about the regular newsletter. Make sure our messages get to your Inbox (and not your bulk or junk folders).<br><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px;line-height:18px" href="https://shoppyflowse.vercel.app/privacy">Privacy police</a></p></td>
+  <td align="center" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Montserrat, sans-serif;line-height:18px;margin-bottom:9px;color:#333333;font-size:12px">You are receiving this email because you have visited our site or asked us about the regular newsletter. Make sure our messages get to your Inbox (and not your bulk or junk folders).<br><a target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:12px;line-height:18px" href="https://shoppyflowsweden.vercel.app/privacy">Privacy police</a></p></td>
   </tr>
   </table></td>
   </tr>
@@ -209,7 +209,7 @@ export const forgotPasswordEmailTemplate = (to, link) => {
   <td align="center" valign="top" style="padding:0;Margin:0;width:360px">
   <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
   <tr>
-  <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://shoppyflowse.vercel.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:16px"><img class="adapt-img" src="https://drqeyd.stripocdn.email/content/guids/CABINET_a04eb8dd4873af469a6ce18ae65342e37075ee511ea6f69ab61e3c7cc7da5266/images/logo.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="34" title="Logo"></a></td>
+  <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://shoppyflowsweden.vercel.app" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#134F5C;font-size:16px"><img class="adapt-img" src="https://drqeyd.stripocdn.email/content/guids/CABINET_a04eb8dd4873af469a6ce18ae65342e37075ee511ea6f69ab61e3c7cc7da5266/images/logo.png" alt="Logo" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="34" title="Logo"></a></td>
   </tr>
   </table></td>
   </tr>
