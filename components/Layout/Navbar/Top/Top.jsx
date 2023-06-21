@@ -37,7 +37,6 @@ const Top = () => {
   return (
     <div className={styles.top}>
       <div className={styles.top__container}>
-        <div className={styles.empty} />
         <div className={styles.top__cart}>
           <Link href="/cart">
             <BsCart3 />
