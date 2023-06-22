@@ -296,66 +296,66 @@ export const flashDealsArray = [
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1679000146/storeado/1679000146082.jpg",
-    price: "91",
-    discount: "11",
+    price: 90,
+    discount: 40,
     link: "",
-    sold: "30",
+    sold: 30,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1677786160/storeado/1677786159551.jpg",
-    price: "73",
-    discount: "25",
+    price: 73,
+    discount: 40,
     link: "",
-    sold: "61",
+    sold: 61,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1678137495/storeado/1678137495394.jpg",
-    price: "90",
-    discount: "36",
+    price: 90,
+    discount:3,
     link: "",
-    sold: "12",
+    sold: 12,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1677366007/storeado/1677366006684.jpg",
-    price: "38",
-    discount: "20",
+    price: 38,
+    discount:2,
     link: "",
-    sold: "96",
+    sold: 96,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1677347486/storeado/1677347485094.jpg",
-    price: "126",
-    discount: "8",
+    price: 126,
+    discount:8,
     link: "",
-    sold: "12",
+    sold: 12,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1679000036/storeado/1679000034563.jpg",
-    price: "65",
-    discount: "7",
+    price: 65,
+    discount:7,
     link: "",
-    sold: "82",
+    sold: 82,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1678999874/storeado/1678999873222.jpg",
-    price: "41",
-    discount: "9",
+    price: 41,
+    discount: 9,
     link: "",
-    sold: "52",
+    sold: 52,
   },
   {
     image:
       "https://res.cloudinary.com/frank2021/image/upload/v1678999771/storeado/1678999769576.jpg",
-    price: "105",
-    discount: "35",
+    price: 105,
+    discount:3,
     link: "",
-    sold: "49",
+    sold: 49,
   },
 ];
 
