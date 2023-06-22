@@ -28,9 +28,9 @@ const Home = ({ country, products }) => {
       <div className={styles.container}>
         <MainSection />
         <hr />
-        <FlashDeals />
-        <hr />
         <ProductsSection products={products} />
+        <hr />
+        <FlashDeals />
       </div>
     </div>
   );
@@ -50,7 +50,6 @@ export async function getServerSideProps() {
     );
     const country = data.location.country;
 
-    console.log(productsArray);
     return {
       props: {
         products: productsArray,
