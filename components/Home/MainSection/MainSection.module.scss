@@ -2,5 +2,5 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "main_swiper main_swiper";
-  height: 50vh;
+  min-height: 50vh;
 }
