@@ -1,9 +1,4 @@
-import Button from "@/components/Layout/Button/Button";
 import { flashDealsArray } from "@/data/home_data";
-import Image from "next/image";
-import Link from "next/link";
-import { BsArrowBarRight } from "react-icons/bs";
-import { ImPriceTag } from "react-icons/im";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "../Card/Card";
