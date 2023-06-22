@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsArrowBarRight } from "react-icons/bs";
 import { ImPriceTag } from "react-icons/im";
-import { Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Card from "../Card/Card";
 import styles from "./FlashDealsSwiper.module.scss";
 
 const FlashDealsSwiper = () => {
@@ -15,6 +16,10 @@ const FlashDealsSwiper = () => {
       spaceBetween={30}
       grabCursor={true}
       navigation={true}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
       breakpoints={{
         480: {
           slidesPerView: 3,
@@ -32,24 +37,12 @@ const FlashDealsSwiper = () => {
       pagination={{
         dynamicBullets: true,
       }}
-      modules={[Navigation, Pagination]}
+      modules={[Navigation, Pagination, Autoplay]}
       className={styles.flash_deals_swiper}
     >
       {flashDealsArray.map((item, i) => (
         <SwiperSlide key={i}>
-          <div className={styles.slide_wrapper}>
-            <Image src={item.image} width={1000} height={1000} alt="placeholder" />
-            <div className={styles.overlay}>
-              <span>
-                <ImPriceTag /> ${(item.price - item.discount).toFixed(0)}
-              </span>
-              <Link href={item.link}>
-                <Button style="secondary">
-                  View <BsArrowBarRight />
-                </Button>
-              </Link>
-            </div>
-          </div>
+          <Card item={item} />
         </SwiperSlide>
       ))}
     </Swiper>
