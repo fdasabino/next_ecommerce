@@ -7,10 +7,9 @@ import thunk from "redux-thunk";
 // reducers (slices)
 import cart from "./cartSlice";
 import country from "./countrySlice";
-import products from "./productSlice";
 
 // combine all reducers
-const reducers = combineReducers({ cart, country, products });
+const reducers = combineReducers({ cart, country });
 
 // config
 const config = {
