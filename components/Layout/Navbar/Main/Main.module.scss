@@ -50,7 +50,7 @@
         }
 
         &:focus {
-          outline: $base-grey auto 1px;
+          background-color: $base-grey;
         }
       }
 
