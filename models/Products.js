@@ -48,7 +48,8 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      //lowercase: true,
+      lowercase: true,
+      index: true,
     },
     category: {
       type: ObjectId,

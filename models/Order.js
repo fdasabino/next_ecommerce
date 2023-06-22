@@ -99,13 +99,7 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Not Processed",
-      enum: [
-        "Not Processed",
-        "Processing",
-        "Dispatched",
-        "Cancelled",
-        "Completed",
-      ],
+      enum: ["Not Processed", "Processing", "Dispatched", "Cancelled", "Completed"],
     },
     paidAt: {
       type: Date,
