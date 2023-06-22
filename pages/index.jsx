@@ -11,7 +11,6 @@ import Products from "../models/Products";
 
 const Home = ({ country, products }) => {
   const dispatch = useDispatch();
-  console.log(products);
 
   // Set country in redux store
   const setCountryToStore = useCallback(() => {
