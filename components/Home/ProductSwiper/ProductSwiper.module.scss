@@ -3,9 +3,10 @@
   cursor: pointer;
   background-color: $base-white;
 
-  .product_swiper__wrapper {
-    img {
-      display: block;
-    }
+  img {
+    display: block;
+    box-shadow: $base-shadow-3 !important;
+    border: 1px solid $base-grey !important;
+    border-radius: 5px;
   }
 }
