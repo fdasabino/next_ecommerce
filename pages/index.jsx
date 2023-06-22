@@ -27,7 +27,6 @@ const Home = ({ country, products }) => {
       <div className={styles.container}>
         <MainSection />
         <ProductsSection products={products} />
-        <hr />
         <FlashDeals />
       </div>
     </div>

@@ -4,7 +4,6 @@
   gap: 0.3rem;
 
   b {
-    padding-top: 1rem;
     font-size: 2rem;
   }
 
@@ -15,7 +14,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
 
     border-radius: 5px;
     border: 2px solid $base-warning-secondary;
