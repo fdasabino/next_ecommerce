@@ -5,7 +5,7 @@ import styles from "./FlashDeals.module.scss";
 
 const FlashDeals = () => {
   return (
-    <div className={styles.flash_deals}>
+    <section className={styles.flash_deals}>
       <div className={styles.flash_deals__header}>
         <h2>
           Flash Deals
@@ -18,7 +18,7 @@ const FlashDeals = () => {
       <div className={styles.flash_deals__container}>
         <FlashDealsSwiper />
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,0 +1,56 @@
+.products_section {
+  position: relative;
+
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__header {
+    width: 100%;
+    background-color: $base-dark-secondary;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+
+    h2 {
+      color: $base-white;
+      font-size: 2rem;
+      font-weight: 500;
+      padding: 0 0.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    svg {
+      color: $base-white;
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  &__swiper_wrapper {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

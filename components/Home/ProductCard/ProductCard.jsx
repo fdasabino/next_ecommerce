@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import ProductSwiper from "../ProductSwiper/ProductSwiper";
 import styles from "./ProductCard.module.scss";
 
 const ProductCard = ({ product }) => {
@@ -19,7 +21,15 @@ const ProductCard = ({ product }) => {
   console.log("Prices ==>", prices);
   console.log("Colors ==>", colors);
 
-  return <div className={styles.product_card}>{product.name}</div>;
+  return (
+    <div className={styles.product_card}>
+      <div className={styles.product_card__container}>
+        <Link href={`/product/${product.slug}?color=${active}`}>
+          <ProductSwiper images={images} />
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default ProductCard;
