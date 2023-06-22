@@ -16,8 +16,8 @@ const FlashDealsSwiper = () => {
       grabCursor={true}
       navigation={true}
       breakpoints={{
-        640: {
-          slidesPerView: 2,
+        480: {
+          slidesPerView: 3,
           spaceBetween: 20,
         },
         768: {
