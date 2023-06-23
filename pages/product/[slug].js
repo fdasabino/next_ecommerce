@@ -10,12 +10,11 @@ const SingleProductPage = ({ product }) => {
 export default SingleProductPage;
 
 export async function getServerSideProps(context) {
-  db.connectDB();
   try {
     const { query } = context;
-    const slug = query.slug;
-    const color = query.color;
-    const size = query.size || 0;
+    const { slug, color, size = 0 } = query;
+
+    db.connectDB();
 
     const product = await Product.findOne({ slug }).lean().exec();
     const subProduct = product.subProducts[color];
@@ -30,16 +29,10 @@ export async function getServerSideProps(context) {
       colors: product.subProducts.map((subProduct) => subProduct.color),
       priceRange: prices.length > 1 ? `From: ${prices[0]}$ to: ${prices[prices.length - 1]}$` : "",
       priceBeforeDiscount: subProduct.sizes[size].price.toFixed(2),
-      price:
-        subProduct.discount > 0
-          ? (
-              subProduct.sizes[size].price -
-              subProduct.sizes[size].price / subProduct.discount
-            ).toFixed(2)
-          : (subProduct.sizes[size].price * 1).toFixed(2),
-
+      price: calculateDiscountedPrice(subProduct.sizes[size], subProduct.discount).toFixed(2),
       quantity: subProduct.sizes[size].qty,
     };
+
     return {
       props: { product: JSON.parse(JSON.stringify(newProduct)) }, // will be passed to the page component as props
     };
@@ -51,4 +44,13 @@ export async function getServerSideProps(context) {
   } finally {
     db.disconnectDB();
   }
+}
+
+function calculateDiscountedPrice(size, discount) {
+  const basePrice = size.price;
+  if (discount > 0) {
+    const discountedPrice = basePrice - basePrice / discount;
+    return discountedPrice;
+  }
+  return basePrice;
 }

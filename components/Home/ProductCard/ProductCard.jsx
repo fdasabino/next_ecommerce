@@ -18,10 +18,6 @@ const ProductCard = ({ product }) => {
     setColors(product.subProducts.map((subProduct) => subProduct.color));
   }, [active, product.subProducts, setPrices]);
 
-  console.log("Images ==>", images);
-  console.log("Prices ==>", prices);
-  console.log("Colors ==>", colors);
-
   return (
     <div className={styles.product_card}>
       <div className={styles.product_card__container}>
@@ -53,7 +49,7 @@ const ProductCard = ({ product }) => {
                 color.image ? (
                   <Image
                     key={index}
-                    className={index === active && styles.active}
+                    className={index === active ? styles.active : ""}
                     onMouseOver={() => {
                       setImages(product.subProducts[index].images);
                       setActive(index);
