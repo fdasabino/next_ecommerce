@@ -42,10 +42,9 @@ const ProductCard = ({ product }) => {
           <span>
             {prices.length === 1
               ? prices[0].toLocaleString() + "$"
-              : (() => {
-                  const priceDifference = Math.abs(prices[0] - prices[prices.length - 1]);
-                  return priceDifference.toLocaleString() + "$";
-                })()}
+              : `from ${prices[0].toLocaleString()}$ to  ${prices[
+                  prices.length - 1
+                ].toLocaleString()}$`}
           </span>
 
           <div className={styles.product_card__colors}>

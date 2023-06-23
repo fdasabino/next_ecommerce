@@ -17,12 +17,13 @@
       text-align: center;
       font-weight: 400;
       margin: 0;
-      margin-bottom: 0.5rem;
       color: $base-dark-secondary;
     }
     span {
       color: $base-error-secondary;
       font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
     }
   }
 
