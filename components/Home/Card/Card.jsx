@@ -11,7 +11,7 @@ const Card = ({ item }) => {
       <div className={styles.overlay}>
         <span>{(item.price - item.discount).toFixed(0)}$</span>
         <small>
-          {(((item.price - (item.price - item.discount) / 2) / item.price) * 100).toFixed(0)}% OFF
+          -{(((item.price - (item.price - item.discount) / 2) / item.price) * 100).toFixed(0)}%
         </small>
         <Link href={item.link}>
           <Button style="secondary">

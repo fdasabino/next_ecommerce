@@ -17,6 +17,7 @@ const ProductSwiper = ({ images }) => {
 
   const handleMouseLeave = () => {
     swiperRef.current.swiper.autoplay.stop();
+    swiperRef.current.swiper.slideTo(0);
   };
 
   return (
@@ -29,7 +30,7 @@ const ProductSwiper = ({ images }) => {
         ref={swiperRef}
         centeredSlides={true}
         autoplay={{
-          delay: 2500,
+          delay: 500,
           stopOnLastSlide: false,
           speed: 500,
         }}

@@ -3,4 +3,79 @@
   width: 100%;
   max-width: 170px;
   height: fit-content;
+  margin: 1rem 0;
+
+  &__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      font-size: 0.8rem;
+      white-space: pre-wrap;
+      text-align: center;
+      font-weight: 400;
+      margin: 0;
+      margin-bottom: 0.5rem;
+      color: $base-dark-secondary;
+    }
+    span {
+      color: $base-error-secondary;
+      font-weight: 600;
+    }
+  }
+
+  &__colors {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease-in-out;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+
+      object-fit: cover;
+
+      border: 1px solid $base-dark-secondary;
+      border-radius: 50%;
+
+      cursor: pointer;
+      outline-offset: 1.5px !important;
+
+      &:hover {
+        outline: 1.5px solid $base-orange;
+      }
+    }
+    .active {
+      outline: 1.5px solid $base-orange;
+    }
+
+    span {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+
+  &__discount {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0.5rem;
+    background-color: rgba($color: $base-orange, $alpha: 0.5);
+    color: $base-white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    z-index: 5;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
 }
