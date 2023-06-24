@@ -7,7 +7,7 @@ import db from "@/utils/db";
 import axios from "axios";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Products from "../models/Products";
+import Product from "../models/Products";
 
 const Home = ({ country, products }) => {
   const dispatch = useDispatch();
@@ -37,13 +37,14 @@ const Home = ({ country, products }) => {
     </div>
   );
 };
+
 export default Home;
 
 export async function getServerSideProps() {
   db.connectDB();
 
   try {
-    const products = await Products.find({}).sort({ createdAt: -1 }).lean();
+    const products = await Product.find({}).sort({ createdAt: -1 }).lean();
     const serializedProducts = JSON.parse(JSON.stringify(products));
     const productsArray = serializedProducts;
 

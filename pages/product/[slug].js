@@ -10,11 +10,11 @@ const SingleProductPage = ({ product }) => {
 
   const path = [
     { id: 1, name: "Home" },
-    { id: 2, name: product.category.name },
+    { id: 2, name: product?.category.name },
     { id: 3, name: "Subcategory 1" },
     {
       id: 4,
-      name: product.name.length > 30 ? `${product.name.substring(0, 30)}...` : product.name,
+      name: product?.name.length > 30 ? `${product.name.substring(0, 30)}...` : product?.name,
     },
   ];
 
@@ -22,7 +22,7 @@ const SingleProductPage = ({ product }) => {
     <>
       <Head>
         <title>
-          {product.name.length > 30 ? `${product.name.substring(0, 30)}...` : product.name}
+          {product?.name.length > 30 ? `${product?.name.substring(0, 30)}...` : product?.name}
         </title>
       </Head>
       <div className={styles.single_product_page}>
@@ -62,6 +62,12 @@ export async function getServerSideProps(context) {
       price: calculateDiscountedPrice(subProduct.sizes[size], subProduct.discount).toFixed(2),
       quantity: subProduct.sizes[size].qty,
     };
+
+    if (!newProduct) {
+      return {
+        notFound: true,
+      };
+    }
 
     return {
       props: { product: JSON.parse(JSON.stringify(newProduct)) }, // will be passed to the page component as props
