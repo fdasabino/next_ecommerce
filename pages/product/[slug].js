@@ -22,7 +22,8 @@ const SingleProductPage = ({ product }) => {
     <>
       <Head>
         <title>
-          {product?.name.length > 30 ? `${product?.name.substring(0, 30)}...` : product?.name}
+          ShoppyFlow |{" "}
+          {product?.name.length > 15 ? `${product?.name.substring(0, 15)}...` : product?.name}
         </title>
       </Head>
       <div className={styles.single_product_page}>

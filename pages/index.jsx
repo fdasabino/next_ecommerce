@@ -5,6 +5,7 @@ import { setProducts } from "@/redux-store/productsSlice";
 import styles from "@/styles/pages/Home.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
+import Head from "next/head";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Product from "../models/Products";
@@ -29,12 +30,17 @@ const Home = ({ country, products }) => {
   }, [setCountryToStore, setProductsToStore]);
 
   return (
-    <div className={styles.home}>
-      <div className={styles.container}>
-        <MainSection products={products} />
-        <FlashDeals />
+    <>
+      <Head>
+        <title> ShoppyFlow | Home</title>
+      </Head>
+      <div className={styles.home}>
+        <div className={styles.container}>
+          <MainSection products={products} />
+          <FlashDeals />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
