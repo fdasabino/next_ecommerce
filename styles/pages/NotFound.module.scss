@@ -4,11 +4,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 5rem;
-
-  @media screen and (max-width: 500px) {
-    margin-top: 0;
-  }
 
   &__container {
     display: flex;
@@ -17,6 +12,9 @@
     justify-content: center;
     max-width: 500px;
     width: 100%;
+    background-image: url("/svgs/animated_shape.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
 
     @media screen and (max-width: 500px) {
       max-width: 350px;
