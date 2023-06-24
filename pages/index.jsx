@@ -63,5 +63,7 @@ export async function getServerSideProps() {
     return {
       props: {},
     };
+  } finally {
+    db.disconnectDB();
   }
 }
