@@ -41,10 +41,10 @@ const Home = ({ country, products }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  db.connectDB();
+  await db.connectDB();
 
   try {
-    const products = await Product.find({}).sort({ createdAt: -1 }).lean();
+    const products = await Product.find({}).sort({ createdAt: -1 }).lean().exec();
     const serializedProducts = JSON.parse(JSON.stringify(products));
     const productsArray = serializedProducts;
 
