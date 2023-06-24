@@ -45,7 +45,7 @@ export async function getServerSideProps(context) {
 
     const product = await Product.findOne({ slug })
       .populate({ path: "category", model: Category })
-      .populate({ path: "subCategories", model: SubCategory })
+      .populate({ path: "subCategories._id", model: SubCategory })
       .lean();
     const subProduct = product.subProducts[color];
     const prices = subProduct.sizes.map((size) => size.price).sort((a, b) => a - b);

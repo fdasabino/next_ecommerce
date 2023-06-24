@@ -92,6 +92,10 @@ hr {
   border-top: 1px solid $base-grey;
 }
 
+main {
+  min-height: fit-content;
+}
+
 .vertical-line {
   margin: auto 0;
   margin-top: 12rem;

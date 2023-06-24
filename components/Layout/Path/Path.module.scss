@@ -28,12 +28,11 @@
     }
 
     a {
-      color: $base-blue;
       text-decoration: none;
       transition: color 0.2s ease-in-out;
 
       &:hover {
-        color: $base-dark-blue;
+        color: $base-blue;
       }
     }
   }
