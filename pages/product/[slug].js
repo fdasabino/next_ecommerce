@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
     const { query } = context;
     const { slug, color, size = 0 } = query;
 
-    db.connectDB();
+    await db.connectDB();
 
     const product = await Product.findOne({ slug })
       .populate({ path: "category", model: Category })
@@ -62,12 +62,6 @@ export async function getServerSideProps(context) {
       price: calculateDiscountedPrice(subProduct.sizes[size], subProduct.discount).toFixed(2),
       quantity: subProduct.sizes[size].qty,
     };
-
-    if (!newProduct) {
-      return {
-        notFound: true,
-      };
-    }
 
     return {
       props: { product: JSON.parse(JSON.stringify(newProduct)) }, // will be passed to the page component as props
