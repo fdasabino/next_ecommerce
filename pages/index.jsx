@@ -1,6 +1,7 @@
 import FlashDeals from "@/components/Home/FlashDeals/FlashDeals";
 import MainSection from "@/components/Home/MainSection/MainSection";
 import { setCountry } from "@/redux-store/countrySlice";
+import { setProducts } from "@/redux-store/productsSlice";
 import styles from "@/styles/pages/Home.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
@@ -16,10 +17,16 @@ const Home = ({ country, products }) => {
     dispatch(setCountry(country));
   }, [country, dispatch]);
 
+  // Set products in redux store
+  const setProductsToStore = useCallback(() => {
+    dispatch(setProducts(products));
+  }, [products, dispatch]);
+
   // Set country in redux store on page load
   useEffect(() => {
     setCountryToStore();
-  }, [setCountryToStore]);
+    setProductsToStore();
+  }, [setCountryToStore, setProductsToStore]);
 
   return (
     <div className={styles.home}>
