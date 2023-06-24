@@ -1,6 +1,5 @@
 import FlashDeals from "@/components/Home/FlashDeals/FlashDeals";
 import MainSection from "@/components/Home/MainSection/MainSection";
-import ProductsSection from "@/components/Home/ProductsSection/ProductsSection";
 import { setCountry } from "@/redux-store/countrySlice";
 import styles from "@/styles/pages/Home.module.scss";
 import db from "@/utils/db";
