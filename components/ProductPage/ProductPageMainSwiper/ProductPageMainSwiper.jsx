@@ -13,6 +13,8 @@ const ProductPageMainSwiper = ({ images, activeImage }) => {
           fullscreenOnMobile
           hasSpacer
           hideHint
+          zoomPreload
+          zoomType="hover"
           zoomScale={1.5}
           key={active}
           src={images[active].url}

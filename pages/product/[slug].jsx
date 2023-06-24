@@ -36,7 +36,7 @@ const SingleProductPage = ({ product }) => {
         <div className={styles.single_product_page__container}>
           <div className={styles.single_product_page__main}>
             <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
-            <ProductInfo />
+            <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
         </div>
       </div>
@@ -61,12 +61,14 @@ export async function getServerSideProps(context) {
     const subProduct = product.subProducts[color];
     const prices = subProduct.sizes.map((size) => size.price).sort((a, b) => a - b);
 
+    console.log(product);
+
     const newProduct = {
       ...product,
       images: subProduct.images,
       sizes: subProduct.sizes,
       discount: subProduct.discount,
-      sku: subProduct.sku,
+      sku: subProduct._id,
       colors: product.subProducts.map((subProduct) => subProduct.color),
       priceRange: prices.length > 1 ? `From: ${prices[0]}$ to: ${prices[prices.length - 1]}$` : "",
       priceBeforeDiscount: subProduct.sizes[size].price.toFixed(2),
@@ -89,7 +91,7 @@ export async function getServerSideProps(context) {
 function calculateDiscountedPrice(size, discount) {
   const basePrice = size.price;
   if (discount > 0) {
-    const discountedPrice = basePrice - basePrice / discount;
+    const discountedPrice = Math.floor(basePrice - basePrice / discount);
     return discountedPrice;
   }
   return basePrice;
