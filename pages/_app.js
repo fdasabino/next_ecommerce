@@ -3,6 +3,7 @@ import store from "@/redux-store/index";
 import "@/styles/globals.scss";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +13,6 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
 const persistor = persistStore(store);
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {

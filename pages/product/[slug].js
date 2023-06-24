@@ -1,11 +1,16 @@
 import Path from "@/components/Layout/Path/Path";
+import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
+import ProductPageMainSwiper from "@/components/ProductPage/ProductPageMainSwiper/ProductPageMainSwiper";
 import Category from "@/models/Category";
 import Product from "@/models/Products";
 import SubCategory from "@/models/SubCategory";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import db from "@/utils/db";
 import Head from "next/head";
+import { useState } from "react";
+
 const SingleProductPage = ({ product }) => {
+  const [activeImage, setActiveImage] = useState("");
   console.log(product);
 
   const path = [
@@ -28,7 +33,12 @@ const SingleProductPage = ({ product }) => {
       </Head>
       <div className={styles.single_product_page}>
         <Path path={path} />
-        <div className={styles.single_product_page__container}></div>
+        <div className={styles.single_product_page__container}>
+          <div className={styles.single_product_page__main}>
+            <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
+            <ProductInfo />
+          </div>
+        </div>
       </div>
     </>
   );

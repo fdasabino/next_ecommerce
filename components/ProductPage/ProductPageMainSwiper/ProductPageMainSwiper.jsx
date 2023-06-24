@@ -1,0 +1,38 @@
+import Image from "next/image";
+import { useState } from "react";
+import InnerImageZoom from "react-inner-image-zoom";
+import styles from "./ProductPageMainSwiper.module.scss";
+
+const ProductPageMainSwiper = ({ images, activeImage }) => {
+  const [active, setActive] = useState(0);
+
+  return (
+    <div className={styles.main_swiper}>
+      <div className={styles.main_swiper__active}>
+        <InnerImageZoom
+          fullscreenOnMobile
+          hasSpacer
+          hideHint
+          zoomScale={1.5}
+          key={active}
+          src={images[active].url}
+          zoomSrc={images[active].url}
+          className={styles.main_swiper_active__image}
+        />
+      </div>
+      <div className={styles.main_swiper__list}>
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`${styles.main_swiper_list__item} ${index === active && styles.active}`}
+            onMouseOver={() => setActive(index)}
+          >
+            <Image src={image.url} width={1000} height={1000} alt="product" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ProductPageMainSwiper;
