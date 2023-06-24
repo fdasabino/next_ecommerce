@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import { AiOutlineHome, AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 import { RiArrowDropDownFill } from "react-icons/ri";
 import CategoriesDropdown from "../CategoriesDropdown/CategoriesDropdown";
 import styles from "./Menu.module.scss";
@@ -19,20 +20,26 @@ const Menu = () => {
     <header className={styles.menu}>
       <div className={styles.wrapper}>
         <ul>
+          <Link href="/">
+            <li>
+              <AiOutlineHome /> Home
+            </li>
+          </Link>
+          <Link href="/">
+            <li>
+              <AiOutlineMan /> Men
+            </li>
+          </Link>
+          <Link href="/">
+            <li>
+              <AiOutlineWoman /> Women
+            </li>
+          </Link>
           <a onClick={handleMenuClick}>
             <li>
               <RiArrowDropDownFill /> Categories
             </li>
           </a>
-          <Link href="/">
-            <li>Store</li>
-          </Link>
-          <Link href="/">
-            <li>Men</li>
-          </Link>
-          <Link href="/">
-            <li>Women</li>
-          </Link>
         </ul>
         {visible && <CategoriesDropdown setVisible={setVisible} />}
       </div>

@@ -1,0 +1,40 @@
+.path {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 380px) {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    @media (max-width: 480px) {
+      font-size: 0.5rem;
+    }
+
+    a {
+      color: $base-blue;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: $base-dark-blue;
+      }
+    }
+  }
+}
