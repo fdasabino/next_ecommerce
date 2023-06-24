@@ -3,12 +3,11 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+}
 
-  &:before,
-  &:after {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-  }
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -32,6 +31,12 @@ body {
 
 main {
   min-height: 100vh;
+  padding-top: 1rem;
+  margin: 0 0 5rem 0; /* Added margin for mobile devices */
+
+  @media (min-width: 768px) {
+    margin: 0; /* Reset margin for desktop */
+  }
 }
 
 p,
@@ -64,7 +69,7 @@ input,
 textarea,
 select {
   font-family: "Mulish", sans-serif;
-  transition: all 0.5s ease-in-out !important;
+  transition: all 0.5s ease-in-out;
 }
 
 img,
@@ -97,27 +102,19 @@ hr {
   border-top: 1px solid $base-grey;
 }
 
-main {
-  min-height: 100vh !important;
-  padding-top: 1rem;
-
-  @media (max-width: 768px) {
-    margin: 0 0 5rem 0;
-  }
-}
-
 .vertical-line {
   margin: auto 0;
   margin-top: 12rem;
   border-left: 2px solid #eeee; /* or border-right */
   height: 300px; /* Adjust the height as needed */
 
-  @media (max-width: 768px) {
-    display: none;
+  display: none; /* Hide on mobile devices */
+
+  @media (min-width: 768px) {
+    display: block; /* Show on desktop */
   }
 }
 
-// toast notification
 .Toastify__toast {
   border-radius: 10px !important;
   font-family: "Mulish", sans-serif !important;
@@ -126,6 +123,6 @@ main {
   transition: all 0.5s ease-in-out !important;
 
   &:hover {
-    scale: 0.95 !important;
+    transform: scale(0.95) !important;
   }
 }
