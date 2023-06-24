@@ -5,11 +5,11 @@ import Top from "./Top/Top";
 
 const Navbar = () => {
   return (
-    <div className={styles.navbar}>
+    <header className={styles.navbar}>
       <Top />
       <Menu />
       <Main />
-    </div>
+    </header>
   );
 };
 

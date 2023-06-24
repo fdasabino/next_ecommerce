@@ -7,10 +7,8 @@ const RootLayout = ({ children }) => {
   const router = useRouter();
   return (
     <>
-      <header>
-        {router.pathname === "/" && <Banner />}
-        <Navbar />
-      </header>
+      {router.pathname === "/" && <Banner />}
+      <Navbar />
       <main>{children}</main>
       <Footer />
     </>

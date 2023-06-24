@@ -28,19 +28,19 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
           <PersistGate persistor={persistor} loading={null}>
             <RootLayout>
               <Component {...pageProps} />
+              <ToastContainer
+                position="bottom-right"
+                autoClose={10000}
+                hideProgressBar
+                newestOnTop={true}
+                closeOnClick
+                draggable
+                theme="light"
+              />
             </RootLayout>
           </PersistGate>
         </Provider>
       </SessionProvider>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={10000}
-        hideProgressBar
-        newestOnTop={true}
-        closeOnClick
-        draggable
-        theme="light"
-      />
     </>
   );
 };
