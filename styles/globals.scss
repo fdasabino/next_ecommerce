@@ -100,6 +100,10 @@ hr {
 main {
   min-height: 100dvh;
   padding-top: 1rem;
+
+  @media (max-width: 768px) {
+    margin: 0 0 5rem 0;
+  }
 }
 
 .vertical-line {
