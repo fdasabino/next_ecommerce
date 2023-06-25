@@ -61,8 +61,6 @@ export async function getServerSideProps(context) {
     const subProduct = product.subProducts[color];
     const prices = subProduct.sizes.map((size) => size.price).sort((a, b) => a - b);
 
-    console.log(product);
-
     const newProduct = {
       ...product,
       images: subProduct.images,
