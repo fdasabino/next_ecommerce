@@ -3,7 +3,7 @@ import { useState } from "react";
 import InnerImageZoom from "react-inner-image-zoom";
 import styles from "./ProductPageMainSwiper.module.scss";
 
-const ProductPageMainSwiper = ({ images, activeImage }) => {
+const ProductPageMainSwiper = ({ images }) => {
   const [active, setActive] = useState(0);
 
   return (

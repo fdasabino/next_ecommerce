@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./ProductInfo.module.scss";
 
-const ProductInfo = ({ product, setActiveImage }) => {
+const ProductInfo = ({ product }) => {
   const router = useRouter();
   const { color, size } = router.query;
   const [selectedSize, setSelectedSize] = useState(parseInt(size));
