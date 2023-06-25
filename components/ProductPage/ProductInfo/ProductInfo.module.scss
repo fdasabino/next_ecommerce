@@ -73,8 +73,86 @@
       color: $base-success;
     }
 
-    h2 {
-      color: $base-dark;
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+
+  &__shipping {
+    small {
+      color: $base-redish;
+      font-size: 0.9rem;
+    }
+
+    span {
+      color: $base-success;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+
+  &__quantity {
+    small {
+      color: $base-dark-grey;
+      font-size: 0.9rem;
+    }
+
+    span {
+      color: $base-success;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+
+  &__sizes {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: $base-dark-grey;
+    font-size: 0.9rem;
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: $base-dark-grey;
+        color: $base-white;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          background-color: rgba($color: $base-dark-grey, $alpha: 0.9);
+        }
+      }
+    }
+
+    .activeSize {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      color: $base-white;
+      background-color: $base-success;
     }
 
     @media (max-width: 768px) {
