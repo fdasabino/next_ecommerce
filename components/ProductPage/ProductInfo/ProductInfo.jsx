@@ -1,4 +1,4 @@
-import { Rating } from "@mui/material";
+import Rating from "@mui/material/Rating";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,7 +11,24 @@ const ProductInfo = ({ product, setActiveImage }) => {
   const [selectedSize, setSelectedSize] = useState(parseInt(size));
   const [selectedColor, setSelectedColor] = useState(parseInt(color));
 
-  console.log(router.query);
+  const {
+    name,
+    rating,
+    numReviews,
+    discount,
+    priceBeforeDiscount,
+    price,
+    priceRange,
+    shipping,
+    colors,
+    slug,
+    sizes,
+    quantity,
+  } = product;
+
+  const selectedSizeValue = selectedSize || size;
+  const selectedColorValue = selectedColor || color;
+  const isColorSelected = selectedColorValue === 0;
 
   useEffect(() => {
     if (!selectedSize) {
@@ -24,24 +41,24 @@ const ProductInfo = ({ product, setActiveImage }) => {
       <div className={styles.product_info__container}>
         {/* title */}
         <div className={styles.product_info__title}>
-          <h1>{product.name}</h1>
+          <h1>{name}</h1>
         </div>
 
         {/* reviews */}
         <div className={styles.product_info__rating}>
-          <Rating name="half-rating-read" defaultValue={product.rating} precision={0.5} readOnly />
+          <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
           <p>
-            {product.numReviews} {product.numReviews === 1 ? "/ review" : "/ reviews"}
+            {numReviews} {numReviews === 1 ? "/ review" : "/ reviews"}
           </p>
         </div>
 
         {/* discount */}
-        {selectedSize && (
+        {selectedSizeValue && (
           <div className={styles.product_info__discount}>
-            {product.discount > 0 && (
+            {discount > 0 && (
               <>
-                <small>{product.priceBeforeDiscount}$</small>
-                <p>(-{product.discount}%)</p>
+                <small>{priceBeforeDiscount}$</small>
+                <p>(-{discount}%)</p>
               </>
             )}
           </div>
@@ -49,53 +66,43 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         {/* price */}
         <div className={styles.product_info__price}>
-          {!selectedSize && product.priceRange ? (
-            <p>{product.priceRange}</p>
+          {!selectedSizeValue && priceRange ? (
+            <p>{priceRange}</p>
           ) : (
-            <h2>{Math.floor(product.price).toFixed(2)}$</h2>
+            <h2>{Math.floor(price).toFixed(2)}$</h2>
           )}
         </div>
 
         {/* Shipping */}
         <div className={styles.product_info__shipping}>
-          {product.shipping ? (
-            <small> {`+${product.shipping}$ shipping fee`}</small>
-          ) : (
-            <span>Free Shipping</span>
-          )}
+          {shipping ? <small> {`+${shipping}$ shipping fee`}</small> : <span>Free Shipping</span>}
         </div>
 
         {/* colors */}
         <div className={styles.product_info__colors}>
-          {!selectedColor || (selectedColor === 0 && <h4>Select a color:</h4>)}
+          {!selectedColorValue || (isColorSelected && <h4>Select a color:</h4>)}
           <div className={styles.wrapper}>
-            {product.colors.length > 0 &&
-              product.colors.map((c, i) => {
-                console.log("color", color);
-                console.log("selected color", selectedColor);
-                return (
-                  <Link
-                    key={i}
-                    href={`/product/${product.slug}?color=${i}`}
-                    onClick={() => {
-                      setSelectedColor(i);
-                    }}
-                  >
-                    <div className={`${+color === i && styles.activeColor}`}>
-                      <Image src={c.image} width={50} height={50} alt={color.color} />
-                    </div>
-                  </Link>
-                );
-              })}
+            {colors.length > 0 &&
+              colors.map((c, i) => (
+                <Link
+                  key={i}
+                  href={`/product/${slug}?color=${i}`}
+                  onClick={() => setSelectedColor(i)}
+                >
+                  <div className={`${+color === i && styles.activeColor}`}>
+                    <Image src={c.image} width={50} height={50} alt="current color" />
+                  </div>
+                </Link>
+              ))}
           </div>
         </div>
 
         {/* quantity available */}
         <div className={styles.product_info__quantity}>
-          {selectedSize ? (
-            <span>Availability: {product.quantity} items available</span>
+          {selectedSizeValue ? (
+            <span>Availability: {quantity} items available</span>
           ) : (
-            <small>{`Availability: ${product.sizes.reduce(
+            <small>{`Availability: ${sizes.reduce(
               (acc, curr) => acc + curr.qty,
               0
             )} items for all sizes`}</small>
@@ -104,14 +111,14 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         {/* sizes */}
         <div className={styles.product_info__sizes}>
-          {!selectedSize && <h4>Select a size:</h4>}
+          {!selectedSizeValue && <h4>Select a size:</h4>}
           <div className={styles.wrapper}>
-            {product.sizes &&
-              product.sizes.map((s, i) => (
+            {sizes &&
+              sizes.map((s, i) => (
                 <Link
                   onClick={() => setSelectedSize(i)}
                   key={i}
-                  href={`/product/${product.slug}?color=${color}&size=${i}`}
+                  href={`/product/${slug}?color=${color}&size=${i}`}
                 >
                   <div
                     className={`${styles.product_info__sizes_size} ${
