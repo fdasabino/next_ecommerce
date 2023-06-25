@@ -64,7 +64,9 @@ const ProductInfo = ({ product, setActiveImage }) => {
         {/* quantity available */}
         <div className={styles.product_info__quantity}>
           {selectedSize ? (
-            <span>Availability: {product.quantity} items available</span>
+            <span>
+              Availability: {product.quantity} items available for size {product.sizes[size].size}
+            </span>
           ) : (
             <small>{`Availability: ${product.sizes.reduce(
               (acc, curr) => acc + curr.qty,

@@ -91,7 +91,7 @@ export async function getServerSideProps(context) {
 function calculateDiscountedPrice(size, discount) {
   const basePrice = size.price;
   if (discount > 0) {
-    const discountedPrice = Math.floor(basePrice - basePrice / discount);
+    const discountedPrice = Math.floor(basePrice * (1 - discount / 100));
     return discountedPrice;
   }
   return basePrice;
