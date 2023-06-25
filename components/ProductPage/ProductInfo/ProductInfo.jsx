@@ -1,4 +1,5 @@
 import { Rating } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -7,7 +8,10 @@ import styles from "./ProductInfo.module.scss";
 const ProductInfo = ({ product, setActiveImage }) => {
   const router = useRouter();
   const { color, size } = router.query;
-  const [selectedSize, setSelectedSize] = useState(+size);
+  const [selectedSize, setSelectedSize] = useState(parseInt(size));
+  const [selectedColor, setSelectedColor] = useState(parseInt(color));
+
+  console.log(router.query);
 
   useEffect(() => {
     if (!selectedSize) {
@@ -61,12 +65,35 @@ const ProductInfo = ({ product, setActiveImage }) => {
           )}
         </div>
 
+        {/* colors */}
+        <div className={styles.product_info__colors}>
+          {!selectedColor || (selectedColor === 0 && <h4>Select a color:</h4>)}
+          <div className={styles.wrapper}>
+            {product.colors.length > 0 &&
+              product.colors.map((c, i) => {
+                console.log("color", color);
+                console.log("selected color", selectedColor);
+                return (
+                  <Link
+                    key={i}
+                    href={`/product/${product.slug}?color=${i}`}
+                    onClick={() => {
+                      setSelectedColor(i);
+                    }}
+                  >
+                    <div className={`${+color === i && styles.activeColor}`}>
+                      <Image src={c.image} width={50} height={50} alt={color.color} />
+                    </div>
+                  </Link>
+                );
+              })}
+          </div>
+        </div>
+
         {/* quantity available */}
         <div className={styles.product_info__quantity}>
           {selectedSize ? (
-            <span>
-              Availability: {product.quantity} items available for size {product.sizes[size].size}
-            </span>
+            <span>Availability: {product.quantity} items available</span>
           ) : (
             <small>{`Availability: ${product.sizes.reduce(
               (acc, curr) => acc + curr.qty,
@@ -79,22 +106,22 @@ const ProductInfo = ({ product, setActiveImage }) => {
         <div className={styles.product_info__sizes}>
           {!selectedSize && <h4>Select a size:</h4>}
           <div className={styles.wrapper}>
-            {product.sizes.map((s, i) => (
-              <Link
-                onClick={() => setSelectedSize(i)}
-                key={i}
-                href={`/product/${product.slug}?color=${color}&size=${i}`}
-              >
-                {console.log(+size, i)}
-                <div
-                  className={`${styles.product_info__sizes_size} ${
-                    +size === i && styles.activeSize
-                  }`}
+            {product.sizes &&
+              product.sizes.map((s, i) => (
+                <Link
+                  onClick={() => setSelectedSize(i)}
+                  key={i}
+                  href={`/product/${product.slug}?color=${color}&size=${i}`}
                 >
-                  {s.size}
-                </div>
-              </Link>
-            ))}
+                  <div
+                    className={`${styles.product_info__sizes_size} ${
+                      +size === i && styles.activeSize
+                    }`}
+                  >
+                    {s.size}
+                  </div>
+                </Link>
+              ))}
           </div>
         </div>
       </div>

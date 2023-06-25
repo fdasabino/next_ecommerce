@@ -139,7 +139,7 @@
         transition: all 0.3s ease-in-out;
 
         &:hover {
-          background-color: rgba($color: $base-dark-grey, $alpha: 0.9);
+          transform: scale(1.1);
         }
       }
     }
@@ -152,7 +152,42 @@
       height: 2rem;
       border-radius: 50%;
       color: $base-white;
-      background-color: $base-success;
+      outline: 2px solid $base-success;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+
+  &__colors {
+    display: flex;
+    align-items: center;
+
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+
+      img {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .activeColor {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        transition: all 0.3s ease-in-out;
+        outline: 2px solid $base-success;
+      }
     }
 
     @media (max-width: 768px) {
