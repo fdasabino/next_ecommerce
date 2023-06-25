@@ -7,8 +7,11 @@ import SubCategory from "@/models/SubCategory";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import db from "@/utils/db";
 import Head from "next/head";
+import { useState } from "react";
 
 const SingleProductPage = ({ product }) => {
+  const [activeImage, setActiveImage] = useState("");
+
   const path = [
     { id: 1, name: "Home" },
     { id: 2, name: product?.category.name },
@@ -31,8 +34,8 @@ const SingleProductPage = ({ product }) => {
         <Path path={path} />
         <div className={styles.single_product_page__container}>
           <div className={styles.single_product_page__main}>
-            <ProductPageMainSwiper images={product?.images} />
-            <ProductInfo product={product} />
+            <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
+            <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
         </div>
       </div>

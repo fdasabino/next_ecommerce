@@ -27,6 +27,7 @@
     gap: 0.5rem;
     overflow-y: scroll;
     padding: 0.5rem;
+    transition: all 0.3s ease-in-out;
 
     &::-webkit-scrollbar {
       display: none;
@@ -81,5 +82,9 @@
 
   .active {
     outline: 2px solid $base-orange;
+  }
+
+  .hidden {
+    opacity: 0;
   }
 }

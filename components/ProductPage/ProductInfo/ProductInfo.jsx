@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "./ProductInfo.module.scss";
 
-const ProductInfo = ({ product }) => {
+const ProductInfo = ({ product, setActiveImage }) => {
   const router = useRouter();
   const { color, size } = router.query;
   const [selectedSize, setSelectedSize] = useState(parseInt(size));
@@ -24,6 +24,7 @@ const ProductInfo = ({ product }) => {
     slug,
     sizes,
     quantity,
+    subProducts,
   } = product;
 
   const selectedSizeValue = selectedSize || size;
@@ -88,6 +89,8 @@ const ProductInfo = ({ product }) => {
                   key={i}
                   href={`/product/${slug}?color=${i}`}
                   onClick={() => setSelectedColor(i)}
+                  onMouseEnter={() => setActiveImage(subProducts[i].images[0].url)}
+                  onMouseLeave={() => setActiveImage("")}
                 >
                   <div className={`${+color === i && styles.activeColor}`}>
                     <Image src={c.image} width={50} height={50} alt="current color" />

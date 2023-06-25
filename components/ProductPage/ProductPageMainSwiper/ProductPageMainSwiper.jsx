@@ -3,7 +3,7 @@ import { useState } from "react";
 import InnerImageZoom from "react-inner-image-zoom";
 import styles from "./ProductPageMainSwiper.module.scss";
 
-const ProductPageMainSwiper = ({ images }) => {
+const ProductPageMainSwiper = ({ images, activeImage }) => {
   const [active, setActive] = useState(0);
 
   return (
@@ -17,12 +17,12 @@ const ProductPageMainSwiper = ({ images }) => {
           zoomType="hover"
           zoomScale={1.5}
           key={active}
-          src={images[active].url}
-          zoomSrc={images[active].url}
+          src={activeImage || images[active].url}
+          zoomSrc={activeImage || images[active].url}
           className={styles.main_swiper_active__image}
         />
       </div>
-      <div className={styles.main_swiper__list}>
+      <div className={`${styles.main_swiper__list} ${activeImage && styles.hidden}`}>
         {images.map((image, index) => (
           <div
             key={index}
