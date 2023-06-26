@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { BsCartPlus, BsHeartFill } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
 import { toast } from "react-toastify";
+import Share from "../Share/Share";
 import styles from "./ProductInfo.module.scss";
 
 const ProductInfo = ({ product, setActiveImage }) => {
@@ -185,6 +186,8 @@ const ProductInfo = ({ product, setActiveImage }) => {
             Add to cart <BsCartPlus size={20} />
           </Button>
         </div>
+
+        <Share />
       </div>
     </div>
   );

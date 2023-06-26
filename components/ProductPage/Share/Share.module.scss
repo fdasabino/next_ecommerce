@@ -1,0 +1,23 @@
+.share {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.1s ease-in-out;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
