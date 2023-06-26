@@ -1,4 +1,5 @@
 import Path from "@/components/Layout/Path/Path";
+import ProductAccordion from "@/components/ProductPage/ProductAccordion/ProductAccordion";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
 import ProductPageMainSwiper from "@/components/ProductPage/ProductPageMainSwiper/ProductPageMainSwiper";
 import Category from "@/models/Category";

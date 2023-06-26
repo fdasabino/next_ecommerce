@@ -32,11 +32,7 @@ body {
 main {
   min-height: 100vh;
   padding-top: 1rem;
-  margin: 0 0 5rem 0; /* Added margin for mobile devices */
-
-  @media (min-width: 768px) {
-    margin: 0; /* Reset margin for desktop */
-  }
+  margin: 0 0 5rem 0;
 }
 
 p,

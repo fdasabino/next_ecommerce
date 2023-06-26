@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { BsCartPlus, BsHeartFill } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
 import { toast } from "react-toastify";
+import ProductAccordion from "../ProductAccordion/ProductAccordion";
 import Share from "../Share/Share";
 import styles from "./ProductInfo.module.scss";
 
@@ -75,6 +76,14 @@ const ProductInfo = ({ product, setActiveImage }) => {
             </IconButton>
           </Tooltip>
         </div>
+
+        {/* description */}
+        <div className={styles.product_info__description}>
+          <small>{product.description}</small>
+        </div>
+
+        {/* accordion */}
+        <ProductAccordion details={product.details} />
 
         {/* reviews */}
         <div className={styles.product_info__rating}>
@@ -186,9 +195,8 @@ const ProductInfo = ({ product, setActiveImage }) => {
             Add to cart <BsCartPlus size={20} />
           </Button>
         </div>
-
-        <Share />
       </div>
+      <Share />
     </div>
   );
 };
