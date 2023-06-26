@@ -25,6 +25,12 @@
   justify-content: center;
   gap: 0.5rem;
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    touch-action: none;
+  }
+
   @media (max-width: 768px) {
     font-size: 0.8rem;
   }
@@ -41,10 +47,19 @@
   &:hover {
     background-color: $hoverColor;
     box-shadow: $base-shadow-3;
+
+    &:disabled {
+      background-color: $bgColor;
+      box-shadow: none;
+    }
   }
 
   &:active {
     transform: scale($activeScale);
+
+    &:disabled {
+      transform: none;
+    }
   }
 }
 

@@ -181,7 +181,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         {/* ctas */}
         <div className={styles.product_info__ctas}>
-          <Button style="secondary" disabled={quantity < 1}>
+          <Button style="secondary" disabled={quantity < 1 || !size}>
             Add to cart <BsCartPlus size={20} />
           </Button>
         </div>
