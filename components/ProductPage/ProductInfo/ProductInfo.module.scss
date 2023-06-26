@@ -22,6 +22,9 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 1.1rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -270,8 +273,5 @@
 
   &__ctas {
     margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
   }
 }

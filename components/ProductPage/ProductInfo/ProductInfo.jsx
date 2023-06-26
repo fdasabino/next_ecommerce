@@ -1,5 +1,7 @@
 import Button from "@/components/Layout/Button/Button";
+import { IconButton, Tooltip } from "@mui/material";
 import Rating from "@mui/material/Rating";
+import Zoom from "@mui/material/Zoom";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -66,6 +68,11 @@ const ProductInfo = ({ product, setActiveImage }) => {
         {/* title */}
         <div className={styles.product_info__title}>
           <h1>{name}</h1>
+          <Tooltip title="Add to wishlist" TransitionComponent={Zoom}>
+            <IconButton>
+              <BsHeartFill size={20} color="#5a31f4" />
+            </IconButton>
+          </Tooltip>
         </div>
 
         {/* reviews */}
@@ -175,10 +182,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
         {/* ctas */}
         <div className={styles.product_info__ctas}>
           <Button style="tertiary" disabled={quantity < 1}>
-            ADD TO CART <BsCartPlus />
-          </Button>
-          <Button style="primary">
-            <BsHeartFill />
+            ADD TO CART <BsCartPlus size={20} />
           </Button>
         </div>
       </div>
