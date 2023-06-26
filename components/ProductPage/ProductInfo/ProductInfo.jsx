@@ -1,8 +1,12 @@
+import Button from "@/components/Layout/Button/Button";
 import Rating from "@mui/material/Rating";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { BsCartPlus, BsHeartFill } from "react-icons/bs";
+import { TbMinus, TbPlus } from "react-icons/tb";
+import { toast } from "react-toastify";
 import styles from "./ProductInfo.module.scss";
 
 const ProductInfo = ({ product, setActiveImage }) => {
@@ -10,6 +14,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
   const { color, size } = router.query;
   const [selectedSize, setSelectedSize] = useState(parseInt(size));
   const [selectedColor, setSelectedColor] = useState(parseInt(color));
+  const [cartQuantity, setCartQuantity] = useState(1);
 
   const {
     name,
@@ -31,11 +36,29 @@ const ProductInfo = ({ product, setActiveImage }) => {
   const selectedColorValue = selectedColor || color;
   const isColorSelected = selectedColorValue === 0;
 
+  const increaseCartQuantity = () => {
+    if (cartQuantity >= quantity) {
+      toast.error(`The maximum quantity available is ${quantity} items...`);
+      return;
+    }
+
+    setCartQuantity((prev) => prev + 1);
+  };
+
+  const decreaseCartQuantity = () => {
+    if (cartQuantity > 1) {
+      setCartQuantity((prev) => prev - 1);
+    }
+  };
+
   useEffect(() => {
     if (!selectedSize) {
       setSelectedSize(size);
     }
-  }, [selectedSize, size]);
+    if (selectedSizeValue && selectedColorValue) {
+      setCartQuantity(1);
+    }
+  }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
 
   return (
     <div className={styles.product_info}>
@@ -133,6 +156,30 @@ const ProductInfo = ({ product, setActiveImage }) => {
                 </Link>
               ))}
           </div>
+        </div>
+
+        {/* add to cart */}
+        <div className={styles.product_info__add_to_cart}>
+          <h5>Select Quantity:</h5>
+          <div className={styles.wrapper}>
+            <button onClick={decreaseCartQuantity}>
+              <TbMinus />
+            </button>
+            <span>{cartQuantity}</span>
+            <button onClick={increaseCartQuantity}>
+              <TbPlus />
+            </button>
+          </div>
+        </div>
+
+        {/* ctas */}
+        <div className={styles.product_info__ctas}>
+          <Button style="tertiary" disabled={quantity < 1}>
+            ADD TO CART <BsCartPlus />
+          </Button>
+          <Button style="primary">
+            <BsHeartFill />
+          </Button>
         </div>
       </div>
     </div>

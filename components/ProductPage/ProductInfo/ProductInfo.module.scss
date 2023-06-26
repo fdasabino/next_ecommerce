@@ -195,4 +195,83 @@
       text-align: center;
     }
   }
+
+  &__add_to_cart {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h5 {
+      color: $base-dark;
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 13rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $base-dark-secondary;
+        font-size: 1.2rem;
+        font-weight: 600;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 0.2rem 0.3rem;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: all 0.3s ease-in-out;
+
+        &:first-of-type {
+          color: $base-error;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+
+          &:hover {
+            background-color: $base-error;
+            color: $base-white;
+          }
+        }
+
+        &:last-of-type {
+          color: $base-success;
+          border-top-right-radius: 2px;
+          border-bottom-right-radius: 2px;
+          z-index: 0;
+
+          &:hover {
+            background-color: $base-success;
+            color: $base-white;
+          }
+        }
+      }
+    }
+  }
+
+  &__ctas {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }
