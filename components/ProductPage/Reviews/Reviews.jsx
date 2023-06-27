@@ -60,13 +60,15 @@ const Reviews = ({ reviews, numReviews }) => {
         <div className={styles.stats_overview}>
           {reviews.length > 0 && <span>Average Rating</span>}
           <div className={styles.overview_rating}>
-            <Rating
-              precision={0.5}
-              name="half-rating-read"
-              defaultValue={averageRating}
-              value={averageRating}
-              readOnly
-            />
+            {averageRating > 0 && (
+              <Rating
+                precision={0.5}
+                name="half-rating-read"
+                defaultValue={averageRating}
+                value={averageRating}
+                readOnly
+              />
+            )}
             <span>{averageRating === 0 ? "No reviews yet" : `${averageRating} stars`}</span>
           </div>
         </div>

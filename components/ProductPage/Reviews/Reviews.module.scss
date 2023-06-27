@@ -24,16 +24,9 @@
   &__stats {
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     margin: 0 1.5rem;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-
-    @media (min-width: 1200px) {
-      flex-direction: column;
-    }
 
     .stats_overview {
       display: flex;
@@ -109,7 +102,7 @@
         .rating_bar {
           position: relative;
           width: 20vw;
-          height: 0.5rem;
+          height: 0.3rem;
           background: $base-dark-grey;
           border-radius: 0.5rem;
           overflow: hidden;
@@ -122,6 +115,10 @@
             background: $base-orange;
             border-radius: 0.5rem;
           }
+        }
+        span {
+          font-size: 1.1rem;
+          font-weight: 600;
         }
       }
     }

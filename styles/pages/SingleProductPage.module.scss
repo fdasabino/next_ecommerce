@@ -31,4 +31,10 @@
       flex-direction: column;
     }
   }
+
+  &__create_review {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
 }

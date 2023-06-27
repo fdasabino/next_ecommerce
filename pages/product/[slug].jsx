@@ -1,5 +1,6 @@
+import Button from "@/components/Layout/Button/Button";
 import Path from "@/components/Layout/Path/Path";
-import ProductAccordion from "@/components/ProductPage/ProductAccordion/ProductAccordion";
+import CreateReview from "@/components/ProductPage/CreateReview/CreateReview";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
 import ProductPageMainSwiper from "@/components/ProductPage/ProductPageMainSwiper/ProductPageMainSwiper";
 import Reviews from "@/components/ProductPage/Reviews/Reviews";
@@ -9,10 +10,18 @@ import Product from "@/models/Products";
 import SubCategory from "@/models/SubCategory";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import db from "@/utils/db";
+import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const SingleProductPage = ({ product }) => {
+  const { data: session } = useSession();
+
+  const signinRedirect = () => {
+    signIn();
+  };
+
   const [activeImage, setActiveImage] = useState("");
   const path = [
     { id: 1, name: "Home" },
@@ -42,6 +51,16 @@ const SingleProductPage = ({ product }) => {
           </div>
           <SimilarProductsSwiper />
           <Reviews reviews={product.reviews} numReviews={product.numReviews} />
+
+          <div className={styles.single_product_page__create_review}>
+            {session ? (
+              <CreateReview product={product} />
+            ) : (
+              <Button onClick={signinRedirect} style="primary">
+                Sign in to write a review <AiOutlineArrowRight />
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </>
