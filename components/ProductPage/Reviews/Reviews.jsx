@@ -50,7 +50,6 @@ const Reviews = ({ reviews, numReviews }) => {
 
   const reviewCount = countReviews(arrayOfRatings);
   const ratingPercentage = calculateRatingPercentage(arrayOfRatings);
-  console.log(ratingPercentage);
 
   return (
     <div className={styles.reviews}>
@@ -59,7 +58,7 @@ const Reviews = ({ reviews, numReviews }) => {
       </div>
       <div className={styles.reviews__stats}>
         <div className={styles.stats_overview}>
-          <span>Average Rating</span>
+          {reviews.length > 0 && <span>Average Rating</span>}
           <div className={styles.overview_rating}>
             <Rating
               precision={0.5}
@@ -71,43 +70,61 @@ const Reviews = ({ reviews, numReviews }) => {
             <span>{averageRating === 0 ? "No reviews yet" : `${averageRating} stars`}</span>
           </div>
         </div>
-        <div className={styles.reviews__stats_breakdown}>
-          <div className={styles.breakdown_left}>
-            {Object.entries(reviewCount)
-              .sort((a, b) => a[1] - b[1]) // Sort by review count in descending order
-              .map(([key, value]) => {
-                const starRating = parseInt(key);
-                if (value > 0) {
-                  return (
-                    <div key={key} className={styles.rating_stats}>
-                      <small>{`${value} ${value === 1 ? "review" : "reviews"}`}</small>
-                      <Rating
-                        name="half-rating-read"
-                        defaultValue={starRating}
-                        value={starRating}
-                        precision={0.5}
-                        readOnly
+        {/* Breakdown of reviews by star rating */}
+        {reviews.length > 0 && (
+          <div className={styles.reviews__stats_breakdown}>
+            <div className={styles.breakdown_left}>
+              {Object.entries(reviewCount)
+                .sort((a, b) => a[1] - b[1]) // Sort by review count in descending order
+                .map(([key, value]) => {
+                  const starRating = parseInt(key);
+                  if (value > 0) {
+                    return (
+                      <div key={key} className={styles.rating_stats}>
+                        <small>{`${value} ${value === 1 ? "review" : "reviews"}`}</small>
+                        <Rating
+                          name="half-rating-read"
+                          defaultValue={starRating}
+                          value={starRating}
+                          precision={0.5}
+                          readOnly
+                        />
+                      </div>
+                    );
+                  }
+                  return null; // Exclude entries with review count 0
+                })}
+            </div>
+            <div className={styles.breakdown_right}>
+              {Object.entries(ratingPercentage).map(([key, value]) => {
+                if (value === "0") return null; // Exclude entries with review count 0
+                return (
+                  <div key={key} className={styles.rating_bar_wrapper}>
+                    <div key={key} className={styles.rating_bar}>
+                      <div
+                        className={styles.rating_bar_fill}
+                        style={{
+                          width: `${value}%`,
+                          background:
+                            value < 20
+                              ? "red"
+                              : value < 40
+                              ? "orangeRed"
+                              : value < 60
+                              ? "blue"
+                              : value <= 100
+                              ? "green"
+                              : "",
+                        }}
                       />
                     </div>
-                  );
-                }
-                return null; // Exclude entries with review count 0
-              })}
-          </div>
-          <div className={styles.breakdown_right}>
-            {Object.entries(ratingPercentage).map(([key, value]) => {
-              if (value === "0") return null; // Exclude entries with review count 0
-              return (
-                <div key={key} className={styles.rating_bar_wrapper}>
-                  <div key={key} className={styles.rating_bar}>
-                    <div className={styles.rating_bar_fill} style={{ width: `${value}%` }} />
+                    <span>{value}%</span>
                   </div>
-                  <span>{value}%</span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
