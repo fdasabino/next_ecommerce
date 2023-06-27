@@ -37,6 +37,7 @@ const SingleProductPage = ({ product }) => {
         <div className={styles.single_product_page__container}>
           <div className={styles.single_product_page__main}>
             <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
+            <div className={styles.vertical_line} />
             <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
           <SimilarProductsSwiper />

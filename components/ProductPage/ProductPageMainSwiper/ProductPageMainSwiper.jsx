@@ -19,7 +19,7 @@ const ProductPageMainSwiper = ({ images, activeImage }) => {
           key={active}
           src={activeImage || images[active].url}
           zoomSrc={activeImage || images[active].url}
-          className={styles.main_swiper_active__image}
+          className={styles.active_image}
         />
       </div>
       <div className={`${styles.main_swiper__list} ${activeImage && styles.hidden}`}>

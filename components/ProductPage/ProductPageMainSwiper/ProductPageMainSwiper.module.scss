@@ -1,7 +1,7 @@
 .main_swiper {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.8rem;
 
   width: 100%;
@@ -12,6 +12,10 @@
   overflow: hidden;
 
   padding: 1rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -66,17 +70,31 @@
   }
 
   &__active {
-    width: 100%;
-    max-width: 400px;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
+    width: 100% !important;
+    max-width: 400px !important;
+    height: 100% !important;
+    min-height: 500px !important;
 
-    &__image {
+    figure {
       width: 100% !important;
       height: 100% !important;
-      object-fit: cover !important;
-      cursor: pointer !important;
+      min-height: 500px !important;
+
+      div {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 100% !important;
+        object-fit: cover !important;
+        cursor: pointer !important;
+
+        img {
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 500px !important;
+          object-fit: cover !important;
+          cursor: pointer !important;
+        }
+      }
     }
   }
 
