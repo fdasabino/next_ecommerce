@@ -19,7 +19,7 @@ import Button from "../Button/Button";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {
-  const { country } = useSelector((state) => ({ ...state }));
+  const country = useSelector((state) => state.country);
 
   return (
     <footer className={styles.footer}>

@@ -24,7 +24,8 @@ const Top = () => {
   const user = session?.user.name.split(" ")[0];
 
   // extract country from redux store
-  const { country, cart } = useSelector((state) => ({ ...state }));
+  const country = useSelector((state) => state.country);
+  const cart = useSelector((state) => state.cart);
 
   const handleMenuClick = () => {
     if (visible) {

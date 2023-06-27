@@ -4,7 +4,7 @@ import { BsCart3, BsSearch } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import styles from "./Main.module.scss";
 const Main = () => {
-  const { cart } = useSelector((state) => ({ ...state }));
+  const cart = useSelector((state) => state.cart);
 
   return (
     <div className={styles.main}>
