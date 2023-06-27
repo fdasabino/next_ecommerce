@@ -2,6 +2,7 @@ import Path from "@/components/Layout/Path/Path";
 import ProductAccordion from "@/components/ProductPage/ProductAccordion/ProductAccordion";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
 import ProductPageMainSwiper from "@/components/ProductPage/ProductPageMainSwiper/ProductPageMainSwiper";
+import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwiper/SimilarProductsSwiper";
 import Category from "@/models/Category";
 import Product from "@/models/Products";
 import SubCategory from "@/models/SubCategory";
@@ -38,6 +39,7 @@ const SingleProductPage = ({ product }) => {
             <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
             <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
+          <SimilarProductsSwiper />
         </div>
       </div>
     </>
