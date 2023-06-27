@@ -87,7 +87,13 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         {/* reviews */}
         <div className={styles.product_info__rating}>
-          <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
+          <Rating
+            name="half-rating-read"
+            defaultValue={rating}
+            value={rating}
+            precision={0.5}
+            readOnly
+          />
           <p>
             {numReviews} {numReviews === 1 ? "/ review" : "/ reviews"}
           </p>

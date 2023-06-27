@@ -1,16 +1,56 @@
 .reviews {
+  width: 100%;
+  max-width: 1200px;
+  height: 300px;
+  margin: 0 auto;
+
   &__title {
     background: $base-dark-secondary;
-    margin: 3rem 1.5rem 0 1.5rem;
+    margin: 1rem 1.5rem 0 1.5rem;
 
     h2 {
       color: $base-white;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 500;
       padding: 0 0.5rem;
 
       @media (max-width: 768px) {
         font-size: 1.5rem;
+      }
+    }
+  }
+
+  &__stats {
+    margin: 1rem 1.5rem 0 1.5rem;
+    max-width: 100%;
+    height: 15.625rem;
+
+    background-color: $base-white;
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 768px) {
+    }
+
+    &__overview {
+      span:first-child {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      &_rating {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
     }
   }
