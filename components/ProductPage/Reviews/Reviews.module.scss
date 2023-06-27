@@ -16,40 +16,106 @@
 
       @media (max-width: 768px) {
         font-size: 1.5rem;
+        text-align: center;
       }
     }
   }
 
   &__stats {
-    margin: 1rem 1.5rem 0 1.5rem;
-    max-width: 100%;
-    height: 15.625rem;
-
-    background-color: $base-white;
-    padding: 3rem;
+    height: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 1.5rem;
 
     @media (max-width: 768px) {
+      flex-direction: column;
     }
 
-    &__overview {
+    .stats_overview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
       span:first-child {
-        font-size: 1.1rem;
-        text-transform: uppercase;
+        font-size: 1.2rem;
         font-weight: 500;
+        text-transform: uppercase;
       }
 
-      &_rating {
-        margin-top: 1rem;
+      .overview_rating {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 0.9rem;
 
-        svg {
-          width: 1.5rem;
-          height: 1.5rem;
+        span {
+          font-size: 1.2rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  &__stats_breakdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .breakdown_left {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .rating_stats {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        small {
+          white-space: nowrap;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .breakdown_right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .rating_bar_wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .rating_bar {
+          position: relative;
+          width: 20vw;
+          height: 0.5rem;
+          background: $base-dark-secondary;
+          border-radius: 0.5rem;
+          overflow: hidden;
+
+          .rating_bar_fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: $base-green;
+            border-radius: 0.5rem;
+          }
         }
       }
     }

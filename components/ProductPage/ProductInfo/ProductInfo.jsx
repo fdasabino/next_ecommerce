@@ -22,7 +22,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
   const {
     name,
-    rating,
+    reviews,
     numReviews,
     discount,
     priceBeforeDiscount,
@@ -35,6 +35,10 @@ const ProductInfo = ({ product, setActiveImage }) => {
     quantity,
     subProducts,
   } = product;
+
+  const arrayOfRatings = reviews.map((review) => review.rating);
+  const averageRating =
+    arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length || 0;
 
   const selectedSizeValue = selectedSize || size;
   const selectedColorValue = selectedColor || color;
@@ -89,8 +93,8 @@ const ProductInfo = ({ product, setActiveImage }) => {
         <div className={styles.product_info__rating}>
           <Rating
             name="half-rating-read"
-            defaultValue={rating}
-            value={rating}
+            defaultValue={averageRating}
+            value={averageRating}
             precision={0.5}
             readOnly
           />
