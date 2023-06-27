@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
 const persistor = persistStore(store);
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {

@@ -13,8 +13,8 @@ const ProductsSection = ({ products }) => {
       </div>
       <div className={styles.products_section__swiper_wrapper}>
         <Swiper
-          slidesPerView={1}
-          spaceBetween={30}
+          slidesPerView={2}
+          spaceBetween={10}
           grabCursor={true}
           navigation={true}
           autoplay={{

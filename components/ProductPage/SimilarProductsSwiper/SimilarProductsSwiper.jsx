@@ -15,6 +15,7 @@ const SimilarProductsSwiper = () => {
       <Swiper
         slidesPerView={2}
         spaceBetween={30}
+        grabCursor={true}
         navigation={true}
         breakpoints={{
           480: {

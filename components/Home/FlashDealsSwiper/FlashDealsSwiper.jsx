@@ -1,5 +1,5 @@
 import { flashDealsArray } from "@/data/home_data";
-import { Autoplay, Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "../Card/Card";
 import styles from "./FlashDealsSwiper.module.scss";
@@ -7,8 +7,8 @@ import styles from "./FlashDealsSwiper.module.scss";
 const FlashDealsSwiper = () => {
   return (
     <Swiper
-      slidesPerView={1}
-      spaceBetween={30}
+      slidesPerView={2}
+      spaceBetween={20}
       grabCursor={true}
       navigation={true}
       autoplay={{
@@ -29,10 +29,7 @@ const FlashDealsSwiper = () => {
           spaceBetween: 50,
         },
       }}
-      pagination={{
-        dynamicBullets: true,
-      }}
-      modules={[Navigation, Pagination, Autoplay]}
+      modules={[Navigation, Autoplay]}
       className={styles.flash_deals_swiper}
     >
       {flashDealsArray.map((item, i) => (
