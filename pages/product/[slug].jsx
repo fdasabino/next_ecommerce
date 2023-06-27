@@ -2,6 +2,7 @@ import Path from "@/components/Layout/Path/Path";
 import ProductAccordion from "@/components/ProductPage/ProductAccordion/ProductAccordion";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
 import ProductPageMainSwiper from "@/components/ProductPage/ProductPageMainSwiper/ProductPageMainSwiper";
+import Reviews from "@/components/ProductPage/Reviews/Reviews";
 import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwiper/SimilarProductsSwiper";
 import Category from "@/models/Category";
 import Product from "@/models/Products";
@@ -13,7 +14,6 @@ import { useState } from "react";
 
 const SingleProductPage = ({ product }) => {
   const [activeImage, setActiveImage] = useState("");
-
   const path = [
     { id: 1, name: "Home" },
     { id: 2, name: product?.category.name },
@@ -41,6 +41,7 @@ const SingleProductPage = ({ product }) => {
             <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
           <SimilarProductsSwiper />
+          <Reviews reviews={product.reviews} numReviews={product.numReviews} />
         </div>
       </div>
     </>

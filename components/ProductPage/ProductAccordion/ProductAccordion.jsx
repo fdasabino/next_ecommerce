@@ -5,8 +5,6 @@ import { BsChevronDown } from "react-icons/bs";
 import styles from "./ProductAccordion.module.scss";
 
 const ProductAccordion = ({ details }) => {
-  console.log(details);
-
   return (
     <div className={styles.product_accordion}>
       <Accordion className={styles.product_accordion__wrapper}>
