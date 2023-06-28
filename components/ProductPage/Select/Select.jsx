@@ -19,7 +19,10 @@ const Select = (props) => {
               {property || `Select ${text}`} <AiOutlineArrowDown />
             </span>
           ) : text === "color" && property.image ? (
-            <Image src={property.image} width={300} height={300} alt="color" />
+            <span>
+              <Image src={property.image} width={300} height={300} alt="color" />
+              <AiOutlineArrowDown />
+            </span>
           ) : (
             <span>
               Select {text} <AiOutlineArrowDown />
