@@ -3,6 +3,7 @@ import Path from "@/components/Layout/Path/Path";
 import CreateReview from "@/components/ProductPage/CreateReview/CreateReview";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
 import ProductPageMainSwiper from "@/components/ProductPage/ProductPageMainSwiper/ProductPageMainSwiper";
+import ReviewTable from "@/components/ProductPage/ReviewTable/ReviewTable";
 import Reviews from "@/components/ProductPage/Reviews/Reviews";
 import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwiper/SimilarProductsSwiper";
 import Category from "@/models/Category";
@@ -62,6 +63,9 @@ const SingleProductPage = ({ product }) => {
                 Sign in to write a review <AiOutlineArrowRight />
               </Button>
             )}
+          </div>
+          <div className={styles.single_product_page__review_table}>
+            <ReviewTable reviews={product.reviews} />
           </div>
         </div>
       </div>
