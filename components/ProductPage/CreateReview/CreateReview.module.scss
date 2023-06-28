@@ -65,6 +65,11 @@
 
       @media (max-width: 768px) {
         height: 300px;
+        min-width: 380px;
+      }
+      @media (max-width: 480px) {
+        height: 300px;
+        min-width: 200px;
       }
 
       textarea {
