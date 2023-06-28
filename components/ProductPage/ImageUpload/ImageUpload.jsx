@@ -24,6 +24,7 @@ const ImageUpload = ({ handleChange, images, handleRemove }) => {
         type="file"
         ref={inputRef}
         onChange={handleChange}
+        multiple
         hidden
         accept="image/png,image/webp,image/jpg,image/jpeg"
       />

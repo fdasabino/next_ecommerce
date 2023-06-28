@@ -48,7 +48,7 @@ const CreateReview = ({ product }) => {
 
     const maxErrorMessage = "You can upload up to 3 images";
     const formatErrorMessage =
-      "is not supported. Please make sure your image files are in jpg, jpeg, png or webp format";
+      "is not supported. Please make sure your image files are in jpg, jpeg, png, or webp format";
     const sizeErrorMessage = "is too large. Images size should be less than 5MB";
 
     if (files.length > 3) {
@@ -56,7 +56,6 @@ const CreateReview = ({ product }) => {
       return;
     }
 
-    const reader = new FileReader();
     files.forEach((file) => {
       if (!acceptedTypes.includes(file.type)) {
         toast.error(`${file.name} ${formatErrorMessage}`);
@@ -66,10 +65,11 @@ const CreateReview = ({ product }) => {
         return;
       }
 
-      reader.readAsDataURL(file);
+      const reader = new FileReader();
       reader.onload = (e) => {
         setImages((images) => [...images, e.target.result]);
       };
+      reader.readAsDataURL(file);
     });
   };
 
