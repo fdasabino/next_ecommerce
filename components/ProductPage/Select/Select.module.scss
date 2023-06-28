@@ -54,6 +54,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-transform: uppercase;
 
       @media (max-width: 768px) {
         font-size: 1rem;
@@ -77,6 +78,7 @@
       height: 50px;
       display: grid;
       place-items: center;
+      text-transform: uppercase;
 
       &:hover {
         background: $base-grey;

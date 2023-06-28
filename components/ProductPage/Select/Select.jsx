@@ -9,6 +9,7 @@ const Select = (props) => {
 
   console.log("data", data);
   console.log("property", property);
+
   return (
     <div className={styles.select}>
       <h2>{text}:</h2>
@@ -22,6 +23,10 @@ const Select = (props) => {
             <span>
               <Image src={property.image} width={300} height={300} alt="color" />
               <AiOutlineArrowDown />
+            </span>
+          ) : text === "fit" && property ? (
+            <span>
+              {property} <AiOutlineArrowDown />
             </span>
           ) : (
             <span>
@@ -60,6 +65,19 @@ const Select = (props) => {
                   <span>
                     <Image src={item.image} width={300} height={300} alt="color" />
                   </span>
+                </li>
+              );
+            if (text === "fit")
+              return (
+                <li
+                  onClick={() => {
+                    handleChange(item);
+                    setVisible(false);
+                  }}
+                  key={i}
+                  className={styles.select__menu__item}
+                >
+                  <span>{item}</span>
                 </li>
               );
           })}

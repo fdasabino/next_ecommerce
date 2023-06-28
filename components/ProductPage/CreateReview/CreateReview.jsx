@@ -5,6 +5,9 @@ import styles from "./CreateReview.module.scss";
 const CreateReview = ({ product }) => {
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
+  const [fit, setFit] = useState("");
+
+  const fits = ["small", "perfect", "large"];
 
   const handleSize = (size) => {
     setSize(size);
@@ -14,6 +17,11 @@ const CreateReview = ({ product }) => {
   const handleColor = (color) => {
     setColor(color);
     console.log(color);
+  };
+
+  const handleFit = (fit) => {
+    setFit(fit);
+    console.log(fit);
   };
 
   console.log("color", color);
@@ -38,6 +46,12 @@ const CreateReview = ({ product }) => {
           text="color"
           data={product.colors.filter((x) => x !== color)}
           handleChange={handleColor}
+        />
+        <Select
+          property={fit}
+          text="fit"
+          data={fits.filter((x) => x !== fit)}
+          handleChange={handleFit}
         />
       </div>
     </div>
