@@ -15,6 +15,7 @@ const CreateReview = ({ product }) => {
     <div className={styles.create_review}>
       <div className={styles.header}>
         <h3>Write a review</h3>
+        <small>Let us know more so we can improve the quality of our products.</small>
         <hr />
       </div>
       <div className={styles.container}>
