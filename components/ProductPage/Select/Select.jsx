@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState } from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import styles from "./Select.module.scss";
@@ -7,22 +8,27 @@ const Select = (props) => {
   const [visible, setVisible] = useState(false);
 
   console.log("data", data);
+  console.log("property", property);
   return (
     <div className={styles.select}>
       <h2>{text}:</h2>
       <div className={styles.select__header} onClick={() => setVisible(!visible)}>
         <div>
-          {property ? (
-            <span>{property}</span>
+          {text === "size" ? (
+            <span>
+              {property || `Select ${text}`} <AiOutlineArrowDown />
+            </span>
+          ) : text === "color" && property.image ? (
+            <Image src={property.image} width={300} height={300} alt="color" />
           ) : (
             <span>
-              Select {text} <AiOutlineArrowDown />{" "}
+              Select {text} <AiOutlineArrowDown />
             </span>
           )}
         </div>
       </div>
       {visible && (
-        <ul className={styles.select__menu}>
+        <ul onMouseLeave={() => setVisible(false)} className={styles.select__menu}>
           {data.map((item, i) => {
             if (text === "size")
               return (
@@ -35,6 +41,22 @@ const Select = (props) => {
                   className={styles.select__menu__item}
                 >
                   <span>{item.size}</span>
+                </li>
+              );
+            if (text === "color")
+              return (
+                <li
+                  style={{ backgroundColor: `${item.color}` }}
+                  onClick={() => {
+                    handleChange(item);
+                    setVisible(false);
+                  }}
+                  key={i}
+                  className={styles.select__menu__item}
+                >
+                  <span>
+                    <Image src={item.image} width={300} height={300} alt="color" />
+                  </span>
                 </li>
               );
           })}

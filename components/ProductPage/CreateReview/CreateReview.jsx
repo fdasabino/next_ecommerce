@@ -4,11 +4,19 @@ import styles from "./CreateReview.module.scss";
 
 const CreateReview = ({ product }) => {
   const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
+
   const handleSize = (size) => {
     setSize(size);
     console.log(size);
   };
 
+  const handleColor = (color) => {
+    setColor(color);
+    console.log(color);
+  };
+
+  console.log("color", color);
   console.log(product);
 
   return (
@@ -19,7 +27,18 @@ const CreateReview = ({ product }) => {
         <hr />
       </div>
       <div className={styles.container}>
-        <Select property={size} text="size" data={product.allSizes} handleChange={handleSize} />
+        <Select
+          property={size}
+          text="size"
+          data={product.allSizes.filter((x) => x.size !== size)}
+          handleChange={handleSize}
+        />
+        <Select
+          property={color}
+          text="color"
+          data={product.colors.filter((x) => x !== color)}
+          handleChange={handleColor}
+        />
       </div>
     </div>
   );
