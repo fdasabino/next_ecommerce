@@ -8,6 +8,7 @@ import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwipe
 import Category from "@/models/Category";
 import Product from "@/models/Products";
 import SubCategory from "@/models/SubCategory";
+import User from "@/models/User";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import db from "@/utils/db";
 import { signIn, useSession } from "next-auth/react";
@@ -81,6 +82,8 @@ export async function getServerSideProps(context) {
     const product = await Product.findOne({ slug })
       .populate({ path: "category", model: Category })
       .populate({ path: "subCategories._id", model: SubCategory })
+      .populate({ path: "reviews.reviewBy", model: User })
+
       .lean();
     const subProduct = product.subProducts[color];
     const prices = subProduct.sizes.map((size) => size.price).sort((a, b) => a - b);

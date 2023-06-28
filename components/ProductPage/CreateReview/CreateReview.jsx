@@ -14,8 +14,10 @@ const CreateReview = ({ product }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [images, setImages] = useState([]);
-
   const fits = ["small", "perfect", "large"];
+
+  const { reviews } = product;
+  console.log(reviews);
 
   const handleSize = (size) => {
     setSize(size);
