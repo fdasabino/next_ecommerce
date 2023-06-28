@@ -1,5 +1,7 @@
+import Button from "@/components/Layout/Button/Button";
 import { Rating } from "@mui/material";
 import { useEffect, useState } from "react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import Select from "../Select/Select";
 import styles from "./CreateReview.module.scss";
 
@@ -73,13 +75,18 @@ const CreateReview = ({ product }) => {
             onChange={handleReview}
             placeholder="Write your review here..."
           />
-          <Rating
-            name="half-rating-read"
-            defaultValue={0}
-            value={rating}
-            onChange={handleRating}
-            precision={1}
-          />
+          <div className={styles.inner_wrapper}>
+            <Rating
+              name="half-rating-read"
+              defaultValue={0}
+              value={rating}
+              onChange={handleRating}
+              precision={1}
+            />
+            <Button disabled={!review || !rating || !color || !fit || !size} style="primary">
+              Submit review <AiOutlineArrowRight />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
