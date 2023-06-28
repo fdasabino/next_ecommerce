@@ -6,6 +6,7 @@ const CreateReview = ({ product }) => {
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [fit, setFit] = useState("");
+  const [review, setReview] = useState("");
 
   const fits = ["small", "perfect", "large"];
 
@@ -24,6 +25,11 @@ const CreateReview = ({ product }) => {
     console.log(fit);
   };
 
+  const handleReview = (e) => {
+    setReview(e.target.value);
+    console.log(review);
+  };
+
   console.log("color", color);
   console.log(product);
 
@@ -34,25 +40,35 @@ const CreateReview = ({ product }) => {
         <small>Let us know more so we can improve the quality of our products.</small>
         <hr />
       </div>
-      <div className={styles.container}>
-        <Select
-          property={size}
-          text="size"
-          data={product.allSizes.filter((x) => x.size !== size)}
-          handleChange={handleSize}
-        />
-        <Select
-          property={color}
-          text="color"
-          data={product.colors.filter((x) => x !== color)}
-          handleChange={handleColor}
-        />
-        <Select
-          property={fit}
-          text="fit"
-          data={fits.filter((x) => x !== fit)}
-          handleChange={handleFit}
-        />
+      <div className={styles.wrapper}>
+        <div className={styles.select_container}>
+          <Select
+            property={size}
+            text="size"
+            data={product.allSizes.filter((x) => x.size !== size)}
+            handleChange={handleSize}
+          />
+          <Select
+            property={color}
+            text="color"
+            data={product.colors.filter((x) => x !== color)}
+            handleChange={handleColor}
+          />
+          <Select
+            property={fit}
+            text="fit"
+            data={fits.filter((x) => x !== fit)}
+            handleChange={handleFit}
+          />
+        </div>
+        <div className={styles.review_container}>
+          <textarea
+            name="review"
+            value={review}
+            onChange={handleReview}
+            placeholder="Write your review here..."
+          />
+        </div>
       </div>
     </div>
   );
