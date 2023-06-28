@@ -7,9 +7,6 @@ const Select = (props) => {
   const { property, text, data, handleChange } = props;
   const [visible, setVisible] = useState(false);
 
-  console.log("data", data);
-  console.log("property", property);
-
   return (
     <div className={styles.select}>
       <h2>{text}:</h2>

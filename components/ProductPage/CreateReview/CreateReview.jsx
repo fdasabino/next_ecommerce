@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Rating } from "@mui/material";
+import { useEffect, useState } from "react";
 import Select from "../Select/Select";
 import styles from "./CreateReview.module.scss";
 
@@ -7,6 +8,7 @@ const CreateReview = ({ product }) => {
   const [color, setColor] = useState("");
   const [fit, setFit] = useState("");
   const [review, setReview] = useState("");
+  const [rating, setRating] = useState(0);
 
   const fits = ["small", "perfect", "large"];
 
@@ -30,8 +32,11 @@ const CreateReview = ({ product }) => {
     console.log(review);
   };
 
-  console.log("color", color);
-  console.log(product);
+  const handleRating = (e) => {
+    setRating(parseInt(e.target.value));
+  };
+
+  useEffect(() => {}, [rating]);
 
   return (
     <div className={styles.create_review}>
@@ -67,6 +72,13 @@ const CreateReview = ({ product }) => {
             value={review}
             onChange={handleReview}
             placeholder="Write your review here..."
+          />
+          <Rating
+            name="half-rating-read"
+            defaultValue={0}
+            value={rating}
+            onChange={handleRating}
+            precision={1}
           />
         </div>
       </div>
