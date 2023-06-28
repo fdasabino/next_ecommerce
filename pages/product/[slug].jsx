@@ -49,6 +49,7 @@ const SingleProductPage = ({ product }) => {
             <div className={styles.vertical_line} />
             <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
+
           <SimilarProductsSwiper />
           <Reviews reviews={product.reviews} numReviews={product.numReviews} />
 
@@ -95,6 +96,15 @@ export async function getServerSideProps(context) {
       priceBeforeDiscount: subProduct.sizes[size].price.toFixed(2),
       price: calculateDiscountedPrice(subProduct.sizes[size], subProduct.discount).toFixed(2),
       quantity: subProduct.sizes[size].qty,
+      allSizes: product.subProducts
+        .map((product) => {
+          return product.sizes;
+        })
+        .flat()
+        .sort((a, b) => a.size - b.size)
+        .filter(
+          (element, index, array) => array.findIndex((ele2) => ele2.size === element.size) === index
+        ),
     };
 
     return {
