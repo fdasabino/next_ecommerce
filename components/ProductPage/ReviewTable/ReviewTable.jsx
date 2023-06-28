@@ -20,7 +20,6 @@ const ReviewTable = ({ reviews }) => {
           .map((reviewItem, index) => {
             const { createdAt, fit, images, rating, review, reviewBy, size, style, _id } =
               reviewItem;
-            console.log(images);
             const { name, image } = reviewBy;
             const isOpen = index === openIndex;
 
