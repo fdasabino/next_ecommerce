@@ -2,6 +2,8 @@ import Button from "@/components/Layout/Button/Button";
 import { Rating } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { toast } from "react-toastify";
+import ImageUpload from "../ImageUpload/ImageUpload";
 import Select from "../Select/Select";
 import styles from "./CreateReview.module.scss";
 
@@ -11,6 +13,7 @@ const CreateReview = ({ product }) => {
   const [fit, setFit] = useState("");
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
+  const [images, setImages] = useState([]);
 
   const fits = ["small", "perfect", "large"];
 
@@ -38,6 +41,42 @@ const CreateReview = ({ product }) => {
     setRating(parseInt(e.target.value));
   };
 
+  const handleImages = (e) => {
+    const files = Array.from(e.target.files);
+    const maxSize = 1024 * 1024 * 5; // 5MB
+    const acceptedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    const maxErrorMessage = "You can upload up to 3 images";
+    const formatErrorMessage =
+      "is not supported. Please make sure your image files are in jpg, jpeg, png or webp format";
+    const sizeErrorMessage = "is too large. Images size should be less than 5MB";
+
+    if (files.length > 3) {
+      toast.error(maxErrorMessage);
+      return;
+    }
+
+    const reader = new FileReader();
+    files.forEach((file) => {
+      if (!acceptedTypes.includes(file.type)) {
+        toast.error(`${file.name} ${formatErrorMessage}`);
+        return;
+      } else if (file.size > maxSize) {
+        toast.error(`${file.name} ${sizeErrorMessage}`);
+        return;
+      }
+
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImages((images) => [...images, e.target.result]);
+      };
+    });
+  };
+
+  const handleRemoveImage = (image) => {
+    setImages(images.filter((x) => x !== image));
+  };
+
   useEffect(() => {}, [rating]);
 
   return (
@@ -47,6 +86,7 @@ const CreateReview = ({ product }) => {
         <small>Let us know more so we can improve the quality of our products.</small>
         <hr />
       </div>
+      <ImageUpload handleChange={handleImages} images={images} handleRemove={handleRemoveImage} />
       <div className={styles.wrapper}>
         <div className={styles.select_container}>
           <Select
