@@ -154,12 +154,15 @@
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        background-color: $base-dark-grey;
-        color: $base-white;
-        transition: all 0.3s ease-in-out;
+        background-color: $base-white;
+        color: $base-dark-secondary;
+        outline: 1px solid $base-dark-grey;
+        transition: all 0.2s ease-in-out;
 
         &:hover {
           transform: scale(1.1);
+          background-color: $base-success;
+          border: none;
         }
       }
     }
