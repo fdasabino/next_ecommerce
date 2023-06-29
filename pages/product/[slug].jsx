@@ -16,6 +16,7 @@ import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product }) => {
   const { data: session } = useSession();
@@ -59,14 +60,23 @@ const SingleProductPage = ({ product }) => {
             {session ? (
               <CreateReview product={product} />
             ) : (
-              <Button onClick={signinRedirect} style="primary">
-                Sign in to write a review <AiOutlineArrowRight />
-              </Button>
+              <div className={styles.not_signed_in}>
+                {product.reviews.length === 0 && (
+                  <h2>
+                    Be the first to review this product <BsChatLeftQuote />
+                  </h2>
+                )}
+                <Button onClick={signinRedirect} style="primary">
+                  Sign in to write a review <AiOutlineArrowRight />
+                </Button>
+              </div>
             )}
           </div>
-          <div className={styles.single_product_page__review_table}>
-            <ReviewTable reviews={product.reviews} />
-          </div>
+          {product.reviews.length > 0 && (
+            <div className={styles.single_product_page__review_table}>
+              <ReviewTable reviews={product.reviews} />
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -13,7 +13,9 @@ const ReviewTable = ({ reviews }) => {
 
   return (
     <div className={styles.review_table}>
-      <div className={styles.review_table__header}>header</div>
+      <div className={styles.review_table__header}>
+        <h2>Reviews:</h2>
+      </div>
       <div className={styles.review_table__body}>
         {reviews
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
