@@ -122,7 +122,7 @@ const CreateReview = ({ product }) => {
               onChange={handleRating}
               precision={1}
             />
-            <Button disabled={!review || !rating || !color || !fit || !size} style="primary">
+            <Button disabled={!review || !rating || !color || !fit || !size} style="tertiary">
               Submit review <AiOutlineArrowRight />
             </Button>
           </div>

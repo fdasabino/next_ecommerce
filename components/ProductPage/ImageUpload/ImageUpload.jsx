@@ -28,7 +28,11 @@ const ImageUpload = ({ handleChange, images, handleRemove }) => {
         hidden
         accept="image/png,image/webp,image/jpg,image/jpeg"
       />
-      <Button disabled={images.length >= 3} onClick={() => inputRef.current.click()}>
+      <Button
+        style="secondary"
+        disabled={images.length >= 3}
+        onClick={() => inputRef.current.click()}
+      >
         <MdAddPhotoAlternate />
       </Button>
     </div>
