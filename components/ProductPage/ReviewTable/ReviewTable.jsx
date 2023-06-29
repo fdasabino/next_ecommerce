@@ -43,7 +43,6 @@ const ReviewTable = ({ reviews }) => {
                   <div className={styles.user_wrapper_left}>
                     <Image src={image} width={400} height={400} alt={name} />
                     <span>{name.split(" ")[0]}</span>
-                    <span>{new Date(createdAt).toLocaleDateString()}</span>
                     <Rating name="read-only" value={rating} readOnly />
                   </div>
                   <div className={styles.user_wrapper_right}>
@@ -54,6 +53,9 @@ const ReviewTable = ({ reviews }) => {
                   <div className={styles.table__body} onMouseLeave={() => setOpenIndex(null)}>
                     <div className={styles.table__body__info}>
                       <div className={styles.left}>
+                        <p>
+                          Date: <span>{new Date(createdAt).toLocaleDateString()}</span>
+                        </p>
                         <p>
                           Fit: <span>{fit}</span>
                         </p>
@@ -85,9 +87,11 @@ const ReviewTable = ({ reviews }) => {
           })}
       </div>
       {visibleReviews.length < reviews.length && (
-        <Button style="secondary" onClick={handleLoadMore}>
-          Load More
-        </Button>
+        <div className={styles.review_table__footer}>
+          <Button style="primary" onClick={handleLoadMore}>
+            Load More...
+          </Button>
+        </div>
       )}
     </div>
   );

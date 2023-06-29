@@ -99,9 +99,16 @@
 
           .left {
             display: flex;
+            gap: 0.5rem;
             gap: 1rem;
+
+            @media (max-width: 768px) {
+              flex-direction: column;
+              gap: 0.5rem;
+            }
+
             p {
-              font-size: 1.2rem;
+              font-size: 1.05rem;
               font-weight: 500;
               color: $base-dark;
 
@@ -143,11 +150,17 @@
               width: 4rem;
               height: 4rem;
               border-radius: 50%;
+
+              @media (max-width: 768px) {
+                width: 2.5rem;
+                height: 2.5rem;
+              }
             }
           }
         }
 
         .table__body__review {
+          margin: 0 0 2rem 0;
           p {
             margin: 0 auto;
             max-width: 800px;
@@ -175,6 +188,20 @@
           }
         }
       }
+    }
+  }
+
+  .review_table__footer {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+
+    button {
+      width: 100%;
+      max-width: 300px;
     }
   }
 }
