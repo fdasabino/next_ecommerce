@@ -1,14 +1,27 @@
+import Button from "@/components/Layout/Button/Button";
 import { Rating } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import styles from "./ReviewTable.module.scss";
 
 const ReviewTable = ({ reviews }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [visibleReviews, setVisibleReviews] = useState([]);
+  const [loadMoreCount, setLoadMoreCount] = useState(3);
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleVisible = (index) => {
     setOpenIndex(index === openIndex ? null : index);
+  };
+
+  useEffect(() => {
+    setVisibleReviews(reviews.slice(0, currentPage * loadMoreCount));
+  }, [currentPage, reviews, loadMoreCount]);
+
+  const handleLoadMore = () => {
+    setLoadMoreCount(loadMoreCount + 2);
+    setCurrentPage(1); // Reset current page to 1
   };
 
   return (
@@ -17,11 +30,10 @@ const ReviewTable = ({ reviews }) => {
         <h2>Reviews:</h2>
       </div>
       <div className={styles.review_table__body}>
-        {reviews
+        {visibleReviews
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map((reviewItem, index) => {
-            const { createdAt, fit, images, rating, review, reviewBy, size, style, _id } =
-              reviewItem;
+            const { createdAt, fit, images, rating, review, reviewBy, size, _id } = reviewItem;
             const { name, image } = reviewBy;
             const isOpen = index === openIndex;
 
@@ -34,7 +46,7 @@ const ReviewTable = ({ reviews }) => {
                     <span>{new Date(createdAt).toLocaleDateString()}</span>
                     <Rating name="read-only" value={rating} readOnly />
                   </div>
-                  <div className={style.user_wrapper_right}>
+                  <div className={styles.user_wrapper_right}>
                     {isOpen ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
                   </div>
                 </div>
@@ -72,6 +84,11 @@ const ReviewTable = ({ reviews }) => {
             );
           })}
       </div>
+      {visibleReviews.length < reviews.length && (
+        <Button style="secondary" onClick={handleLoadMore}>
+          Load More
+        </Button>
+      )}
     </div>
   );
 };

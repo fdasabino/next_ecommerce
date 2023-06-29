@@ -77,12 +77,12 @@
 
 .btnSecondary {
   @include button-styles;
-  @if (get-color-type(#373738) == "blue") {
-    @include button-background(#373738, lighten(#373738, 10%), 0.95);
-  } @else if (get-color-type(#373738) == "green") {
-    @include button-background(#373738, lighten(#373738, 15%), 0.95);
+  @if (get-color-type(#5c5c5e) == "blue") {
+    @include button-background(#5c5c5e, lighten(#5c5c5e, 10%), 0.95);
+  } @else if (get-color-type(#5c5c5e) == "green") {
+    @include button-background(#5c5c5e, lighten(#5c5c5e, 15%), 0.95);
   } @else {
-    @include button-background(#373738, darken(#373738, 10%), 0.95);
+    @include button-background(#5c5c5e, darken(#5c5c5e, 10%), 0.95);
   }
 }
 
