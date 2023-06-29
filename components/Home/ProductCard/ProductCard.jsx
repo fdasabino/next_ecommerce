@@ -67,6 +67,10 @@ const ProductCard = ({ product }) => {
                       setImages(product.subProducts[index].images);
                       setActive(index);
                     }}
+                    onTouchStart={() => {
+                      setImages(product.subProducts[index].images);
+                      setActive(index);
+                    }}
                   />
                 )
               )}

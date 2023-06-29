@@ -151,7 +151,9 @@ const ProductInfo = ({ product, setActiveImage }) => {
                     href={`/product/${slug}?color=${i}`}
                     onClick={() => setSelectedColor(i)}
                     onMouseEnter={() => setActiveImage(subProducts[i].images[0].url)}
+                    onTouchStart={() => setActiveImage(subProducts[i].images[0].url)}
                     onMouseLeave={() => setActiveImage("")}
+                    onTouchEnd={() => setActiveImage("")}
                   >
                     <div className={`${+color === i && styles.activeColor}`}>
                       <Image src={c.image} width={50} height={50} alt="current color" />
