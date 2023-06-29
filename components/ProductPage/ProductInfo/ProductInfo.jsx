@@ -2,6 +2,7 @@ import Button from "@/components/Layout/Button/Button";
 import { IconButton, Tooltip } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import Zoom from "@mui/material/Zoom";
+import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -68,17 +69,27 @@ const ProductInfo = ({ product, setActiveImage }) => {
     }
   }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
 
+  console.log(colors);
+
+  const getColorName = (color) => {
+    const colorName = GetColorName(color);
+    return colorName;
+  };
+
   return (
     <div className={styles.product_info}>
       <div className={styles.product_info__container}>
         {/* title */}
         <div className={styles.product_info__title}>
-          <h1>{name}</h1>
-          <Tooltip title="Add to wishlist" TransitionComponent={Zoom}>
-            <IconButton>
-              <BsHeartFill size={20} color="#5a31f4" />
-            </IconButton>
-          </Tooltip>
+          <div className={styles.wrapper}>
+            <h1>{name}</h1>
+            <Tooltip title="Add to wishlist" TransitionComponent={Zoom}>
+              <IconButton>
+                <BsHeartFill size={20} color="#5a31f4" />
+              </IconButton>
+            </Tooltip>
+          </div>
+          <small>{getColorName(colors[color].color)}</small>
         </div>
 
         {/* description */}
@@ -135,17 +146,18 @@ const ProductInfo = ({ product, setActiveImage }) => {
           <div className={styles.wrapper}>
             {colors.length > 0 &&
               colors.map((c, i) => (
-                <Link
-                  key={i}
-                  href={`/product/${slug}?color=${i}`}
-                  onClick={() => setSelectedColor(i)}
-                  onMouseEnter={() => setActiveImage(subProducts[i].images[0].url)}
-                  onMouseLeave={() => setActiveImage("")}
-                >
-                  <div className={`${+color === i && styles.activeColor}`}>
-                    <Image src={c.image} width={50} height={50} alt="current color" />
-                  </div>
-                </Link>
+                <Tooltip title={getColorName(c.color)} key={i}>
+                  <Link
+                    href={`/product/${slug}?color=${i}`}
+                    onClick={() => setSelectedColor(i)}
+                    onMouseEnter={() => setActiveImage(subProducts[i].images[0].url)}
+                    onMouseLeave={() => setActiveImage("")}
+                  >
+                    <div className={`${+color === i && styles.activeColor}`}>
+                      <Image src={c.image} width={50} height={50} alt="current color" />
+                    </div>
+                  </Link>
+                </Tooltip>
               ))}
           </div>
         </div>

@@ -23,14 +23,23 @@
 
   &__title {
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     font-size: 1.1rem;
     text-transform: uppercase;
     font-weight: 700;
     color: $base-dark;
     white-space: pre-wrap;
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    small {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: $base-dark-grey;
+    }
 
     @media (max-width: 768px) {
       font-size: 0.9rem;
