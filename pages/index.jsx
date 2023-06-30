@@ -10,7 +10,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Product from "../models/Products";
 
-const Home = ({ country, products }) => {
+const HomePage = ({ country, products }) => {
   const dispatch = useDispatch();
 
   // Set country in redux store
@@ -44,7 +44,7 @@ const Home = ({ country, products }) => {
   );
 };
 
-export default Home;
+export default HomePage;
 
 export async function getServerSideProps() {
   await db.connectDB();
