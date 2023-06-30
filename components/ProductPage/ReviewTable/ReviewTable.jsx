@@ -1,4 +1,5 @@
 import Button from "@/components/Layout/Button/Button";
+import DotLoader from "@/components/Layout/DotLoader/DotLoader";
 import { Rating } from "@mui/material";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -8,6 +9,7 @@ import styles from "./ReviewTable.module.scss";
 const ReviewTable = ({ reviews }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [visibleReviews, setVisibleReviews] = useState([]);
+  const [loadMore, setLoadMore] = useState(false);
   const [loadMoreCount, setLoadMoreCount] = useState(3);
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -20,8 +22,13 @@ const ReviewTable = ({ reviews }) => {
   }, [currentPage, reviews, loadMoreCount]);
 
   const handleLoadMore = () => {
-    setLoadMoreCount(loadMoreCount + 2);
-    setCurrentPage(1); // Reset current page to 1
+    setLoadMore(true);
+    setTimeout(() => {
+      setLoadMoreCount(loadMoreCount + 2);
+      setCurrentPage(1);
+      setLoadMore(false);
+    }, 2000);
+    return () => clearTimeout();
   };
 
   return (
@@ -88,9 +95,13 @@ const ReviewTable = ({ reviews }) => {
       </div>
       {visibleReviews.length < reviews.length && (
         <div className={styles.review_table__footer}>
-          <Button style="primary" onClick={handleLoadMore}>
-            Load More...
-          </Button>
+          {loadMore ? (
+            <DotLoader />
+          ) : (
+            <Button style="primary" onClick={handleLoadMore}>
+              Load More...
+            </Button>
+          )}
         </div>
       )}
     </div>
