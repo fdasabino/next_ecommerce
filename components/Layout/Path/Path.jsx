@@ -11,10 +11,10 @@ const Path = ({ path }) => {
             className={`${styles.path__item}${index === path.length - 1 ? " active" : ""}`}
             aria-current={index === path.length - 1 ? "page" : undefined}
           >
-            <>
-              {index === 0 ? "" : <span className={styles.path__separator}>/</span>}
-              <Link href="/">{step.name}</Link>
-            </>
+            {index !== 0 && <span className={styles.path__separator}>/</span>}
+            <Link href={step.name === "Home" ? "/" : step.name.toLowerCase().replace(" ", "-")}>
+              {step.name}
+            </Link>
           </li>
         ))}
       </ul>
