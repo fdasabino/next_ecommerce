@@ -1,12 +1,14 @@
 import Path from "@/components/Layout/Path/Path";
 import styles from "@/styles/pages/CartPage.module.scss";
+import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BsBalloonFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const CartPage = () => {
-  const router = useRouter();
-
-  console.log(router);
+  const cart = useSelector((state) => state.cart);
+  console.log();
 
   const path = [
     { id: 1, name: "Home" },
@@ -15,6 +17,19 @@ const CartPage = () => {
   return (
     <div className={styles.cart}>
       <Path path={path} />
+      <div className={styles.cart__container}>
+        {cart.length === 0 ? (
+          <div className={styles.cart__empty}>
+            <Image src={"/images/empty_cart.png"} width={500} height={500} alt="empty cart" />
+            <h2>Your cart is empty, but it doesn&#8217;t have to be... </h2>
+            <Link href="/browse">
+              <AiOutlineArrowLeft /> Browse our shop
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };
