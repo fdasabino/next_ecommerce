@@ -69,11 +69,16 @@ const ProductInfo = ({ product, setActiveImage }) => {
     }
   }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
 
-  console.log(colors);
-
   const getColorName = (color) => {
     const colorName = GetColorName(color);
     return colorName;
+  };
+
+  const handleAddToCart = async () => {
+    const { data } = await axios.get(
+      `/api/product/${product._id}?color${selectedColorValue}&size=${selectedSizeValue}`
+    );
+    console.log(data);
   };
 
   return (
@@ -215,7 +220,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         {/* ctas */}
         <div className={styles.product_info__ctas}>
-          <Button style="tertiary" disabled={quantity < 1 || !size}>
+          <Button onClick={handleAddToCart} style="tertiary" disabled={quantity < 1 || !size}>
             Add to cart <BsCartPlus size={20} />
           </Button>
         </div>

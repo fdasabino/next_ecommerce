@@ -7,7 +7,7 @@ import ReviewTable from "@/components/ProductPage/ReviewTable/ReviewTable";
 import Reviews from "@/components/ProductPage/Reviews/Reviews";
 import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwiper/SimilarProductsSwiper";
 import Category from "@/models/Category";
-import Product from "@/models/Products";
+import Product from "@/models/Product";
 import SubCategory from "@/models/SubCategory";
 import User from "@/models/User";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
