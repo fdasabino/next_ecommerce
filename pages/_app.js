@@ -30,7 +30,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
             <RootLayout>
               <Component {...pageProps} />
               <ToastContainer
-                position="bottom-right"
+                position="top-center"
                 autoClose={10000}
                 hideProgressBar
                 newestOnTop={true}
