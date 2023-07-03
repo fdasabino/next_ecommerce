@@ -1,4 +1,5 @@
 import Button from "@/components/Layout/Button/Button";
+import { addToCart, updateCart } from "@/redux-store/cartSlice";
 import { IconButton, Tooltip } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import Zoom from "@mui/material/Zoom";
@@ -10,18 +11,13 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsCartPlus, BsHeartFill } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ProductAccordion from "../ProductAccordion/ProductAccordion";
 import Share from "../Share/Share";
 import styles from "./ProductInfo.module.scss";
 
 const ProductInfo = ({ product, setActiveImage }) => {
-  const router = useRouter();
-  const { color, size } = router.query;
-  const [selectedSize, setSelectedSize] = useState(parseInt(size));
-  const [selectedColor, setSelectedColor] = useState(parseInt(color));
-  const [cartQuantity, setCartQuantity] = useState(1);
-
   const {
     name,
     reviews,
@@ -38,13 +34,74 @@ const ProductInfo = ({ product, setActiveImage }) => {
     subProducts,
   } = product;
 
+  const router = useRouter();
+  const { color, size } = router.query;
+  const [selectedSize, setSelectedSize] = useState(parseInt(size));
+  const [selectedColor, setSelectedColor] = useState(parseInt(color));
+  const [cartQuantity, setCartQuantity] = useState(1);
   const arrayOfRatings = reviews.map((review) => review.rating);
   const averageRating =
     arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length || 0;
-
   const selectedSizeValue = selectedSize || size;
   const selectedColorValue = selectedColor || color;
   const isColorSelected = selectedColorValue === 0;
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
+  useEffect(() => {
+    if (!selectedSize) {
+      setSelectedSize(size);
+    }
+    if (selectedSizeValue && selectedColorValue) {
+      setCartQuantity(1);
+    }
+  }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
+
+  const handleAddToCart = async () => {
+    const { data } = await axios.get(
+      `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
+    );
+    console.log(data);
+
+    let _uid = `${product._id}_${selectedColorValue}_${selectedSizeValue}`;
+    let existingProduct = cart.cartItems.find((item) => item._uid === _uid);
+
+    console.log(existingProduct);
+
+    if (!selectedColorValue) {
+      toast.error("Please select a color...");
+      return;
+    }
+
+    if (!selectedSizeValue) {
+      toast.error("Please select a size...");
+      return;
+    }
+
+    if (cartQuantity > data.quantity) {
+      toast.error(`The maximum quantity available is ${data.quantity} items...`);
+      return;
+    }
+
+    if (data.quantity === 0) {
+      toast.error(`This product is out of stock...`);
+      return;
+    }
+
+    if (existingProduct) {
+      let newCart = cart.cartItems.map((item) => {
+        if (item._uid === existingProduct._uid) {
+          return { ...item, addedQuantity: cartQuantity };
+        }
+
+        return item;
+      });
+      dispatch(updateCart(newCart));
+    } else {
+      dispatch(addToCart({ ...data, addedQuantity: cartQuantity, size: data.size, _uid }));
+    }
+  };
 
   const increaseCartQuantity = () => {
     if (cartQuantity >= quantity) {
@@ -61,45 +118,9 @@ const ProductInfo = ({ product, setActiveImage }) => {
     }
   };
 
-  useEffect(() => {
-    if (!selectedSize) {
-      setSelectedSize(size);
-    }
-    if (selectedSizeValue && selectedColorValue) {
-      setCartQuantity(1);
-    }
-  }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
-
   const getColorName = (color) => {
     const colorName = GetColorName(color);
     return colorName;
-  };
-
-  const handleAddToCart = async () => {
-    try {
-      if (!selectedSizeValue || !selectedColorValue) {
-        toast.error("Please select a size and a color...");
-        return;
-      }
-
-      const { data } = await axios.get(
-        `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
-      );
-
-      if (data.quantity < cartQuantity) {
-        toast.error(`The maximum quantity available is ${data.quantity} items...`);
-        return;
-      } else if (data.quantity === 0) {
-        toast.error(`This product is out of stock...`);
-        return;
-      } else {
-      }
-
-      console.log(data);
-    } catch (error) {
-      // Handle any errors here
-      console.error(error);
-    }
   };
 
   return (

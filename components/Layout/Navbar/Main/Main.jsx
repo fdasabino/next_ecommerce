@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BsCart3, BsSearch } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -19,7 +18,7 @@ const Main = () => {
         <div className={styles.cart}>
           <Link href="/cart">
             <BsCart3 />
-            <span>{cart && cart.length}</span>
+            <span>{cart.cartItems && cart.cartItems.length}</span>
           </Link>
         </div>
       </div>
