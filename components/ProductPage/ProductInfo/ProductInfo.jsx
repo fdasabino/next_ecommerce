@@ -2,6 +2,7 @@ import Button from "@/components/Layout/Button/Button";
 import { IconButton, Tooltip } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import Zoom from "@mui/material/Zoom";
+import axios from "axios";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,7 +77,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
   const handleAddToCart = async () => {
     const { data } = await axios.get(
-      `/api/product/${product._id}?color${selectedColorValue}&size=${selectedSizeValue}`
+      `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
     );
     console.log(data);
   };
