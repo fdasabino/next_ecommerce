@@ -15,6 +15,8 @@ const handler = async (req, res) => {
       ? Math.round(priceBeforeDiscount * (1 - discount / 100))
       : priceBeforeDiscount;
 
+    console.log(subProduct);
+
     const responseData = {
       _id: product._id,
       colorIndex: Number(color),
@@ -29,6 +31,7 @@ const handler = async (req, res) => {
       priceBeforeDiscount,
       priceAfterDiscount,
       quantity,
+      size: subProduct.sizes[size],
     };
 
     res.status(200).json(responseData);

@@ -76,10 +76,30 @@ const ProductInfo = ({ product, setActiveImage }) => {
   };
 
   const handleAddToCart = async () => {
-    const { data } = await axios.get(
-      `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
-    );
-    console.log(data);
+    try {
+      if (!selectedSizeValue || !selectedColorValue) {
+        toast.error("Please select a size and a color...");
+        return;
+      }
+
+      const { data } = await axios.get(
+        `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
+      );
+
+      if (data.quantity < cartQuantity) {
+        toast.error(`The maximum quantity available is ${data.quantity} items...`);
+        return;
+      } else if (data.quantity === 0) {
+        toast.error(`This product is out of stock...`);
+        return;
+      } else {
+      }
+
+      console.log(data);
+    } catch (error) {
+      // Handle any errors here
+      console.error(error);
+    }
   };
 
   return (
