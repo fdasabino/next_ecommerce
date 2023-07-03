@@ -58,28 +58,6 @@
       @media screen and (max-width: 500px) {
         font-size: 0.9rem;
       }
-
-      a {
-        text-decoration-line: underline;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-
-        svg {
-          width: 2rem;
-          height: 2rem;
-          color: $base-dark;
-          border: 2px solid $base-dark;
-          border-radius: 50%;
-          padding: 0.2rem;
-
-          @media screen and (max-width: 500px) {
-            width: 1.5rem;
-            height: 1.5rem;
-          }
-        }
-      }
     }
   }
 }
