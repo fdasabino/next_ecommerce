@@ -14,7 +14,9 @@ const CartPage = () => {
   return (
     <div className={styles.cart}>
       <Path path={path} />
-      <div className={styles.cart__container}>{cart.length === 0 ? <EmptyCart /> : ""}</div>
+      <div className={styles.cart__container}>
+        {cart.cartItems.length === 0 ? <EmptyCart /> : ""}
+      </div>
     </div>
   );
 };

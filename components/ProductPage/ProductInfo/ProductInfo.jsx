@@ -47,7 +47,6 @@ const ProductInfo = ({ product, setActiveImage }) => {
   const isColorSelected = selectedColorValue === 0;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   useEffect(() => {
     if (!selectedSize) {
