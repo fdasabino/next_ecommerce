@@ -114,9 +114,10 @@ hr {
 .Toastify__toast {
   border-radius: 10px !important;
   font-family: "Mulish", sans-serif !important;
-  font-size: 1rem !important;
+  font-size: 0.9rem !important;
   font-weight: 600 !important;
   transition: all 0.5s ease-in-out !important;
+  white-space: pre-wrap !important;
 
   &:hover {
     transform: scale(0.95) !important;

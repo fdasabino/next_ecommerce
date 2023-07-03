@@ -41,7 +41,7 @@ const Top = () => {
         <div className={styles.top__cart}>
           <Link href="/cart">
             <BsCart3 />
-            <span>{cart && cart.length}</span>
+            <span>{cart.cartItems && cart.cartItems.length}</span>
           </Link>
         </div>
         <ul className={styles.top__list}>

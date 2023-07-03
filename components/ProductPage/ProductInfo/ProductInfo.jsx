@@ -97,9 +97,24 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         return item;
       });
+
       dispatch(updateCart(newCart));
+
+      if (cartQuantity === existingProduct.addedQuantity) {
+        toast.info(
+          `The quantity of "${data.name}" (${data.size.size}) in your cart is already (${cartQuantity}x).`
+        );
+        return;
+      }
+
+      toast.success(
+        `The quantity of "${data.name}" (${data.size.size}) in your cart has been updated to (${cartQuantity}x).`
+      );
     } else {
       dispatch(addToCart({ ...data, addedQuantity: cartQuantity, size: data.size, _uid }));
+      toast.success(
+        `Added (${cartQuantity}x) "${data.name}", size ${data.size.size}, to your cart.`
+      );
     }
   };
 
