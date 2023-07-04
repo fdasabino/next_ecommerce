@@ -9,6 +9,11 @@
   align-items: center;
   gap: 1rem;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .left {
     display: flex;
     align-items: center;
@@ -20,8 +25,5 @@
   }
 
   .right {
-    button {
-      background: $base-dark-secondary;
-    }
   }
 }

@@ -1,10 +1,20 @@
 import Button from "@/components/Layout/Button/Button";
+import { signIn, useSession } from "next-auth/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import styles from "./CartHeader.module.scss";
 
 const CartHeader = () => {
+  const { data: session } = useSession();
   const cart = useSelector((state) => state.cart);
+
+  const handleSignIn = () => {
+    signIn();
+  };
+
+  const handleCheckout = () => {
+    console.log("Checkout");
+  };
 
   return (
     <div className={styles.cart_header}>
@@ -14,9 +24,15 @@ const CartHeader = () => {
         </h2>
       </div>
       <div className={styles.right}>
-        <Button style="secondary">
-          Proceed to checkout <AiOutlineArrowRight />
-        </Button>
+        {session ? (
+          <Button onClick={handleCheckout} style="primary">
+            Proceed to checkout <AiOutlineArrowRight />
+          </Button>
+        ) : (
+          <Button onClick={handleSignIn} style="secondary">
+            Sign in to checkout <AiOutlineArrowRight />
+          </Button>
+        )}
       </div>
     </div>
   );
