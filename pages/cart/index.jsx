@@ -1,3 +1,4 @@
+import CartHeader from "@/components/Cart/CartHeader/CartHeader";
 import EmptyCart from "@/components/Cart/EmptyCart/EmptyCart";
 import Path from "@/components/Layout/Path/Path";
 import styles from "@/styles/pages/CartPage.module.scss";
@@ -15,7 +16,16 @@ const CartPage = () => {
     <div className={styles.cart}>
       <Path path={path} />
       <div className={styles.cart__container}>
-        {cart.cartItems.length === 0 ? <EmptyCart /> : ""}
+        <CartHeader />
+        <hr />
+        {cart.cartItems.length > 0 ? (
+          <div className={styles.cart__wrapper}>
+            <div className={styles.left}>Right</div>
+            <div className={styles.right}>Left</div>
+          </div>
+        ) : (
+          <EmptyCart />
+        )}
       </div>
     </div>
   );

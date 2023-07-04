@@ -1,0 +1,27 @@
+.cart_header {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    h2 {
+      text-transform: uppercase;
+      font-size: 1.6rem;
+    }
+  }
+
+  .right {
+    button {
+      background: $base-dark-secondary;
+    }
+  }
+}

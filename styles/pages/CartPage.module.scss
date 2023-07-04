@@ -4,8 +4,36 @@
   max-width: 1400px;
   margin: 0 auto;
 
+  hr {
+    margin: 0.5rem 0.5rem 2rem 0.5rem;
+    border-top: 4px solid $base-grey;
+  }
+
   &__container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
+
+    .left {
+      width: 100%;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .right {
+      width: 100%;
+      max-width: 400px;
+      padding: 0 20px;
+    }
   }
 }
