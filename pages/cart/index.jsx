@@ -14,19 +14,23 @@ const CartPage = () => {
   ];
   return (
     <div className={styles.cart}>
-      <Path path={path} />
-      <div className={styles.cart__container}>
-        <CartHeader />
-        <hr />
-        {cart.cartItems.length > 0 ? (
-          <div className={styles.cart__wrapper}>
-            <div className={styles.left}>Right</div>
-            <div className={styles.right}>Left</div>
-          </div>
-        ) : (
+      {cart.cartItems.length === 0 ? (
+        <div className={styles.cart__empty}>
           <EmptyCart />
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={styles.cart__container}>
+          <Path path={path} />
+          <CartHeader />
+          <hr />
+          {cart.cartItems.length > 0 && (
+            <div className={styles.cart__wrapper}>
+              <div className={styles.left}>Right</div>
+              <div className={styles.right}>Left</div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
