@@ -61,12 +61,9 @@ const ProductInfo = ({ product, setActiveImage }) => {
     const { data } = await axios.get(
       `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
     );
-    console.log(data);
 
     let _uid = `${product._id}_${selectedColorValue}_${selectedSizeValue}`;
     let existingProduct = cart.cartItems.find((item) => item._uid === _uid);
-
-    console.log(existingProduct);
 
     if (!selectedColorValue) {
       toast.error("Please select a color...");

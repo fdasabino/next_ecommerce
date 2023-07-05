@@ -1,5 +1,8 @@
+import { removeFromCart } from "@/redux-store/cartSlice";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
+import { BsTrash3 } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,14 +11,21 @@ import styles from "./CartItem.module.scss";
 const CartItem = ({ product }) => {
   const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
   console.log(product);
+  const dispatch = useDispatch();
 
   const getColorName = (color) => {
     const colorName = GetColorName(color);
     return colorName;
   };
 
+  const handleRemoveItem = () => {
+    console.log("remove item ==> " + product._uid);
+    dispatch(removeFromCart({ id: product._uid }));
+  };
   return (
     <div className={styles.cart_item}>
+      <BsTrash3 onClick={handleRemoveItem} />
+
       <div className={styles.images}>
         <Swiper
           spaceBetween={0}
@@ -31,17 +41,18 @@ const CartItem = ({ product }) => {
               spaceBetween: 0,
             },
             900: {
-              slidesPerView: 6,
-              spaceBetween: 10,
+              slidesPerView: 5,
+              spaceBetween: 20,
             },
           }}
           modules={[Navigation]}
         >
-          {product.images.map((image) => (
-            <SwiperSlide key={image.public_url}>
-              <Image src={image.url} width={600} height={600} alt={product.name} />
-            </SwiperSlide>
-          ))}
+          {product.images.length > 0 &&
+            product.images.map((image) => (
+              <SwiperSlide key={image.public_url}>
+                <Image src={image.url} width={600} height={600} alt={product.name} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
 
