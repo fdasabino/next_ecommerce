@@ -1,7 +1,7 @@
 .cart {
   user-select: none;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
 
   hr {
@@ -27,9 +27,15 @@
     width: 100%;
     max-width: 1400px;
 
+    @media (max-width: 768px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     .left {
       width: 100%;
-      max-width: 1000px;
+      max-width: 600px;
       padding: 0 20px;
       display: flex;
       flex-wrap: wrap;
@@ -38,7 +44,7 @@
 
     .right {
       width: 100%;
-      max-width: 200px;
+      max-width: 400px;
       padding: 0 20px;
     }
   }

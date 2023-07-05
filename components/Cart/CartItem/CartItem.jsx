@@ -1,4 +1,5 @@
 import { removeFromCart } from "@/redux-store/cartSlice";
+import { Tooltip } from "@mui/material";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import { BsTrash3 } from "react-icons/bs";
@@ -24,11 +25,8 @@ const CartItem = ({ product }) => {
   };
   return (
     <div className={styles.cart_item}>
-      <BsTrash3 onClick={handleRemoveItem} />
-
       <div className={styles.images}>
         <Swiper
-          spaceBetween={0}
           grabCursor={true}
           navigation={isLargeScreen ? false : true}
           breakpoints={{
@@ -46,6 +44,7 @@ const CartItem = ({ product }) => {
             },
           }}
           modules={[Navigation]}
+          className={styles.swiper_container}
         >
           {product.images.length > 0 &&
             product.images.map((image) => (
@@ -57,8 +56,17 @@ const CartItem = ({ product }) => {
       </div>
 
       <div className={styles.details_1}>
-        <h3>{product.name}</h3>
-        <p>{product.brand}</p>
+        <hr />
+        <div className={styles.wrapper}>
+          <div className={styles.left}>
+            <h3>{product.name}</h3>
+            <div className={styles.divider} />
+            <p>{product.brand}</p>
+          </div>
+          <Tooltip title="Remove item" placement="bottom">
+            <small onClick={handleRemoveItem}>Remove</small>
+          </Tooltip>
+        </div>
         <hr />
         <small>
           Qty: <span>{product.addedQuantity}x</span>
