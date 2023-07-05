@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const CartPage = () => {
   const cart = useSelector((state) => state.cart);
-  console.log();
 
   const path = [
     { id: 1, name: "Home" },
@@ -31,7 +30,7 @@ const CartPage = () => {
                   cart.cartItems.length > 0 &&
                   cart.cartItems.map((item) => <CartItem key={item._uid} product={item} />)}
               </div>
-              <div className={styles.right}>Left</div>
+              <div className={styles.right}>right</div>
             </div>
           )}
         </div>

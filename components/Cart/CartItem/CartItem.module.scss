@@ -1,8 +1,8 @@
 .cart_item {
   width: 100%;
-  max-width: 200px;
-  height: 100%;
-  min-height: fit-content;
+  max-width: 1000px;
+  height: fit-content;
+  max-height: 500px;
 
   background: $base-white;
   border: 1px solid $base-grey;
@@ -19,16 +19,20 @@
     box-shadow: $base-shadow-3;
   }
 
-  .image {
-    max-width: 100%;
-    height: 200px;
+  .images {
+    max-width: fit-content;
+    height: 150px;
     padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 
     img {
       width: 100%;
+      max-width: 100px;
       height: 100%;
       object-fit: cover;
-      border: 2px solid $base-grey;
     }
   }
 
@@ -88,23 +92,31 @@
 
   .details_2 {
     padding: 0.5rem 1rem;
-    display: flex;
-    justify-content: space-between;
 
-    small {
-      font-size: 1rem;
-      font-weight: 400;
-      margin: 0;
-      padding: 0;
-      text-decoration: line-through;
-      color: $base-redish;
+    hr {
+      margin: 0.2rem 0.7rem;
+      border-top: 1px solid $base-grey;
     }
 
-    p {
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 0;
-      padding: 0;
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      small {
+        font-size: 1rem;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+        text-decoration: line-through;
+        color: $base-redish;
+      }
+
+      p {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+      }
     }
   }
 }

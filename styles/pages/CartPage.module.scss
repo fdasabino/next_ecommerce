@@ -17,30 +17,28 @@
 
   &__container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
   }
 
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
     margin: 0 auto;
     width: 100%;
     max-width: 1400px;
 
     .left {
       width: 100%;
-      max-width: 800px;
+      max-width: 1000px;
       padding: 0 20px;
       display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
     }
 
     .right {
       width: 100%;
-      max-width: 400px;
+      max-width: 200px;
       padding: 0 20px;
     }
   }

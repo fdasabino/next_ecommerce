@@ -1,8 +1,12 @@
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ product }) => {
+  const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
   console.log(product);
 
   const getColorName = (color) => {
@@ -12,8 +16,33 @@ const CartItem = ({ product }) => {
 
   return (
     <div className={styles.cart_item}>
-      <div className={styles.image}>
-        <Image src={product.images[0].url} width={400} height={400} alt={product.name} />
+      <div className={styles.images}>
+        <Swiper
+          spaceBetween={0}
+          grabCursor={true}
+          navigation={isLargeScreen ? false : true}
+          breakpoints={{
+            480: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 0,
+            },
+            900: {
+              slidesPerView: 6,
+              spaceBetween: 10,
+            },
+          }}
+          modules={[Navigation]}
+        >
+          {product.images.map((image) => (
+            <SwiperSlide key={image.public_url}>
+              <Image src={image.url} width={600} height={600} alt={product.name} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
       <div className={styles.details_1}>
@@ -48,13 +77,15 @@ const CartItem = ({ product }) => {
           )}
         </p>
       </div>
-      <hr />
       <div className={styles.details_2}>
-        <small>${product.priceBeforeDiscount.toFixed(2)}</small>
-        <p>
-          ${(product.price + product.shipping).toFixed(2)}
-          {product.shipping > 0 && <span style={{ color: "red" }}> *</span>}
-        </p>
+        <hr />
+        <div className={styles.wrapper}>
+          <small>${product.priceBeforeDiscount.toFixed(2)}</small>
+          <p>
+            ${(product.price + product.shipping).toFixed(2)}
+            {product.shipping > 0 && <span style={{ color: "red" }}> *</span>}
+          </p>
+        </div>
       </div>
     </div>
   );
