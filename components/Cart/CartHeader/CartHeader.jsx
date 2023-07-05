@@ -24,11 +24,7 @@ const CartHeader = () => {
         </h2>
       </div>
       <div className={styles.right}>
-        {session ? (
-          <Button onClick={handleCheckout} style="primary">
-            Proceed to checkout <AiOutlineArrowRight />
-          </Button>
-        ) : (
+        {!session && (
           <Button onClick={handleSignIn} style="secondary">
             Sign in to checkout <AiOutlineArrowRight />
           </Button>
