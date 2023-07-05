@@ -2,7 +2,6 @@ import { removeFromCart } from "@/redux-store/cartSlice";
 import { Tooltip } from "@mui/material";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
-import { BsTrash3 } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Navigation } from "swiper";
@@ -54,7 +53,6 @@ const CartItem = ({ product }) => {
             ))}
         </Swiper>
       </div>
-
       <div className={styles.details_1}>
         <hr />
         <div className={styles.wrapper}>
