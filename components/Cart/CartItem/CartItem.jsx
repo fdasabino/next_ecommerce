@@ -99,7 +99,7 @@ const CartItem = ({ product }) => {
         <div className={styles.wrapper}>
           <small>${product.priceBeforeDiscount.toFixed(2)}</small>
           <p>
-            ${(product.price + product.shipping).toFixed(2)}
+            ${product.price.toFixed(2)}
             {product.shipping > 0 && <span style={{ color: "red" }}> *</span>}
           </p>
         </div>
