@@ -61,6 +61,12 @@
         gap: 1rem;
         align-items: center;
 
+        .remove {
+          position: absolute;
+          top: 0.5rem;
+          right: 0;
+        }
+
         @media (max-width: 768px) {
           flex-direction: column;
           align-items: center;

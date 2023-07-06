@@ -34,11 +34,9 @@ const Panel = () => {
           <h3>Do you have a promo code?</h3>
           <div className={styles.input}>
             <input type="text" placeholder="Enter your code" />
-            <button>Apply</button>
+            <Button style="secondary">Apply</Button>
           </div>
         </div>
-        <hr />
-
         <div className={styles.subtotal}>
           <div className={styles.row1}>
             <h3>
@@ -54,7 +52,6 @@ const Panel = () => {
               <span>TBD</span>
             </h3>
           </div>
-          <hr />
           <div className={styles.row2}>
             <h3>
               Estimated Total:
@@ -63,7 +60,6 @@ const Panel = () => {
               </span>
             </h3>
           </div>
-          <hr />
           <div className={styles.row3}>
             <Button disabled={!session} onClick={handleCheckout} style="secondary">
               Checkout <AiOutlineArrowRight />

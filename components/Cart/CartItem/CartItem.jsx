@@ -2,6 +2,7 @@ import { removeFromCart } from "@/redux-store/cartSlice";
 import { Tooltip } from "@mui/material";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
+import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Navigation } from "swiper";
@@ -24,47 +25,22 @@ const CartItem = ({ product }) => {
   };
   return (
     <div className={styles.cart_item}>
-      <div className={styles.images}>
-        <Swiper
-          grabCursor={true}
-          navigation={isLargeScreen ? false : true}
-          breakpoints={{
-            480: {
-              slidesPerView: 3,
-              spaceBetween: 0,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 0,
-            },
-            900: {
-              slidesPerView: 5,
-              spaceBetween: 20,
-            },
-          }}
-          modules={[Navigation]}
-          className={styles.swiper_container}
-        >
-          {product.images.length > 0 &&
-            product.images.map((image) => (
-              <SwiperSlide key={image.public_url}>
-                <Image src={image.url} width={600} height={600} alt={product.name} />
-              </SwiperSlide>
-            ))}
-        </Swiper>
-      </div>
       <div className={styles.details_1}>
-        <hr />
         <div className={styles.wrapper}>
           <div className={styles.left}>
             <h3>{product.name}</h3>
             <div className={styles.divider} />
             <p>{product.brand}</p>
+            <div className={styles.remove}>
+              <Tooltip title="Remove item" placement="bottom">
+                <small onClick={handleRemoveItem}>
+                  <FaTimes />
+                </small>
+              </Tooltip>
+            </div>
           </div>
-          <Tooltip title="Remove item" placement="bottom">
-            <small onClick={handleRemoveItem}>Remove</small>
-          </Tooltip>
         </div>
+
         <hr />
         <small>
           Qty: <span>{product.addedQuantity}x</span>
@@ -93,6 +69,35 @@ const CartItem = ({ product }) => {
             </small>
           )}
         </p>
+      </div>
+      <div className={styles.images}>
+        <Swiper
+          grabCursor={true}
+          navigation={isLargeScreen ? false : true}
+          breakpoints={{
+            480: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 0,
+            },
+            900: {
+              slidesPerView: 5,
+              spaceBetween: 20,
+            },
+          }}
+          modules={[Navigation]}
+          className={styles.swiper_container}
+        >
+          {product.images.length > 0 &&
+            product.images.map((image) => (
+              <SwiperSlide key={image.public_url}>
+                <Image src={image.url} width={600} height={600} alt={product.name} />
+              </SwiperSlide>
+            ))}
+        </Swiper>
       </div>
       <div className={styles.details_2}>
         <hr />

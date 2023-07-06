@@ -6,7 +6,7 @@
 
   hr {
     margin: 0.5rem 0.5rem 2rem 0.5rem;
-    border-top: 4px solid $base-grey;
+    border-top: 1px solid $base-grey;
   }
 
   &__empty {
@@ -41,8 +41,20 @@
       flex-wrap: wrap;
       gap: 1rem;
 
+      h2 {
+        width: 100%;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
       @media (max-width: 900px) {
         max-width: 100%;
+
+        h2 {
+          margin: 0 auto;
+        }
       }
     }
 
