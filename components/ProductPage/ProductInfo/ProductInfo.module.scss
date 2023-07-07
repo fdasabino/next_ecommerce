@@ -23,7 +23,7 @@
 
   &__title {
     position: relative;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     font-weight: 700;
     color: $base-dark;
@@ -38,17 +38,16 @@
     small {
       font-size: 0.8rem;
       font-weight: 400;
-      color: $base-dark-grey;
+      color: $base-dark;
     }
 
     @media (max-width: 768px) {
-      font-size: 0.9rem;
       text-align: center;
     }
   }
 
   &__description {
-    max-width: 500px;
+    max-width: 400px;
     text-align: justify;
     font-size: 0.9rem;
     color: $base-dark-grey;
@@ -60,7 +59,8 @@
 
     @media (max-width: 768px) {
       text-align: center;
-      margin-right: 0;
+      margin-right: 1rem;
+      margin-left: 1rem;
     }
 
     &:hover {
