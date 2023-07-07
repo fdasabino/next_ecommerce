@@ -40,7 +40,6 @@ const CartItem = ({ product }) => {
             </div>
           </div>
         </div>
-
         <hr />
         <small>
           Qty: <span>{product.addedQuantity}x</span>
