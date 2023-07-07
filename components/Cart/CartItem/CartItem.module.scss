@@ -136,6 +136,7 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        font-size: 1rem;
 
         button {
           display: flex;
@@ -149,15 +150,9 @@
           text-transform: uppercase;
           transition: all 0.3s ease-in-out;
 
-          :disabled {
+          &:disabled {
             cursor: not-allowed;
-            background-color: $base-grey;
-            color: $base-white;
-
-            &:hover {
-              background-color: $base-grey;
-              color: $base-white;
-            }
+            opacity: 0.5;
           }
 
           &:first-of-type {
@@ -166,8 +161,7 @@
             border-bottom-left-radius: 2px;
 
             &:hover {
-              background-color: $base-error;
-              color: $base-white;
+              color: $base-redish;
             }
           }
 
@@ -178,8 +172,7 @@
             z-index: 0;
 
             &:hover {
-              background-color: $base-success;
-              color: $base-white;
+              color: $base-green;
             }
           }
         }
