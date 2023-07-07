@@ -23,7 +23,7 @@
 
   &__title {
     position: relative;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     font-weight: 700;
     color: $base-dark;
@@ -48,14 +48,19 @@
   }
 
   &__description {
-    font-size: 1rem;
+    max-width: 500px;
+    text-align: justify;
+    font-size: 0.9rem;
     color: $base-dark-grey;
     line-height: 1.5;
     white-space: pre-wrap;
     transition: all 0.1s ease-in-out;
+    margin-bottom: 1rem;
+    margin-right: 2rem;
 
     @media (max-width: 768px) {
       text-align: center;
+      margin-right: 0;
     }
 
     &:hover {

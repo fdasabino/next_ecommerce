@@ -140,12 +140,12 @@ const ProductInfo = ({ product, setActiveImage }) => {
         {/* title */}
         <div className={styles.product_info__title}>
           <div className={styles.wrapper}>
-            <h1>{name}</h1>
             <Tooltip title="Add to wishlist" TransitionComponent={Zoom}>
               <IconButton>
                 <BsHeartFill size={20} color="#5a31f4" />
               </IconButton>
             </Tooltip>
+            <h1>{name}</h1>
           </div>
           <small>{getColorName(colors[color].color)}</small>
         </div>
