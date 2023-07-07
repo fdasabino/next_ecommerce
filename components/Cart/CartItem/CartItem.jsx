@@ -75,16 +75,20 @@ const CartItem = ({ product }) => {
           grabCursor={true}
           navigation={isLargeScreen ? false : true}
           breakpoints={{
+            380: {
+              slidesPerView: product.images.length > 2 ? 3 : 2,
+              spaceBetween: 0,
+            },
             480: {
-              slidesPerView: 3,
+              slidesPerView: product.images.length > 3 ? 4 : 2,
               spaceBetween: 0,
             },
             768: {
-              slidesPerView: 4,
+              slidesPerView: product.images.length > 3 ? 4 : 3,
               spaceBetween: 0,
             },
             900: {
-              slidesPerView: 5,
+              slidesPerView: product.images.length > 4 ? 5 : 3,
               spaceBetween: 20,
             },
           }}

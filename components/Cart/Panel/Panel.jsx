@@ -41,11 +41,11 @@ const Panel = () => {
           <div className={styles.row1}>
             <h3>
               Subtotal:
-              <span>${calculateTotalPrice(cart.cartItems)}</span>
+              <span>${calculateTotalPrice(cart.cartItems).toFixed(2)}</span>
             </h3>
             <h3>
               Shipping:
-              <span>${calculateTotalShipping(cart.cartItems)}</span>
+              <span>${calculateTotalShipping(cart.cartItems).toFixed(2)}</span>
             </h3>
             <h3>
               Sales Tax:
@@ -56,7 +56,10 @@ const Panel = () => {
             <h3>
               Estimated Total:
               <span>
-                ${calculateTotalPrice(cart.cartItems) + calculateTotalShipping(cart.cartItems)}
+                $
+                {(
+                  calculateTotalPrice(cart.cartItems) + calculateTotalShipping(cart.cartItems)
+                ).toFixed(2)}
               </span>
             </h3>
           </div>

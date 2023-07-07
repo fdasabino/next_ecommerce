@@ -7,6 +7,11 @@
   border-radius: 5px;
   padding: 0.8rem;
 
+  hr {
+    margin: 0.5rem 0.5rem 2rem 0.5rem;
+    border-top: 1px solid $base-grey !important;
+  }
+
   .header {
     h2 {
       text-transform: uppercase;
@@ -45,7 +50,7 @@
           padding: 0.5rem;
           font-size: 1rem;
           font-weight: 500;
-          color: $base-grey;
+          color: $base-dark-secondary;
           outline: none;
         }
       }
@@ -64,8 +69,7 @@
           font-size: 1rem;
 
           span {
-            font-size: 0.8rem;
-            font-weight: 400;
+            font-weight: 500;
             color: $base-dark-secondary;
           }
         }
@@ -80,8 +84,7 @@
           font-size: 1rem;
 
           span {
-            font-size: 0.8rem;
-            font-weight: 400;
+            font-weight: 500;
             color: $base-dark-secondary;
           }
         }
