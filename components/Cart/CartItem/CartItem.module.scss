@@ -135,7 +135,54 @@
         font-weight: 600;
         display: flex;
         align-items: center;
-        gap: 0.2rem;
+        gap: 0.5rem;
+
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          padding: 0.2rem 0.3rem;
+          font-size: 1rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          transition: all 0.3s ease-in-out;
+
+          :disabled {
+            cursor: not-allowed;
+            background-color: $base-grey;
+            color: $base-white;
+
+            &:hover {
+              background-color: $base-grey;
+              color: $base-white;
+            }
+          }
+
+          &:first-of-type {
+            color: $base-error;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+
+            &:hover {
+              background-color: $base-error;
+              color: $base-white;
+            }
+          }
+
+          &:last-of-type {
+            color: $base-success;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            z-index: 0;
+
+            &:hover {
+              background-color: $base-success;
+              color: $base-white;
+            }
+          }
+        }
       }
 
       small {

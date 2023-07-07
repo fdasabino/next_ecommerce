@@ -1,18 +1,22 @@
-import { removeFromCart } from "@/redux-store/cartSlice";
+import { removeFromCart, updateCart } from "@/redux-store/cartSlice";
 import { Tooltip } from "@mui/material";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
+import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { TbMinus, TbPlus } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { toast } from "react-toastify";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ product }) => {
+  const [cartQuantity, setCartQuantity] = useState(product.addedQuantity);
   const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
-  console.log(product);
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   const getColorName = (color) => {
     const colorName = GetColorName(color);
@@ -22,7 +26,45 @@ const CartItem = ({ product }) => {
   const handleRemoveItem = () => {
     console.log("remove item ==> " + product._uid);
     dispatch(removeFromCart({ id: product._uid }));
+    toast.info(`"${product.name}" has been removed from the cart.`);
   };
+
+  const increaseCartQuantity = () => {
+    if (cartQuantity >= product.availableQuantity) {
+      toast.error(
+        `The maximum quantity available for "${product.name}" is ${product.availableQuantity} items.`
+      );
+      return;
+    }
+
+    const newQuantity = cartQuantity + 1;
+    setCartQuantity(newQuantity);
+    dispatch(updateCart({ ...product, id: product._uid, addedQuantity: newQuantity }));
+    toast.success(`Quantity updated for "${product.name}". New quantity: ${newQuantity}.`);
+  };
+
+  const decreaseCartQuantity = () => {
+    if (cartQuantity > 1) {
+      const newQuantity = cartQuantity - 1;
+      setCartQuantity(newQuantity);
+      dispatch(updateCart({ ...product, id: product._uid, addedQuantity: newQuantity }));
+      toast.success(`Quantity updated for "${product.name}". New quantity: ${newQuantity}.`);
+    }
+  };
+
+  const disableIncreaseButton = () => {
+    const cartItem = cart.cartItems.find((item) => item._uid === product._uid);
+    return cartItem && cartItem.addedQuantity >= cart.availableQuantity;
+  };
+
+  const disableDecreaseButton = () => {
+    const cartItem = cart.cartItems.find((item) => item._uid === product._uid);
+    return cartItem && cartItem.addedQuantity <= 1;
+  };
+
+  console.log("product ====>>>>>:", product);
+  console.log("cart ====>>>>>:", cart);
+
   return (
     <div className={styles.cart_item}>
       <div className={styles.details_1}>
@@ -42,7 +84,16 @@ const CartItem = ({ product }) => {
         </div>
         <hr />
         <small>
-          Qty: <span>{product.addedQuantity}x</span>
+          Qty:{" "}
+          <span>
+            <button disabled={disableDecreaseButton()} onClick={decreaseCartQuantity}>
+              <TbMinus />
+            </button>
+            <span>{cartQuantity}x</span>
+            <button disabled={disableIncreaseButton()} onClick={increaseCartQuantity}>
+              <TbPlus />
+            </button>
+          </span>
         </small>
         <small>
           Size: <span>{product.size.size}</span>
