@@ -62,9 +62,6 @@ const CartItem = ({ product }) => {
     return cartItem && cartItem.addedQuantity <= 1;
   };
 
-  console.log("product ====>>>>>:", product);
-  console.log("cart ====>>>>>:", cart);
-
   return (
     <div className={styles.cart_item}>
       <div className={styles.details_1}>
