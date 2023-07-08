@@ -24,7 +24,6 @@ const CartItem = ({ product }) => {
   };
 
   const handleRemoveItem = () => {
-    console.log("remove item ==> " + product._uid);
     dispatch(removeFromCart({ id: product._uid }));
     toast.info(`"${product.name}" has been removed from the cart.`);
   };
