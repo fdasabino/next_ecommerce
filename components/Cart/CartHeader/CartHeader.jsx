@@ -9,26 +9,28 @@ import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
 import styles from "./CartHeader.module.scss";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "#FAFAFA",
-  boxShadow: 24,
-  borderRadius: 2,
-  p: 4,
-};
 
 const CartHeader = () => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: isMobile ? 300 : 400,
+    bgcolor: "#FAFAFA",
+    boxShadow: 24,
+    borderRadius: 2,
+    p: isMobile ? 2 : 4,
+  };
 
   const handleSignIn = () => {
     signIn();

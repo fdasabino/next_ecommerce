@@ -61,16 +61,6 @@
         gap: 1rem;
         align-items: center;
 
-        .remove {
-          position: absolute;
-          top: 0.5rem;
-          right: 0;
-
-          @media (max-width: 768px) {
-            top: 3rem;
-          }
-        }
-
         @media (max-width: 768px) {
           flex-direction: column;
           align-items: center;
@@ -199,20 +189,41 @@
       display: flex;
       justify-content: space-between;
 
-      small {
-        font-size: 1rem;
-        font-weight: 400;
-        margin: 0;
-        padding: 0;
-        text-decoration: line-through;
-        color: $base-redish;
+      .remove {
+        text-transform: uppercase;
+
+        small {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            color: $base-redish;
+          }
+        }
       }
 
-      p {
-        font-size: 1rem;
-        font-weight: 600;
-        margin: 0;
-        padding: 0;
+      .totals {
+        display: flex;
+        gap: 1rem;
+
+        small {
+          font-size: 1rem;
+          font-weight: 500;
+          margin: 0;
+          padding: 0;
+          text-decoration: line-through;
+          color: $base-redish;
+        }
+
+        p {
+          font-size: 1rem;
+          font-weight: 600;
+          margin: 0;
+          padding: 0;
+        }
       }
     }
   }

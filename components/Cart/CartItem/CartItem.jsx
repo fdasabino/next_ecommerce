@@ -69,13 +69,6 @@ const CartItem = ({ product }) => {
             <h3>{product.name}</h3>
             <div className={styles.divider} />
             <p>{product.brand}</p>
-            <div className={styles.remove}>
-              <Tooltip title="Remove item" placement="bottom">
-                <small onClick={handleRemoveItem}>
-                  <FaTimes />
-                </small>
-              </Tooltip>
-            </div>
           </div>
         </div>
         <hr />
@@ -116,6 +109,7 @@ const CartItem = ({ product }) => {
           )}
         </p>
       </div>
+      <hr />
       <div className={styles.images}>
         <Swiper
           grabCursor={true}
@@ -152,11 +146,18 @@ const CartItem = ({ product }) => {
       <div className={styles.details_2}>
         <hr />
         <div className={styles.wrapper}>
-          <small>${product.priceBeforeDiscount.toFixed(2)}</small>
-          <p>
-            ${product.price.toFixed(2)}
-            {product.shipping > 0 && <span style={{ color: "red" }}> *</span>}
-          </p>
+          <div className={styles.remove}>
+            <Tooltip title="Remove from cart" placement="bottom">
+              <small onClick={handleRemoveItem}>Remove</small>
+            </Tooltip>
+          </div>
+          <div className={styles.totals}>
+            <small>${product.priceBeforeDiscount.toFixed(2)}</small>
+            <p>
+              ${product.price.toFixed(2)}
+              {product.shipping > 0 && <span style={{ color: "red" }}> *</span>}
+            </p>
+          </div>
         </div>
       </div>
     </div>

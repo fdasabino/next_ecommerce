@@ -25,14 +25,16 @@ const CartPage = () => {
           <CartHeader />
           <hr />
           {cart.cartItems.length > 0 && (
-            <div className={styles.cart__wrapper}>
-              <div className={styles.left}>
-                {cart &&
-                  cart.cartItems.length > 0 &&
-                  cart.cartItems.map((item) => <CartItem key={item._uid} product={item} />)}
-              </div>
-              <div className={styles.right}>
-                <Panel />
+            <div className={styles.mx_4}>
+              <div className={styles.cart__wrapper}>
+                <div className={styles.left}>
+                  {cart &&
+                    cart.cartItems.length > 0 &&
+                    cart.cartItems.map((item) => <CartItem key={item._uid} product={item} />)}
+                </div>
+                <div className={styles.right}>
+                  <Panel />
+                </div>
               </div>
             </div>
           )}
