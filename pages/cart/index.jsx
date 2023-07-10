@@ -46,6 +46,7 @@ const CartPage = () => {
             </div>
           )}
           <div className={styles.cart__swiper}>
+            <h2>You might also like</h2>
             <CartSwiper />
           </div>
         </div>
