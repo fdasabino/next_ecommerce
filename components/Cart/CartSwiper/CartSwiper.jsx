@@ -7,24 +7,24 @@ import styles from "./CartSwiper.module.scss";
 const CartSwiper = () => {
   return (
     <Swiper
-      slidesPerView={3}
+      slidesPerView={2}
       grabCursor={true}
       spaceBetween={30}
       breakpoints={{
         380: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        480: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        768: {
           slidesPerView: 3,
           spaceBetween: 10,
         },
+        480: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
         900: {
-          slidesPerView: 5,
+          slidesPerView: 6,
           spaceBetween: 20,
         },
       }}
