@@ -100,6 +100,55 @@
           text-align: center;
         }
       }
+
+      .row4 {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+
+        @media screen and (min-width: 900px) {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .payment_methods {
+          display: flex;
+          gap: 0.5rem;
+
+          svg {
+            font-size: 1.5rem;
+            fill: $base-dark-secondary;
+          }
+        }
+        .disclaimer {
+          display: flex;
+          align-items: center;
+          gap: 0.2rem;
+          margin-top: 1rem;
+          text-align: center;
+
+          p {
+            text-transform: uppercase;
+            font-size: 0.7rem;
+          }
+
+          svg {
+            font-size: 1.3rem;
+            fill: $base-success;
+          }
+
+          @media screen and (max-width: 500px) {
+            p {
+              font-size: 0.5rem;
+            }
+          }
+        }
+      }
     }
   }
 }

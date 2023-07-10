@@ -2,6 +2,8 @@ import Button from "@/components/Layout/Button/Button";
 import { useSession } from "next-auth/react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsClipboardCheck } from "react-icons/bs";
+import { FaCcAmex, FaCcDinersClub, FaCcMastercard, FaCcPaypal, FaCcVisa } from "react-icons/fa";
+import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import styles from "./Panel.module.scss";
 
@@ -70,6 +72,19 @@ const Panel = () => {
             <small>
               Need help? <a href="mailto: shoppyflowsweden@gmail.com">Send a message</a>{" "}
             </small>
+          </div>
+          <div className={styles.row4}>
+            <div className={styles.payment_methods}>
+              <FaCcVisa />
+              <FaCcMastercard />
+              <FaCcAmex />
+              <FaCcDinersClub />
+              <FaCcPaypal />
+            </div>
+            <div className={styles.disclaimer}>
+              <IoShieldCheckmarkSharp />
+              <p>Secure checkout. Shopping is always safe & secure</p>
+            </div>
           </div>
         </div>
       </div>
