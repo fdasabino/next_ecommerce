@@ -83,7 +83,7 @@ const Panel = () => {
             </div>
             <div className={styles.disclaimer}>
               <IoShieldCheckmarkSharp />
-              <p>Secure checkout. Shopping is always safe & secure</p>
+              <p>We make sure shopping is always safe & secure</p>
             </div>
           </div>
         </div>
