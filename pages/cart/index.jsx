@@ -1,5 +1,6 @@
 import CartHeader from "@/components/Cart/CartHeader/CartHeader";
 import CartItem from "@/components/Cart/CartItem/CartItem";
+import CartSwiper from "@/components/Cart/CartSwiper/CartSwiper";
 import EmptyCart from "@/components/Cart/EmptyCart/EmptyCart";
 import Panel from "@/components/Cart/Panel/Panel";
 import Path from "@/components/Layout/Path/Path";
@@ -38,6 +39,9 @@ const CartPage = () => {
               </div>
             </div>
           )}
+          <div className={styles.cart__swiper}>
+            <CartSwiper />
+          </div>
         </div>
       )}
     </div>

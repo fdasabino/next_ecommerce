@@ -18,6 +18,12 @@
   &__container {
     display: flex;
     flex-direction: column;
+
+    .cart__swiper {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 3rem;
+    }
   }
 
   &__wrapper {
