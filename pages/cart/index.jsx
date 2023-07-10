@@ -5,6 +5,7 @@ import EmptyCart from "@/components/Cart/EmptyCart/EmptyCart";
 import Panel from "@/components/Cart/Panel/Panel";
 import Path from "@/components/Layout/Path/Path";
 import styles from "@/styles/pages/CartPage.module.scss";
+import { AiOutlineArrowDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const CartPage = () => {
@@ -29,6 +30,11 @@ const CartPage = () => {
             <div className={styles.mx_4}>
               <div className={styles.cart__wrapper}>
                 <div className={styles.left}>
+                  <div className={styles.summary}>
+                    <h2>
+                      Order Summary <AiOutlineArrowDown />
+                    </h2>
+                  </div>
                   {cart &&
                     cart.cartItems.length > 0 &&
                     cart.cartItems.map((item) => <CartItem key={item._uid} product={item} />)}
