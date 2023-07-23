@@ -16,7 +16,7 @@ const FlashDeals = () => {
       </div>
       {!isMobile && (
         <div className={styles.flash_deals__countdown}>
-          <CountDown date={new Date(2023, 6, 23)} />
+          <CountDown date={new Date(2023, 11, 25)} />
         </div>
       )}
       <div className={styles.flash_deals__container}>
