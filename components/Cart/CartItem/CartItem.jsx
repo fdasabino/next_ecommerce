@@ -61,14 +61,14 @@ const CartItem = ({ cartProducts }) => {
     return cartItem && cartItem.addedQuantity <= 1;
   };
 
-  function calculateDiscountedPrice(size, discount) {
+  const calculateDiscountedPrice = (size, discount) => {
     const basePrice = size.price;
-    if (discount > 0) {
-      const discountedPrice = Math.round(basePrice * (1 - discount / 100));
-      return discountedPrice;
-    }
-    return basePrice;
-  }
+    return discount > 0 ? Math.round(basePrice * (1 - discount / 100)) : basePrice;
+  };
+
+  const itemWithDiscount = cart.cartItems.filter(
+    (item) => item.discount > 0 && item._uid === cartProducts._uid
+  );
 
   return (
     <div className={styles.cart_item}>
@@ -162,7 +162,9 @@ const CartItem = ({ cartProducts }) => {
           </div>
           <div className={styles.totals}>
             <small>
-              ${(cartProducts.priceBeforeDiscount * cartProducts.addedQuantity).toFixed(2)}
+              {itemWithDiscount.find(
+                (item) => item._uid === cartProducts._uid && item.discount > 0
+              ) && `$${(cartProducts.priceBeforeDiscount * cartProducts.addedQuantity).toFixed(2)}`}
             </small>
             <p>
               $

@@ -11,10 +11,9 @@ const Panel = ({ saveCartToDbHandler }) => {
   const { data: session } = useSession();
   const cart = useSelector((state) => state.cart);
 
-  console.log(cart.cartItems[0].discount);
-  function calculateTotalPrice(discount) {
+  function calculateTotalPrice() {
     const basePrice = cart.cartItems.reduce(
-      (total, item) => total + item.price * (1 - item.discount / 100),
+      (total, item) => Math.round(total + item.price * (1 - item.discount / 100)),
       0
     );
 
@@ -25,7 +24,6 @@ const Panel = ({ saveCartToDbHandler }) => {
     return cartItems.reduce((total, item) => total + item.shipping, 0);
   };
 
-  console.log(cart);
   return (
     <div className={styles.panel}>
       <div className={styles.header}>
@@ -46,7 +44,7 @@ const Panel = ({ saveCartToDbHandler }) => {
           <div className={styles.row1}>
             <h3>
               Subtotal:
-              <span>${calculateTotalPrice(cart.cartItems.discount)}</span>
+              <span>${calculateTotalPrice().toFixed(2)}</span>
             </h3>
             <h3>
               Shipping:

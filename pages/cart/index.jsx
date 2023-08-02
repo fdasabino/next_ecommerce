@@ -18,8 +18,10 @@ const CartPage = () => {
 
   const saveCartToDbHandler = async () => {
     if (session) {
-      console.log(session);
       const response = await addCartToDb(cart.cartItems, session?.user._id);
+      if (response.ok === true) {
+        router.push("/checkout");
+      }
     } else {
       signIn();
     }
