@@ -5,11 +5,25 @@ import EmptyCart from "@/components/Cart/EmptyCart/EmptyCart";
 import Panel from "@/components/Cart/Panel/Panel";
 import Path from "@/components/Layout/Path/Path";
 import styles from "@/styles/pages/CartPage.module.scss";
+import { addCartToDb } from "@/utils/addCartTodb";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const CartPage = () => {
   const cart = useSelector((state) => state.cart);
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const saveCartToDbHandler = async () => {
+    if (session) {
+      console.log(session);
+      const response = await addCartToDb(cart.cartItems, session?.user._id);
+    } else {
+      signIn();
+    }
+  };
 
   const path = [
     { id: 1, name: "Home" },
@@ -37,10 +51,10 @@ const CartPage = () => {
                   </div>
                   {cart &&
                     cart.cartItems.length > 0 &&
-                    cart.cartItems.map((item) => <CartItem key={item._uid} product={item} />)}
+                    cart.cartItems.map((item) => <CartItem key={item._uid} cartProducts={item} />)}
                 </div>
                 <div className={styles.right}>
-                  <Panel />
+                  <Panel saveCartToDbHandler={saveCartToDbHandler} />
                 </div>
               </div>
             </div>

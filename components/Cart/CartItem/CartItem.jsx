@@ -12,8 +12,8 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./CartItem.module.scss";
 
-const CartItem = ({ product }) => {
-  const [cartQuantity, setCartQuantity] = useState(product.addedQuantity);
+const CartItem = ({ cartProducts }) => {
+  const [cartQuantity, setCartQuantity] = useState(cartProducts.addedQuantity);
   const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -24,51 +24,60 @@ const CartItem = ({ product }) => {
   };
 
   const handleRemoveItem = () => {
-    dispatch(removeFromCart({ id: product._uid }));
-    toast.info(`"${product.name}" has been removed from the cart.`);
+    dispatch(removeFromCart({ id: cartProducts._uid }));
+    toast.info(`"${cartProducts.name}" has been removed from the cart.`);
   };
 
   const increaseCartQuantity = () => {
-    if (cartQuantity >= product.availableQuantity) {
+    if (cartQuantity >= cartProducts.availableQuantity) {
       toast.error(
-        `The maximum quantity available for "${product.name}" is ${product.availableQuantity} items.`
+        `The maximum quantity available for "${cartProducts.name}" is ${cartProducts.availableQuantity} items.`
       );
       return;
     }
 
     const newQuantity = cartQuantity + 1;
     setCartQuantity(newQuantity);
-    dispatch(updateCart({ ...product, id: product._uid, addedQuantity: newQuantity }));
-    toast.success(`Quantity updated for "${product.name}". New quantity: ${newQuantity}.`);
+    dispatch(updateCart({ ...cartProducts, id: cartProducts._uid, addedQuantity: newQuantity }));
+    toast.success(`Quantity updated for "${cartProducts.name}". New quantity: ${newQuantity}.`);
   };
 
   const decreaseCartQuantity = () => {
     if (cartQuantity > 1) {
       const newQuantity = cartQuantity - 1;
       setCartQuantity(newQuantity);
-      dispatch(updateCart({ ...product, id: product._uid, addedQuantity: newQuantity }));
-      toast.success(`Quantity updated for "${product.name}". New quantity: ${newQuantity}.`);
+      dispatch(updateCart({ ...cartProducts, id: cartProducts._uid, addedQuantity: newQuantity }));
+      toast.success(`Quantity updated for "${cartProducts.name}". New quantity: ${newQuantity}.`);
     }
   };
 
   const disableIncreaseButton = () => {
-    const cartItem = cart.cartItems.find((item) => item._uid === product._uid);
+    const cartItem = cart.cartItems.find((item) => item._uid === cartProducts._uid);
     return cartItem && cartItem.addedQuantity >= cart.availableQuantity;
   };
 
   const disableDecreaseButton = () => {
-    const cartItem = cart.cartItems.find((item) => item._uid === product._uid);
+    const cartItem = cart.cartItems.find((item) => item._uid === cartProducts._uid);
     return cartItem && cartItem.addedQuantity <= 1;
   };
+
+  function calculateDiscountedPrice(size, discount) {
+    const basePrice = size.price;
+    if (discount > 0) {
+      const discountedPrice = Math.round(basePrice * (1 - discount / 100));
+      return discountedPrice;
+    }
+    return basePrice;
+  }
 
   return (
     <div className={styles.cart_item}>
       <div className={styles.details_1}>
         <div className={styles.wrapper}>
           <div className={styles.left}>
-            <h3>{product.name}</h3>
+            <h3>{cartProducts.name}</h3>
             <div className={styles.divider} />
-            <p>{product.brand}</p>
+            <p>{cartProducts.brand}</p>
           </div>
         </div>
         <hr />
@@ -85,26 +94,26 @@ const CartItem = ({ product }) => {
           </span>
         </small>
         <small>
-          Size: <span>{product.size.size}</span>
+          Size: <span>{cartProducts.size.size}</span>
         </small>
         <small>
           Color:{" "}
           <span>
-            {getColorName(product.color.color)}{" "}
-            <small style={{ backgroundColor: `${product.color.color}` }} />
+            {getColorName(cartProducts.color.color)}{" "}
+            <small style={{ backgroundColor: `${cartProducts.color.color}` }} />
           </span>
         </small>
         <small>
-          Item no: <span>{product.size._id.substring(12, 24)}</span>
+          Item no: <span>{cartProducts.size._id.substring(12, 24)}</span>
         </small>
         <p>
-          {product.shipping <= 0 ? (
+          {cartProducts.shipping <= 0 ? (
             <small>
               Shipping: <span>Free</span>
             </small>
           ) : (
             <small>
-              Shipping: <span>${product.shipping}</span>
+              Shipping: <span>${cartProducts.shipping}</span>
             </small>
           )}
         </p>
@@ -116,29 +125,29 @@ const CartItem = ({ product }) => {
           navigation={isLargeScreen ? false : true}
           breakpoints={{
             380: {
-              slidesPerView: product.images.length > 2 ? 3 : 2,
+              slidesPerView: cartProducts.images.length > 2 ? 3 : 2,
               spaceBetween: 0,
             },
             480: {
-              slidesPerView: product.images.length > 3 ? 4 : 2,
+              slidesPerView: cartProducts.images.length > 3 ? 4 : 2,
               spaceBetween: 0,
             },
             768: {
-              slidesPerView: product.images.length > 3 ? 4 : 3,
+              slidesPerView: cartProducts.images.length > 3 ? 4 : 3,
               spaceBetween: 0,
             },
             900: {
-              slidesPerView: product.images.length > 4 ? 5 : 3,
+              slidesPerView: cartProducts.images.length > 4 ? 5 : 3,
               spaceBetween: 20,
             },
           }}
           modules={[Navigation]}
           className={styles.swiper_container}
         >
-          {product.images.length > 0 &&
-            product.images.map((image) => (
+          {cartProducts.images.length > 0 &&
+            cartProducts.images.map((image) => (
               <SwiperSlide key={image.public_url}>
-                <Image src={image.url} width={600} height={600} alt={product.name} />
+                <Image src={image.url} width={600} height={600} alt={cartProducts.name} />
               </SwiperSlide>
             ))}
         </Swiper>
@@ -152,10 +161,18 @@ const CartItem = ({ product }) => {
             </Tooltip>
           </div>
           <div className={styles.totals}>
-            <small>${product.priceBeforeDiscount.toFixed(2)}</small>
+            <small>
+              ${(cartProducts.priceBeforeDiscount * cartProducts.addedQuantity).toFixed(2)}
+            </small>
             <p>
-              ${product.price.toFixed(2)}
-              {product.shipping > 0 && <span style={{ color: "red" }}> *</span>}
+              $
+              {cartProducts.discount > 0
+                ? (
+                    calculateDiscountedPrice(cartProducts.size, cartProducts.discount) *
+                    cartProducts.addedQuantity
+                  ).toFixed(2)
+                : (cartProducts.priceBeforeDiscount * cartProducts.addedQuantity).toFixed(2)}
+              {cartProducts.shipping > 0 && <span style={{ color: "red" }}> *</span>}
             </p>
           </div>
         </div>

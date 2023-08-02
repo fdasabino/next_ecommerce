@@ -7,22 +7,25 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import styles from "./Panel.module.scss";
 
-const Panel = () => {
+const Panel = ({ saveCartToDbHandler }) => {
   const { data: session } = useSession();
   const cart = useSelector((state) => state.cart);
+
+  console.log(cart.cartItems[0].discount);
+  function calculateTotalPrice(discount) {
+    const basePrice = cart.cartItems.reduce(
+      (total, item) => total + item.price * (1 - item.discount / 100),
+      0
+    );
+
+    return basePrice;
+  }
 
   const calculateTotalShipping = (cartItems) => {
     return cartItems.reduce((total, item) => total + item.shipping, 0);
   };
 
-  const calculateTotalPrice = (cartItems) => {
-    return cartItems.reduce((total, item) => total + item.price, 0);
-  };
-
-  const handleCheckout = () => {
-    console.log("Checkout");
-  };
-
+  console.log(cart);
   return (
     <div className={styles.panel}>
       <div className={styles.header}>
@@ -43,7 +46,7 @@ const Panel = () => {
           <div className={styles.row1}>
             <h3>
               Subtotal:
-              <span>${calculateTotalPrice(cart.cartItems).toFixed(2)}</span>
+              <span>${calculateTotalPrice(cart.cartItems.discount)}</span>
             </h3>
             <h3>
               Shipping:
@@ -58,15 +61,12 @@ const Panel = () => {
             <h3>
               Estimated Total:
               <span>
-                $
-                {(
-                  calculateTotalPrice(cart.cartItems) + calculateTotalShipping(cart.cartItems)
-                ).toFixed(2)}
+                ${(calculateTotalPrice() + calculateTotalShipping(cart.cartItems)).toFixed(2)}
               </span>
             </h3>
           </div>
           <div className={styles.row3}>
-            <Button disabled={!session} onClick={handleCheckout} style="secondary">
+            <Button disabled={!session} onClick={saveCartToDbHandler} style="secondary">
               Checkout <AiOutlineArrowRight />
             </Button>
             <small>

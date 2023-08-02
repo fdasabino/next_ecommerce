@@ -19,6 +19,7 @@ const handler = async (req, res) => {
       _id: product._id,
       name: product.name,
       description: product.description,
+      discount: product.discount,
       slug: product.slug,
       brand: product.brand,
       colorIndex: Number(color),

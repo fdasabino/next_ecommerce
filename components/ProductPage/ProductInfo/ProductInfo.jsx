@@ -88,7 +88,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
     if (existingProduct) {
       let newCart = cart.cartItems.map((item) => {
         if (item._uid === existingProduct._uid) {
-          return { ...item, addedQuantity: cartQuantity };
+          return { ...item, addedQuantity: cartQuantity, discount };
         }
 
         return item;
@@ -107,7 +107,9 @@ const ProductInfo = ({ product, setActiveImage }) => {
         `The quantity of "${data.name}" (${data.size.size}) in your cart has been updated to (${cartQuantity}x).`
       );
     } else {
-      dispatch(addToCart({ ...data, addedQuantity: cartQuantity, size: data.size, _uid }));
+      dispatch(
+        addToCart({ ...data, addedQuantity: cartQuantity, size: data.size, _uid, discount })
+      );
       toast.success(
         `Added (${cartQuantity}x) "${data.name}", size ${data.size.size}, to your cart.`
       );

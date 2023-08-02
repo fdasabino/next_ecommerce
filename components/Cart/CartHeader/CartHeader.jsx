@@ -3,7 +3,6 @@ import { clearCart } from "@/redux-store/cartSlice";
 import { IconButton, Tooltip } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
 import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
