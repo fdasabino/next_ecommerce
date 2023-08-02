@@ -41,7 +41,7 @@ const handler = async (req, res) => {
       // Calculate the base price for the individual product based on its size
       const basePrice = cart[i].size.price * Number(cart[i].addedQuantity);
       // Calculate the discounted price for the individual product
-      const discountPrice = Math.round(basePrice - basePrice * (discount / 100));
+      const discountPrice = basePrice - basePrice * (discount / 100);
       productData.price = cart[i].discount > 0 ? discountPrice : basePrice;
       products.push(productData);
     }

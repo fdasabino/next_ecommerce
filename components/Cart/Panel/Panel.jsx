@@ -11,14 +11,13 @@ const Panel = ({ saveCartToDbHandler }) => {
   const { data: session } = useSession();
   const cart = useSelector((state) => state.cart);
 
-  function calculateTotalPrice() {
+  const calculateTotalPrice = () => {
     const basePrice = cart.cartItems.reduce(
-      (total, item) => Math.round(total + item.price * (1 - item.discount / 100)),
+      (total, item) => total + item.price * (item.quantity || 1),
       0
     );
-
     return basePrice;
-  }
+  };
 
   const calculateTotalShipping = (cartItems) => {
     return cartItems.reduce((total, item) => total + item.shipping, 0);

@@ -63,7 +63,7 @@ const CartItem = ({ cartProducts }) => {
 
   const calculateDiscountedPrice = (size, discount) => {
     const basePrice = size.price;
-    return discount > 0 ? Math.round(basePrice * (1 - discount / 100)) : basePrice;
+    return discount > 0 ? basePrice * (1 - discount / 100) : basePrice;
   };
 
   const itemWithDiscount = cart.cartItems.filter(

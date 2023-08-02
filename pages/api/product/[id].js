@@ -13,7 +13,7 @@ const handler = async (req, res) => {
     const { price: priceBeforeDiscount, qty: quantity } = sizes[size];
 
     const priceAfterDiscount =
-      discount > 0 ? Math.round(priceBeforeDiscount * (1 - discount / 100)) : priceBeforeDiscount;
+      discount > 0 ? priceBeforeDiscount * (1 - discount / 100) : priceBeforeDiscount;
 
     const responseData = {
       _id: product._id,
