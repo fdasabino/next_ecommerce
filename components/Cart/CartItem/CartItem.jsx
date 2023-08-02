@@ -1,9 +1,9 @@
 import { removeFromCart, updateCart } from "@/redux-store/cartSlice";
+import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
 import { Tooltip } from "@mui/material";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import { useState } from "react";
-import { FaTimes } from "react-icons/fa";
 import { TbMinus, TbPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
@@ -59,11 +59,6 @@ const CartItem = ({ cartProducts }) => {
   const disableDecreaseButton = () => {
     const cartItem = cart.cartItems.find((item) => item._uid === cartProducts._uid);
     return cartItem && cartItem.addedQuantity <= 1;
-  };
-
-  const calculateDiscountedPrice = (size, discount) => {
-    const basePrice = size.price;
-    return discount > 0 ? basePrice * (1 - discount / 100) : basePrice;
   };
 
   const itemWithDiscount = cart.cartItems.filter(

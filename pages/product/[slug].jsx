@@ -11,6 +11,7 @@ import Product from "@/models/Product";
 import SubCategory from "@/models/SubCategory";
 import User from "@/models/User";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
+import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
 import db from "@/utils/db";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
@@ -135,12 +136,4 @@ export async function getServerSideProps(context) {
   } finally {
     db.disconnectDB();
   }
-}
-function calculateDiscountedPrice(size, discount) {
-  const basePrice = size.price;
-  if (discount > 0) {
-    const discountedPrice = basePrice * (1 - discount / 100);
-    return discountedPrice;
-  }
-  return basePrice;
 }
