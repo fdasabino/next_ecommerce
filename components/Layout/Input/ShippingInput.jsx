@@ -2,8 +2,7 @@ import { ErrorMessage, useField } from "formik";
 import { AiOutlinePhone } from "react-icons/ai";
 import { BiMap, BiUser } from "react-icons/bi";
 import { GoNumber } from "react-icons/go";
-import { IoKeyOutline } from "react-icons/io5";
-import { MdAlternateEmail, MdErrorOutline } from "react-icons/md";
+import { MdErrorOutline } from "react-icons/md";
 import styles from "./FormInput.module.scss";
 
 const iconMap = {
