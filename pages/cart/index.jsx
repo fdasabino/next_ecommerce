@@ -7,6 +7,7 @@ import Path from "@/components/Layout/Path/Path";
 import styles from "@/styles/pages/CartPage.module.scss";
 import { addCartToDb } from "@/utils/addCartTodb";
 import { signIn, useSession } from "next-auth/react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -32,42 +33,49 @@ const CartPage = () => {
     { id: 2, name: "Cart" },
   ];
   return (
-    <div className={styles.cart}>
-      {cart.cartItems.length === 0 ? (
-        <div className={styles.cart__empty}>
-          <EmptyCart />
-        </div>
-      ) : (
-        <div className={styles.cart__container}>
-          <Path path={path} />
-          <CartHeader />
-          <hr />
-          {cart.cartItems.length > 0 && (
-            <div className={styles.mx_4}>
-              <div className={styles.cart__wrapper}>
-                <div className={styles.left}>
-                  <div className={styles.summary}>
-                    <h2>
-                      Order Summary <AiOutlineArrowDown />
-                    </h2>
+    <>
+      <Head>
+        <title> ShoppyFlow | Cart</title>
+      </Head>
+      <div className={styles.cart}>
+        {cart.cartItems.length === 0 ? (
+          <div className={styles.cart__empty}>
+            <EmptyCart />
+          </div>
+        ) : (
+          <div className={styles.cart__container}>
+            <Path path={path} />
+            <CartHeader />
+            <hr />
+            {cart.cartItems.length > 0 && (
+              <div className={styles.mx_4}>
+                <div className={styles.cart__wrapper}>
+                  <div className={styles.left}>
+                    <div className={styles.summary}>
+                      <h2>
+                        Order Summary <AiOutlineArrowDown />
+                      </h2>
+                    </div>
+                    {cart &&
+                      cart.cartItems.length > 0 &&
+                      cart.cartItems.map((item) => (
+                        <CartItem key={item._uid} cartProducts={item} />
+                      ))}
                   </div>
-                  {cart &&
-                    cart.cartItems.length > 0 &&
-                    cart.cartItems.map((item) => <CartItem key={item._uid} cartProducts={item} />)}
-                </div>
-                <div className={styles.right}>
-                  <Panel saveCartToDbHandler={saveCartToDbHandler} />
+                  <div className={styles.right}>
+                    <Panel saveCartToDbHandler={saveCartToDbHandler} />
+                  </div>
                 </div>
               </div>
+            )}
+            <div className={styles.cart__swiper}>
+              <h2>You might also like</h2>
+              <CartSwiper />
             </div>
-          )}
-          <div className={styles.cart__swiper}>
-            <h2>You might also like</h2>
-            <CartSwiper />
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

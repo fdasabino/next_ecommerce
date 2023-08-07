@@ -1,6 +1,4 @@
 import { ErrorMessage, useField } from "formik";
-import { AiOutlinePhone } from "react-icons/ai";
-import { BiMap, BiUser } from "react-icons/bi";
 import { GoNumber } from "react-icons/go";
 import { MdErrorOutline } from "react-icons/md";
 import { PiTextAaThin } from "react-icons/pi";

@@ -1,8 +1,9 @@
 import Button from "@/components/Layout/Button/Button";
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
+import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import { countries } from "@/data/countries";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
@@ -60,26 +61,13 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       <Formik enableReinitialize initialValues={newAddress} validationSchema={validateAddress}>
         {(form) => (
           <Form>
-            <FormControl fullWidth required>
-              <InputLabel id="demo-simple-select-label" style={{ fontFamily: "Mulish" }}>
-                Select country
-              </InputLabel>
-              <Select
-                style={{ borderRadius: "10px" }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={newAddress.country}
-                label="Select country"
-                name="country"
-                onChange={handleChange}
-              >
-                {countries.map((country) => (
-                  <MenuItem key={country.name} value={country.name}>
-                    {country.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <SingleSelectInput
+              name="country"
+              value={newAddress.country}
+              placeholder="Select country *"
+              onChange={handleChange}
+              data={countries}
+            />
             <ShippingInput
               type="text"
               icon="firstName"
