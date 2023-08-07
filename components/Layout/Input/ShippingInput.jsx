@@ -3,18 +3,19 @@ import { AiOutlinePhone } from "react-icons/ai";
 import { BiMap, BiUser } from "react-icons/bi";
 import { GoNumber } from "react-icons/go";
 import { MdErrorOutline } from "react-icons/md";
+import { PiTextAaThin } from "react-icons/pi";
 import styles from "./FormInput.module.scss";
 
 const iconMap = {
-  firstName: <BiUser />,
-  lastName: <BiUser />,
-  phoneNumber: <AiOutlinePhone />,
-  state: <BiMap />,
-  city: <BiMap />,
+  firstName: <PiTextAaThin />,
+  lastName: <PiTextAaThin />,
+  phoneNumber: <GoNumber />,
+  state: <PiTextAaThin />,
+  city: <PiTextAaThin />,
   zipCode: <GoNumber />,
-  address1: <BiMap />,
-  address2: <BiMap />,
-  country: <BiMap />,
+  address1: <PiTextAaThin />,
+  address2: <PiTextAaThin />,
+  country: <PiTextAaThin />,
 };
 
 const ShippingInput = ({ icon, placeholder, ...props }) => {

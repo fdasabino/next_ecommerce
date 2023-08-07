@@ -17,6 +17,11 @@
 
   margin-bottom: 1rem;
 
+  &:hover {
+    cursor: pointer;
+    outline: 1px solid $base-dark;
+  }
+
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {

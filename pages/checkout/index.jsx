@@ -12,14 +12,16 @@ const Checkout = ({ cart, user }) => {
   console.log("cart from props", cart);
   return (
     <div className={styles.checkout}>
-      <div className={styles.checkout_left}>
-        <Shipping
-          selectedAddress={selectedAddress}
-          setSelectedAddress={setSelectedAddress}
-          user={user}
-        />
+      <div className={styles.wrapper}>
+        <div className={styles.checkout_left}>
+          <Shipping
+            selectedAddress={selectedAddress}
+            setSelectedAddress={setSelectedAddress}
+            user={user}
+          />
+        </div>
+        <div className={styles.checkout_right}>Right Side</div>
       </div>
-      <div className={styles.checkout_right}></div>
     </div>
   );
 };
@@ -30,7 +32,7 @@ export async function getServerSideProps(context) {
   db.connectDB();
   const session = await getSession(context);
   const user = await User.findById(session?.user?._id);
-  const cart = await Cart.findOne({ user: user._id });
+  const cart = await Cart.findOne({ user: user?._id });
 
   if (!cart) {
     return {

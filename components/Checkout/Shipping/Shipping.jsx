@@ -1,4 +1,7 @@
+import Button from "@/components/Layout/Button/Button";
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
+import { countries } from "@/data/countries";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
@@ -36,7 +39,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       .max(20, "Last name must not exceed 20 characters")
       .required("Last name is required"),
     phoneNumber: Yup.string()
-      .matches(/^\+?[0-9]+$/, "Invalid phone number format") // Allows numbers with an optional '+' sign at the beginning
+      .matches(/^\+?[0-9]+$/, "Invalid phone number format")
       .required("Phone number is required"),
     state: Yup.string().required("State is required"),
     city: Yup.string().required("City is required"),
@@ -48,7 +51,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       .required("Zip code is required"),
 
     address1: Yup.string().required("Address line 1 is required"),
-    address2: Yup.string(), // Address line 2 is optional, no validation required
+    address2: Yup.string(),
     country: Yup.string().required("Country is required"),
   });
 
@@ -57,69 +60,86 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       <Formik enableReinitialize initialValues={newAddress} validationSchema={validateAddress}>
         {(form) => (
           <Form>
+            <FormControl fullWidth required>
+              <InputLabel id="demo-simple-select-label" style={{ fontFamily: "Mulish" }}>
+                Select country
+              </InputLabel>
+              <Select
+                style={{ borderRadius: "10px" }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={newAddress.country}
+                label="Select country"
+                name="country"
+                onChange={handleChange}
+              >
+                {countries.map((country) => (
+                  <MenuItem key={country.name} value={country.name}>
+                    {country.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <ShippingInput
               type="text"
               icon="firstName"
               name="firstName"
-              placeholder="First name"
+              placeholder="First name *"
               onChange={handleChange}
             />
             <ShippingInput
               type="text"
               icon="lastName"
               name="lastName"
-              placeholder="Last name"
+              placeholder="Last name *"
               onChange={handleChange}
             />
             <ShippingInput
               type="number"
               icon="phoneNumber"
               name="phoneNumber"
-              placeholder="Phone including area code"
+              placeholder="Phone including area code *"
               onChange={handleChange}
             />
             <ShippingInput
               type="text"
               icon="state"
               name="state"
-              placeholder="State/province"
+              placeholder="State/province *"
               onChange={handleChange}
             />
             <ShippingInput
               type="text"
               icon="city"
               name="city"
-              placeholder="City"
+              placeholder="City *"
               onChange={handleChange}
             />
             <ShippingInput
               type="text"
               icon="zipCode"
               name="zipCode"
-              placeholder="Zipcode/postcode"
+              placeholder="Zip-code/postcode *"
               onChange={handleChange}
             />
             <ShippingInput
               type="text"
               icon="address1"
               name="address1"
-              placeholder="Address"
+              placeholder="Address *"
               onChange={handleChange}
             />
             <ShippingInput
               type="text"
               icon="address2"
               name="address2"
-              placeholder="Address 2"
+              placeholder="Apartment, etc. (optional)"
               onChange={handleChange}
             />
-            <ShippingInput
-              type="text"
-              icon="country"
-              name="country"
-              placeholder="Country"
-              onChange={handleChange}
-            />
+            <Button style="primary" type="submit">
+              Save address
+            </Button>
+            <small>* - Required Fields</small>
           </Form>
         )}
       </Formik>
