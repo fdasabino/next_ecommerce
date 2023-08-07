@@ -4,21 +4,21 @@
   align-items: center;
   gap: 1rem;
 
-  .col {
+  border: 1px solid $base-grey;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+
+  small {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
 
-    @media (min-width: 768px) {
-      flex-direction: row;
-      gap: 1rem;
-    }
-
-    form {
-      width: 100%;
-    }
-
-    .select {
-      width: 100%;
-    }
+  hr {
+    margin: 1rem 0;
   }
 }

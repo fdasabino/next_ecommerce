@@ -1,4 +1,4 @@
-import { MenuItem, TextField } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { ErrorMessage, useField } from "formik";
 import React from "react";
 import { MdErrorOutline } from "react-icons/md";
@@ -19,25 +19,27 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
         </div>
       )}
       <div>
-        <TextField
-          fullWidth
-          variant="outlined"
-          name={field.name}
-          select
-          label={placeholder}
-          value={field.value}
-          onChange={onChange}
-          className={`${styles.select} ${meta.touched && meta.error && styles.error_select}`}
-        >
-          <MenuItem key="" value="">
-            {placeholder}
-          </MenuItem>
-          {data.map((option) => (
-            <MenuItem key={option.name} value={option.name}>
-              {option.name}
+        <FormControl fullWidth>
+          <Select
+            fullWidth
+            variant="standard"
+            name={field.name}
+            select
+            label={placeholder}
+            value={field.value}
+            onChange={onChange}
+            className={`${styles.select} ${meta.touched && meta.error && styles.error_select}`}
+          >
+            <MenuItem key="" value="">
+              {placeholder}
             </MenuItem>
-          ))}
-        </TextField>
+            {data.map((option) => (
+              <MenuItem key={option.name} value={option.name}>
+                {option.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
     </>
   );

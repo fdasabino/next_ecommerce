@@ -5,6 +5,7 @@ import { countries } from "@/data/countries";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Form, Formik, useField } from "formik";
 import React, { useState } from "react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
 
@@ -42,7 +43,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     phoneNumber: Yup.string()
       .matches(/^\+?[0-9]+$/, "Invalid phone number format")
       .required("Phone number is required"),
-    state: Yup.string().required("State is required"),
+    state: Yup.string().required("State/province is required"),
     city: Yup.string().required("City is required"),
     zipCode: Yup.string()
       .matches(
@@ -58,16 +59,14 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
   return (
     <div className={styles.shipping}>
+      <h2>Shipping address</h2>
+
       <Formik enableReinitialize initialValues={newAddress} validationSchema={validateAddress}>
         {(form) => (
           <Form>
-            <SingleSelectInput
-              name="country"
-              value={newAddress.country}
-              placeholder="Select country *"
-              onChange={handleChange}
-              data={countries}
-            />
+            <small>
+              <AiOutlineArrowRight /> Start by entering your details
+            </small>
             <ShippingInput
               type="text"
               icon="firstName"
@@ -89,45 +88,68 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
               placeholder="Phone including area code *"
               onChange={handleChange}
             />
-            <ShippingInput
-              type="text"
-              icon="state"
-              name="state"
-              placeholder="State/province *"
-              onChange={handleChange}
-            />
-            <ShippingInput
-              type="text"
-              icon="city"
-              name="city"
-              placeholder="City *"
-              onChange={handleChange}
-            />
-            <ShippingInput
-              type="text"
-              icon="zipCode"
-              name="zipCode"
-              placeholder="Zip-code/postcode *"
-              onChange={handleChange}
-            />
-            <ShippingInput
-              type="text"
-              icon="address1"
-              name="address1"
-              placeholder="Address *"
-              onChange={handleChange}
-            />
-            <ShippingInput
-              type="text"
-              icon="address2"
-              name="address2"
-              placeholder="Apartment, etc. (optional)"
-              onChange={handleChange}
-            />
-            <Button style="primary" type="submit">
-              Save address
-            </Button>
-            <small>* - Required Fields</small>
+            {newAddress.firstName && newAddress.lastName && newAddress.phoneNumber && (
+              <>
+                <small>
+                  <AiOutlineArrowRight /> Please select your country
+                </small>
+                <SingleSelectInput
+                  name="country"
+                  value={newAddress.country}
+                  placeholder="Select country *"
+                  onChange={handleChange}
+                  data={countries}
+                />
+              </>
+            )}
+            {newAddress.country && (
+              <>
+                <hr />
+                <small>
+                  <AiOutlineArrowRight /> Please complete your address
+                </small>
+                <ShippingInput
+                  type="text"
+                  icon="state"
+                  name="state"
+                  placeholder="State/province *"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  type="text"
+                  icon="city"
+                  name="city"
+                  placeholder="City *"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  type="text"
+                  icon="zipCode"
+                  name="zipCode"
+                  placeholder="Zip-code/postcode *"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  type="text"
+                  icon="address1"
+                  name="address1"
+                  placeholder="Address *"
+                  onChange={handleChange}
+                />
+                <ShippingInput
+                  type="text"
+                  icon="address2"
+                  name="address2"
+                  placeholder="Apartment, etc. (optional)"
+                  onChange={handleChange}
+                />
+                <Button style="primary" type="submit">
+                  Save address
+                </Button>
+
+                <small>* - Required Fields</small>
+              </>
+            )}
           </Form>
         )}
       </Formik>
