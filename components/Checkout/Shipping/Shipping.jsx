@@ -64,9 +64,16 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       <Formik enableReinitialize initialValues={newAddress} validationSchema={validateAddress}>
         {(form) => (
           <Form>
-            <small>
+            <p>
               <AiOutlineArrowRight /> Start by entering your details
-            </small>
+            </p>
+            <SingleSelectInput
+              name="country"
+              value={newAddress.country}
+              placeholder="Select country *"
+              onChange={handleChange}
+              data={countries}
+            />
             <ShippingInput
               type="text"
               icon="firstName"
@@ -88,68 +95,49 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
               placeholder="Phone including area code *"
               onChange={handleChange}
             />
-            {newAddress.firstName && newAddress.lastName && newAddress.phoneNumber && (
-              <>
-                <small>
-                  <AiOutlineArrowRight /> Please select your country
-                </small>
-                <SingleSelectInput
-                  name="country"
-                  value={newAddress.country}
-                  placeholder="Select country *"
-                  onChange={handleChange}
-                  data={countries}
-                />
-              </>
-            )}
-            {newAddress.country && (
-              <>
-                <hr />
-                <small>
-                  <AiOutlineArrowRight /> Please complete your address
-                </small>
-                <ShippingInput
-                  type="text"
-                  icon="state"
-                  name="state"
-                  placeholder="State/province *"
-                  onChange={handleChange}
-                />
-                <ShippingInput
-                  type="text"
-                  icon="city"
-                  name="city"
-                  placeholder="City *"
-                  onChange={handleChange}
-                />
-                <ShippingInput
-                  type="text"
-                  icon="zipCode"
-                  name="zipCode"
-                  placeholder="Zip-code/postcode *"
-                  onChange={handleChange}
-                />
-                <ShippingInput
-                  type="text"
-                  icon="address1"
-                  name="address1"
-                  placeholder="Address *"
-                  onChange={handleChange}
-                />
-                <ShippingInput
-                  type="text"
-                  icon="address2"
-                  name="address2"
-                  placeholder="Apartment, etc. (optional)"
-                  onChange={handleChange}
-                />
-                <Button style="primary" type="submit">
-                  Save address
-                </Button>
-
-                <small>* - Required Fields</small>
-              </>
-            )}
+            <ShippingInput
+              disabled={!newAddress.country}
+              type="text"
+              icon="state"
+              name="state"
+              placeholder="State/province *"
+              onChange={handleChange}
+            />
+            <ShippingInput
+              disabled={!newAddress.country}
+              type="text"
+              icon="city"
+              name="city"
+              placeholder="City *"
+              onChange={handleChange}
+            />
+            <ShippingInput
+              disabled={!newAddress.country}
+              type="text"
+              icon="zipCode"
+              name="zipCode"
+              placeholder="Zip-code/postcode *"
+              onChange={handleChange}
+            />
+            <ShippingInput
+              disabled={!newAddress.country}
+              type="text"
+              icon="address1"
+              name="address1"
+              placeholder="Address *"
+              onChange={handleChange}
+            />
+            <ShippingInput
+              disabled={!newAddress.country}
+              type="text"
+              icon="address2"
+              name="address2"
+              placeholder="Apartment, etc. (optional)"
+              onChange={handleChange}
+            />
+            <Button style="primary" type="submit">
+              Save address
+            </Button>
           </Form>
         )}
       </Formik>

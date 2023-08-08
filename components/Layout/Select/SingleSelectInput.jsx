@@ -8,40 +8,31 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
-    <>
-      {meta.error && meta.touched && (
-        <div className={styles.error_message}>
-          <span></span>
-          <p>
-            <ErrorMessage name={field.name} />
-          </p>
-          <MdErrorOutline />
-        </div>
-      )}
-      <div>
-        <FormControl fullWidth>
-          <Select
-            fullWidth
-            variant="standard"
-            name={field.name}
-            select
-            label={placeholder}
-            value={field.value}
-            onChange={onChange}
-            className={`${styles.select} ${meta.touched && meta.error && styles.error_select}`}
-          >
-            <MenuItem key="" value="">
-              {placeholder}
+    <div>
+      <FormControl fullWidth>
+        <InputLabel>{meta.touched && meta.error ? "Country is required" : placeholder}</InputLabel>
+        <Select
+          fullWidth
+          variant="outlined"
+          name={field.name}
+          select
+          error={meta.touched && meta.error}
+          label={meta.touched && meta.error ? "Country is required" : placeholder}
+          value={field.value}
+          onChange={onChange}
+          className={`${styles.select} ${meta.touched && meta.error ? styles.error : ""}`}
+        >
+          <MenuItem key="" value="">
+            {placeholder}
+          </MenuItem>
+          {data.map((option) => (
+            <MenuItem key={option.name} value={option.name}>
+              {option.name}
             </MenuItem>
-            {data.map((option) => (
-              <MenuItem key={option.name} value={option.name}>
-                {option.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-    </>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
   );
 };
 
