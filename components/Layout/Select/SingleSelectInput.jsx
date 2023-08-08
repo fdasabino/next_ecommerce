@@ -15,7 +15,7 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
           fullWidth
           variant="outlined"
           name={field.name}
-          select={true}
+          select={field.select}
           error={meta.touched && meta.error}
           label={meta.touched && meta.error ? ErrorMessage : placeholder}
           value={field.value}
