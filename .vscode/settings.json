@@ -1,3 +1,13 @@
 {
-  "dotenv.enableAutocloaking": false
+  "dotenv.enableAutocloaking": false,
+  "workbench.colorCustomizations": {
+    "button.background": "#2a2b2b",
+    "button.border": "#2a2b2b",
+    "button.foreground": "#ffffff",
+    "button.hoverBackground": "#2e2e2e",
+    "editorCursor.foreground": "#029aff",
+    "terminalCursor.foreground": "#029aff",
+    "minimap.background": "#00000000",
+    "scrollbar.shadow": "#00000000"
+  }
 }

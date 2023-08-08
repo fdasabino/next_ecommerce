@@ -15,9 +15,9 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
           fullWidth
           variant="outlined"
           name={field.name}
-          select
+          select={true}
           error={meta.touched && meta.error}
-          label={meta.touched && meta.error ? "Country is required" : placeholder}
+          label={meta.touched && meta.error ? ErrorMessage : placeholder}
           value={field.value}
           onChange={onChange}
           className={`${styles.select} ${meta.touched && meta.error ? styles.error : ""}`}
