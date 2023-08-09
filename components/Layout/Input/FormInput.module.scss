@@ -1,7 +1,7 @@
 .form_input {
   position: relative;
-  max-width: 350px;
   width: 100%;
+  height: 50px;
 
   background: $base-white;
   border: 1px solid $base-grey;
@@ -17,11 +17,6 @@
 
   margin-bottom: 1rem;
 
-  &:hover {
-    cursor: pointer;
-    outline: 1px solid $base-dark;
-  }
-
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -32,6 +27,9 @@
   /* Firefox */
   input[type="number"] {
     -moz-appearance: textfield;
+  }
+
+  input {
   }
 
   &:focus-within {
@@ -52,13 +50,17 @@
     padding: 0.5rem 0.5rem;
     line-height: 1;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: $base-dark-secondary;
     width: 100%;
 
+    &:disabled {
+      cursor: not-allowed;
+    }
+
     &::placeholder {
       color: $base-grey;
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
 }

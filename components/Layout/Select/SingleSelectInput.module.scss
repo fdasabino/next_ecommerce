@@ -1,12 +1,17 @@
 .select {
   position: relative;
-  max-width: 350px !important;
   width: 100% !important;
+  height: 50px !important;
 
   background: $base-white !important;
-
   outline: none !important;
   box-shadow: none !important;
+  border-radius: 10px !important;
+  margin-bottom: 1rem !important;
+
+  &::placeholder {
+    color: $base-grey !important;
+  }
 
   &:hover {
     cursor: pointer;
@@ -30,40 +35,5 @@
     height: 25px;
     stroke: $base-info;
     fill: $base-info;
-  }
-}
-
-.error_message {
-  position: relative;
-  max-width: 350px;
-  width: 100%;
-  background-color: $base-error;
-  border-radius: 10px;
-  padding: 0.7rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  span {
-    position: absolute;
-    bottom: -10px;
-    left: 1rem;
-    border-top: 10px solid $base-error;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-  }
-
-  p {
-    color: $base-white !important;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-
-  svg {
-    width: 20px;
-    height: 20px;
-    stroke: $base-white !important;
-    fill: $base-white !important;
   }
 }
