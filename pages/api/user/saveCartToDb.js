@@ -1,62 +1,56 @@
 import Cart from "@/models/Cart";
 import Product from "@/models/Product";
 import User from "@/models/User";
-import db from "../../../utils/db";
+import db from "@/utils/db";
+import { GetColorName } from "hex-color-to-color-name";
+
+const getColorName = (color) => {
+  const colorName = GetColorName(color);
+  return colorName;
+};
 
 const handler = async (req, res) => {
   try {
     await db.connectDB();
     const { cart, userID } = req.body;
-    let products = [];
 
     const user = await User.findById(userID);
-    let existingCart = await Cart.findOne({ user: userID });
+    await Cart.deleteOne({ user: userID });
 
-    if (existingCart) {
-      await existingCart.deleteOne();
-    }
+    const products = await Promise.all(
+      cart.map(async ({ _id, color, colorIndex, addedQuantity, size, discount }) => {
+        const dbProduct = await Product.findById(_id).lean();
+        const subProduct = dbProduct.subProducts[colorIndex];
 
-    for (let i = 0; i < cart.length; i++) {
-      // loop through cart and find each product
-      const dbProduct = await Product.findById(cart[i]._id).lean();
+        const { name, _id: product } = dbProduct;
+        const { color: cartColor } = color;
+        const { url } = subProduct.images[0];
+        const qty = Number(addedQuantity);
+        const { size: productSize } = size;
+        const productDiscount = discount ? discount : 0;
 
-      // find the sub product
-      const subProduct = dbProduct.subProducts[cart[i].colorIndex];
+        const basePrice = size.price * qty;
+        const discountPrice = basePrice - (basePrice * productDiscount) / 100;
 
-      // destructure the discount for the sub product
-      const { discount } = subProduct;
+        return {
+          name,
+          product,
+          color: { color: getColorName(cartColor), image: color.image },
+          image: url,
+          qty,
+          size: productSize,
+          price: productDiscount > 0 ? discountPrice : basePrice,
+        };
+      })
+    );
 
-      // create a temporary object to store the product data
-      const productData = {};
-      productData.name = dbProduct.name;
-      productData.product = dbProduct._id;
-      productData.color = {
-        color: cart[i].color.color,
-        image: cart[i].color.image,
-      };
-      productData.image = subProduct.images[0].url;
-      productData.qty = Number(cart[i].addedQuantity);
-      productData.size = cart[i].size.size;
+    const cartTotal = products.reduce((acc, item) => acc + Number(item.price), 0);
 
-      // Calculate the base price for the individual product based on its size
-      const basePrice = cart[i].size.price * Number(cart[i].addedQuantity);
-      // Calculate the discounted price for the individual product
-      const discountPrice = basePrice - basePrice * (discount / 100);
-      productData.price = cart[i].discount > 0 ? discountPrice : basePrice;
-      products.push(productData);
-    }
-    // calculate cart total
-    let cartTotal = products.reduce((acc, item) => {
-      return acc + item.price;
-    }, 0);
-
-    const newCart = await new Cart({
+    const newCart = await Cart.create({
       products,
-      cartTotal,
+      cartTotal: Number(cartTotal),
       user: user._id,
     });
-
-    await newCart.save();
 
     res.status(200).json({ newCart, ok: true });
   } catch (error) {

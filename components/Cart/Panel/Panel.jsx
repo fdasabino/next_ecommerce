@@ -11,12 +11,22 @@ const Panel = ({ saveCartToDbHandler }) => {
   const { data: session } = useSession();
   const cart = useSelector((state) => state.cart);
 
+  // calculate total price if there is a discount on the items or based on the original price
   const calculateTotalPrice = () => {
-    const basePrice = cart.cartItems.reduce(
-      (total, item) => total + item.price * (item.quantity || 1),
-      0
-    );
-    return basePrice;
+    let totalPrice = 0;
+
+    for (const item of cart.cartItems) {
+      if (item.discount > 0) {
+        const productDiscount = item.discount;
+        const discountPrice =
+          item.priceBeforeDiscount - (item.priceBeforeDiscount * productDiscount) / 100;
+        totalPrice += discountPrice * item.addedQuantity;
+      } else {
+        totalPrice += item.priceBeforeDiscount * item.addedQuantity;
+      }
+    }
+
+    return totalPrice;
   };
 
   const calculateTotalShipping = (cartItems) => {
@@ -47,7 +57,8 @@ const Panel = ({ saveCartToDbHandler }) => {
             </h3>
             <h3>
               Shipping:
-              <span>${calculateTotalShipping(cart.cartItems).toFixed(2)}</span>
+              {/* <span>${calculateTotalShipping(cart.cartItems).toFixed(2)}</span> */}
+              <span>TBD</span>
             </h3>
             <h3>
               Sales Tax:
@@ -58,7 +69,8 @@ const Panel = ({ saveCartToDbHandler }) => {
             <h3>
               Estimated Total:
               <span>
-                ${(calculateTotalPrice() + calculateTotalShipping(cart.cartItems)).toFixed(2)}
+                {/* ${(calculateTotalPrice() + calculateTotalShipping(cart.cartItems)).toFixed(2)} */}
+                ${calculateTotalPrice().toFixed(2)}
               </span>
             </h3>
           </div>

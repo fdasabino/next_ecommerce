@@ -4,7 +4,7 @@ import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import { countries } from "@/data/countries";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
 
@@ -73,10 +73,15 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
               onChange={handleChange}
               data={countries}
             />
-            <p>
-              <AiOutlineArrowRight />{" "}
-              {!newAddress.country ? "Select a country" : "Fill in your address details"}
-            </p>
+            {!newAddress.country ? (
+              <p>
+                <AiOutlineArrowUp /> Select a country
+              </p>
+            ) : (
+              <p>
+                <AiOutlineArrowDown /> Fill in your address details
+              </p>
+            )}
             <div className={styles.row}>
               <ShippingInput
                 disabled={!newAddress.country}
