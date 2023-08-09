@@ -1,7 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { ErrorMessage, useField } from "formik";
+import { useField } from "formik";
 import React from "react";
-import { MdErrorOutline } from "react-icons/md";
 import styles from "./SingleSelectInput.module.scss";
 
 const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
@@ -10,23 +9,28 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
   return (
     <div>
       <FormControl fullWidth>
-        <InputLabel>{meta.touched && meta.error ? "SELECT YOUR COUNTRY" : placeholder}</InputLabel>
+        <InputLabel style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}>{placeholder}</InputLabel>
         <Select
+          style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
           fullWidth
           variant="outlined"
           name={field.name}
           select={field.select}
           error={meta.touched && meta.error}
-          label={meta.touched && meta.error ? "SELECT YOUR COUNTRY" : placeholder}
+          label={placeholder}
           value={field.value}
           onChange={onChange}
           className={`${styles.select} ${meta.touched && meta.error ? styles.error : ""}`}
         >
-          <MenuItem key="" value="">
-            {placeholder || "SELECT YOUR COUNTRY"}
+          <MenuItem style={{ fontFamily: "Mulish", fontSize: "0.9rem" }} key="" value="">
+            {placeholder}
           </MenuItem>
           {data.map((option) => (
-            <MenuItem key={option.name} value={option.name}>
+            <MenuItem
+              style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
+              key={option.name}
+              value={option.name}
+            >
               {option.name}
             </MenuItem>
           ))}
