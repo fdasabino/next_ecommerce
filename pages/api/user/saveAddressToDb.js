@@ -20,9 +20,11 @@ const handler = async (req, res) => {
       Object.is(a.country, address.country)
   );
 
-  existingAddressIndex !== -1
-    ? (user.address[existingAddressIndex] = address)
-    : user.address.push(address);
+  if (existingAddressIndex !== -1) {
+    user.address[existingAddressIndex] = address;
+  } else {
+    user.address.push(address);
+  }
 
   await user.save();
 

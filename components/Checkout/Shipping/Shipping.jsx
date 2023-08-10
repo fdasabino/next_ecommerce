@@ -7,7 +7,7 @@ import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { BiWorld } from "react-icons/bi";
-import { FaIdBadge, FaMap, FaMapPin, FaPhoneAlt } from "react-icons/fa";
+import { FaIdBadge, FaMap, FaMapPin, FaPhoneAlt, FaPlus, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
@@ -27,6 +27,7 @@ const initialValues = {
 const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [newAddress, setNewAddress] = useState(initialValues);
+  const [showForm, setShowForm] = useState(false);
   const country = useSelector((state) => state.country);
 
   const validateAddress = Yup.object().shape({
@@ -69,27 +70,35 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
   const handleSubmit = async () => {
     const res = await saveAddress(newAddress, user._id);
+    console.log(res);
 
-    if (res.ok) {
-      console.log("Address saved successfully");
-
+    if (res && res.update) {
+      const newAddressList = [...addresses];
+      const index = newAddressList.findIndex((item) => item._id === res.address._id);
+      if (index !== -1) {
+        newAddressList[index] = res.address;
+        setAddresses(newAddressList);
+        setSelectedAddress(newAddressList[index]);
+      }
+    } else if (res && res.ok) {
       const newAddressList = [...addresses, res.address];
-      console.log("new address list", newAddressList);
-
       setAddresses(newAddressList);
       setSelectedAddress(newAddressList[newAddressList.length - 1]);
-
-      console.log(newAddressList[newAddressList.length - 1]);
-      console.log("Selected address", selectedAddress);
     }
+
+    setNewAddress(initialValues);
+    setShowForm(false);
+    swe;
   };
 
   return (
     <div className={styles.shipping}>
-      <h2>Shipping address</h2>
+      <div className={styles.shipping_header}>
+        <h2>Shipping address</h2>
+      </div>
       <div className={styles.addresses}>
         {addresses.length > 0
-          ? addresses.map((item) => {
+          ? addresses.map((item, i) => {
               const {
                 _id,
                 firstName,
@@ -108,7 +117,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                   : phoneNumber;
 
               return (
-                <div key={_id} className={styles.address}>
+                <div key={_id || i} className={styles.address}>
                   <div className={styles.row}>
                     <p>
                       <FaIdBadge /> {firstName} {lastName}
@@ -119,7 +128,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                     </p>
                     <hr />
                     <p>
-                      {address1}, {state}, {city}, {zipCode} {item.country},{" "}
+                      {address1}, {state}, {city}, {zipCode} {item.country}{" "}
                       {address2 ? address2 : ""}
                     </p>
                   </div>
@@ -127,113 +136,119 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
               );
             })
           : "You don't have any saved addresses"}
+        <Button style={showForm ? "danger" : "primary"} onClick={() => setShowForm(!showForm)}>
+          {showForm ? <FaTimes /> : <FaPlus />}
+        </Button>
       </div>
-
-      <Formik
-        enableReinitialize
-        initialValues={newAddress}
-        validationSchema={validateAddress}
-        onSubmit={handleSubmit}
-      >
-        {(form) => (
-          <Form>
-            <p>
-              <AiOutlineArrowRight /> Start by selecting your country
-            </p>
-            <SingleSelectInput
-              name="country"
-              value={newAddress.country}
-              placeholder="Select country *"
-              onChange={handleChange}
-              data={countries}
-            />
-            {!newAddress.country ? (
-              <p>
-                <AiOutlineArrowUp /> Select a country
-              </p>
-            ) : (
-              <p>
-                <AiOutlineArrowDown /> Fill in your address details
-              </p>
+      {showForm && (
+        <div className={styles.forms}>
+          <Formik
+            enableReinitialize
+            initialValues={newAddress}
+            validationSchema={validateAddress}
+            onSubmit={handleSubmit}
+          >
+            {(form) => (
+              <Form>
+                <p>
+                  <AiOutlineArrowRight /> Start by selecting your country
+                </p>
+                <SingleSelectInput
+                  name="country"
+                  value={newAddress.country}
+                  placeholder="Select country *"
+                  onChange={handleChange}
+                  data={countries}
+                />
+                {!newAddress.country ? (
+                  <p>
+                    <AiOutlineArrowUp /> Select a country
+                  </p>
+                ) : (
+                  <p>
+                    <AiOutlineArrowDown /> Fill in your address details
+                  </p>
+                )}
+                <div className={styles.row}>
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="firstName"
+                    name="firstName"
+                    placeholder="First name *"
+                    onChange={handleChange}
+                  />
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="lastName"
+                    name="lastName"
+                    placeholder="Last name *"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="number"
+                    icon="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Phone including area code *"
+                    onChange={handleChange}
+                  />
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="state"
+                    name="state"
+                    placeholder="State/province *"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="city"
+                    name="city"
+                    placeholder="City *"
+                    onChange={handleChange}
+                  />
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="zipCode"
+                    name="zipCode"
+                    placeholder="Zip-code/postcode *"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="address1"
+                    name="address1"
+                    placeholder="Address *"
+                    onChange={handleChange}
+                  />
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
+                    icon="address2"
+                    name="address2"
+                    placeholder="Apartment, etc. (optional)"
+                    onChange={handleChange}
+                  />
+                </div>
+                <Button style="primary" type="submit" disabled={!newAddress.country}>
+                  Save address
+                </Button>
+              </Form>
             )}
-            <div className={styles.row}>
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="firstName"
-                name="firstName"
-                placeholder="First name *"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="lastName"
-                name="lastName"
-                placeholder="Last name *"
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.row}>
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="number"
-                icon="phoneNumber"
-                name="phoneNumber"
-                placeholder="Phone including area code *"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="state"
-                name="state"
-                placeholder="State/province *"
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.row}>
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="city"
-                name="city"
-                placeholder="City *"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="zipCode"
-                name="zipCode"
-                placeholder="Zip-code/postcode *"
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.row}>
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="address1"
-                name="address1"
-                placeholder="Address *"
-                onChange={handleChange}
-              />
-              <ShippingInput
-                disabled={!newAddress.country}
-                type="text"
-                icon="address2"
-                name="address2"
-                placeholder="Apartment, etc. (optional)"
-                onChange={handleChange}
-              />
-            </div>
-            <Button style="primary" type="submit" disabled={!newAddress.country}>
-              Save address
-            </Button>
-          </Form>
-        )}
-      </Formik>
+          </Formik>
+        </div>
+      )}
     </div>
   );
 };

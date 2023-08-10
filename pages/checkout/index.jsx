@@ -19,7 +19,6 @@ const Checkout = ({ cart, user }) => {
             user={user}
           />
         </div>
-        <div className={styles.checkout_right}>Right Side</div>
       </div>
     </div>
   );
