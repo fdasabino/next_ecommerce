@@ -2,9 +2,13 @@ import Button from "@/components/Layout/Button/Button";
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import { countries } from "@/data/countries";
+import { saveAddress } from "@/utils/saveAddressToDb";
 import { Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
+import { BiWorld } from "react-icons/bi";
+import { FaIdBadge, FaMap, FaMapPin, FaPhoneAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
 
@@ -21,8 +25,12 @@ const initialValues = {
 };
 
 const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
-  const [address, setAddress] = useState(user?.addresses || []);
+  const [addresses, setAddresses] = useState(user?.address || []);
   const [newAddress, setNewAddress] = useState(initialValues);
+  const country = useSelector((state) => state.country);
+
+  console.log("User", user);
+  console.log(country.name);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,11 +64,77 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     country: Yup.string().required("Country is required"),
   });
 
+  useEffect(() => {
+    if (addresses.length > 0) {
+      setSelectedAddress(user?.address[0]);
+    }
+  }, [addresses, setSelectedAddress, user]);
+
+  const handleSubmit = async () => {
+    const res = await saveAddress(newAddress, user._id);
+
+    if (res.ok) {
+      console.log("Address saved successfully");
+
+      const newAddressList = [...addresses, res.address];
+      console.log("new address list", newAddressList);
+
+      setAddresses(newAddressList);
+      setSelectedAddress(newAddressList[newAddressList.length - 1]);
+
+      console.log(newAddressList[newAddressList.length - 1]);
+      console.log("Selected address", selectedAddress);
+    }
+  };
+
   return (
     <div className={styles.shipping}>
       <h2>Shipping address</h2>
+      <div className={styles.addresses}>
+        {addresses.length > 0
+          ? addresses.map((item) => {
+              const {
+                _id,
+                firstName,
+                lastName,
+                phoneNumber,
+                state,
+                city,
+                zipCode,
+                address1,
+                address2,
+              } = item;
+              console.log(country);
 
-      <Formik enableReinitialize initialValues={newAddress} validationSchema={validateAddress}>
+              return (
+                <div key={_id} className={styles.address}>
+                  <div className={styles.row}>
+                    <p>
+                      <FaIdBadge /> {firstName} {lastName}
+                    </p>
+                    <p>
+                      <FaPhoneAlt />{" "}
+                      {country.name === item.country
+                        ? `+${country.calling_code} ${phoneNumber}`
+                        : phoneNumber}
+                    </p>
+                    <hr />
+                    <p>
+                      {address1}, {state}, {city}, {zipCode} {item.country}, {address2}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          : "You don't have any saved addresses"}
+      </div>
+
+      <Formik
+        enableReinitialize
+        initialValues={newAddress}
+        validationSchema={validateAddress}
+        onSubmit={handleSubmit}
+      >
         {(form) => (
           <Form>
             <p>

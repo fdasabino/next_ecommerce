@@ -4,10 +4,16 @@
   align-items: center;
   gap: 1rem;
 
-  border: 1px solid $base-grey;
-  padding: 1rem;
   margin: 1rem;
   border-radius: 10px;
+
+  .add_address {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    text-transform: uppercase;
+  }
 
   form {
     button {
@@ -26,6 +32,65 @@
 
     hr {
       margin: 1rem 0;
+    }
+  }
+
+  .addresses {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    gap: 1rem;
+    overflow-x: scroll;
+    width: 100%;
+    max-width: 200px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .address {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid $base-dark-grey;
+        box-shadow: $base-shadow-1;
+      }
+
+      &.selected {
+        border: 1px solid $base-blue;
+      }
+
+      background: $base-white;
+      border: 1px solid $base-grey;
+      border-radius: 10px;
+      padding: 1rem;
+
+      .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        hr {
+          margin: 0;
+        }
+
+        p {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.9rem;
+
+          svg {
+            width: 0.9rem;
+            height: 0.9rem;
+          }
+        }
+      }
     }
   }
 }

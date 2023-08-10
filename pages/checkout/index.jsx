@@ -9,7 +9,6 @@ import React, { useState } from "react";
 const Checkout = ({ cart, user }) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
 
-  console.log("cart from props", cart);
   return (
     <div className={styles.checkout}>
       <div className={styles.wrapper}>
