@@ -29,15 +29,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   const [newAddress, setNewAddress] = useState(initialValues);
   const country = useSelector((state) => state.country);
 
-  console.log("User", user);
-  console.log(country.name);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewAddress({ ...newAddress, [name]: value });
-    console.log(name, value);
-  };
-
   const validateAddress = Yup.object().shape({
     firstName: Yup.string()
       .min(3, "First name must be at least 3 characters long")
@@ -63,6 +54,12 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     address2: Yup.string(),
     country: Yup.string().required("Country is required"),
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewAddress({ ...newAddress, [name]: value });
+    console.log(name, value);
+  };
 
   useEffect(() => {
     if (addresses.length > 0) {
@@ -104,7 +101,11 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                 address1,
                 address2,
               } = item;
-              console.log(country);
+
+              const formattedPhoneNumber =
+                country.name === item.country
+                  ? `(+${country.calling_code})${phoneNumber}`
+                  : phoneNumber;
 
               return (
                 <div key={_id} className={styles.address}>
@@ -113,14 +114,13 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                       <FaIdBadge /> {firstName} {lastName}
                     </p>
                     <p>
-                      <FaPhoneAlt />{" "}
-                      {country.name === item.country
-                        ? `+${country.calling_code} ${phoneNumber}`
-                        : phoneNumber}
+                      <FaPhoneAlt />
+                      {formattedPhoneNumber}
                     </p>
                     <hr />
                     <p>
-                      {address1}, {state}, {city}, {zipCode} {item.country}, {address2}
+                      {address1}, {state}, {city}, {zipCode} {item.country},{" "}
+                      {address2 ? address2 : ""}
                     </p>
                   </div>
                 </div>
