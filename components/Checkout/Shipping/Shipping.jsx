@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { FaIdBadge, FaPhoneAlt, FaPlus, FaTimes } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
 
@@ -58,7 +59,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewAddress({ ...newAddress, [name]: value });
-    console.log(name, value);
   };
 
   console.log(addresses);
@@ -66,23 +66,18 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
   const handleSubmit = async () => {
     const res = await saveAddress(newAddress, user._id);
-    console.log(res);
 
-    if (res && res.update) {
-      const newAddressList = [...addresses];
-      const index = newAddressList.findIndex((item) => console.log(item._id === res.address._id));
-      if (index !== -1) {
-        newAddressList[index] = res.address;
-        setAddresses(newAddressList);
-      }
-    } else if (res && res.ok) {
-      const newAddressList = [...addresses, res.address];
-      setAddresses(newAddressList);
+    if (res.addressFound === true) {
+      toast.info("Address already exists, please select it from the list");
+      return;
     }
 
-    setNewAddress(initialValues);
-    setShowForm(false);
-    swe;
+    if (res && res.ok) {
+      const newAddressList = [...addresses, res.address];
+      setAddresses(newAddressList);
+      setNewAddress(initialValues);
+      setShowForm(false);
+    }
   };
 
   return (

@@ -21,14 +21,19 @@ const handler = async (req, res) => {
   );
 
   if (existingAddressIndex !== -1) {
-    user.address[existingAddressIndex] = address;
+    // If an existing address is found
+    res
+      .status(200)
+      .json({ message: "Existing address found", ok: true, addressFound: true, address });
   } else {
+    // If no existing address is found
     user.address.push(address);
+    await user.save(); // Save the new address
+
+    res
+      .status(200)
+      .json({ message: "Address saved successfully", ok: true, addressFound: false, address });
   }
-
-  await user.save();
-
-  res.status(200).json({ message: "Address saved successfully", ok: true, address });
 
   db.disconnectDB();
 };
