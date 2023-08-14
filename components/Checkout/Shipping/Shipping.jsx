@@ -2,11 +2,12 @@ import Button from "@/components/Layout/Button/Button";
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import { countries } from "@/data/countries";
+import { deleteAddressFromDb } from "@/utils/deleteAddressFromDb";
 import { saveAddress } from "@/utils/saveAddressToDb";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
-import { FaIdBadge, FaPhoneAlt, FaPlus, FaTimes } from "react-icons/fa";
+import { FaCheck, FaIdBadge, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -56,19 +57,26 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     country: Yup.string().required("Country is required"),
   });
 
+  useEffect(() => {
+    if (user) {
+      setAddresses(user.address);
+    }
+
+    if (user.address.length > 0) {
+      setSelectedAddress(user.address[0]);
+    }
+  }, [user, setSelectedAddress]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewAddress({ ...newAddress, [name]: value });
   };
 
-  console.log(addresses);
-  console.log("selectedAddress", selectedAddress);
-
   const handleSubmit = async () => {
     const res = await saveAddress(newAddress, user._id);
 
     if (res.addressFound === true) {
-      toast.info("Address already exists, please select it from the list");
+      toast.info("Address already exists, please select it from the list above");
       return;
     }
 
@@ -77,6 +85,23 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       setAddresses(newAddressList);
       setNewAddress(initialValues);
       setShowForm(false);
+      setSelectedAddress(res.address);
+      toast.success("Address saved successfully");
+    }
+  };
+
+  const handleDelete = async (addressId, userId) => {
+    try {
+      const res = await deleteAddressFromDb(addressId, userId);
+
+      if (res && res.ok) {
+        setAddresses((prevAddresses) => prevAddresses.filter((item) => item._id !== addressId));
+        toast.success(res.message);
+      }
+    } catch (error) {
+      // Handle error here
+      console.error(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -84,6 +109,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     <div className={styles.shipping}>
       <div className={styles.shipping_header}>
         <h2>Shipping address</h2>
+        <p>Add address or select an existing one from the list below</p>
       </div>
       <div className={styles.addresses}>
         {addresses.length > 0
@@ -109,9 +135,26 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                 <div
                   key={_id || i}
                   className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
-                  onClick={() => setSelectedAddress(item)}
                 >
+                  <div className={styles.ctas}>
+                    <div className={styles.check}>
+                      <FaCheck
+                        className={styles.check_icon}
+                        style={{ color: selectedAddress._id === item._id ? "green" : "black" }}
+                        onClick={() => setSelectedAddress(item)}
+                      />
+                      {selectedAddress._id === item._id && <small>Selected address</small>}
+                    </div>
+
+                    {selectedAddress._id !== item._id && (
+                      <FaTrash
+                        className={styles.delete}
+                        onClick={() => handleDelete(item._id, user._id)}
+                      />
+                    )}
+                  </div>
                   <div className={styles.row}>
+                    <hr />
                     <p>
                       <FaIdBadge /> {firstName} {lastName}
                     </p>
@@ -183,9 +226,10 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                 <div className={styles.row}>
                   <ShippingInput
                     disabled={!newAddress.country}
-                    type="number"
+                    type="text"
                     icon="phoneNumber"
                     name="phoneNumber"
+                    min="0"
                     placeholder="Phone including area code *"
                     onChange={handleChange}
                   />
