@@ -115,9 +115,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
   const isCountrySelected = !!newAddress.country;
 
-  console.log("selected address", selectedAddress.active);
-  console.log("addresses", addresses);
-
   return (
     <div className={styles.shipping}>
       <div className={styles.shipping_header}>
