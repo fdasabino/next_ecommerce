@@ -21,9 +21,12 @@ const handler = async (req, res) => {
   );
 
   if (existingAddressIndex !== -1) {
-    res
-      .status(200)
-      .json({ message: "Existing address found", ok: true, addressFound: true, address });
+    res.status(200).json({
+      message: "The address provided already exists. Please select it from the list above...",
+      ok: true,
+      addressFound: true,
+      address,
+    });
   } else {
     user.address.push(address);
     await user.save();

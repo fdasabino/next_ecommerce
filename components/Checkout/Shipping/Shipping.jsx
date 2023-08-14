@@ -1,3 +1,9 @@
+import Button from "@/components/Layout/Button/Button";
+import ShippingInput from "@/components/Layout/Input/ShippingInput";
+import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
+import { countries } from "@/data/countries";
+import { deleteAddressFromDb } from "@/utils/deleteAddressFromDb";
+import { saveAddress } from "@/utils/saveAddressToDb";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
@@ -5,14 +11,6 @@ import { FaCheck, FaIdBadge, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-
-import Button from "@/components/Layout/Button/Button";
-import ShippingInput from "@/components/Layout/Input/ShippingInput";
-import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
-import { countries } from "@/data/countries";
-import { deleteAddressFromDb } from "@/utils/deleteAddressFromDb";
-import { saveAddress } from "@/utils/saveAddressToDb";
-
 import styles from "./Shipping.module.scss";
 
 const initialValues = {
@@ -78,7 +76,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
       if (res && res.ok) {
         setAddresses((prevAddresses) => prevAddresses.filter((item) => item._id !== addressId));
-        toast.success(res.message);
+        toast.info(res.message);
       }
     } catch (error) {
       console.error(error);
@@ -87,10 +85,19 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   };
 
   const handleSubmit = async () => {
-    const res = await saveAddress(newAddress, user?._id);
+    const formattedPhoneNumber =
+      country.name === newAddress.country
+        ? `(+${country.calling_code})${newAddress.phoneNumber}`
+        : newAddress.phoneNumber.startsWith("+")
+        ? newAddress.phoneNumber
+        : `(${country.calling_code})${newAddress.phoneNumber}`;
+
+    const updatedAddress = { ...newAddress, phoneNumber: formattedPhoneNumber };
+
+    const res = await saveAddress(updatedAddress, user?._id);
 
     if (res && res.addressFound === true) {
-      toast.info("Address already exists, please select it from the list above");
+      toast.info(res.message);
       return;
     }
 
@@ -127,11 +134,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
               address2,
             } = item;
 
-            const formattedPhoneNumber =
-              country.name === item.country
-                ? `(+${country.calling_code})${phoneNumber}`
-                : phoneNumber;
-
             return (
               <div
                 key={_id || i}
@@ -162,7 +164,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                   </p>
                   <p>
                     <FaPhoneAlt />
-                    {formattedPhoneNumber}
+                    {phoneNumber}
                   </p>
                   <hr />
                   <p>
@@ -232,7 +234,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                     type="text"
                     icon="phoneNumber"
                     name="phoneNumber"
-                    min="0"
                     placeholder="Phone including area code *"
                     onChange={handleChange}
                   />
