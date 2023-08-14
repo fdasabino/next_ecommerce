@@ -7,7 +7,7 @@ import { getSession } from "next-auth/react";
 import React, { useState } from "react";
 
 const Checkout = ({ cart, user }) => {
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState({});
 
   return (
     <div className={styles.checkout}>

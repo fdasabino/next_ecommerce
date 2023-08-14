@@ -61,11 +61,8 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     console.log(name, value);
   };
 
-  useEffect(() => {
-    if (addresses.length > 0) {
-      setSelectedAddress(user?.address[0]);
-    }
-  }, [addresses, setSelectedAddress, user]);
+  console.log(addresses);
+  console.log("selectedAddress", selectedAddress);
 
   const handleSubmit = async () => {
     const res = await saveAddress(newAddress, user._id);
@@ -73,16 +70,14 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
     if (res && res.update) {
       const newAddressList = [...addresses];
-      const index = newAddressList.findIndex((item) => item._id === res.address._id);
+      const index = newAddressList.findIndex((item) => console.log(item._id === res.address._id));
       if (index !== -1) {
         newAddressList[index] = res.address;
         setAddresses(newAddressList);
-        setSelectedAddress(newAddressList[index]);
       }
     } else if (res && res.ok) {
       const newAddressList = [...addresses, res.address];
       setAddresses(newAddressList);
-      setSelectedAddress(newAddressList[newAddressList.length - 1]);
     }
 
     setNewAddress(initialValues);
@@ -116,7 +111,11 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                   : phoneNumber;
 
               return (
-                <div key={_id || i} className={styles.address}>
+                <div
+                  key={_id || i}
+                  className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
+                  onClick={() => setSelectedAddress(item)}
+                >
                   <div className={styles.row}>
                     <p>
                       <FaIdBadge /> {firstName} {lastName}
@@ -198,13 +197,21 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                   <ShippingInput
                     disabled={!newAddress.country}
                     type="text"
+                    icon="address1"
+                    name="address1"
+                    placeholder="Address *"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.row}>
+                  <ShippingInput
+                    disabled={!newAddress.country}
+                    type="text"
                     icon="state"
                     name="state"
                     placeholder="State/province *"
                     onChange={handleChange}
                   />
-                </div>
-                <div className={styles.row}>
                   <ShippingInput
                     disabled={!newAddress.country}
                     type="text"
@@ -213,22 +220,14 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                     placeholder="City *"
                     onChange={handleChange}
                   />
+                </div>
+                <div className={styles.row}>
                   <ShippingInput
                     disabled={!newAddress.country}
                     type="text"
                     icon="zipCode"
                     name="zipCode"
                     placeholder="Zip-code/postcode *"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className={styles.row}>
-                  <ShippingInput
-                    disabled={!newAddress.country}
-                    type="text"
-                    icon="address1"
-                    name="address1"
-                    placeholder="Address *"
                     onChange={handleChange}
                   />
                   <ShippingInput
