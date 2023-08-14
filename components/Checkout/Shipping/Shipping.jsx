@@ -7,7 +7,7 @@ import { saveAddress } from "@/utils/saveAddressToDb";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
-import { FaCheck, FaIdBadge, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
+import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -170,7 +170,8 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                   </p>
                   <hr />
                   <p>
-                    {address1}, {state}, {city}, {zipCode} {item.country} {address2 ? address2 : ""}
+                    <FaMapPin /> {address1}, {state}, {city}, {zipCode} {item.country}{" "}
+                    {address2 ? address2 : ""}
                   </p>
                 </div>
               </div>
