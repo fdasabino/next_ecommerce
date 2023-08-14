@@ -7,6 +7,14 @@ const handler = async (req, res) => {
   const { address, userId } = req.body;
   const user = await User.findById(userId);
 
+  // Find and deactivate any previously active addresses
+  for (const a of user.address) {
+    if (a.active) {
+      a.active = false;
+    }
+  }
+
+  // Check if the new address already exists
   const existingAddressIndex = user.address.findIndex(
     (a) =>
       Object.is(a.firstName, address.firstName) &&
@@ -28,6 +36,8 @@ const handler = async (req, res) => {
       address,
     });
   } else {
+    // Mark the new address as active
+    address.active = true;
     user.address.push(address);
     await user.save();
     res

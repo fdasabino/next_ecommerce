@@ -106,12 +106,17 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       setAddresses(newAddressList);
       setNewAddress(initialValues);
       setShowForm(false);
-      setSelectedAddress(res.address);
+
+      if (res.address.active) setSelectedAddress(res.address);
+
       toast.success("Address saved successfully");
     }
   };
 
   const isCountrySelected = !!newAddress.country;
+
+  console.log("selected address", selectedAddress.active);
+  console.log("addresses", addresses);
 
   return (
     <div className={styles.shipping}>
