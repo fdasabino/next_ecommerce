@@ -5,6 +5,7 @@ import { countries } from "@/data/countries";
 import { deleteAddressFromDb } from "@/utils/deleteAddressFromDb";
 import { saveAddress } from "@/utils/saveAddressToDb";
 import { Form, Formik } from "formik";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
@@ -141,6 +142,9 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                 key={_id || i}
                 className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
               >
+                <div className={styles.img}>
+                  <Image src={user.image} width={300} height={300} alt={user.name} />
+                </div>
                 <div className={styles.ctas}>
                   <div className={styles.check}>
                     <FaCheck
