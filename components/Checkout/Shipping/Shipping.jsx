@@ -59,9 +59,13 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   const country = useSelector((state) => state.country);
 
   useEffect(() => {
-    setAddresses(user?.address);
-    setSelectedAddress(user?.address[0]);
-  }, [user.address, setSelectedAddress, user]);
+    if (user?.address.length === 0) setShowForm(true);
+
+    if (user?.address.length > 0) {
+      setAddresses(user?.address);
+      setSelectedAddress({ ...user?.address[0], active: true });
+    }
+  }, [user.address, setSelectedAddress]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,8 +88,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       toast.error(error.response.data.message);
     }
   };
-
-  console.log("selectedAddress", selectedAddress);
 
   const handleSubmit = async () => {
     const formattedPhoneNumber =
@@ -153,7 +155,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                       className={`${styles.check_icon} ${
                         selectedAddress._id === item._id ? styles.green : styles.black
                       }`}
-                      onClick={() => setSelectedAddress(item)}
+                      onClick={() => setSelectedAddress({ ...item, active: true })}
                     />
                     {selectedAddress._id === item._id && <small>Selected address</small>}
                   </div>
