@@ -4,12 +4,10 @@ import User from "@/models/User";
 import styles from "@/styles/pages/CheckoutPage.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Checkout = ({ cart, user }) => {
-  const [selectedAddress, setSelectedAddress] = useState(
-    { ...user?.address[0], active: true } || {}
-  );
+const Checkout = ({ cart, user, activeAddress }) => {
+  const [selectedAddress, setSelectedAddress] = useState(activeAddress || null);
 
   return (
     <div className={styles.checkout}>
@@ -18,6 +16,7 @@ const Checkout = ({ cart, user }) => {
           <Shipping
             selectedAddress={selectedAddress}
             setSelectedAddress={setSelectedAddress}
+            activeAddress={activeAddress}
             user={user}
           />
         </div>
@@ -33,6 +32,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   const user = await User.findById(session?.user?._id);
   const cart = await Cart.findOne({ user: user?._id });
+  const activeAddress = user?.address.find((address) => address.active);
 
   if (!cart) {
     return {
@@ -48,6 +48,7 @@ export async function getServerSideProps(context) {
     props: {
       cart: JSON.parse(JSON.stringify(cart)),
       user: JSON.parse(JSON.stringify(user)),
+      activeAddress: JSON.parse(JSON.stringify(activeAddress)),
     },
   };
 }

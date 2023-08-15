@@ -4,9 +4,10 @@ import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import { countries } from "@/data/countries";
 import { deleteAddressFromDb } from "@/utils/deleteAddressFromDb";
 import { saveAddress } from "@/utils/saveAddressToDb";
+import { setAddressActive } from "@/utils/setActiveAddress";
 import { Form, Formik } from "formik";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -52,20 +53,11 @@ const validateAddress = Yup.object().shape({
   country: Yup.string().required("Country is required"),
 });
 
-const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
+const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [newAddress, setNewAddress] = useState(initialValues);
   const [showForm, setShowForm] = useState(false);
   const country = useSelector((state) => state.country);
-
-  useEffect(() => {
-    if (user?.address.length === 0) setShowForm(true);
-
-    if (user?.address.length > 0) {
-      setAddresses(user?.address);
-      setSelectedAddress({ ...user?.address[0], active: true });
-    }
-  }, [user.address, setSelectedAddress]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -108,6 +100,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
     if (res && res.ok) {
       const newAddressList = [...addresses, res.address];
+      setSelectedAddress(res.address);
       setAddresses(newAddressList);
       setNewAddress(initialValues);
       setShowForm(false);
@@ -117,6 +110,23 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       toast.success("Address saved successfully");
     }
   };
+
+  const handleSelectAddress = async (address) => {
+    try {
+      const res = await setAddressActive(address);
+      if (res && res.ok) {
+        setSelectedAddress(res.address);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      }
+    } catch (error) {
+      // Handle error (e.g., show an error message using toast)
+      toast.error("An error occurred while setting address as active");
+    }
+  };
+
+  console.log(user.address);
 
   const isCountrySelected = !!newAddress.country;
 
@@ -155,7 +165,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                       className={`${styles.check_icon} ${
                         selectedAddress._id === item._id ? styles.green : styles.black
                       }`}
-                      onClick={() => setSelectedAddress({ ...item, active: true })}
+                      onClick={() => handleSelectAddress(item)}
                     />
                     {selectedAddress._id === item._id && <small>Selected address</small>}
                   </div>
