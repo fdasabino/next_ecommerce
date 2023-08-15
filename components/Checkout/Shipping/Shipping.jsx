@@ -126,8 +126,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) 
     }
   };
 
-  console.log(user.address);
-
   const isCountrySelected = !!newAddress.country;
 
   return (
