@@ -1,51 +1,57 @@
+import authMiddleware from "@/middleware/auth";
 import User from "@/models/User";
 import db from "@/utils/db";
 
-const handler = async (req, res) => {
-  await db.connectDB();
-
-  const { address, userId } = req.body;
-  const user = await User.findById(userId);
-
-  // Find and deactivate any previously active addresses
-  for (const a of user.address) {
-    if (a.active) {
-      a.active = false;
-    }
-  }
-
-  // Check if the new address already exists
-  const existingAddressIndex = user.address.findIndex(
-    (a) =>
-      Object.is(a.firstName, address.firstName) &&
-      Object.is(a.lastName, address.lastName) &&
-      Object.is(a.phoneNumber, address.phoneNumber) &&
-      Object.is(a.state, address.state) &&
-      Object.is(a.address1, address.address1) &&
-      Object.is(a.address2, address.address2) &&
-      Object.is(a.city, address.city) &&
-      Object.is(a.zipCode, address.zipCode) &&
-      Object.is(a.country, address.country)
+const addressesEqual = (a, b) => {
+  return (
+    a.firstName === b.firstName &&
+    a.lastName === b.lastName &&
+    a.phoneNumber === b.phoneNumber &&
+    a.state === b.state &&
+    a.address1 === b.address1 &&
+    a.address2 === b.address2 &&
+    a.city === b.city &&
+    a.zipCode === b.zipCode &&
+    a.country === b.country
   );
+};
 
-  if (existingAddressIndex !== -1) {
-    res.status(200).json({
-      message: "The address provided already exists. Please select it from the list above...",
-      ok: true,
-      addressFound: true,
-      address,
-    });
-  } else {
-    // Mark the new address as active
-    address.active = true;
-    user.address.push(address);
-    await user.save();
-    res
-      .status(200)
-      .json({ message: "Address saved successfully", ok: true, addressFound: false, address });
-  }
+const handler = async (req, res) => {
+  await authMiddleware(req, res, async () => {
+    try {
+      await db.connectDB();
+      const { address } = req.body;
+      const user = await User.findById(req.user);
 
-  db.disconnectDB();
+      // Deactivate previously active addresses
+      user.address.forEach((a) => {
+        a.active = false;
+      });
+
+      const addressMatch = user.address.find((a) => addressesEqual(a, address));
+
+      if (addressMatch) {
+        res.status(200).json({
+          message: "The address provided already exists. Please select it from the list above...",
+          ok: true,
+          addressFound: true,
+          address: addressMatch,
+        });
+      } else {
+        // Mark the new address as active
+        address.active = true;
+        user.address.push(address);
+        await user.save();
+        res
+          .status(200)
+          .json({ message: "Address saved successfully", ok: true, addressFound: false, address });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    } finally {
+      db.disconnectDB();
+    }
+  });
 };
 
 export default handler;

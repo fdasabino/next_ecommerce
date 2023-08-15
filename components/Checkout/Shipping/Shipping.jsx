@@ -59,9 +59,9 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   const country = useSelector((state) => state.country);
 
   useEffect(() => {
-    setAddresses(user?.address || []);
+    setAddresses(user?.address);
     setSelectedAddress(user?.address[0]);
-  }, [user.address, setSelectedAddress]);
+  }, [user.address, setSelectedAddress, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,9 +71,9 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     }));
   };
 
-  const handleDelete = async (addressId, userId) => {
+  const handleDelete = async (addressId) => {
     try {
-      const res = await deleteAddressFromDb(addressId, userId);
+      const res = await deleteAddressFromDb(addressId);
 
       if (res && res.ok) {
         setAddresses((prevAddresses) => prevAddresses.filter((item) => item._id !== addressId));
@@ -85,6 +85,8 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
     }
   };
 
+  console.log("selectedAddress", selectedAddress);
+
   const handleSubmit = async () => {
     const formattedPhoneNumber =
       country.name === newAddress.country
@@ -95,7 +97,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
     const updatedAddress = { ...newAddress, phoneNumber: formattedPhoneNumber };
 
-    const res = await saveAddress(updatedAddress, user?._id);
+    const res = await saveAddress(updatedAddress);
 
     if (res && res.addressFound === true) {
       toast.info(res.message);
@@ -157,10 +159,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
                   </div>
 
                   {selectedAddress._id !== item._id && (
-                    <FaTrash
-                      className={styles.delete}
-                      onClick={() => handleDelete(item._id, user?._id)}
-                    />
+                    <FaTrash className={styles.delete} onClick={() => handleDelete(item._id)} />
                   )}
                 </div>
                 <div className={styles.row}>
