@@ -4,12 +4,20 @@ import User from "@/models/User";
 import styles from "@/styles/pages/CheckoutPage.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Checkout = ({ cart, user, activeAddress }) => {
+  const [addresses, setAddresses] = useState(user?.address || []);
   const [selectedAddress, setSelectedAddress] = useState(
     activeAddress.active === true ? activeAddress : null
   );
+
+  useEffect(() => {
+    const checkedActiveAddress = addresses.find((address) => address.active === true);
+    if (checkedActiveAddress) {
+      setSelectedAddress(checkedActiveAddress);
+    }
+  }, [addresses]);
 
   return (
     <div className={styles.checkout}>
@@ -18,6 +26,8 @@ const Checkout = ({ cart, user, activeAddress }) => {
           <Shipping
             selectedAddress={selectedAddress}
             setSelectedAddress={setSelectedAddress}
+            setAddresses={setAddresses}
+            addresses={addresses}
             activeAddress={activeAddress}
             user={user}
           />

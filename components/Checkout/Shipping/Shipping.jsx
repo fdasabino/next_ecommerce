@@ -5,6 +5,7 @@ import { countries } from "@/data/countries";
 import { deleteAddressFromDb } from "@/utils/deleteAddressFromDb";
 import { saveAddress } from "@/utils/saveAddressToDb";
 import { setAddressActive } from "@/utils/setActiveAddress";
+import { Button as MuiButton, Tooltip } from "@mui/material";
 import { Form, Formik } from "formik";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -54,8 +55,7 @@ const validateAddress = Yup.object().shape({
   country: Yup.string().required("Country is required"),
 });
 
-const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
-  const [addresses, setAddresses] = useState(user?.address || []);
+const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses, user }) => {
   const [newAddress, setNewAddress] = useState(initialValues);
   const [showForm, setShowForm] = useState(false);
   const country = useSelector((state) => state.country);
@@ -140,9 +140,9 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
       <div className={styles.shipping_header}>
         <div className={styles.btn_header}>
           <h2>Shipping address</h2>
-          <Button style={showForm ? "danger" : "primary"} onClick={() => setShowForm(!showForm)}>
+          <MuiButton color={!showForm ? "primary" : "error"} onClick={() => setShowForm(!showForm)}>
             {showForm ? <FaTimes /> : <FaPlus />}
-          </Button>
+          </MuiButton>
         </div>
         <p>Add address or select an existing one from the list below</p>
       </div>
