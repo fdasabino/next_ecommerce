@@ -23,14 +23,28 @@
     gap: 1rem;
     margin-bottom: 1rem;
 
-    button {
-      svg {
-        width: 0.7rem;
-        height: 0.7rem;
+    .btn_header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      button {
+        width: 2rem;
+        height: 1.5rem;
+        svg {
+          width: 0.7rem;
+          height: 0.7rem;
+        }
+      }
+      h2 {
+        font-size: 1.6rem;
+        text-transform: uppercase;
       }
     }
-    h2 {
+
+    p {
+      font-size: 1rem;
       text-transform: uppercase;
+      font-weight: 600;
     }
   }
 
@@ -44,6 +58,12 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+
+      @media (max-width: 700px) {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+      }
 
       button {
         margin: 0 auto;
@@ -73,7 +93,7 @@
     gap: 1rem;
     width: 100%;
 
-    @media (max-width: 580px) {
+    @media (max-width: 700px) {
       max-width: 100%;
       width: 100%;
       flex-direction: column;
@@ -89,76 +109,19 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease-in-out;
+      background: $base-white;
+      border: 1px solid $base-grey;
+      border-radius: 10px;
+      padding: 1rem;
 
-      .img {
-        width: 100%;
-        max-width: 100px;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 1rem;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-
-      .ctas {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 3rem;
-        margin: 0 0 1rem 0;
-        width: 100%;
-
-        small {
-          text-transform: uppercase;
-          font-weight: 600;
-        }
-
-        .green {
-          color: $base-green;
-        }
-
-        .black {
-          color: $base-dark-secondary;
-        }
-
-        .check {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          transition: all 0.2s ease-in-out;
-
-          .check_icon {
-            transition: all 0.2s ease-in-out;
-            &:hover {
-              fill: $base-green;
-            }
-          }
-        }
-
-        .delete {
-          transition: all 0.2s ease-in-out;
-          &:hover {
-            fill: $base-redish;
-          }
-        }
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      @media (max-width: 580px) {
+      @media (max-width: 700px) {
         max-width: 100%;
         width: 100%;
         height: 100%;
         justify-content: flex-start;
+        flex-direction: row;
         align-items: center;
+        gap: 2rem;
       }
 
       &:hover {
@@ -168,32 +131,132 @@
 
       &.selected {
         border: 1px solid $base-success;
+        background: rgba($color: $base-green, $alpha: 0.2);
       }
 
-      background: $base-white;
-      border: 1px solid $base-grey;
-      border-radius: 10px;
-      padding: 1rem;
-
-      .row {
+      .left {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        align-items: center;
+        justify-content: center;
 
-        hr {
-          margin: 0;
+        .img {
+          width: 100%;
+          max-width: 100px;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 1rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
 
-        p {
+        .ctas {
           display: flex;
+          justify-content: center;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.9rem;
-          text-transform: uppercase;
+          gap: 2rem;
+          width: 100%;
 
-          svg {
-            width: 0.9rem;
-            height: 0.9rem;
+          @media (max-width: 700px) {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+          }
+
+          small {
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: default;
+            color: $base-success;
+            text-align: center;
+          }
+
+          .green {
+            color: $base-green;
+          }
+
+          .black {
+            color: $base-dark-secondary;
+          }
+
+          .icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            width: 100%;
+
+            svg {
+              min-width: 1rem;
+              min-height: 1rem;
+            }
+
+            .check_icon {
+              transition: all 0.2s ease-in-out;
+
+              &:hover {
+                fill: $base-green;
+              }
+            }
+
+            .delete {
+              transition: all 0.2s ease-in-out;
+              cursor: pointer;
+
+              &:hover {
+                fill: $base-redish;
+              }
+            }
+          }
+        }
+      }
+
+      .right {
+        .row {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          hr {
+            margin: 0;
+            border-color: $base-success-secondary;
+          }
+
+          p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+
+            @media (max-width: 700px) {
+              max-width: 100%;
+              width: 100%;
+              font-size: 1rem;
+            }
+
+            @media (max-width: 480px) {
+              max-width: 100%;
+              width: 100%;
+              font-size: 0.8rem;
+            }
+
+            svg {
+              min-width: 0.9rem;
+              min-height: 0.9rem;
+              fill: $base-dark-secondary;
+            }
           }
         }
       }

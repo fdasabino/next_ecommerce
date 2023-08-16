@@ -11,6 +11,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
@@ -53,11 +54,12 @@ const validateAddress = Yup.object().shape({
   country: Yup.string().required("Country is required"),
 });
 
-const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) => {
+const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [newAddress, setNewAddress] = useState(initialValues);
   const [showForm, setShowForm] = useState(false);
   const country = useSelector((state) => state.country);
+  const isMedium = useMediaQuery({ query: "(max-width: 700px)" });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,9 +107,13 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) 
       setNewAddress(initialValues);
       setShowForm(false);
 
-      if (res.address.active) setSelectedAddress(res.address);
-
       toast.success("Address saved successfully");
+
+      const timeout = setTimeout(() => {
+        window.location.reload();
+      }, 500);
+
+      () => clearTimeout(timeout);
     }
   };
 
@@ -116,9 +122,8 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) 
       const res = await setAddressActive(address);
       if (res && res.ok) {
         setSelectedAddress(res.address);
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        setShowForm(false);
+        toast.success(res.message);
       }
     } catch (error) {
       // Handle error (e.g., show an error message using toast)
@@ -131,7 +136,12 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) 
   return (
     <div className={styles.shipping}>
       <div className={styles.shipping_header}>
-        <h2>Shipping address</h2>
+        <div className={styles.btn_header}>
+          <h2>Shipping address</h2>
+          <Button style={showForm ? "danger" : "primary"} onClick={() => setShowForm(!showForm)}>
+            {showForm ? <FaTimes /> : <FaPlus />}
+          </Button>
+        </div>
         <p>Add address or select an existing one from the list below</p>
       </div>
       <div className={styles.addresses}>
@@ -154,38 +164,50 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) 
                 key={_id || i}
                 className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
               >
-                <div className={styles.img}>
-                  <Image src={user.image} width={300} height={300} alt={user.name} />
-                </div>
-                <div className={styles.ctas}>
-                  <div className={styles.check}>
-                    <FaCheck
-                      className={`${styles.check_icon} ${
-                        selectedAddress._id === item._id ? styles.green : styles.black
-                      }`}
-                      onClick={() => handleSelectAddress(item)}
-                    />
-                    {selectedAddress._id === item._id && <small>Selected address</small>}
+                <div className={styles.left}>
+                  {/* image */}
+                  <div className={styles.img}>
+                    <Image src={user.image} width={300} height={300} alt={user.name} />
                   </div>
 
-                  {selectedAddress._id !== item._id && (
-                    <FaTrash className={styles.delete} onClick={() => handleDelete(item._id)} />
-                  )}
+                  {/* ctas */}
+                  <div className={styles.ctas}>
+                    <div className={styles.icons}>
+                      {selectedAddress._id !== item._id && (
+                        <FaCheck
+                          className={`${styles.check_icon} ${
+                            selectedAddress._id === item._id ? styles.green : styles.black
+                          }`}
+                          onClick={() => handleSelectAddress(item)}
+                        />
+                      )}
+
+                      {selectedAddress._id === item._id && <small>Selected address</small>}
+
+                      {selectedAddress._id !== item._id && (
+                        <FaTrash className={styles.delete} onClick={() => handleDelete(item._id)} />
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.row}>
-                  <hr />
-                  <p>
-                    <FaIdBadge /> {firstName} {lastName}
-                  </p>
-                  <p>
-                    <FaPhoneAlt />
-                    {phoneNumber}
-                  </p>
-                  <hr />
-                  <p>
-                    <FaMapPin /> {address1}, {state}, {city}, {zipCode} {item.country}{" "}
-                    {address2 ? address2 : ""}
-                  </p>
+
+                <div className={styles.right}>
+                  {/* address details */}
+                  <div className={styles.row}>
+                    {!isMedium && <hr />}
+                    <p>
+                      <FaIdBadge /> {firstName} {lastName}
+                    </p>
+                    <p>
+                      <FaPhoneAlt />
+                      {phoneNumber}
+                    </p>
+                    <hr />
+                    <p>
+                      <FaMapPin /> {address1}, {state}, {city}, {zipCode} {item.country}{" "}
+                      {address2 ? address2 : ""}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
@@ -193,9 +215,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user, activeAddress }) 
         ) : (
           <p>You don&apos;t have any saved addresses</p>
         )}
-        <Button style={showForm ? "danger" : "primary"} onClick={() => setShowForm(!showForm)}>
-          {showForm ? <FaTimes /> : <FaPlus />}
-        </Button>
       </div>
       {showForm && (
         <div className={styles.forms}>
