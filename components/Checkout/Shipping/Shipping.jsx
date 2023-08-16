@@ -140,11 +140,17 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
       <div className={styles.shipping_header}>
         <div className={styles.btn_header}>
           <h2>Shipping address</h2>
-          <MuiButton color={!showForm ? "primary" : "error"} onClick={() => setShowForm(!showForm)}>
-            {showForm ? <FaTimes /> : <FaPlus />}
-          </MuiButton>
+          <Tooltip title={showForm ? "Hide form" : "Add address"}>
+            <MuiButton
+              style={{ border: "1px solid #e7e7e7" }}
+              color={!showForm ? "primary" : "error"}
+              onClick={() => setShowForm(!showForm)}
+            >
+              {showForm ? <FaTimes /> : <FaPlus />}
+            </MuiButton>
+          </Tooltip>
         </div>
-        <p>Add address or select an existing one from the list below</p>
+        <small>Add a new address or select an existing one from the list below</small>
       </div>
       <div className={styles.addresses}>
         {addresses.length > 0 ? (
@@ -174,20 +180,31 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
 
                   {/* ctas */}
                   <div className={styles.ctas}>
-                    <div className={styles.icons}>
+                    <div className={styles.btns}>
                       {selectedAddress._id !== item._id && (
-                        <FaCheck
-                          className={`${styles.check_icon} ${
-                            selectedAddress._id === item._id ? styles.green : styles.black
-                          }`}
-                          onClick={() => handleSelectAddress(item)}
-                        />
+                        <Tooltip title="Select address">
+                          <MuiButton
+                            style={{ border: "1px solid #e7e7e7" }}
+                            color={selectedAddress._id === item._id ? "primary" : "success"}
+                            onClick={() => handleSelectAddress(item)}
+                          >
+                            <FaCheck />
+                          </MuiButton>
+                        </Tooltip>
                       )}
 
                       {selectedAddress._id === item._id && <small>Selected address</small>}
 
                       {selectedAddress._id !== item._id && (
-                        <FaTrash className={styles.delete} onClick={() => handleDelete(item._id)} />
+                        <Tooltip title="Delete address">
+                          <MuiButton
+                            style={{ border: "1px solid #e7e7e7" }}
+                            color="error"
+                            onClick={() => handleDelete(item._id)}
+                          >
+                            <FaTrash />
+                          </MuiButton>
+                        </Tooltip>
                       )}
                     </div>
                   </div>

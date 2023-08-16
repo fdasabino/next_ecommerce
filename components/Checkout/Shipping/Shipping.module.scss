@@ -41,8 +41,8 @@
       }
     }
 
-    p {
-      font-size: 1rem;
+    small {
+      font-size: 0.9rem;
       text-transform: uppercase;
       font-weight: 600;
     }
@@ -124,6 +124,16 @@
         gap: 2rem;
       }
 
+      @media (max-width: 400px) {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
       &:hover {
         border: 1px solid $base-dark-grey;
         box-shadow: $base-shadow-1;
@@ -179,15 +189,7 @@
             text-align: center;
           }
 
-          .green {
-            color: $base-green;
-          }
-
-          .black {
-            color: $base-dark-secondary;
-          }
-
-          .icons {
+          .btns {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -196,28 +198,6 @@
             cursor: pointer;
             margin-bottom: 1rem;
             width: 100%;
-
-            svg {
-              min-width: 1rem;
-              min-height: 1rem;
-            }
-
-            .check_icon {
-              transition: all 0.2s ease-in-out;
-
-              &:hover {
-                fill: $base-green;
-              }
-            }
-
-            .delete {
-              transition: all 0.2s ease-in-out;
-              cursor: pointer;
-
-              &:hover {
-                fill: $base-redish;
-              }
-            }
           }
         }
       }
