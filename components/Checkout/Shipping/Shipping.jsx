@@ -97,6 +97,8 @@ const Shipping = ({ selectedAddress, setSelectedAddress, user }) => {
 
     if (res && res.addressFound === true) {
       toast.info(res.message);
+      setShowForm(false);
+      window.scrollTo(0, 0);
       return;
     }
 
