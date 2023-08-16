@@ -7,7 +7,7 @@ import { saveAddress } from "@/utils/saveAddressToDb";
 import { setAddressActive } from "@/utils/setActiveAddress";
 import { Form, Formik } from "formik";
 import Image from "next/image";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
