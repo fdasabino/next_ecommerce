@@ -44,6 +44,10 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       font-weight: 600;
+
+      @media (max-width: 600px) {
+        text-align: center;
+      }
     }
   }
 
