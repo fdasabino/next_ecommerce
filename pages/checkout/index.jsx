@@ -1,3 +1,4 @@
+import CheckoutCart from "@/components/Checkout/CheckoutCart/CheckoutCart";
 import Shipping from "@/components/Checkout/Shipping/Shipping";
 import Cart from "@/models/Cart";
 import User from "@/models/User";
@@ -31,6 +32,9 @@ const Checkout = ({ cart, user, activeAddress }) => {
             activeAddress={activeAddress}
             user={user}
           />
+        </div>
+        <div className={styles.checkout_right}>
+          <CheckoutCart cart={cart} />
         </div>
       </div>
     </div>
