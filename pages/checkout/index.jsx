@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 const Checkout = ({ cart, user, activeAddress }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [selectedAddress, setSelectedAddress] = useState(
-    activeAddress.active === true ? activeAddress : null
+    activeAddress === true ? activeAddress : null
   );
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export async function getServerSideProps(context) {
     props: {
       cart: JSON.parse(JSON.stringify(cart)),
       user: JSON.parse(JSON.stringify(user)),
-      activeAddress: JSON.parse(JSON.stringify(activeAddress)),
+      activeAddress: activeAddress ? JSON.parse(JSON.stringify(activeAddress)) : null,
     },
   };
 }

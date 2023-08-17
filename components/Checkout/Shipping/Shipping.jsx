@@ -57,7 +57,14 @@ const validateAddress = Yup.object().shape({
   country: Yup.string().required("Country is required"),
 });
 
-const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses, user }) => {
+const Shipping = ({
+  selectedAddress,
+  setSelectedAddress,
+  addresses,
+  setAddresses,
+  user,
+  activeAddress,
+}) => {
   const [newAddress, setNewAddress] = useState(initialValues);
   const [showForm, setShowForm] = useState(false);
   const country = useSelector((state) => state.country);
@@ -172,7 +179,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
             </MuiButton>
           </Tooltip>
         </div>
-        {user?.address.length && (
+        {user?.address.length > 0 && (
           <small>Select an existing address or click + to add a new one</small>
         )}
       </div>
@@ -222,19 +229,19 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                     {/* ctas */}
                     <div className={styles.ctas}>
                       <div className={styles.btns}>
-                        {selectedAddress._id !== item._id && (
+                        {selectedAddress?._id !== item._id && (
                           <Tooltip title="Select address">
                             <MuiButton
                               style={{ border: "1px solid #e7e7e7" }}
-                              color={selectedAddress._id === item._id ? "primary" : "success"}
+                              color={selectedAddress?._id === item._id ? "primary" : "success"}
                               onClick={() => handleSelectAddress(item)}
                             >
                               <FaCheck />
                             </MuiButton>
                           </Tooltip>
                         )}
-                        {selectedAddress._id === item._id && <small>Selected address</small>}
-                        {selectedAddress._id !== item._id && (
+                        {selectedAddress?._id === item._id && <small>Selected address</small>}
+                        {selectedAddress?._id !== item._id && (
                           <Tooltip title="Delete address">
                             <MuiButton
                               style={{ border: "1px solid #e7e7e7" }}
