@@ -57,14 +57,7 @@ const validateAddress = Yup.object().shape({
   country: Yup.string().required("Country is required"),
 });
 
-const Shipping = ({
-  selectedAddress,
-  setSelectedAddress,
-  addresses,
-  setAddresses,
-  user,
-  activeAddress,
-}) => {
+const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses, user }) => {
   const [newAddress, setNewAddress] = useState(initialValues);
   const [showForm, setShowForm] = useState(false);
   const country = useSelector((state) => state.country);
@@ -292,9 +285,9 @@ const Shipping = ({
           >
             {(form) => (
               <Form>
-                <p>
+                <h4>
                   <AiOutlineArrowRight /> Start by selecting your country
-                </p>
+                </h4>
                 <SingleSelectInput
                   name="country"
                   value={newAddress.country}
@@ -303,13 +296,13 @@ const Shipping = ({
                   data={countries}
                 />
                 {!isCountrySelected ? (
-                  <p>
+                  <h4>
                     <AiOutlineArrowUp /> Select a country
-                  </p>
+                  </h4>
                 ) : (
-                  <p>
+                  <h4>
                     <AiOutlineArrowDown /> Fill in your address details
-                  </p>
+                  </h4>
                 )}
                 <div className={styles.row}>
                   <ShippingInput
