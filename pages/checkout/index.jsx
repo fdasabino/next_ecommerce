@@ -14,11 +14,13 @@ const Checkout = ({ cart, user, activeAddress }) => {
   );
 
   useEffect(() => {
-    const checkedActiveAddress = addresses.find((address) => address.active === true);
+    const checkedActiveAddress = addresses.find(
+      (address) => address.active === true && activeAddress.active === true
+    );
     if (checkedActiveAddress) {
       setSelectedAddress(checkedActiveAddress);
     }
-  }, [addresses]);
+  }, [addresses, activeAddress]);
 
   return (
     <div className={styles.checkout}>
