@@ -45,7 +45,7 @@ const Top = () => {
           </Link>
         </div>
         <ul className={styles.top__list}>
-          <li>
+          <li className={styles.img}>
             <Image
               width={100}
               height={100}

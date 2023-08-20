@@ -64,7 +64,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
   const country = useSelector((state) => state.country);
 
   const isLarge = useMediaQuery({ query: "(max-width: 1000px)" });
-  const isMedium = useMediaQuery({ query: "(max-width: 800px)" });
+  const isMedium = useMediaQuery({ query: "(max-width: 850px)" });
   const isSmall = useMediaQuery({ query: "(max-width: 600px)" });
 
   const swiperRef = useRef(null);
@@ -191,9 +191,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
           >
             {(form) => (
               <Form>
-                <h4>
-                  <AiOutlineArrowRight /> Start by selecting your country
-                </h4>
                 <SingleSelectInput
                   name="country"
                   value={newAddress.country}
