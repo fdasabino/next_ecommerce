@@ -44,6 +44,7 @@
 
         input {
           width: 100%;
+          max-width: 400px;
           height: 100%;
           border: none;
           border-bottom: 1px solid $base-grey;
@@ -52,6 +53,11 @@
           font-weight: 500;
           color: $base-dark-secondary;
           outline: none;
+        }
+
+        button {
+          width: 100%;
+          max-width: 100px;
         }
       }
     }
