@@ -189,11 +189,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
         {/* price */}
         <div className={styles.product_info__price}>
-          {!selectedSizeValue && priceRange ? (
-            <p>{priceRange}</p>
-          ) : (
-            <h2>{Math.floor(price).toFixed(2)}$</h2>
-          )}
+          {!selectedSizeValue && priceRange ? <p>{priceRange}</p> : <h2>{price.toFixed(2)}$</h2>}
         </div>
 
         {/* Shipping */}
