@@ -159,122 +159,25 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
       <div className={styles.shipping_header}>
         <div className={styles.btn_header}>
           <h2>Shipping address</h2>
-          <Tooltip title={showForm ? "Hide form" : "Add address"}>
-            <MuiButton
-              style={{
-                width: isSmall ? "100%" : "50px",
-                border: "1px solid #e7e7e7",
-              }}
-              color={!showForm ? "primary" : "error"}
-              onClick={() => setShowForm(!showForm)}
-            >
-              {showForm ? <FaTimes /> : <FaPlus />}
-            </MuiButton>
-          </Tooltip>
-        </div>
-        {user?.address.length > 0 && (
-          <small>Select an existing address or click + to add a new one</small>
-        )}
-      </div>
-      <Swiper
-        ref={swiperRef}
-        slidesPerView={isSmall ? 1 : isMedium ? 2 : isLarge ? 4 : 4}
-        spaceBetween={5}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        style={{ width: "100%", padding: "1.5rem 0" }}
-      >
-        {addresses.length > 0 ? (
-          addresses.map((item, i) => {
-            const {
-              _id,
-              firstName,
-              lastName,
-              phoneNumber,
-              state,
-              city,
-              zipCode,
-              address1,
-              address2,
-            } = item;
-
-            return (
-              <SwiperSlide
-                style={
-                  selectedAddress?._id === _id
-                    ? { order: -1 } // Move selected address to the first position
-                    : null
-                }
-                className={styles.addresses}
-                key={_id || i}
+          <div className={styles.header_wrapper}>
+            {user?.address.length > 0 && (
+              <small>Select an existing address or click + to add a new one</small>
+            )}
+            <Tooltip title={showForm ? "Hide form" : "Add address"}>
+              <MuiButton
+                style={{
+                  width: isSmall ? "100%" : "50px",
+                  border: "1px solid #e7e7e7",
+                }}
+                color={!showForm ? "primary" : "error"}
+                onClick={() => setShowForm(!showForm)}
               >
-                <div
-                  className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
-                >
-                  <div className={styles.left}>
-                    {/* image */}
-                    <div className={styles.img}>
-                      <Image src={user.image} width={300} height={300} alt={user.name} />
-                    </div>
-
-                    {/* ctas */}
-                    <div className={styles.ctas}>
-                      <div className={styles.btns}>
-                        {selectedAddress?._id !== item._id && (
-                          <Tooltip title="Select address">
-                            <MuiButton
-                              style={{ border: "1px solid #e7e7e7" }}
-                              color={selectedAddress?._id === item._id ? "primary" : "success"}
-                              onClick={() => handleSelectAddress(item)}
-                            >
-                              <FaCheck />
-                            </MuiButton>
-                          </Tooltip>
-                        )}
-                        {selectedAddress?._id === item._id && <small>Selected address</small>}
-                        {selectedAddress?._id !== item._id && (
-                          <Tooltip title="Delete address">
-                            <MuiButton
-                              style={{ border: "1px solid #e7e7e7" }}
-                              color="error"
-                              onClick={() => handleDelete(item._id)}
-                            >
-                              <FaTrash />
-                            </MuiButton>
-                          </Tooltip>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.right}>
-                    {/* address details */}
-                    <div className={styles.row}>
-                      {!isMedium && <hr />}
-                      <p>
-                        <FaIdBadge /> {firstName} {lastName}
-                      </p>
-                      <p>
-                        <FaPhoneAlt />
-                        {phoneNumber}
-                      </p>
-                      <hr />
-                      <p>
-                        <FaMapPin /> {address1}, {state}, {city}, {zipCode} {item.country}{" "}
-                        {address2 ? address2 : ""}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-            );
-          })
-        ) : (
-          <p>You don&apos;t have any saved addresses</p>
-        )}
-      </Swiper>
-
+                {showForm ? <FaTimes /> : <FaPlus />}
+              </MuiButton>
+            </Tooltip>
+          </div>
+        </div>
+      </div>
       {showForm && (
         <div style={showForm ? { opacity: 1 } : { opacity: 0 }} className={styles.forms}>
           <Formik
@@ -384,6 +287,105 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
           </Formik>
         </div>
       )}
+      <Swiper
+        ref={swiperRef}
+        slidesPerView={isSmall ? 1 : isMedium ? 2 : isLarge ? 4 : 4}
+        spaceBetween={5}
+        pagination={{
+          clickable: true,
+        }}
+        grabCursor={true}
+        modules={[Pagination]}
+        style={{ width: "100%", padding: "1.5rem 0" }}
+      >
+        {addresses.length > 0 ? (
+          addresses.map((item, i) => {
+            const {
+              _id,
+              firstName,
+              lastName,
+              phoneNumber,
+              state,
+              city,
+              zipCode,
+              address1,
+              address2,
+            } = item;
+
+            return (
+              <SwiperSlide
+                style={
+                  selectedAddress?._id === _id
+                    ? { order: -1 } // Move selected address to the first position
+                    : null
+                }
+                className={styles.addresses}
+                key={_id || i}
+              >
+                <div
+                  className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
+                >
+                  <div className={styles.left}>
+                    {/* image */}
+                    <div className={styles.img}>
+                      <Image src={user.image} width={300} height={300} alt={user.name} />
+                    </div>
+
+                    {/* ctas */}
+                    <div className={styles.ctas}>
+                      <div className={styles.btns}>
+                        {selectedAddress?._id !== item._id && (
+                          <Tooltip title="Select address">
+                            <MuiButton
+                              style={{ border: "1px solid #e7e7e7" }}
+                              color={selectedAddress?._id === item._id ? "primary" : "success"}
+                              onClick={() => handleSelectAddress(item)}
+                            >
+                              <FaCheck />
+                            </MuiButton>
+                          </Tooltip>
+                        )}
+                        {selectedAddress?._id === item._id && <small>Selected address</small>}
+                        {selectedAddress?._id !== item._id && (
+                          <Tooltip title="Delete address">
+                            <MuiButton
+                              style={{ border: "1px solid #e7e7e7" }}
+                              color="error"
+                              onClick={() => handleDelete(item._id)}
+                            >
+                              <FaTrash />
+                            </MuiButton>
+                          </Tooltip>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.right}>
+                    {/* address details */}
+                    <div className={styles.row}>
+                      {!isMedium && <hr />}
+                      <p>
+                        <FaIdBadge /> {firstName} {lastName}
+                      </p>
+                      <p>
+                        <FaPhoneAlt />
+                        {phoneNumber}
+                      </p>
+                      <hr />
+                      <p>
+                        <FaMapPin /> {address1}, {state}, {city}, {zipCode} {item.country}{" "}
+                        {address2 ? address2 : ""}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })
+        ) : (
+          <p>You don&apos;t have any saved addresses</p>
+        )}
+      </Swiper>
     </div>
   );
 };

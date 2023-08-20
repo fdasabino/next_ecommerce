@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
   margin: 1rem;
   position: relative;
 
@@ -10,7 +9,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-
     text-transform: uppercase;
   }
 
@@ -26,27 +24,35 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      button {
-        width: 2rem;
-        height: 1.5rem;
-        svg {
-          width: 0.7rem;
-          height: 0.7rem;
-        }
-      }
+
       h2 {
         font-size: 1.6rem;
         text-transform: uppercase;
       }
-    }
 
-    small {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      font-weight: 600;
+      .header_wrapper {
+        display: flex;
+        gap: 1rem;
 
-      @media (max-width: 600px) {
-        text-align: center;
+        @media (max-width: 600px) {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        button {
+          width: 2rem;
+          height: 1.5rem;
+          svg {
+            width: 0.7rem;
+            height: 0.7rem;
+          }
+        }
+
+        small {
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
       }
     }
   }
@@ -59,15 +65,11 @@
     display: flex;
     justify-content: center;
 
-    position: absolute;
-    top: 5rem;
-    left: 0;
-    opacity: 0;
     transition: all 0.5s ease-in-out;
     z-index: 5;
 
-    background: rgba($color: $base-grey, $alpha: 0.8);
-    backdrop-filter: blur(10px);
+    background: $base-grey;
+    box-shadow: $base-shadow-2;
     border-radius: 5px;
     border: 1px solid $base-dark-grey;
 
@@ -88,6 +90,12 @@
         width: 100%;
       }
 
+      @media (max-width: 600px) {
+        button {
+          width: 100%;
+        }
+      }
+
       button {
         margin: 0 auto;
       }
@@ -103,6 +111,10 @@
         font-weight: 600;
         text-transform: uppercase;
         font-size: 1.2rem;
+
+        @media (max-width: 700px) {
+          font-size: 1rem;
+        }
       }
 
       hr {
