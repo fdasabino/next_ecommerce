@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
-import { RiListUnordered } from "react-icons/ri";
+import { PiClipboardTextThin } from "react-icons/pi";
 import styles from "./CheckoutCart.module.scss";
 
 const CheckoutCart = ({ cart }) => {
@@ -12,8 +13,11 @@ const CheckoutCart = ({ cart }) => {
     <div className={styles.checkout_cart}>
       <div className={styles.header}>
         <h2>
-          Order Summary ({products.length}) <RiListUnordered />
+          Order Summary ({products.length}) <PiClipboardTextThin />
         </h2>
+        <small>
+          You can still modify your order by returning to your <Link href="/cart">cart</Link>
+        </small>
       </div>
       <div className={styles.items}>
         {products.map((product) => {

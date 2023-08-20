@@ -28,6 +28,10 @@
       h2 {
         font-size: 1.6rem;
         text-transform: uppercase;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       .header_wrapper {
@@ -49,7 +53,7 @@
         }
 
         small {
-          font-size: 0.9rem;
+          font-size: 0.8rem;
           text-transform: uppercase;
           font-weight: 600;
         }

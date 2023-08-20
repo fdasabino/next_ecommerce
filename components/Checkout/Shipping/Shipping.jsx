@@ -11,6 +11,7 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
 import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
+import { TbTruckDelivery } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
@@ -158,7 +159,9 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
     <div className={styles.shipping}>
       <div className={styles.shipping_header}>
         <div className={styles.btn_header}>
-          <h2>Shipping address</h2>
+          <h2>
+            Shipping address <TbTruckDelivery />
+          </h2>
           <div className={styles.header_wrapper}>
             {user?.address.length > 0 && (
               <small>Select an existing address or click + to add a new one</small>
