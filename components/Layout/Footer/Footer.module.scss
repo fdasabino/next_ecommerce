@@ -47,11 +47,12 @@
     align-items: center;
     justify-content: center;
     margin: 1rem;
-    max-width: 300px;
     width: 100%;
+    max-width: 400px;
 
     input {
       width: 100%;
+      max-width: 300px;
       height: 2.2rem;
       padding: 0 1rem;
       margin-right: 0.3rem;
@@ -77,6 +78,10 @@
       &:focus {
         outline: $base-grey auto 1px;
       }
+    }
+
+    button {
+      max-width: 100px;
     }
   }
 
