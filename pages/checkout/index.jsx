@@ -9,14 +9,15 @@ import React, { useEffect, useState } from "react";
 
 const Checkout = ({ cart, user, activeAddress }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
-  const [selectedAddress, setSelectedAddress] = useState(
-    activeAddress === true ? activeAddress : null
-  );
+  const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
+
+  console.log("activeAddress", activeAddress);
 
   useEffect(() => {
     const checkedActiveAddress = addresses.find(
-      (address) => address.active === true && activeAddress.active === true
+      (address) => address.active === true && activeAddress
     );
+    console.log("checkedActiveAddress", checkedActiveAddress);
     if (checkedActiveAddress) {
       setSelectedAddress(checkedActiveAddress);
     }

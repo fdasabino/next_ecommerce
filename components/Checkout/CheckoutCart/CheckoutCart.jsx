@@ -11,6 +11,10 @@ const CheckoutCart = ({ cart, user }) => {
 
   const { products, cartTotal } = cart;
 
+  const saveOrderToDb = () => {
+    console.log("save order to db");
+  };
+
   return (
     <div className={styles.checkout_cart}>
       <div className={styles.header}>
@@ -49,7 +53,7 @@ const CheckoutCart = ({ cart, user }) => {
         <hr />
         <div className={styles.cart_total}>
           <p>Order total: ${cartTotal.toFixed(2)}</p>
-          <Button style="primary" disabled={user?.address.length === 0}>
+          <Button style="primary" disabled={user?.address.length === 0} onClick={saveOrderToDb}>
             Continue to payment <AiOutlineArrowRight />
           </Button>
         </div>
