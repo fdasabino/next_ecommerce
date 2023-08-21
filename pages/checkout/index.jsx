@@ -11,13 +11,14 @@ const Checkout = ({ cart, user, activeAddress }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
 
-  console.log("activeAddress", activeAddress);
-
   useEffect(() => {
-    const checkedActiveAddress = addresses.find(
-      (address) => address.active === true && activeAddress
+    let checkedActiveAddress = null;
+
+    checkedActiveAddress = addresses.find(
+      (address) => activeAddress && address.active === true && address._id === activeAddress._id
     );
-    console.log("checkedActiveAddress", checkedActiveAddress);
+    // console.log("checkedActiveAddress", checkedActiveAddress);
+    // console.log("activeAddress", activeAddress);
     if (checkedActiveAddress) {
       setSelectedAddress(checkedActiveAddress);
     }
