@@ -167,7 +167,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
             {user?.address.length > 0 && (
               <small>Select an existing address or click + to add a new one</small>
             )}
-            <Tooltip title={showForm ? "Hide form" : "Add address"}>
+            <Tooltip title={showForm ? "Hide fields" : "Add address"}>
               <MuiButton
                 style={{
                   width: isSmall ? "100%" : "50px",
