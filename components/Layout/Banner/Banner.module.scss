@@ -12,6 +12,8 @@
   gap: 2rem;
   opacity: 1;
   position: relative;
+  border-bottom: 1px solid $base-grey;
+  box-shadow: $base-shadow-2;
 
   @media (max-width: 900px) {
     display: none;
