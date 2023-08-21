@@ -1,3 +1,5 @@
+import React, { useRef, useState } from "react";
+
 import Button from "@/components/Layout/Button/Button";
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
@@ -8,8 +10,7 @@ import { setAddressActive } from "@/utils/setActiveAddress";
 import { Button as MuiButton, Tooltip } from "@mui/material";
 import { Form, Formik } from "formik";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { AiOutlineArrowDown, AiOutlineArrowRight, AiOutlineArrowUp } from "react-icons/ai";
+import { AiFillCheckSquare, AiOutlineArrowUp } from "react-icons/ai";
 import { FaCheck, FaIdBadge, FaMapPin, FaPhoneAlt, FaPlus, FaTimes, FaTrash } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useSelector } from "react-redux";
@@ -191,6 +192,9 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
           >
             {(form) => (
               <Form>
+                <h4>
+                  <FaPlus /> Add new address
+                </h4>
                 <SingleSelectInput
                   name="country"
                   value={newAddress.country}
@@ -199,12 +203,12 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                   data={countries}
                 />
                 {!isCountrySelected ? (
-                  <h4>
+                  <h4 style={{ color: "grey" }}>
                     <AiOutlineArrowUp /> Select a country
                   </h4>
                 ) : (
-                  <h4>
-                    <AiOutlineArrowDown /> Fill in your address details
+                  <h4 style={{ color: "green" }}>
+                    <AiFillCheckSquare /> Fill in your address details below
                   </h4>
                 )}
                 <div className={styles.row}>
