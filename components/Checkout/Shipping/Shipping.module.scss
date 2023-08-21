@@ -169,7 +169,7 @@
       &.selected {
         border: 1px solid $base-success;
         background: rgba($color: $base-green, $alpha: 0.2);
-        scale: 1.05;
+        scale: 1.03;
 
         @media (max-width: 800px) {
           scale: none;

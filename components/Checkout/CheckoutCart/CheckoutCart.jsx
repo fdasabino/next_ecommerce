@@ -19,7 +19,9 @@ const CheckoutCart = ({ cart, user }) => {
     <div className={styles.checkout_cart}>
       <div className={styles.header}>
         <h2>
-          Order Summary ({products.length}) <PiClipboardTextThin />
+          Order Summary (
+          {products.length === 1 ? `${products.length} item` : `${products.length} items`}){" "}
+          <PiClipboardTextThin />
         </h2>
         <small>
           You can still modify your order by returning to your <Link href="/cart">cart</Link>
