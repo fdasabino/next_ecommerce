@@ -1,10 +1,12 @@
+import Button from "@/components/Layout/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { PiClipboardTextThin } from "react-icons/pi";
 import styles from "./CheckoutCart.module.scss";
 
-const CheckoutCart = ({ cart }) => {
+const CheckoutCart = ({ cart, user }) => {
   console.log(cart);
 
   const { products, cartTotal } = cart;
@@ -44,7 +46,13 @@ const CheckoutCart = ({ cart }) => {
             </div>
           );
         })}
-        <p className={styles.cart_total}>Order total: ${cartTotal.toFixed(2)}</p>
+        <hr />
+        <div className={styles.cart_total}>
+          <p>Order total: ${cartTotal.toFixed(2)}</p>
+          <Button style="primary" disabled={user?.address.length === 0}>
+            Continue to payment <AiOutlineArrowRight />
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ const Checkout = ({ cart, user, activeAddress }) => {
           />
         </div>
         <div className={styles.checkout_right}>
-          <CheckoutCart cart={cart} />
+          <CheckoutCart cart={cart} user={user} />
         </div>
       </div>
     </div>

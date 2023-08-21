@@ -5,16 +5,36 @@
   gap: 1rem;
   margin: 1rem;
 
+  hr {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0.5rem auto;
+  }
+
   .cart_total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     text-transform: uppercase;
     font-size: 1rem;
-    font-weight: 600;
     width: 100%;
+    padding: 1rem;
 
-    background-color: rgba($color: $base-success, $alpha: 0.2);
-    border: 1px solid $base-success;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    p {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      width: 100%;
+      max-width: fit-content;
+    }
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .header {
@@ -44,7 +64,7 @@
       font-weight: 600;
 
       a {
-        color: $base-dark;
+        color: $base-info;
         text-decoration: underline;
       }
     }

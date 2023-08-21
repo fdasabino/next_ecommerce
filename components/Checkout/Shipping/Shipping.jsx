@@ -387,7 +387,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
             );
           })
         ) : (
-          <p>You don&apos;t have any saved addresses</p>
+          <p>You don&apos;t have any saved addresses.</p>
         )}
       </Swiper>
     </div>
