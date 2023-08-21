@@ -42,13 +42,6 @@ const Panel = ({ saveCartToDbHandler }) => {
       </div>
       <hr />
       <div className={styles.body}>
-        <div className={styles.promo}>
-          <h3>Do you have a promo code?</h3>
-          <div className={styles.input}>
-            <input type="text" placeholder="Enter your code" />
-            <Button style="secondary">Apply</Button>
-          </div>
-        </div>
         <div className={styles.subtotal}>
           <div className={styles.row1}>
             <h3>

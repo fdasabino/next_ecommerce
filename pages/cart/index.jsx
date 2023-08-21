@@ -9,7 +9,6 @@ import { addCartToDb } from "@/utils/addCartTodb";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { AiOutlineArrowDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const CartPage = () => {
@@ -51,11 +50,6 @@ const CartPage = () => {
               <div className={styles.mx_4}>
                 <div className={styles.cart__wrapper}>
                   <div className={styles.left}>
-                    <div className={styles.summary}>
-                      <h2>
-                        Order Summary <AiOutlineArrowDown />
-                      </h2>
-                    </div>
                     {cart &&
                       cart.cartItems.length > 0 &&
                       cart.cartItems.map((item) => (
