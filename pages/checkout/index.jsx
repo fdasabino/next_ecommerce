@@ -1,4 +1,5 @@
 import CheckoutCart from "@/components/Checkout/CheckoutCart/CheckoutCart";
+import PaymentMethod from "@/components/Checkout/PaymentMethod/PaymentMethod";
 import Shipping from "@/components/Checkout/Shipping/Shipping";
 import Cart from "@/models/Cart";
 import User from "@/models/User";
@@ -10,6 +11,7 @@ import React, { useEffect, useState } from "react";
 const Checkout = ({ cart, user, activeAddress }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   useEffect(() => {
     let checkedActiveAddress = null;
@@ -27,7 +29,7 @@ const Checkout = ({ cart, user, activeAddress }) => {
   return (
     <div className={styles.checkout}>
       <div className={styles.wrapper}>
-        <div className={styles.checkout_left}>
+        <div className={styles.checkout_top}>
           <Shipping
             selectedAddress={selectedAddress}
             setSelectedAddress={setSelectedAddress}
@@ -37,8 +39,18 @@ const Checkout = ({ cart, user, activeAddress }) => {
             user={user}
           />
         </div>
-        <div className={styles.checkout_right}>
-          <CheckoutCart cart={cart} user={user} />
+        <div className={styles.checkout_bottom}>
+          <div className={styles.checkout_bottom_left}>
+            <CheckoutCart cart={cart} user={user} />
+          </div>
+          <div className={styles.checkout_bottom_right}>
+            <PaymentMethod
+              selectedPaymentMethod={selectedPaymentMethod}
+              setSelectedPaymentMethod={setSelectedPaymentMethod}
+              user={user}
+              cart={cart}
+            />
+          </div>
         </div>
       </div>
     </div>

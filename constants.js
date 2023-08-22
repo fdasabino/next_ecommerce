@@ -67,3 +67,19 @@ export const footerLinks = [
     ],
   },
 ];
+
+export const paymentMethods = [
+  {
+    name: "Credit Card",
+    id: "credit_card",
+    description: "",
+    images: ["visa", "mastercard", "maestro", "american_express"],
+  },
+  {
+    name: "Paypal",
+    id: "paypal",
+    description:
+      "You can also pay via paypal with your credit card or bank debit card. Payments can be submitted in any currency!",
+    images: [],
+  },
+];

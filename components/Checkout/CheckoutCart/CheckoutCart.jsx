@@ -6,14 +6,8 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { PiClipboardTextThin } from "react-icons/pi";
 import styles from "./CheckoutCart.module.scss";
 
-const CheckoutCart = ({ cart, user }) => {
-  console.log(cart);
-
-  const { products, cartTotal } = cart;
-
-  const saveOrderToDb = () => {
-    console.log("save order to db");
-  };
+const CheckoutCart = ({ cart }) => {
+  const { products } = cart;
 
   return (
     <div className={styles.checkout_cart}>
@@ -52,13 +46,6 @@ const CheckoutCart = ({ cart, user }) => {
             </div>
           );
         })}
-        <hr />
-        <div className={styles.cart_total}>
-          <p>Order total: ${cartTotal.toFixed(2)}</p>
-          <Button style="primary" disabled={user?.address.length === 0} onClick={saveOrderToDb}>
-            Continue to payment <AiOutlineArrowRight />
-          </Button>
-        </div>
       </div>
     </div>
   );
