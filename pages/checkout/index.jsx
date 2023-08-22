@@ -8,8 +8,9 @@ import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 
-const Checkout = ({ cart, user, activeAddress }) => {
+const Checkout = ({ cart, user }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
+  const activeAddress = addresses.find((address) => address.active === true);
   const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
@@ -19,8 +20,7 @@ const Checkout = ({ cart, user, activeAddress }) => {
     checkedActiveAddress = addresses.find(
       (address) => activeAddress && address.active === true && address._id === activeAddress._id
     );
-    // console.log("checkedActiveAddress", checkedActiveAddress);
-    // console.log("activeAddress", activeAddress);
+
     if (checkedActiveAddress) {
       setSelectedAddress(checkedActiveAddress);
     }
@@ -35,7 +35,6 @@ const Checkout = ({ cart, user, activeAddress }) => {
             setSelectedAddress={setSelectedAddress}
             setAddresses={setAddresses}
             addresses={addresses}
-            activeAddress={activeAddress}
             user={user}
           />
         </div>
@@ -64,7 +63,6 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   const user = await User.findById(session?.user?._id);
   const cart = await Cart.findOne({ user: user?._id });
-  const activeAddress = user?.address.find((address) => address.active === true);
 
   if (!cart) {
     return {
@@ -80,7 +78,6 @@ export async function getServerSideProps(context) {
     props: {
       cart: JSON.parse(JSON.stringify(cart)),
       user: JSON.parse(JSON.stringify(user)),
-      activeAddress: activeAddress ? JSON.parse(JSON.stringify(activeAddress)) : null,
     },
   };
 }

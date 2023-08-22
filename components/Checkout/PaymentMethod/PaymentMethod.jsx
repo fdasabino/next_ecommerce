@@ -9,14 +9,9 @@ import styles from "./PaymentMethod.module.scss";
 const PaymentMethod = ({ selectedPaymentMethod, setSelectedPaymentMethod, user, cart }) => {
   const { cartTotal } = cart;
 
-  console.log(paymentMethods);
-  console.log(selectedPaymentMethod);
-
   const saveOrderToDb = () => {
     console.log("save order to db");
   };
-
-  console.log(user.address);
 
   const handleChange = (e) => {
     const newValue = e.target.value;

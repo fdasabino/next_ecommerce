@@ -104,14 +104,14 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
 
     const res = await saveAddress(updatedAddress);
 
-    if (res && res.addressFound === true) {
+    if (res?.addressFound === true) {
       toast.info(res.message);
       setShowForm(false);
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    if (res && res.ok) {
+    if (res?.ok) {
       const newAddressList = [...addresses, res.address];
       setSelectedAddress(res.address);
       setAddresses(newAddressList);
@@ -119,37 +119,26 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
       setShowForm(false);
 
       toast.success("Address saved successfully");
-
-      const timeout = setTimeout(() => {
-        window.location.reload();
-      }, 500);
-
-      () => clearTimeout(timeout);
+      history.go(0);
     }
   };
 
   const handleSelectAddress = async (address) => {
     try {
       const res = await setAddressActive(address);
-      if (res && res.ok) {
-        // Move the selected address to the first position in the array
-        const updatedAddresses = [
-          res.address,
-          ...addresses.filter((item) => item._id !== res.address._id),
-        ];
-        setAddresses(updatedAddresses);
 
-        setSelectedAddress(res.address);
-        setShowForm(false);
-        toast.success(res.message);
+      // Move the selected address to the first position in the array
+      const updatedAddresses = [
+        res.address,
+        ...addresses.filter((item) => item._id !== res.address._id),
+      ];
 
-        // Move the Swiper to the first slide
-        if (swiperRef.current) {
-          swiperRef.current.swiper.slideTo(0);
-        }
-      }
+      setAddresses(updatedAddresses);
+      setSelectedAddress(res.address);
+      setShowForm(false);
+      toast.success(res.message);
+      swiperRef.current.swiper.slideTo(0);
     } catch (error) {
-      // Handle error (e.g., show an error message using toast)
       toast.error("An error occurred while setting address as active");
     }
   };
