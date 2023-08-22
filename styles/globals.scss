@@ -65,14 +65,13 @@ input,
 textarea,
 select,
 option,
-label,
-.MuiButtonBase-root,
-.MuiSelect-select {
-  text-transform: uppercase !important;
+label {
   transition: all 0.5s ease-in-out;
+  font-family: "Rajdhani", sans-serif !important;
 }
 
-.MuiFormLabel-root {
+.MuiButtonBase-root,
+.MuiSelect-select {
   font-family: "Rajdhani", sans-serif !important;
   font-weight: 500 !important;
   font-size: 0.8rem !important;
