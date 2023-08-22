@@ -162,8 +162,8 @@
       padding: 1rem;
 
       &:hover {
-        border: 1px solid $base-dark-grey;
-        box-shadow: $base-shadow-1;
+        background-color: rgba($color: $base-success, $alpha: 0.1);
+        border-radius: 10px;
       }
 
       &.selected {
