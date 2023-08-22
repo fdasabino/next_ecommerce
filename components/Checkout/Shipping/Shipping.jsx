@@ -101,7 +101,6 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
         : `(${country.calling_code})${newAddress.phoneNumber}`;
 
     const updatedAddress = { ...newAddress, phoneNumber: formattedPhoneNumber };
-
     const res = await saveAddress(updatedAddress);
 
     if (res?.addressFound === true) {
@@ -293,38 +292,26 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
       >
         {addresses.length > 0 ? (
           addresses.map((item, i) => {
-            const {
-              _id,
-              firstName,
-              lastName,
-              phoneNumber,
-              state,
-              city,
-              zipCode,
-              address1,
-              address2,
-            } = item;
-
             return (
               <SwiperSlide
                 style={
-                  selectedAddress?._id === _id
+                  selectedAddress?._id === item._id
                     ? { order: -1 } // Move selected address to the first position
                     : null
                 }
                 className={styles.addresses}
-                key={_id || i}
+                key={item._id || i}
               >
                 <div
-                  className={`${styles.address} ${selectedAddress?._id === _id && styles.selected}`}
+                  className={`${styles.address} ${
+                    selectedAddress?._id === item._id && styles.selected
+                  }`}
                 >
                   <div className={styles.left}>
-                    {/* image */}
                     <div className={styles.img}>
                       <Image src={user.image} width={300} height={300} alt={user.name} />
                     </div>
 
-                    {/* ctas */}
                     <div className={styles.ctas}>
                       <div className={styles.btns}>
                         {selectedAddress?._id !== item._id && (
@@ -338,6 +325,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                             </MuiButton>
                           </Tooltip>
                         )}
+
                         {selectedAddress?._id === item._id && <small>Selected address</small>}
                         {selectedAddress?._id !== item._id && (
                           <Tooltip title="Delete address">
@@ -354,20 +342,19 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                     </div>
                   </div>
                   <div className={styles.right}>
-                    {/* address details */}
                     <div className={styles.row}>
                       {!isMedium && <hr />}
                       <p>
-                        <FaIdBadge /> {firstName} {lastName}
+                        <FaIdBadge /> {item.firstName} {item.lastName}
                       </p>
                       <p>
                         <FaPhoneAlt />
-                        {phoneNumber}
+                        {item.phoneNumber}
                       </p>
                       <hr />
                       <p>
-                        <FaMapPin /> {address1}, {state}, {city}, {zipCode} {item.country}{" "}
-                        {address2 ? address2 : ""}
+                        <FaMapPin /> {item.address1}, {item.state}, {item.city}, {item.zipCode}{" "}
+                        {item.country} {item.address2 ? item.address2 : ""}
                       </p>
                     </div>
                   </div>

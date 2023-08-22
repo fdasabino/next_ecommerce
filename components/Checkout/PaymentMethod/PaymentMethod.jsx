@@ -4,6 +4,7 @@ import React from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaCcAmex, FaCcDinersClub, FaCcMastercard, FaCcPaypal, FaCcVisa } from "react-icons/fa";
 import { MdPayments } from "react-icons/md";
+import { toast } from "react-toastify";
 import styles from "./PaymentMethod.module.scss";
 
 const PaymentMethod = ({ selectedPaymentMethod, setSelectedPaymentMethod, user, cart }) => {
@@ -33,6 +34,7 @@ const PaymentMethod = ({ selectedPaymentMethod, setSelectedPaymentMethod, user, 
             : "Add a delivery address to continue"}
         </small>
       </div>
+
       <div className={styles.payment_methods}>
         {paymentMethods.map((method) => {
           return (
@@ -43,6 +45,7 @@ const PaymentMethod = ({ selectedPaymentMethod, setSelectedPaymentMethod, user, 
               key={method.id}
               onClick={() => setSelectedPaymentMethod(method.name)}
             >
+              {selectedPaymentMethod === method.name && <p>selected</p>}
               <div className={styles.radio}>
                 <input
                   id={method.id}
