@@ -134,117 +134,133 @@ const AuthForms = (props) => {
       .required("Confirm password is required"),
   });
 
+  const renderSignInForm = () => {
+    return (
+      <Formik
+        enableReinitialize
+        initialValues={{ login_email, login_password }}
+        validationSchema={signInValidation}
+        onSubmit={handleSignIn}
+      >
+        {(form) => (
+          <Form method="post" action="/api/auth/signin/email">
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+            <FormInput
+              type="email"
+              icon="email"
+              name="login_email"
+              placeholder="Email address"
+              onChange={handleChange}
+            />
+            <FormInput
+              type="password"
+              icon="password"
+              name="login_password"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+            <Button type="submit" style="primary">
+              Sign in <AiOutlineArrowRight />
+            </Button>
+            <div className={styles.forgot_password}>
+              <Link href="/auth/forgotpassword">Forgot your password?</Link>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    );
+  };
+
+  const renderSignUpForm = () => {
+    return (
+      <Formik
+        enableReinitialize
+        initialValues={{
+          full_name,
+          signup_email,
+          signup_password,
+          signup_confirm_password,
+        }}
+        validationSchema={signUpValidation}
+        onSubmit={handleSignUp}
+      >
+        {(form) => (
+          <Form>
+            <FormInput
+              type="text"
+              icon="user"
+              name="full_name"
+              placeholder="Full name"
+              onChange={handleChange}
+            />
+            <FormInput
+              type="email"
+              icon="email"
+              name="signup_email"
+              placeholder="Email address"
+              onChange={handleChange}
+            />
+            <FormInput
+              type="password"
+              icon="password"
+              name="signup_password"
+              placeholder="Create password"
+              onChange={handleChange}
+            />
+            <FormInput
+              type="password"
+              icon="password"
+              name="signup_confirm_password"
+              placeholder="Confirm password"
+              onChange={handleChange}
+            />
+            <Button type="submit" style="primary">
+              Sign up <AiOutlineUserAdd />
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    );
+  };
+
+  const renderProviders = () => {
+    return (
+      <div className={styles.signin__providers}>
+        <span>or sign in with:</span>
+        {Object.values(providers).map((provider) => {
+          // skip credentials provider since we already have it above
+          if (provider.id === "credentials") return;
+          return (
+            <div key={provider.id} className={styles.provider_container}>
+              <form method="post" action={`/api/auth/signin/${provider.name}`}>
+                <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+                <Button style="google" onClick={() => signIn(provider.id)}>
+                  <FcGoogle /> Google account
+                </Button>
+              </form>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <>
       <div className={styles.signin__container}>
         <div className={styles.signin__form}>
           <h1>Sign in</h1>
           <p>Sign in with your account</p>
-          <Formik
-            enableReinitialize
-            initialValues={{ login_email, login_password }}
-            validationSchema={signInValidation}
-            onSubmit={handleSignIn}
-          >
-            {(form) => (
-              <Form method="post" action="/api/auth/signin/email">
-                <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                <FormInput
-                  type="email"
-                  icon="email"
-                  name="login_email"
-                  placeholder="Email address"
-                  onChange={handleChange}
-                />
-                <FormInput
-                  type="password"
-                  icon="password"
-                  name="login_password"
-                  placeholder="Password"
-                  onChange={handleChange}
-                />
-                <Button type="submit" style="primary">
-                  Sign in <AiOutlineArrowRight />
-                </Button>
-                <div className={styles.forgot_password}>
-                  <Link href="/auth/forgotpassword">Forgot your password?</Link>
-                </div>
-              </Form>
-            )}
-          </Formik>
-          {/* Providers */}
-          <div className={styles.signin__providers}>
-            <span>or sign in with:</span>
-            {Object.values(providers).map((provider) => {
-              // skip credentials provider since we already have it above
-              if (provider.id === "credentials") return;
-              return (
-                <div key={provider.id} className={styles.provider_container}>
-                  <form method="post" action={`/api/auth/signin/${provider.name}`}>
-                    <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                    <Button style="google" onClick={() => signIn(provider.id)}>
-                      <FcGoogle /> Google account
-                    </Button>
-                  </form>
-                </div>
-              );
-            })}
-          </div>
+          {renderSignInForm()}
+          {renderProviders()}
         </div>
       </div>
       <div className="vertical-line" />
-      {/* Right */}
       <div className={styles.signin__container}>
         <div className={styles.signin__form}>
           <h1>Sign up</h1>
           <p>Sign up with credentials</p>
-          <Formik
-            enableReinitialize
-            initialValues={{
-              full_name,
-              signup_email,
-              signup_password,
-              signup_confirm_password,
-            }}
-            validationSchema={signUpValidation}
-            onSubmit={handleSignUp}
-          >
-            {(form) => (
-              <Form>
-                <FormInput
-                  type="text"
-                  icon="user"
-                  name="full_name"
-                  placeholder="Full name"
-                  onChange={handleChange}
-                />
-                <FormInput
-                  type="email"
-                  icon="email"
-                  name="signup_email"
-                  placeholder="Email address"
-                  onChange={handleChange}
-                />
-                <FormInput
-                  type="password"
-                  icon="password"
-                  name="signup_password"
-                  placeholder="Create password"
-                  onChange={handleChange}
-                />
-                <FormInput
-                  type="password"
-                  icon="password"
-                  name="signup_confirm_password"
-                  placeholder="Confirm password"
-                  onChange={handleChange}
-                />
-                <Button type="submit" style="primary">
-                  Sign up <AiOutlineUserAdd />
-                </Button>
-              </Form>
-            )}
-          </Formik>
+          {renderSignUpForm()}
         </div>
       </div>
     </>
