@@ -120,14 +120,18 @@ hr {
 
 .Toastify__toast {
   border-radius: 5px !important;
-  font-family: "Mulish", sans-serif !important;
-  font-size: 0.8rem !important;
+  font-family: "Rajdhani", sans-serif !important;
+  font-size: 0.9rem !important;
   font-weight: 600 !important;
-  transition: all 0.5s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
   white-space: pre-line !important;
-  padding: 0.5rem 1rem !important;
+  text-transform: uppercase !important;
+  color: #000 !important;
+  text-align: center !important;
+  padding: 1rem !important;
+  border: 1px solid $base-dark-grey !important;
 
   &:hover {
-    transform: scale(0.95) !important;
+    scale: 0.95 !important;
   }
 }
