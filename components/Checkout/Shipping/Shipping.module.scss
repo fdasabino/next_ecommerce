@@ -72,10 +72,9 @@
     transition: all 0.5s ease-in-out;
     z-index: 5;
 
-    background: $base-white;
-    box-shadow: $base-shadow-3;
+    box-shadow: inset $base-shadow-2;
     border-radius: 10px;
-    border: 1px solid $base-grey;
+    border: #f0efef 1px solid;
 
     form {
       width: 100%;
