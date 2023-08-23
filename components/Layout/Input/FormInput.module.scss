@@ -29,9 +29,6 @@
     -moz-appearance: textfield;
   }
 
-  input {
-  }
-
   &:focus-within {
     outline: 1px solid $base-info;
   }
@@ -80,7 +77,7 @@
 
 .error_message {
   position: relative;
-  max-width: 350px;
+  max-width: 100%;
   width: 100%;
   background-color: $base-error;
   border-radius: 10px;

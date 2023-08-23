@@ -249,7 +249,7 @@ const AuthForms = (props) => {
     <>
       <div className={styles.signin__container}>
         <div className={styles.signin__form}>
-          <h1>Sign in</h1>
+          <h2>Sign in</h2>
           <p>Sign in with your account</p>
           {renderSignInForm()}
           {renderProviders()}
@@ -258,7 +258,7 @@ const AuthForms = (props) => {
       <div className="vertical-line" />
       <div className={styles.signin__container}>
         <div className={styles.signin__form}>
-          <h1>Sign up</h1>
+          <h2>Sign up</h2>
           <p>Sign up with credentials</p>
           {renderSignUpForm()}
         </div>
