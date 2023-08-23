@@ -53,6 +53,11 @@
       flex-direction: column;
       align-items: center;
 
+      button {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
       .forgot_password {
         display: flex;
         justify-content: center;

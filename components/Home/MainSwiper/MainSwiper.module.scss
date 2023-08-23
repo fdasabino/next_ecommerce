@@ -56,7 +56,19 @@
 
       .ctas {
         display: flex;
+        justify-content: center;
         gap: 1rem;
+        width: 100%;
+
+        button {
+          width: 100%;
+          max-width: 100%;
+        }
+
+        @media (max-width: 500px) {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
       }
     }
   }
