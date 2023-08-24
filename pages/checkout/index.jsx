@@ -1,6 +1,7 @@
 import CheckoutCart from "@/components/Checkout/CheckoutCart/CheckoutCart";
 import PaymentMethod from "@/components/Checkout/PaymentMethod/PaymentMethod";
 import Shipping from "@/components/Checkout/Shipping/Shipping";
+import Summary from "@/components/Checkout/Summary/Summary";
 import Cart from "@/models/Cart";
 import User from "@/models/User";
 import styles from "@/styles/pages/CheckoutPage.module.scss";
@@ -13,6 +14,7 @@ const Checkout = ({ cart, user }) => {
   const activeAddress = addresses.find((address) => address.active === true);
   const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [totalAfterCoupon, setTotalAfterCoupon] = useState(0);
 
   useEffect(() => {
     let checkedActiveAddress = null;
@@ -44,6 +46,9 @@ const Checkout = ({ cart, user }) => {
           </div>
           <div className={styles.checkout_bottom_right}>
             <PaymentMethod
+              totalAfterCoupon={totalAfterCoupon}
+              setTotalAfterCoupon={setTotalAfterCoupon}
+              activeAddress={activeAddress}
               selectedPaymentMethod={selectedPaymentMethod}
               setSelectedPaymentMethod={setSelectedPaymentMethod}
               user={user}

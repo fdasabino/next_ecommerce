@@ -1,4 +1,5 @@
 import { ErrorMessage, useField } from "formik";
+import { CiDiscount1 } from "react-icons/ci";
 import { GoNumber } from "react-icons/go";
 import { MdErrorOutline } from "react-icons/md";
 import { PiTextAaThin } from "react-icons/pi";
@@ -14,6 +15,7 @@ const iconMap = {
   address1: <PiTextAaThin />,
   address2: <PiTextAaThin />,
   country: <PiTextAaThin />,
+  coupon: <CiDiscount1 />,
 };
 
 const ShippingInput = ({ icon, placeholder, ...props }) => {
