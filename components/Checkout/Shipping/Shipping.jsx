@@ -16,7 +16,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
-import { Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import * as Yup from "yup";
 import styles from "./Shipping.module.scss";
@@ -288,11 +288,12 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
         ref={swiperRef}
         slidesPerView={isSmall ? 1 : isMedium ? 2 : isLarge ? 4 : 4}
         spaceBetween={5}
+        navigation={isMedium && user.address.length > 2 ? true : false}
         pagination={{
           clickable: true,
         }}
         grabCursor={true}
-        modules={[Pagination]}
+        modules={[Pagination, Navigation]}
         style={{ width: "100%", padding: "1.5rem 0" }}
       >
         {addresses.length > 0 ? (
