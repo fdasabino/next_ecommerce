@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlineArrowRight, AiOutlineUserAdd } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
