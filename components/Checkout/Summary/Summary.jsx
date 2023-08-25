@@ -1,7 +1,7 @@
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
 import { Button as MuiButton } from "@mui/material";
 import { Form, Formik } from "formik";
-import React, { useState } from "react";
+import { useState } from "react";
 import * as Yup from "yup";
 import styles from "./Summary.module.scss";
 

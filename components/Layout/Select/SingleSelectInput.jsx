@@ -1,6 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useField } from "formik";
-import React from "react";
 import styles from "./SingleSelectInput.module.scss";
 
 const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {

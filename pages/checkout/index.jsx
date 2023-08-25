@@ -1,13 +1,12 @@
 import CheckoutCart from "@/components/Checkout/CheckoutCart/CheckoutCart";
 import PaymentMethod from "@/components/Checkout/PaymentMethod/PaymentMethod";
 import Shipping from "@/components/Checkout/Shipping/Shipping";
-import Summary from "@/components/Checkout/Summary/Summary";
 import Cart from "@/models/Cart";
 import User from "@/models/User";
 import styles from "@/styles/pages/CheckoutPage.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Checkout = ({ cart, user }) => {
   const [addresses, setAddresses] = useState(user?.address || []);

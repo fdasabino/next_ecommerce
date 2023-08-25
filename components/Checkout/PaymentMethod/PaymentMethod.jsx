@@ -1,7 +1,7 @@
 import Button from "@/components/Layout/Button/Button";
 import { paymentMethods } from "@/constants";
 import { Button as MuiButton, Tooltip } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { CiDiscount1 } from "react-icons/ci";
 import {

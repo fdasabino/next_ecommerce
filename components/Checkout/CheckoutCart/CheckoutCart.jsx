@@ -1,8 +1,5 @@
-import Button from "@/components/Layout/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
 import { PiClipboardTextThin } from "react-icons/pi";
 import styles from "./CheckoutCart.module.scss";
 

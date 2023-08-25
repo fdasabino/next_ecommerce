@@ -1,6 +1,4 @@
-import authMiddleware from "@/middleware/auth";
 import Coupon from "@/models/Coupon";
-import User from "@/models/User";
 import db from "@/utils/db";
 
 const handler = async (req, res) => {
