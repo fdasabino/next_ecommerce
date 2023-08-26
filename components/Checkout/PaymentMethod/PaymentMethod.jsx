@@ -1,5 +1,6 @@
 import Button from "@/components/Layout/Button/Button";
 import { paymentMethods } from "@/constants";
+import { applyCoupon } from "@/utils/applyCoupon";
 import { Button as MuiButton, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -152,7 +153,7 @@ const PaymentMethod = ({
         <div className={styles.cart_total}>
           <div className={styles.info}>
             <span>
-              Total: <b>${cartTotal}</b>
+              Total: <b>${cartTotal.toFixed(2)}</b>
             </span>
             {discount > 0 && (
               <span>
