@@ -5,19 +5,34 @@ import db from "@/utils/db";
 
 const handler = async (req, res) => {
   try {
-    await authMiddleware(req, res, async () => {
-      await db.connectDB();
-      const { coupon } = req.body;
+    await db.connectDB();
+    const { coupon } = req.body;
 
-      console.log(coupon);
+    const couponInDb = await Coupon.findOne(coupon).exec();
 
-      const validCoupon = await Coupon.findOne({ name: coupon }).exec();
-      if (!validCoupon) {
-        return res.status(400).json({ message: "Invalid coupon" });
-      }
+    console.log(couponInDb);
 
-      res.json({ message: "Coupon applied", coupon: validCoupon, ok: true });
-    });
+    if (!couponInDb) {
+      return res.status(400).json({ message: "Invalid discount code" });
+    }
+
+    const currentDate = new Date();
+    const startDate = new Date(couponInDb.startDate);
+    const endDate = new Date(couponInDb.endDate);
+
+    if (currentDate < startDate) {
+      return res.status(400).json({
+        message: `Coupon not active yet. This code starts on: ${startDate.getFullYear()}`,
+      });
+    }
+
+    if (currentDate > endDate) {
+      return res.status(400).json({ message: `Coupon expired on the: ${endDate.getFullYear()}` });
+    }
+
+    res.json({ message: "Coupon applied", coupon, ok: true });
+
+    await db.disconnectDB();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

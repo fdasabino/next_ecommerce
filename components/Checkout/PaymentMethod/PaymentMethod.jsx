@@ -46,14 +46,15 @@ const PaymentMethod = ({
       const res = await applyCoupon(coupon);
 
       if (res.ok === true) {
-        setDiscount(res.discount);
+        console.log("apply coupon", res);
+        setDiscount(res.coupon.discount);
         setTotalAfterCoupon(res.totalAfterCoupon);
+        toast.success(
+          `Coupon "${res.coupon.coupon}" applied... ${res.coupon.discount}% off your order`
+        );
       } else {
         toast.error(res.message);
       }
-
-      console.log("apply coupon");
-      toast.success("Coupon applied");
     } catch (error) {
       // Handle the error here
       console.log(error);

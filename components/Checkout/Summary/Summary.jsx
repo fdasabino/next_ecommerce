@@ -44,15 +44,15 @@ const Summary = ({
                   icon="coupon"
                   placeholder="*Enter discount code"
                   onChange={handleChange}
-                  value={coupon || ""}
+                  value={coupon ? coupon : ""}
                 />
                 <MuiButton
+                  fullWidth
                   style={{
-                    width: "100%",
                     border: "1px solid #e7e7e7",
                   }}
                   color="success"
-                  onClick={form.handleSubmit}
+                  type="submit"
                 >
                   Apply discount
                 </MuiButton>
