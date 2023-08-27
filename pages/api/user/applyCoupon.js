@@ -8,7 +8,9 @@ const handler = async (req, res) => {
     await db.connectDB();
     const { coupon } = req.body;
 
-    const couponInDb = await Coupon.findOne(coupon).exec();
+    console.log(coupon);
+
+    const couponInDb = await Coupon.findOne({ coupon }).exec();
 
     console.log(couponInDb);
 
@@ -30,7 +32,7 @@ const handler = async (req, res) => {
       return res.status(400).json({ message: `Coupon expired on the: ${endDate.getFullYear()}` });
     }
 
-    res.json({ message: "Coupon applied", coupon, ok: true });
+    res.json({ message: "Coupon applied", coupon: couponInDb, ok: true });
 
     await db.disconnectDB();
   } catch (error) {

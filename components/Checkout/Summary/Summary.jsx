@@ -14,9 +14,9 @@ const Summary = ({
   selectedPaymentMethod,
   setDiscount,
   applyCouponHandler,
+  coupon,
+  setCoupon,
 }) => {
-  const [coupon, setCoupon] = useState(null);
-
   const validateCoupon = Yup.object().shape({
     coupon: Yup.string().required("Please enter a coupon code"),
   });

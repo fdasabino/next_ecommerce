@@ -31,7 +31,7 @@ const PaymentMethod = ({
   const { cartTotal } = cart;
   const [showCoupon, setShowCoupon] = useState(false);
   const [discount, setDiscount] = useState(0);
-  const [coupon, setCoupon] = useState("");
+  const [coupon, setCoupon] = useState(null);
 
   const handleShowCouponForm = () => {
     if (showCoupon === true) {
@@ -115,6 +115,8 @@ const PaymentMethod = ({
               selectedPaymentMethod={selectedPaymentMethod}
               applyCouponHandler={applyCouponHandler}
               setDiscount={setDiscount}
+              coupon={coupon}
+              setCoupon={setCoupon}
             />
           </div>
         )}
