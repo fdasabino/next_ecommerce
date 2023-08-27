@@ -18,13 +18,6 @@ const cartSchema = new mongoose.Schema(
         size: {
           type: String,
         },
-        /*
-        style: {
-          style: String,
-          color: String,
-          image: String,
-        },
-        */
         qty: {
           type: Number,
         },
@@ -36,6 +29,7 @@ const cartSchema = new mongoose.Schema(
       },
     ],
     cartTotal: Number,
+    discount: Number,
     totalAfterDiscount: Number,
     user: {
       type: ObjectId,

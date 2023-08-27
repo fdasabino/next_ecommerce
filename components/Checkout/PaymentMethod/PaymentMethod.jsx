@@ -28,7 +28,7 @@ const PaymentMethod = ({
   totalAfterCoupon,
   setTotalAfterCoupon,
 }) => {
-  const { cartTotal } = cart;
+  const { cartTotal, totalAfterDiscount, discount: discountFromDb } = cart;
   const [showCoupon, setShowCoupon] = useState(false);
   const [discount, setDiscount] = useState(0);
   const [coupon, setCoupon] = useState(null);
@@ -45,18 +45,19 @@ const PaymentMethod = ({
     try {
       const res = await applyCoupon(coupon);
 
+      if (res.ok === false) {
+        toast.error(res.message);
+      }
+
       if (res.ok === true) {
         console.log("apply coupon", res);
         setDiscount(res.coupon.discount);
-        setTotalAfterCoupon(res.totalAfterCoupon);
+        setTotalAfterCoupon(res.newCart.totalAfterDiscount);
         toast.success(
           `Coupon "${res.coupon.coupon}" applied... ${res.coupon.discount}% off your order`
         );
-      } else {
-        toast.error(res.message);
       }
     } catch (error) {
-      // Handle the error here
       console.log(error);
     }
   };
@@ -69,6 +70,10 @@ const PaymentMethod = ({
 
   const placeOrderHandler = () => {
     console.log("save order to db");
+    console.log("Payment", selectedPaymentMethod);
+    console.log("Total after", totalAfterCoupon);
+    console.log("Discount", discount);
+    console.log("cart", cart);
   };
 
   return (
@@ -107,16 +112,11 @@ const PaymentMethod = ({
         {showCoupon && (
           <div className={styles.discount}>
             <Summary
-              user={user}
-              cart={cart}
-              activeAddress={activeAddress}
-              totalAfterCoupon={totalAfterCoupon}
-              setTotalAfterCoupon={setTotalAfterCoupon}
-              selectedPaymentMethod={selectedPaymentMethod}
               applyCouponHandler={applyCouponHandler}
-              setDiscount={setDiscount}
               coupon={coupon}
               setCoupon={setCoupon}
+              totalAfterDiscount={totalAfterDiscount}
+              discountFromDb={discountFromDb}
             />
           </div>
         )}
@@ -156,16 +156,17 @@ const PaymentMethod = ({
         <div className={styles.cart_total}>
           <div className={styles.info}>
             <span>
-              Total: <b>${cartTotal.toFixed(2)}</b>
+              {totalAfterCoupon > 0 ? "SubTotal" : "Total:"} <b>${cartTotal.toFixed(2)}</b>
             </span>
-            {discount > 0 && (
-              <span>
-                Discount applied: <b> -{discount}%</b>
-              </span>
-            )}
+            {discount > 0 ||
+              (discountFromDb > 0 && (
+                <span>
+                  Discount applied: <b> -{discount || discountFromDb}%</b>
+                </span>
+              ))}
             {totalAfterCoupon < cartTotal && totalAfterCoupon > 0 && (
               <span>
-                New price: <b>${totalAfterCoupon}</b>
+                Total: <b>${totalAfterCoupon}</b>
               </span>
             )}
           </div>

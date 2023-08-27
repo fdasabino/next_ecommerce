@@ -8,7 +8,7 @@ import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-const Checkout = ({ cart, user }) => {
+const Checkout = ({ cart, user, totalWithDiscountApplied }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const activeAddress = addresses.find((address) => address.active === true);
   const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
@@ -18,6 +18,10 @@ const Checkout = ({ cart, user }) => {
   useEffect(() => {
     let checkedActiveAddress = null;
 
+    if (totalWithDiscountApplied && totalWithDiscountApplied > 0) {
+      setTotalAfterCoupon(totalWithDiscountApplied);
+    }
+
     checkedActiveAddress = addresses.find(
       (address) => activeAddress && address.active === true && address._id === activeAddress._id
     );
@@ -25,7 +29,7 @@ const Checkout = ({ cart, user }) => {
     if (checkedActiveAddress) {
       setSelectedAddress(checkedActiveAddress);
     }
-  }, [addresses, activeAddress]);
+  }, [addresses, activeAddress, totalWithDiscountApplied]);
 
   return (
     <div className={styles.checkout}>
@@ -68,6 +72,8 @@ export async function getServerSideProps(context) {
   const user = await User.findById(session?.user?._id);
   const cart = await Cart.findOne({ user: user?._id });
 
+  const { totalAfterDiscount } = cart;
+
   if (!cart) {
     return {
       redirect: {
@@ -80,6 +86,7 @@ export async function getServerSideProps(context) {
   db.disconnectDB();
   return {
     props: {
+      totalWithDiscountApplied: totalAfterDiscount ? totalAfterDiscount : null,
       cart: JSON.parse(JSON.stringify(cart)),
       user: JSON.parse(JSON.stringify(user)),
     },

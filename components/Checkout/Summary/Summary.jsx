@@ -5,18 +5,7 @@ import { useState } from "react";
 import * as Yup from "yup";
 import styles from "./Summary.module.scss";
 
-const Summary = ({
-  user,
-  cart,
-  activeAddress,
-  totalAfterCoupon,
-  setTotalAfterCoupon,
-  selectedPaymentMethod,
-  setDiscount,
-  applyCouponHandler,
-  coupon,
-  setCoupon,
-}) => {
+const Summary = ({ applyCouponHandler, coupon, setCoupon, totalAfterDiscount, discountFromDb }) => {
   const validateCoupon = Yup.object().shape({
     coupon: Yup.string().required("Please enter a coupon code"),
   });
@@ -42,9 +31,12 @@ const Summary = ({
                   name="coupon"
                   type="text"
                   icon="coupon"
-                  placeholder="*Enter discount code"
+                  placeholder={
+                    discountFromDb && discountFromDb > 0 ? "Coupon applied" : "Apply coupon"
+                  }
                   onChange={handleChange}
                   value={coupon ? coupon : ""}
+                  disabled={totalAfterDiscount ? true : false}
                 />
                 <MuiButton
                   fullWidth
@@ -53,8 +45,9 @@ const Summary = ({
                   }}
                   color="success"
                   type="submit"
+                  disabled={totalAfterDiscount ? true : false}
                 >
-                  Apply discount
+                  {discountFromDb && discountFromDb > 0 ? "Coupon applied" : "Apply coupon"}
                 </MuiButton>
               </div>
             </Form>
