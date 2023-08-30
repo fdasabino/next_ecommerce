@@ -1,11 +1,19 @@
 import ShippingInput from "@/components/Layout/Input/ShippingInput";
 import { Button as MuiButton } from "@mui/material";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import * as Yup from "yup";
 import styles from "./Summary.module.scss";
 
-const Summary = ({ applyCouponHandler, coupon, setCoupon, totalAfterDiscount, discountFromDb }) => {
+const Summary = ({
+  applyCouponHandler,
+  coupon,
+  cart,
+  setCoupon,
+  discountFromDb,
+  disabled,
+  discount,
+}) => {
+  const { discount: discountFromCart } = cart;
   const validateCoupon = Yup.object().shape({
     coupon: Yup.string().required("Please enter a coupon code"),
   });
@@ -32,11 +40,17 @@ const Summary = ({ applyCouponHandler, coupon, setCoupon, totalAfterDiscount, di
                   type="text"
                   icon="coupon"
                   placeholder={
-                    discountFromDb && discountFromDb > 0 ? "Coupon applied" : "Apply coupon"
+                    disabled
+                      ? `COUPON APPLIED: ${discount || discountFromCart}% DISCOUNT`
+                      : "Apply coupon"
                   }
                   onChange={handleChange}
-                  value={coupon ? coupon : ""}
-                  disabled={totalAfterDiscount ? true : false}
+                  value={
+                    coupon && discount
+                      ? `COUPON APPLIED: ${discount || discountFromCart}% DISCOUNT`
+                      : coupon
+                  }
+                  disabled={disabled}
                 />
                 <MuiButton
                   fullWidth
@@ -45,9 +59,9 @@ const Summary = ({ applyCouponHandler, coupon, setCoupon, totalAfterDiscount, di
                   }}
                   color="success"
                   type="submit"
-                  disabled={totalAfterDiscount ? true : false}
+                  disabled={disabled}
                 >
-                  {discountFromDb && discountFromDb > 0 ? "Coupon applied" : "Apply coupon"}
+                  {disabled ? "Coupon applied" : "Apply coupon"}
                 </MuiButton>
               </div>
             </Form>

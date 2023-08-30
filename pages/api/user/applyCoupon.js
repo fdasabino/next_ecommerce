@@ -14,10 +14,6 @@ const handler = async (req, res) => {
       const couponInDb = await Coupon.findOne({ coupon }).exec();
       const cartInDb = await Cart.findOne({ user: userInDb._id }).exec();
 
-      console.log(userInDb);
-      console.log(couponInDb);
-      console.log(cartInDb);
-
       if (!couponInDb) {
         return res.json({ message: "Invalid discount code", ok: false });
       }

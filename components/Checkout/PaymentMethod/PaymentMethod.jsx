@@ -2,7 +2,7 @@ import Button from "@/components/Layout/Button/Button";
 import { paymentMethods } from "@/constants";
 import { applyCoupon } from "@/utils/applyCoupon";
 import { Button as MuiButton, Tooltip } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { CiDiscount1 } from "react-icons/ci";
 import {
@@ -31,7 +31,16 @@ const PaymentMethod = ({
   const { cartTotal, totalAfterDiscount, discount: discountFromDb } = cart;
   const [showCoupon, setShowCoupon] = useState(false);
   const [discount, setDiscount] = useState(0);
-  const [coupon, setCoupon] = useState(null);
+  const [coupon, setCoupon] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (discountFromDb) {
+      setDiscount(discountFromDb);
+      setTotalAfterCoupon(totalAfterDiscount);
+      setDisabled(true);
+    }
+  }, [disabled, discountFromDb, totalAfterDiscount, setTotalAfterCoupon]);
 
   const handleShowCouponForm = () => {
     if (showCoupon === true) {
@@ -50,9 +59,9 @@ const PaymentMethod = ({
       }
 
       if (res.ok === true) {
-        console.log("apply coupon", res);
         setDiscount(res.coupon.discount);
         setTotalAfterCoupon(res.newCart.totalAfterDiscount);
+        setDisabled(true);
         toast.success(
           `Coupon "${res.coupon.coupon}" applied... ${res.coupon.discount}% off your order`
         );
@@ -70,10 +79,12 @@ const PaymentMethod = ({
 
   const placeOrderHandler = () => {
     console.log("save order to db");
+    console.log("coupon", coupon);
     console.log("Payment", selectedPaymentMethod);
     console.log("Total after", totalAfterCoupon);
     console.log("Discount", discount);
     console.log("cart", cart);
+    console.log("active address", activeAddress);
   };
 
   return (
@@ -116,7 +127,9 @@ const PaymentMethod = ({
               coupon={coupon}
               setCoupon={setCoupon}
               totalAfterDiscount={totalAfterDiscount}
-              discountFromDb={discountFromDb}
+              discount={discount}
+              disabled={disabled}
+              cart={cart}
             />
           </div>
         )}
@@ -130,7 +143,7 @@ const PaymentMethod = ({
               key={method.id}
               onClick={() => setSelectedPaymentMethod(method.name)}
             >
-              {selectedPaymentMethod === method.name && <p>selected</p>}
+              {selectedPaymentMethod === method.name && <p>selected payment method</p>}
               <div className={styles.radio}>
                 <input
                   id={method.id}
@@ -158,15 +171,14 @@ const PaymentMethod = ({
             <span>
               {totalAfterCoupon > 0 ? "SubTotal" : "Total:"} <b>${cartTotal.toFixed(2)}</b>
             </span>
-            {discount > 0 ||
-              (discountFromDb > 0 && (
-                <span>
-                  Discount applied: <b> -{discount || discountFromDb}%</b>
-                </span>
-              ))}
+            {disabled && (
+              <span>
+                Discount applied: <b> -{discount || discountFromDb}%</b>
+              </span>
+            )}
             {totalAfterCoupon < cartTotal && totalAfterCoupon > 0 && (
               <span>
-                Total: <b>${totalAfterCoupon}</b>
+                Total: <b>${totalAfterCoupon.toFixed(2)}</b>
               </span>
             )}
           </div>
