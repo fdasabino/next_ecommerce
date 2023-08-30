@@ -72,7 +72,7 @@ export async function getServerSideProps(context) {
   const user = await User.findById(session?.user?._id);
   const cart = await Cart.findOne({ user: user?._id });
 
-  const { totalAfterDiscount } = cart;
+  const totalAfterDiscount = cart?.totalAfterDiscount || null;
 
   if (!cart) {
     return {

@@ -12,7 +12,7 @@
   border-radius: 10px;
 
   display: grid;
-  grid-template-columns: 10% auto;
+  grid-template-columns: 10% auto 10%;
   align-items: center;
   justify-items: center;
 
@@ -35,8 +35,8 @@
   }
 
   svg {
-    width: 25px;
-    height: 25px;
+    width: 1.5rem;
+    height: 1.5rem;
     stroke: $base-info;
     fill: $base-info;
   }
@@ -59,6 +59,15 @@
     &::placeholder {
       color: $base-grey;
       font-size: 0.8rem;
+    }
+  }
+
+  .password_icon {
+    cursor: pointer;
+    svg {
+      width: 1.3rem !important;
+      height: 1.3rem !important;
+      stroke: $base-dark !important;
     }
   }
 }
