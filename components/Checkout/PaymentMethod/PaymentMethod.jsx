@@ -1,7 +1,9 @@
 import Button from "@/components/Layout/Button/Button";
 import { paymentMethods } from "@/constants";
 import { applyCoupon } from "@/utils/applyCoupon";
+import { placeOrder } from "@/utils/placeOrder";
 import { Button as MuiButton, Tooltip } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { CiDiscount1 } from "react-icons/ci";
@@ -33,6 +35,8 @@ const PaymentMethod = ({
   const [discount, setDiscount] = useState(0);
   const [coupon, setCoupon] = useState("");
   const [disabled, setDisabled] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (discountFromDb) {
@@ -73,18 +77,34 @@ const PaymentMethod = ({
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    console.log(newValue);
     setSelectedPaymentMethod(newValue);
   };
 
-  const placeOrderHandler = () => {
-    console.log("save order to db");
-    console.log("coupon", coupon);
-    console.log("Payment", selectedPaymentMethod);
-    console.log("Total after", totalAfterCoupon);
-    console.log("Discount", discount);
-    console.log("cart", cart);
-    console.log("active address", activeAddress);
+  const placeOrderHandler = async () => {
+    try {
+      const order = {
+        couponApplied: coupon && discount ? discount : coupon || "No coupon applied",
+        paymentMethod: selectedPaymentMethod,
+        totalAfterDiscount: totalAfterCoupon,
+        products: cart.products,
+        total: cartTotal,
+        activeAddress,
+      };
+
+      const res = await placeOrder(order);
+
+      if (res.ok === false) {
+        toast.error(res.message);
+      }
+
+      if (res.ok === true) {
+        // router.push("/payment");
+        toast.success("Order placed successfully");
+      }
+    } catch (error) {
+      toast.error(error.message);
+      console.log(error);
+    }
   };
 
   return (
