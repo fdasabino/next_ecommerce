@@ -40,7 +40,7 @@ const handler = async (req, res) => {
 
       // apply discount to cart total
       const totalAfterDiscount = () => {
-        return cartInDb.cartTotal - (cartInDb.cartTotal * couponInDb.discount) / 100;
+        return (cartInDb.cartTotal - (cartInDb.cartTotal * couponInDb.discount) / 100).toFixed(2);
       };
 
       const updatedCart = await Cart.findOneAndUpdate(
