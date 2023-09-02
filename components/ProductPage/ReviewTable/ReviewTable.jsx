@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import styles from "./ReviewTable.module.scss";
 
-const ReviewTable = ({ reviews }) => {
+const ReviewTable = ({ reviews, productName }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
   const [loadMoreCount, setLoadMoreCount] = useState(3);
   const [openIndex, setOpenIndex] = useState(null);
+
+  const defaultImage =
+    "https://res.cloudinary.com/dmhcnhtng/image/upload/v1664642478/992490_b0iqzq.png";
 
   const handleVisible = (index) => {
     setOpenIndex(index === openIndex ? null : index);
@@ -41,15 +44,21 @@ const ReviewTable = ({ reviews }) => {
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .map((reviewItem, index) => {
             const { createdAt, fit, images, rating, review, reviewBy, size, _id } = reviewItem;
-            const { name, image } = reviewBy;
+            const name = reviewBy?.name;
+            const image = reviewBy?.image;
             const isOpen = index === openIndex;
 
             return (
               <div key={_id} className={styles.table__user}>
                 <div onClick={() => handleVisible(index)} className={styles.user_wrapper}>
                   <div className={styles.user_wrapper_left}>
-                    <Image src={image} width={400} height={400} alt={name} />
-                    <span>{name.split(" ")[0]}</span>
+                    <Image
+                      src={image ? image : defaultImage}
+                      width={400}
+                      height={400}
+                      alt={name ? name : "USER"}
+                    />
+                    <span>{name ? name.split(" ")[0] : "USER"}</span>
                     <Rating name="read-only" value={rating} readOnly />
                   </div>
                   <div className={styles.user_wrapper_right}>
@@ -78,7 +87,7 @@ const ReviewTable = ({ reviews }) => {
                               src={image.url}
                               width={400}
                               height={400}
-                              alt={name}
+                              alt={productName ? productName : "PRODUCT"}
                             />
                           ))}
                       </div>

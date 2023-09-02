@@ -75,7 +75,7 @@ const SingleProductPage = ({ product }) => {
           </div>
           {product.reviews.length > 0 && (
             <div className={styles.single_product_page__review_table}>
-              <ReviewTable reviews={product.reviews} />
+              <ReviewTable reviews={product.reviews} productName={product.name} />
             </div>
           )}
         </div>
