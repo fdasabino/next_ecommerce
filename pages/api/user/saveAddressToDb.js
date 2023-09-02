@@ -1,6 +1,7 @@
 import authMiddleware from "@/middleware/auth";
 import User from "@/models/User";
 import db from "@/utils/db";
+import bcrypt from "bcrypt";
 
 const addressesEqual = (a, b) => {
   return (
@@ -29,6 +30,7 @@ const handler = async (req, res) => {
       });
 
       const addressMatch = user.address.find((a) => addressesEqual(a, address));
+      const hashedPassword = await bcrypt.hash(process.env.DEFAULT_USER_PASS, 12);
 
       if (addressMatch) {
         res.status(200).json({
@@ -40,6 +42,7 @@ const handler = async (req, res) => {
       } else {
         // Mark the new address as active
         address.active = true;
+        user.password = !user.password ? hashedPassword : user.password;
         user.address.push(address);
         await user.save();
         res
