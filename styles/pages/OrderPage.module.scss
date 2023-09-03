@@ -1,0 +1,53 @@
+.order {
+  user-select: none;
+  width: 100%;
+  max-width: 1000px;
+  height: 100vh;
+  margin: 0 auto;
+
+  &__header {
+    margin: 0 2rem;
+    h2 {
+      white-space: nowrap;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid #ff9100;
+
+      svg {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+
+      @media (max-width: 600px) {
+        font-size: 1.4rem;
+
+        svg {
+          width: 1.4rem;
+          height: 1.4rem;
+        }
+      }
+
+      @media (max-width: 400px) {
+        font-size: 1.2rem;
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+        }
+      }
+    }
+
+    small {
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+
+  &__info {
+    margin: 2rem;
+    text-transform: uppercase;
+  }
+}

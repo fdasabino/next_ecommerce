@@ -24,14 +24,15 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      width: 100%;
 
       h2 {
         font-size: 1.6rem;
         text-transform: uppercase;
-
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        border-bottom: 1px solid #ff9100;
       }
 
       .header_wrapper {
