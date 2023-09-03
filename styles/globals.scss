@@ -110,7 +110,7 @@ hr {
   height: 300px; /* Adjust the height as needed */
   display: none; /* Hide on mobile devices */
 
-  @media (min-width: 768px) {
+  @media (min-width: 800px) {
     display: block; /* Show on desktop */
   }
 }
