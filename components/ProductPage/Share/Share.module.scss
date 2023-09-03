@@ -22,7 +22,7 @@
     background: none;
     cursor: pointer;
     outline: none;
-    transition: transform 0.1s ease-in-out;
+    transition: transform 0.1s linear;
 
     svg {
       width: 1.5rem;

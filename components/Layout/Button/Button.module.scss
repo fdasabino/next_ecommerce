@@ -14,7 +14,7 @@
   letter-spacing: 0.1rem;
   text-align: center;
   text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
-  transition: all 0.1s ease-in;
+  transition: all 0.1s linear;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -77,44 +77,44 @@
 .btnPrimary {
   @include button-styles;
   @if (get-color-type(#008cff) == "blue") {
-    @include button-background(#008cff, lighten(#008cff, 10%), 0.95);
+    @include button-background(#008cff, lighten(#008cff, 10%), 0.98);
   } @else if (get-color-type(#008cff) == "green") {
-    @include button-background(#008cff, lighten(#008cff, 15%), 0.95);
+    @include button-background(#008cff, lighten(#008cff, 15%), 0.98);
   } @else {
-    @include button-background(#008cff, darken(#008cff, 10%), 0.95);
+    @include button-background(#008cff, darken(#008cff, 10%), 0.98);
   }
 }
 
 .btnSecondary {
   @include button-styles;
   @if (get-color-type(#373738) == "blue") {
-    @include button-background(#373738, lighten(#373738, 10%), 0.95);
+    @include button-background(#373738, lighten(#373738, 10%), 0.98);
   } @else if (get-color-type(#373738) == "green") {
-    @include button-background(#373738, lighten(#373738, 15%), 0.95);
+    @include button-background(#373738, lighten(#373738, 15%), 0.98);
   } @else {
-    @include button-background(#373738, darken(#373738, 10%), 0.95);
+    @include button-background(#373738, darken(#373738, 10%), 0.98);
   }
 }
 
 .btnTertiary {
   @include button-styles;
   @if (get-color-type(#1cbd3f) == "blue") {
-    @include button-background(#1cbd3f, lighten(#1cbd3f, 10%), 0.95);
+    @include button-background(#1cbd3f, lighten(#1cbd3f, 10%), 0.98);
   } @else if (get-color-type(#1cbd3f) == "green") {
-    @include button-background(#1cbd3f, lighten(#1cbd3f, 15%), 0.95);
+    @include button-background(#1cbd3f, lighten(#1cbd3f, 15%), 0.98);
   } @else {
-    @include button-background(#1cbd3f, darken(#1cbd3f, 10%), 0.95);
+    @include button-background(#1cbd3f, darken(#1cbd3f, 10%), 0.98);
   }
 }
 
 .btnDanger {
   @include button-styles;
   @if (get-color-type(#bd1c1c) == "blue") {
-    @include button-background(#bd1c1c, lighten(#bd1c1c, 10%), 0.95);
+    @include button-background(#bd1c1c, lighten(#bd1c1c, 10%), 0.98);
   } @else if (get-color-type(#bd1c1c) == "green") {
-    @include button-background(#bd1c1c, lighten(#bd1c1c, 15%), 0.95);
+    @include button-background(#bd1c1c, lighten(#bd1c1c, 15%), 0.98);
   } @else {
-    @include button-background(#bd1c1c, darken(#bd1c1c, 10%), 0.95);
+    @include button-background(#bd1c1c, darken(#bd1c1c, 10%), 0.98);
   }
 }
 
@@ -123,7 +123,7 @@
   background-color: #0702ff;
   background-image: linear-gradient(to bottom, #0702ff, lighten(#0702ff, 10%));
   border-radius: 20px;
-  opacity: 0.95;
+  opacity: 0.98;
 
   &:hover {
     background-image: linear-gradient(to bottom, #0702ff, lighten(#0702ff, 5%));

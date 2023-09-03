@@ -19,7 +19,7 @@
     border: 1px solid $base-grey;
     border-radius: 50%;
 
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s linear;
 
     display: grid;
     place-items: center;

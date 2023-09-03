@@ -69,7 +69,7 @@
     display: flex;
     justify-content: center;
 
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s linear;
     z-index: 5;
 
     box-shadow: inset $base-shadow-2;
@@ -163,7 +163,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s linear;
       background: $base-white;
       border: 1px solid $base-grey;
       border-radius: 10px;
@@ -236,7 +236,7 @@
             justify-content: center;
             align-items: center;
             gap: 1rem;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.2s linear;
             cursor: pointer;
             margin-bottom: 1rem;
             width: 100%;

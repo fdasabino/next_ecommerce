@@ -53,7 +53,7 @@
     color: $base-dark-grey;
     line-height: 1.5;
     white-space: pre-wrap;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.1s linear;
     margin-bottom: 1rem;
     margin-right: 2rem;
 
@@ -172,7 +172,7 @@
         color: $base-dark-secondary;
         font-weight: 600;
         outline: 1px solid $base-dark-grey;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s linear;
 
         &:hover {
           transform: scale(1.1);
@@ -213,7 +213,7 @@
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s linear;
 
         &:hover {
           transform: scale(1.1);
@@ -224,7 +224,7 @@
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s linear;
         outline: 2px solid $base-success;
       }
     }
@@ -279,7 +279,7 @@
         font-size: 1rem;
         font-weight: 700;
         text-transform: uppercase;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s linear;
 
         &:first-of-type {
           color: $base-error;

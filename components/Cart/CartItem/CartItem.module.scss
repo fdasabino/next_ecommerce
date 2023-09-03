@@ -8,7 +8,7 @@
   border: 1px solid $base-grey;
   border-radius: 5px;
   box-shadow: $base-shadow-2;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s linear;
 
   hr {
     margin: 0.2rem 0.7rem;
@@ -97,7 +97,7 @@
       }
       small {
         cursor: pointer;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s linear;
 
         &:hover {
           color: $base-redish;
@@ -138,7 +138,7 @@
           font-size: 1rem;
           font-weight: 700;
           text-transform: uppercase;
-          transition: all 0.3s ease-in-out;
+          transition: all 0.3s linear;
 
           &:disabled {
             cursor: not-allowed;
@@ -198,7 +198,7 @@
           align-items: center;
           gap: 0.5rem;
           cursor: pointer;
-          transition: all 0.2s ease-in-out;
+          transition: all 0.2s linear;
           &:hover {
             color: $base-redish;
           }

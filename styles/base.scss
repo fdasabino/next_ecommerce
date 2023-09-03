@@ -25,7 +25,7 @@ $base-shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 $base-shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 $base-shadow-3: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 $base-cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-$base-button-transition: all 1s ease-in-out;
+$base-button-transition: all 1s linear;
 
 .container {
   max-width: 1400px;

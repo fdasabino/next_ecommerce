@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s linear;
 
     img {
       width: 1.5rem;

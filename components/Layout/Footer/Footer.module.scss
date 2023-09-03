@@ -154,7 +154,7 @@
       li a {
         font-size: 0.8rem;
         font-weight: 400;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s linear;
         cursor: pointer;
 
         @media (max-width: 768px) {
@@ -184,7 +184,7 @@
       li svg {
         width: 1.5rem;
         height: 1.5rem;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s linear;
         cursor: pointer;
 
         @media (max-width: 768px) {

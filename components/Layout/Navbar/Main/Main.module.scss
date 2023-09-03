@@ -67,7 +67,7 @@
         background-color: $base-grey;
 
         cursor: pointer;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s linear;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
 
@@ -102,7 +102,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.2s linear;
 
       @media (max-width: 800px) {
         display: none;

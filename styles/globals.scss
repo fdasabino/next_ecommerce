@@ -63,7 +63,7 @@ textarea,
 select,
 option,
 label {
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s linear;
   font-family: "Rajdhani", sans-serif !important;
 }
 
@@ -120,7 +120,7 @@ hr {
   font-family: "Rajdhani", sans-serif !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
-  transition: all 0.2s ease-in-out !important;
+  transition: all 0.2s linear !important;
   white-space: pre-line !important;
   text-transform: uppercase !important;
   color: #000 !important;
