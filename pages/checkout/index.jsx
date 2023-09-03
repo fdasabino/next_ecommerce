@@ -8,7 +8,7 @@ import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-const Checkout = ({ cart, user, totalWithDiscountApplied }) => {
+const CheckoutPage = ({ cart, user, totalWithDiscountApplied }) => {
   const [addresses, setAddresses] = useState(user?.address || []);
   const activeAddress = addresses.find((address) => address.active === true);
   const [selectedAddress, setSelectedAddress] = useState(activeAddress ? activeAddress : null);
@@ -64,7 +64,7 @@ const Checkout = ({ cart, user, totalWithDiscountApplied }) => {
   );
 };
 
-export default Checkout;
+export default CheckoutPage;
 
 export async function getServerSideProps(context) {
   db.connectDB();
