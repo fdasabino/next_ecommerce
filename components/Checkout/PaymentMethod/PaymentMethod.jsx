@@ -98,7 +98,7 @@ const PaymentMethod = ({
       }
 
       if (res.ok === true) {
-        // router.push("/payment");
+        router.push(`/order/${res.order._id}`);
         toast.success("Order placed successfully");
       }
     } catch (error) {
