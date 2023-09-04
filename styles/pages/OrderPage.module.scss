@@ -12,17 +12,29 @@
     align-items: center;
     border-bottom: 1px solid #ff9100;
 
-    span {
-      text-transform: uppercase;
-      font-weight: 600;
-      font-size: 1rem;
+    div {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
 
       @media (max-width: 768px) {
-        font-size: 0.9rem;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      @media (max-width: 480px) {
-        font-size: 0.8rem;
+      p {
+        color: $base-dark;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        span {
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 0.9rem;
+
+          @media (max-width: 768px) {
+            font-size: 0.8rem;
+          }
+        }
       }
     }
 
@@ -205,6 +217,55 @@
               font-weight: 400;
             }
           }
+        }
+      }
+    }
+
+    &__total {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-transform: uppercase;
+
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border-top: 1px solid $base-dark-grey;
+        border-bottom: 1px solid $base-dark-grey;
+
+        .discount {
+          color: $base-success;
+
+          p {
+            font-weight: 600;
+          }
+        }
+        .tax {
+          color: $base-redish;
+
+          p {
+            font-weight: 600;
+          }
+        }
+
+        .totals {
+          p {
+            font-weight: 600;
+          }
+        }
+      }
+
+      small {
+        font-size: 0.8rem;
+        color: $base-dark;
+        font-weight: 600;
+
+        span {
+          color: $base-success;
+          font-weight: 600;
         }
       }
     }

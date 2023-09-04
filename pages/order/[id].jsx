@@ -14,6 +14,12 @@ const OrderPage = ({ order }) => {
     return colorName;
   };
 
+  const formattedDate = new Date(order?.createdAt)?.toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
     <>
       <Head>
@@ -26,7 +32,15 @@ const OrderPage = ({ order }) => {
           <h2>
             Complete your Order <MdPayment />
           </h2>
-          <span>Order ID: {order?._id}</span>
+
+          <div>
+            <p>
+              Ordered on: <span>{formattedDate}</span>
+            </p>
+            <p>
+              Order ID: <span>{order?._id}</span>
+            </p>
+          </div>
         </div>
         <div className={styles.order__wrapper}>
           <div className={styles.order__info}>
@@ -86,15 +100,45 @@ const OrderPage = ({ order }) => {
                       Size: <span>{product.size}</span>
                     </p>
                     <p>
-                      Price: <span>${(product.price * product.qty).toFixed(2)}</span>
+                      Quantity: <span>{product.qty}x</span>
                     </p>
                     <p>
-                      Quantity: <span>{product.qty}x</span>
+                      Price: <span>${(product.price * product.qty).toFixed(2)}</span>
                     </p>
                   </div>
                 </div>
               </div>
             ))}
+            <div className={styles.order__products__total}>
+              <div className={styles.wrapper}>
+                {order.couponApplied && (
+                  <div className={styles.discount}>
+                    <p>Discount: {order.couponApplied}%</p>
+                  </div>
+                )}
+
+                {order.taxPrice > 0 && (
+                  <div className={styles.tax}>
+                    <p>Tax: {order.taxPrice}</p>
+                  </div>
+                )}
+
+                <div className={styles.totals}>
+                  {order.couponApplied ? (
+                    <p>Order total: {order.total}</p>
+                  ) : (
+                    <p>Order Total: {order.totalBeforeDiscount}</p>
+                  )}
+                </div>
+              </div>
+
+              {order.couponApplied && (
+                <small>
+                  Well done! You saved a total of{" "}
+                  <span>{(order.total - order.totalBeforeDiscount).toFixed(2)}$</span> in this order
+                </small>
+              )}
+            </div>
           </div>
           <div className={styles.order__info__right}></div>
         </div>
