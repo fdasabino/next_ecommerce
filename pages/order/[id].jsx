@@ -18,7 +18,7 @@ const OrderPage = ({ order }) => {
           <h2>
             Complete your Order <MdPayment />
           </h2>
-          <small>Order ID: {order?._id}</small>
+          <span>Order ID: {order?._id}</span>
         </div>
         <div className={styles.order__info}>
           <div
@@ -32,9 +32,9 @@ const OrderPage = ({ order }) => {
           <div
             style={
               order.status === "Not Processed"
-                ? { background: "lightBlue" }
+                ? { background: "gold" }
                 : order.status === "Processing"
-                ? { background: "blue" }
+                ? { background: "lightBlue" }
                 : order.status === "Dispatched"
                 ? { background: "purple" }
                 : order.status === "Cancelled"
