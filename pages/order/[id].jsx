@@ -1,6 +1,5 @@
 import Order from "@/models/Order";
 import styles from "@/styles/pages/OrderPage.module.scss";
-import { GetColorName } from "hex-color-to-color-name";
 import Head from "next/head";
 import Image from "next/image";
 import { MdPayment } from "react-icons/md";
@@ -106,28 +105,35 @@ const OrderPage = ({ order }) => {
             ))}
             <div className={styles.order__products__total}>
               <div className={styles.wrapper}>
-                {order.couponApplied && (
-                  <div className={styles.discount}>
-                    <p>Discount: {order.couponApplied}%</p>
-                  </div>
-                )}
-
                 {order.taxPrice > 0 && (
                   <div className={styles.tax}>
-                    <p>Tax: {order.taxPrice}</p>
+                    <p>Sales tax: +{order.taxPrice}</p>
                   </div>
                 )}
-
                 <div className={styles.totals}>
                   {order.couponApplied ? (
-                    <p>Order total: {order.total}</p>
+                    <>
+                      <p>SubTotal: {order.totalBeforeDiscount}</p>
+                      <p>
+                        {order.couponApplied !== "No coupon applied" &&
+                          `Discount: -${order.couponApplied}%`}
+                      </p>
+                      <p
+                        style={
+                          order.total < order.totalBeforeDiscount
+                            ? { color: "#6CC082" }
+                            : { color: "black" }
+                        }
+                      >
+                        Order total: {order.total}
+                      </p>
+                    </>
                   ) : (
                     <p>Order Total: {order.totalBeforeDiscount}</p>
                   )}
                 </div>
               </div>
-
-              {order.couponApplied && (
+              {order.couponApplied !== "No coupon applied" && (
                 <small>
                   Well done! You saved a total of{" "}
                   <span>{(order.totalBeforeDiscount - order.total).toFixed(2)}$</span> in this order
