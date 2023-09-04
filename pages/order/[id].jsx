@@ -130,7 +130,7 @@ const OrderPage = ({ order }) => {
               {order.couponApplied && (
                 <small>
                   Well done! You saved a total of{" "}
-                  <span>{(order.total - order.totalBeforeDiscount).toFixed(2)}$</span> in this order
+                  <span>{(order.totalBeforeDiscount - order.total).toFixed(2)}$</span> in this order
                 </small>
               )}
             </div>
