@@ -50,7 +50,7 @@ const OrderSummary = ({ order }) => {
             {order.couponApplied !== "No coupon applied" ? (
               <>
                 <p>SubTotal: {order.totalBeforeDiscount}</p>
-                <p>`Discount: -${order.couponApplied}%`</p>
+                <p>Discount: -${order.couponApplied}%</p>
                 <p
                   style={
                     order.total < order.totalBeforeDiscount
