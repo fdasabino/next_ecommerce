@@ -21,23 +21,37 @@ const OrderPage = ({ order }) => {
           <small>Order ID: {order?._id}</small>
         </div>
         <div className={styles.order__info}>
-          <div className={styles.order__info__status}>
+          <div
+            style={order.isPaid ? { background: "green" } : { background: "orangeRed" }}
+            className={`${styles.order__info__status} ${styles.payment_status}`}
+          >
             <p>
-              Order Status:{" "}
-              <span
-                style={
-                  order.isPaid
-                    ? { color: "green", fontWeight: 600 }
-                    : { color: "red", fontWeight: 600 }
-                }
-              >
-                {order.isPaid ? "PAID" : "NOT PAID"}
-              </span>
+              Payment Status: <span>{order.isPaid ? "PAID" : "NOT PAID"}</span>
             </p>
           </div>
-          <div className={styles.order__info__left}></div>
-          <div className={styles.order__info__right}></div>
+          <div
+            style={
+              order.status === "Not Processed"
+                ? { background: "lightBlue" }
+                : order.status === "Processing"
+                ? { background: "blue" }
+                : order.status === "Dispatched"
+                ? { background: "purple" }
+                : order.status === "Cancelled"
+                ? { background: "orangeRed" }
+                : order.status === "Completed"
+                ? { background: "green" }
+                : ""
+            }
+            className={`${styles.order__info__status} ${styles.order_status}`}
+          >
+            <p>
+              Order Status: <span>{order.status}</span>
+            </p>
+          </div>
         </div>
+        <div className={styles.order__info__left}></div>
+        <div className={styles.order__info__right}></div>
       </div>
     </>
   );
