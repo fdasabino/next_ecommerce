@@ -2,10 +2,24 @@
   user-select: none;
   width: 100%;
   max-width: 1000px;
-  height: 100vh;
   margin: 0 auto;
 
   &__wrapper {
     margin: 0 2rem;
+  }
+
+  hr {
+    margin: 1rem 0;
+    border-top: 1px solid #ff9100;
+  }
+
+  &__main {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
 }
