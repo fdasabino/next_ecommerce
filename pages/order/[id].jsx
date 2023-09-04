@@ -9,11 +9,6 @@ import { PiClipboardTextThin } from "react-icons/pi";
 const OrderPage = ({ order }) => {
   console.log(order);
 
-  const getColorName = (color) => {
-    const colorName = GetColorName(color);
-    return colorName;
-  };
-
   const formattedDate = new Date(order?.createdAt)?.toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
