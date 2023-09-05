@@ -1,6 +1,7 @@
 import OrderAddress from "@/components/Order/OrderAddress/OrderAddress";
 import OrderHeader from "@/components/Order/OrderHeader/OrderHeader";
 import OrderInfo from "@/components/Order/OrderInfo/OrderInfo";
+import OrderPayment from "@/components/Order/OrderPayment/OrderPayment";
 import OrderSummary from "@/components/Order/OrderSummary/OrderSummary";
 import Order from "@/models/Order";
 import styles from "@/styles/pages/OrderPage.module.scss";
@@ -23,7 +24,7 @@ const OrderPage = ({ order }) => {
           <OrderAddress order={order} />
           <div className={styles.order__main}>
             <OrderSummary order={order} />
-            {/* payment forms */}
+            <OrderPayment order={order} />
           </div>
 
           <div className={styles.order__info__right}></div>
