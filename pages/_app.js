@@ -1,6 +1,7 @@
 import RootLayout from "@/components/Layout/RootLayout/RootLayout";
 import store from "@/redux-store/index";
 import "@/styles/globals.scss";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
@@ -28,16 +29,18 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         <Provider store={store}>
           <PersistGate persistor={persistor} loading={null}>
             <RootLayout>
-              <Component {...pageProps} />
-              <ToastContainer
-                position="bottom-right"
-                autoClose={10000}
-                newestOnTop={true}
-                closeOnClick
-                draggable
-                icon={false}
-                theme="light"
-              />
+              <PayPalScriptProvider>
+                <Component {...pageProps} />
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={10000}
+                  newestOnTop={true}
+                  closeOnClick
+                  draggable
+                  icon={false}
+                  theme="light"
+                />
+              </PayPalScriptProvider>
             </RootLayout>
           </PersistGate>
         </Provider>

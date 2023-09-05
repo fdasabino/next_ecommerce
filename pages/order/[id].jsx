@@ -5,10 +5,53 @@ import OrderPayment from "@/components/Order/OrderPayment/OrderPayment";
 import OrderSummary from "@/components/Order/OrderSummary/OrderSummary";
 import Order from "@/models/Order";
 import styles from "@/styles/pages/OrderPage.module.scss";
+import db from "@/utils/db";
+import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import Head from "next/head";
-const OrderPage = ({ order }) => {
-  console.log(order);
+import { useEffect, useReducer } from "react";
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "PAYMENT_REQUEST":
+      return { ...state, loading: true };
+    case "PAYMENT_SUCCESS":
+      return { ...state, loading: false, success: true };
+    case "PAYMENT_FAIL":
+      return { ...state, loading: false, error: action.payload };
+    case "PAYMENT_RESET":
+      return { ...state, loading: false, success: false, error: null };
+    default:
+      return state;
+  }
+};
+
+const OrderPage = ({ order, paypalClientID }) => {
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const [{ loading, success, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: null,
+  });
+
+  useEffect(() => {
+    if (!order._id || success) {
+      if (success) {
+        dispatch({ type: "PAYMENT_RESET" });
+      }
+    } else {
+      paypalDispatch({
+        type: "resetOptions",
+        value: {
+          "client-id": paypalClientID,
+          currency: "USD",
+        },
+      });
+      paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+    }
+  }, [order, success, paypalClientID, paypalDispatch]);
+
+  console.log(order);
+  console.log(paypalClientID);
   return (
     <>
       <Head>
@@ -21,9 +64,19 @@ const OrderPage = ({ order }) => {
         <div className={styles.order__wrapper}>
           <OrderInfo order={order} />
           <div className={styles.order__main}>
-            <OrderSummary order={order} />
-            <OrderPayment order={order} />
+            <OrderAddress order={order} />
+            <OrderPayment
+              order={order}
+              isPending={isPending}
+              paypalDispatch={paypalDispatch}
+              paypalClientID={paypalClientID}
+              dispatch={dispatch}
+              loading={loading}
+              success={success}
+              error={error}
+            />
           </div>
+          <OrderSummary order={order} />
 
           <div className={styles.order__info__right}></div>
         </div>
@@ -36,11 +89,17 @@ export default OrderPage;
 
 // server side
 export async function getServerSideProps(context) {
+  db.connectDB();
   const { query } = context;
   const id = query?.id;
   const order = await Order.findById(id).populate("user").lean().exec();
+  let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
 
+  db.disconnectDB();
   return {
-    props: { order: JSON.parse(JSON.stringify(order)) },
+    props: {
+      order: JSON.parse(JSON.stringify(order)),
+      paypalClientID: paypal_client_id,
+    },
   };
 }
