@@ -1,8 +1,8 @@
+import DotLoader from "@/components/Layout/DotLoader/DotLoader";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import React from "react";
 import { MdPayments } from "react-icons/md";
 import styles from "./OrderPayment.module.scss";
-
 const OrderPayment = ({
   order,
   isPending,
@@ -29,7 +29,7 @@ const OrderPayment = ({
         {order.paymentMethod === "Paypal" && (
           <>
             {isPending ? (
-              <span>Loading...</span>
+              <DotLoader />
             ) : (
               <PayPalButtons
                 style={{ layout: "vertical", color: "silver", shape: "rect", label: "pay" }}

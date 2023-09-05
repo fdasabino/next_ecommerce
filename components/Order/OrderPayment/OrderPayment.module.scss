@@ -37,6 +37,9 @@
   }
 
   .wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-height: 185px;
     padding: 1rem;
     box-shadow: $base-shadow-3;
     border-radius: 10px;

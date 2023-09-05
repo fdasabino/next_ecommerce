@@ -129,9 +129,9 @@
 
     .cart_total {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
       width: 100%;
-      padding: 1rem;
 
       .info {
         width: 100%;
@@ -140,16 +140,13 @@
         align-items: flex-end;
         flex-direction: column;
 
-        padding: 1rem;
-
-        background-color: rgba($color: $base-blue, $alpha: 0.3);
         box-shadow: $base-shadow-3;
         border-radius: 10px;
         border: 1px solid $base-grey;
+        padding: 1rem;
 
         span {
           text-transform: uppercase;
-          margin-bottom: 0.5rem;
         }
       }
     }
