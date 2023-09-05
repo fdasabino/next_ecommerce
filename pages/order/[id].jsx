@@ -51,7 +51,6 @@ const OrderPage = ({ order, paypalClientID }) => {
   }, [order, success, paypalClientID, paypalDispatch]);
 
   console.log(order);
-  console.log(paypalClientID);
   return (
     <>
       <Head>
