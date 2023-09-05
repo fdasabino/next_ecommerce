@@ -3,32 +3,34 @@ import styles from "./OrderInfo.module.scss";
 const OrderInfo = ({ order }) => {
   return (
     <div className={styles.order__info}>
-      <div
-        style={order.isPaid ? { background: "lightGreen" } : { background: "orangeRed" }}
-        className={`${styles.order__info__status} ${styles.payment_status}`}
-      >
+      <div className={`${styles.order__info__status} ${styles.payment_status}`}>
         <p>
-          Payment Status: <span>{order.isPaid ? "PAID" : "NOT PAID"}</span>
+          Payment Status:{" "}
+          <span style={order.isPaid ? { color: "lightGreen" } : { color: "orangeRed" }}>
+            {order.isPaid ? "PAID" : "NOT PAID"}
+          </span>
         </p>
       </div>
-      <div
-        style={
-          order.status === "Not Processed"
-            ? { background: "gold" }
-            : order.status === "Processing"
-            ? { background: "lightBlue" }
-            : order.status === "Dispatched"
-            ? { background: "purple" }
-            : order.status === "Cancelled"
-            ? { background: "orangeRed" }
-            : order.status === "Completed"
-            ? { background: "lightGreen" }
-            : ""
-        }
-        className={`${styles.order__info__status} ${styles.order_status}`}
-      >
+      <div className={`${styles.order__info__status} ${styles.order_status}`}>
         <p>
-          Order Status: <span>{order.status}</span>
+          Order Status:{" "}
+          <span
+            style={
+              order.status === "Not Processed"
+                ? { color: "orangered" }
+                : order.status === "Processing"
+                ? { color: "lightBlue" }
+                : order.status === "Dispatched"
+                ? { color: "purple" }
+                : order.status === "Cancelled"
+                ? { color: "orangeRed" }
+                : order.status === "Completed"
+                ? { color: "lightGreen" }
+                : ""
+            }
+          >
+            {order.status}
+          </span>
         </p>
       </div>
     </div>

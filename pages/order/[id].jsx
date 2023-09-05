@@ -20,8 +20,6 @@ const OrderPage = ({ order }) => {
         <OrderHeader order={order} />
         <div className={styles.order__wrapper}>
           <OrderInfo order={order} />
-          <hr />
-          <OrderAddress order={order} />
           <div className={styles.order__main}>
             <OrderSummary order={order} />
             <OrderPayment order={order} />

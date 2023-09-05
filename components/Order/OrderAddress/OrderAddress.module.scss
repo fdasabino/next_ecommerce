@@ -2,14 +2,6 @@
   width: 100%;
   max-width: 100%;
   height: fit-content;
-  margin: 2rem auto;
-
-  padding: 1rem;
-
-  background-color: rgba($color: $base-info, $alpha: 0.1);
-  box-shadow: $base-shadow-3;
-  border-radius: 10px;
-  border: 1px solid rgba($color: $base-dark, $alpha: 0.3);
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -17,13 +9,22 @@
 
   &__header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 
     h2 {
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1rem;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.5rem;
+      }
 
       @media (max-width: 768px) {
         font-size: 1.2rem;
@@ -39,11 +40,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding-bottom: 1rem;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem;
 
-    @media (max-width: 768px) {
+    box-shadow: $base-shadow-3;
+    border-radius: 10px;
+    border: 1px solid rgba($color: $base-dark, $alpha: 0.3);
+
+    @media (max-width: 800px) {
       flex-direction: column;
       text-align: center;
     }
@@ -59,7 +64,7 @@
 
     .body__text {
       p {
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 500;
 
         @media (max-width: 768px) {
@@ -68,6 +73,22 @@
 
         @media (max-width: 480px) {
           font-size: 0.7rem;
+        }
+      }
+      small {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: $base-dark-grey;
+        margin-top: 1rem;
+        width: 100%;
+
+        @media (max-width: 768px) {
+          font-size: 0.7rem;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 0.6rem;
         }
       }
     }

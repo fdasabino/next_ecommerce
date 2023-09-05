@@ -18,6 +18,7 @@ const OrderAddress = ({ order }) => {
           <p>
             {shippingAddress.firstName} {shippingAddress.lastName}
           </p>
+          <p>{user.email}</p>
           <p>{shippingAddress.phoneNumber}</p>
           <p>
             {shippingAddress.address1}, {shippingAddress.zipCode}
@@ -26,6 +27,7 @@ const OrderAddress = ({ order }) => {
           <p>
             {shippingAddress.city}, {shippingAddress.country}
           </p>
+          <small>Billing and delivery address are the same *</small>
         </div>
       </summary>
     </div>
