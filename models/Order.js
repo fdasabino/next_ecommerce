@@ -70,6 +70,7 @@ const orderSchema = new mongoose.Schema(
     paymentResult: {
       id: String,
       status: String,
+      name: String,
       email: String,
     },
     total: {

@@ -25,7 +25,7 @@ const reducer = (state, action) => {
   }
 };
 
-const OrderPage = ({ order, paypalClientID }) => {
+const OrderPage = ({ order, paypalClientID, stripePublicKey }) => {
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const [{ loading, success, error }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -50,7 +50,6 @@ const OrderPage = ({ order, paypalClientID }) => {
     }
   }, [order, success, paypalClientID, paypalDispatch]);
 
-  console.log(order);
   return (
     <>
       <Head>
@@ -64,16 +63,19 @@ const OrderPage = ({ order, paypalClientID }) => {
           <OrderInfo order={order} />
           <div className={styles.order__main}>
             <OrderAddress order={order} />
-            <OrderPayment
-              order={order}
-              isPending={isPending}
-              paypalDispatch={paypalDispatch}
-              paypalClientID={paypalClientID}
-              dispatch={dispatch}
-              loading={loading}
-              success={success}
-              error={error}
-            />
+            {!order.isPaid && (
+              <OrderPayment
+                order={order}
+                isPending={isPending}
+                paypalDispatch={paypalDispatch}
+                paypalClientID={paypalClientID}
+                stripePublicKey={stripePublicKey}
+                dispatch={dispatch}
+                loading={loading}
+                success={success}
+                error={error}
+              />
+            )}
           </div>
           <OrderSummary order={order} />
 
@@ -93,12 +95,14 @@ export async function getServerSideProps(context) {
   const id = query?.id;
   const order = await Order.findById(id).populate("user").lean().exec();
   let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
+  let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
 
   db.disconnectDB();
   return {
     props: {
       order: JSON.parse(JSON.stringify(order)),
       paypalClientID: paypal_client_id,
+      stripePublicKey: stripe_public_key,
     },
   };
 }

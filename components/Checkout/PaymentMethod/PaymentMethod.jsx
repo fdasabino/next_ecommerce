@@ -193,7 +193,7 @@ const PaymentMethod = ({
             </span>
             {disabled && (
               <span>
-                Discount applied: <b> -{discount || discountFromDb}%</b>
+                Discount: <b> -{discount || discountFromDb}%</b>
               </span>
             )}
             {totalAfterCoupon < cartTotal && totalAfterCoupon > 0 && (
