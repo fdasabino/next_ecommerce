@@ -140,9 +140,8 @@
         align-items: flex-end;
         flex-direction: column;
 
-        box-shadow: $base-shadow-3;
-        border-radius: 10px;
-        border: 1px solid $base-grey;
+        border-top: 1px solid $base-dark-grey;
+        border-bottom: 1px solid $base-dark-grey;
         padding: 1rem;
 
         span {
