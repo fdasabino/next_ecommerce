@@ -1,4 +1,4 @@
-import fs from "fs";
+import { removeTmp } from "@/utils/removeTemp";
 
 export const imageMiddleware = async (req, res, next) => {
   try {
@@ -35,10 +35,4 @@ export const imageMiddleware = async (req, res, next) => {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
-};
-
-const removeTmp = (path) => {
-  fs.unlink(path, (err) => {
-    if (err) throw err;
-  });
 };

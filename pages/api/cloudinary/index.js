@@ -1,9 +1,9 @@
 import authMiddleware from "@/middleware/auth";
 import { imageMiddleware } from "@/middleware/image";
+import { uploadToCloudinaryHandler } from "@/utils/cloudinary";
+import { removeTmp } from "@/utils/removeTemp";
 import bodyParser from "body-parser";
-import cloudinary from "cloudinary";
 import fileUpload from "express-fileupload";
-import fs from "fs";
 
 // Cloudinary configuration
 cloudinary.config({
@@ -40,35 +40,6 @@ const handler = async (req, res) => {
         res.status(500).json({ message: error.message });
       }
     });
-  });
-};
-
-const uploadToCloudinaryHandler = async (file, path) => {
-  return new Promise((resolve, reject) => {
-    cloudinary.v2.uploader.upload(
-      file.tempFilePath,
-      {
-        folder: path,
-        public_id: `${Date.now()}`,
-      },
-      async (err, result) => {
-        if (err) {
-          removeTmp(file.tempFilePath);
-          reject(err);
-          res.status(500).json({ message: "Error uploading your image... Pls try again later" });
-        }
-        resolve({
-          public_id: result.public_id,
-          url: result.secure_url,
-        });
-      }
-    );
-  });
-};
-
-const removeTmp = (path) => {
-  fs.unlink(path, (err) => {
-    if (err) throw err;
   });
 };
 
