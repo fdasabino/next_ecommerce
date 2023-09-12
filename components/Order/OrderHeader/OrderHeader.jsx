@@ -16,7 +16,7 @@ const OrderHeader = ({ order }) => {
 
       <div>
         <p>
-          Ordered on: <span>{formattedDate}</span>
+          Created on: <span>{formattedDate}</span>
         </p>
         {order.isPaid === true && (
           <p>
