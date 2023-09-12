@@ -67,13 +67,8 @@ const OrderPage = ({ order, paypalClientID, stripePublicKey }) => {
               <OrderPayment
                 order={order}
                 isPending={isPending}
-                paypalDispatch={paypalDispatch}
-                paypalClientID={paypalClientID}
                 stripePublicKey={stripePublicKey}
                 dispatch={dispatch}
-                loading={loading}
-                success={success}
-                error={error}
               />
             )}
           </div>

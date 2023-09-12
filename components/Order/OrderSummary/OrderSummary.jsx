@@ -1,6 +1,6 @@
 import { Button as MuiButton, Tooltip } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsChevronBarExpand } from "react-icons/bs";
 import { PiClipboardTextThin } from "react-icons/pi";
 import { useMediaQuery } from "react-responsive";

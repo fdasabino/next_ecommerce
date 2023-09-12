@@ -3,7 +3,7 @@ import DotLoader from "@/components/Layout/DotLoader/DotLoader";
 import { clearCart } from "@/redux-store/cartSlice";
 import { stripePayment } from "@/utils/stripePayment";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { use, useState } from "react";
+import { useState } from "react";
 import { BsCashCoin } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
