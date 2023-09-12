@@ -30,7 +30,7 @@ const handler = async (req, res) => {
           enabled: true,
           allow_redirects: "never", // Or you can set it to "manual" if needed
         },
-        return_url: `${process.env.NEXTAUTH_URL}`, // Specify your return URL here
+        return_url: `${process.env.LOCALHOST_DEV_MODE}`, // Specify your return URL here
       });
 
       if (order) {
