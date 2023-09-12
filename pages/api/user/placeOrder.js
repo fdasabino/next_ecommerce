@@ -11,7 +11,7 @@ const handler = async (req, res) => {
       const { couponApplied, paymentMethod, totalAfterDiscount, total, activeAddress, products } =
         order;
 
-      await Order.findOneAndDelete({ user: req.user });
+      await Order.deleteMany({ user: req.user, isPaid: false });
 
       const newOrder = new Order({
         products,

@@ -28,8 +28,7 @@ const OrderSummary = ({ order }) => {
               color={!summaryVisible ? "primary" : "error"}
               onClick={() => setSummaryVisible(!summaryVisible)}
             >
-              {!setSummaryVisible ? "Hide Summary" : "Show Summary"}{" "}
-              <BsChevronBarExpand size={15} />
+              {summaryVisible ? "Hide Summary" : "Show Summary"} <BsChevronBarExpand size={15} />
             </MuiButton>
           </Tooltip>
         </div>
@@ -43,7 +42,7 @@ const OrderSummary = ({ order }) => {
             <div className={styles.totals}>
               {order.couponApplied !== "No coupon applied" ? (
                 <>
-                  <p>SubTotal: {order.totalBeforeDiscount}</p>
+                  <p>SubTotal: {order.totalBeforeDiscount.toFixed(2)}</p>
                   <p>Discount: -${order.couponApplied}%</p>
                   <p
                     style={
@@ -52,11 +51,11 @@ const OrderSummary = ({ order }) => {
                         : { color: "black" }
                     }
                   >
-                    Order total: {order.total}
+                    Order total: {order.total.toFixed(2)}
                   </p>
                 </>
               ) : (
-                <p>Order Total: {order.totalBeforeDiscount}</p>
+                <p>Order Total: {order.totalBeforeDiscount.toFixed(2)}</p>
               )}
             </div>
           </div>
