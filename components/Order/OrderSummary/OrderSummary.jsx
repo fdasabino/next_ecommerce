@@ -28,8 +28,7 @@ const OrderSummary = ({ order }) => {
               color={!summaryVisible ? "primary" : "error"}
               onClick={() => setSummaryVisible(!summaryVisible)}
             >
-              {!setSummaryVisible ? "Hide Summary" : "Show Summary"}{" "}
-              <BsChevronBarExpand size={15} />
+              {summaryVisible ? "Hide Summary" : "Show Summary"} <BsChevronBarExpand size={15} />
             </MuiButton>
           </Tooltip>
         </div>

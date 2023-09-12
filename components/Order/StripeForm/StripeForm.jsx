@@ -1,9 +1,11 @@
 import Button from "@/components/Layout/Button/Button";
 import DotLoader from "@/components/Layout/DotLoader/DotLoader";
+import { clearCart } from "@/redux-store/cartSlice";
 import { stripePayment } from "@/utils/stripePayment";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { use, useState } from "react";
 import { BsCashCoin } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import styles from "./StripeForm.module.scss";
 
@@ -35,6 +37,9 @@ const StripeForm = ({ order }) => {
   const [error, setError] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -53,6 +58,8 @@ const StripeForm = ({ order }) => {
           toast.success(response.message);
           setLoading(false);
           window.location.reload(false);
+
+          dispatch(clearCart());
         }
       } catch (error) {
         console.log(error);

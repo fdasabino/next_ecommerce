@@ -1,4 +1,5 @@
 import authMiddleware from "@/middleware/auth";
+import Cart from "@/models/Cart";
 import Order from "@/models/Order";
 import User from "@/models/User";
 import db from "@/utils/db";
@@ -13,6 +14,8 @@ const handler = async (req, res) => {
     await authMiddleware(req, res, async () => {
       const order = await Order.findById(orderId);
       const user = await User.findById(req.user);
+      const cart = await Cart.findOne({ user: req.user });
+      const { address } = user;
 
       // Convert amount to cents (or smallest currency unit) and round it to an integer
       const amountInCents = Math.round(Number(amount) * 100);
@@ -30,10 +33,6 @@ const handler = async (req, res) => {
         return_url: `${process.env.NEXTAUTH_URL}`, // Specify your return URL here
       });
 
-      console.log("Payment:", payment);
-      console.log(req.user);
-      console.log(user);
-
       if (order) {
         order.isPaid = true;
         order.paidAt = Date.now();
@@ -45,6 +44,8 @@ const handler = async (req, res) => {
           name: user.name,
         };
         const updatedOrder = await order.save();
+        // Clear cart after payment is successful
+        await cart.deleteOne({ user: req.user });
         res.status(200).json({ message: "Payment successful", order: updatedOrder, ok: true });
       } else {
         res.status(404).json({ message: "Order not found.", ok: false });

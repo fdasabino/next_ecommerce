@@ -1,6 +1,5 @@
 import DotLoader from "@/components/Layout/DotLoader/DotLoader";
 import { PayPalButtons } from "@paypal/react-paypal-js";
-import React from "react";
 import { MdPayments } from "react-icons/md";
 import StripePayment from "../StripePayment/StripePayment";
 import styles from "./OrderPayment.module.scss";
