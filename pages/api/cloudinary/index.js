@@ -13,22 +13,17 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-const handler = nc()
-  // .use(authMiddleware)
-  .use(
-    fileUpload({
-      useTempFiles: true,
-    })
-  )
-  .use(bodyParser.json())
-  .use(imageMiddleware);
-// .use(authMiddleware);
-
 export const config = {
   api: {
     bodyParser: false,
   },
 };
+
+const handler = nc()
+  .use(authMiddleware)
+  .use(fileUpload({ useTempFiles: true }))
+  .use(bodyParser.json())
+  .use(imageMiddleware);
 
 handler.post(async (req, res) => {
   try {
