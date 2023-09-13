@@ -3,16 +3,26 @@ import { imageMiddleware } from "@/middleware/image";
 import { uploadToCloudinaryHandler } from "@/utils/cloudinary";
 import { removeTmp } from "@/utils/removeTemp";
 import bodyParser from "body-parser";
+import cloudinary from "cloudinary";
 import fileUpload from "express-fileupload";
+import nc from "next-connect";
 
-// Cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  cloud_key: process.env.CLOUDINARY_API_KEY,
-  cloud_secret: process.env.CLOUDINARY_SECRET_KEY,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-fileUpload({ useTempFiles: true });
+const handler = nc()
+  // .use(authMiddleware)
+  .use(
+    fileUpload({
+      useTempFiles: true,
+    })
+  )
+  .use(bodyParser.json())
+  .use(imageMiddleware);
+// .use(authMiddleware);
 
 export const config = {
   api: {
@@ -20,27 +30,31 @@ export const config = {
   },
 };
 
-const handler = async (req, res) => {
-  let files = Object.values(req.files).flat();
-  const { path } = req.body;
-  await authMiddleware(req, res, async () => {
-    await imageMiddleware(req, res, async () => {
-      try {
-        let images = [];
+handler.post(async (req, res) => {
+  try {
+    const { path } = req.body;
+    let files = Object.values(req.files).flat();
+    let images = [];
+    for (const file of files) {
+      const img = await uploadToCloudinaryHandler(file, path);
+      images.push(img);
+      removeTmp(file.tempFilePath);
+    }
+    res.status(200).json({ message: "Images uploaded successfully", images });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
 
-        for (const file of files) {
-          const { path } = file;
-          const img = await uploadToCloudinaryHandler(file, path);
-          images.push(img);
-          removeTmp(file.tempFilePath);
-        }
-        res.status(200).json({ message: "success", files });
-      } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: error.message });
-      }
-    });
-  });
-};
+handler.delete(async (req, res) => {
+  try {
+    const { public_id } = req.body;
+    if (!public_id) return res.status(400).json({ message: "No images selected" });
+    await cloudinary.v2.uploader.destroy(public_id);
+    res.status(200).json({ message: "Image deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
 
 export default handler;

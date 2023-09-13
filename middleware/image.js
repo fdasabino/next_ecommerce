@@ -2,27 +2,24 @@ import { removeTmp } from "@/utils/removeTemp";
 
 export const imageMiddleware = async (req, res, next) => {
   try {
-    if (!req.files || Object.keys(req.files).length === 0) {
+    const { files } = req;
+
+    if (!files || Object.keys(files).length === 0) {
       return res.status(400).json({ message: "No files were uploaded." });
     }
 
-    let files = Object.values(req.files).flat();
+    for (const file of Object.values(files)) {
+      const { size, tempFilePath, mimetype } = file;
 
-    for (const file of files) {
-      if (file.size > 1024 * 1024 * 3) {
-        removeTmp(file.tempFilePath);
+      if (size > 1024 * 1024 * 3) {
+        removeTmp(tempFilePath);
         return res
           .status(400)
           .json({ message: "File size too large...maximum 3mb files are allowed" });
       }
 
-      if (
-        file.mimetype !== "image/jpeg" &&
-        file.mimetype !== "image/png" &&
-        file.mimetype !== "image/jpg" &&
-        file.mimetype !== "image/webp"
-      ) {
-        removeTmp(file.tempFilePath);
+      if (!["image/jpeg", "image/png", "image/jpg", "image/webp"].includes(mimetype)) {
+        removeTmp(tempFilePath);
         return res
           .status(400)
           .json({ message: "File format is incorrect. Only JPEG/PNG/JPG/WEBP are allowed." });
@@ -30,9 +27,8 @@ export const imageMiddleware = async (req, res, next) => {
     }
 
     next();
-    res.status(200).json({ message: "success", files });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
