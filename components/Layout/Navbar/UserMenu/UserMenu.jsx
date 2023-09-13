@@ -12,6 +12,7 @@ const UserMenu = (props) => {
 
   // Get session
   const { data: session } = useSession();
+  const { user } = session;
 
   // Sign out
   const handleSignOut = async () => {
@@ -39,7 +40,9 @@ const UserMenu = (props) => {
           />
           <div className={styles.col}>
             <span>
-              Welcome back, <br /> {session?.user.name}!
+              {user.role === "user"
+                ? ` Welcome back, <br /> ${session?.user.name}!`
+                : "Hello Admin"}
             </span>
             <small>{session?.user.email}</small>
             <Button onClick={handleSignOut} style="danger">
@@ -55,21 +58,32 @@ const UserMenu = (props) => {
           </Button>
         </div>
       )}
-      <Link href="/profile">
-        <li>Account</li>
-      </Link>
-      <Link href="/profile/orders">
-        <li>My Orders</li>
-      </Link>
-      <Link href="/profile/messages">
-        <li>Message Center</li>
-      </Link>
-      <Link href="/profile/address">
-        <li>Addresses</li>
-      </Link>
-      <Link href="/profile/wishlist">
-        <li>Wishlist</li>
-      </Link>
+      {user.role === "admin" && (
+        <>
+          <Link href="/admin/dashboard">
+            <li>Admin Panel</li>
+          </Link>
+        </>
+      )}
+      {user.role === "user" && (
+        <>
+          <Link href="/profile">
+            <li>Account</li>
+          </Link>
+          <Link href="/profile/orders">
+            <li>My Orders</li>
+          </Link>
+          <Link href="/profile/messages">
+            <li>Message Center</li>
+          </Link>
+          <Link href="/profile/address">
+            <li>Addresses</li>
+          </Link>
+          <Link href="/profile/wishlist">
+            <li>Wishlist</li>
+          </Link>
+        </>
+      )}
     </ul>
   );
 };
