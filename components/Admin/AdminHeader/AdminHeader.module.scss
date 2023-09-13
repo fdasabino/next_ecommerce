@@ -1,0 +1,37 @@
+.admin_header {
+  user-select: none;
+  width: 100%;
+  max-width: 1200px;
+  height: 60px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 auto;
+  padding: 0 2rem;
+  border-bottom: 1px solid $base-orange;
+
+  @media (max-width: 768px) {
+    padding: 0 0.8rem;
+  }
+
+  .col {
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: $base-dark-secondary;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+      @media (max-width: 480px) {
+        font-size: 1rem;
+      }
+    }
+  }
+}
