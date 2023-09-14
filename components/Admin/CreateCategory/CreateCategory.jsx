@@ -10,7 +10,6 @@ import styles from "./CreateCategory.module.scss";
 
 const categoryValidation = Yup.object().shape({
   name: Yup.string()
-    .required("Category name is required")
     .min(3, "Category name must be at least 3 characters...")
     .max(20, "Category name must be at most 20 characters...")
     .matches(/^[A-zA-Z\s]*$/, "Category name should not have numbers or special characters..."),
