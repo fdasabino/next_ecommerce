@@ -1,3 +1,4 @@
+import authMiddleware from "@/middleware/auth";
 import User from "@/models/User";
 import db from "@/utils/db";
 import bcrypt from "bcrypt";
@@ -17,41 +18,43 @@ const addressesEqual = (a, b) => {
 };
 
 const handler = async (req, res) => {
-  try {
-    await db.connectDB();
-    const { address } = req.body;
-    const user = await User.findById(req.user);
+  await authMiddleware(req, res, async () => {
+    try {
+      await db.connectDB();
+      const { address } = req.body;
+      const user = await User.findById(req.user);
 
-    // Deactivate previously active addresses
-    user.address.forEach((a) => {
-      a.active = false;
-    });
-
-    const addressMatch = user.address.find((a) => addressesEqual(a, address));
-    const hashedPassword = await bcrypt.hash(process.env.DEFAULT_USER_PASS, 12);
-
-    if (addressMatch) {
-      res.status(200).json({
-        message: "The address provided already exists. Please select it from the list above...",
-        ok: true,
-        addressFound: true,
-        address: addressMatch,
+      // Deactivate previously active addresses
+      user.address.forEach((a) => {
+        a.active = false;
       });
-    } else {
-      // Mark the new address as active
-      address.active = true;
-      user.password = !user.password ? hashedPassword : user.password;
-      user.address.push(address);
-      await user.save();
-      res
-        .status(200)
-        .json({ message: "Address saved successfully", ok: true, addressFound: false, address });
+
+      const addressMatch = user.address.find((a) => addressesEqual(a, address));
+      const hashedPassword = await bcrypt.hash(process.env.DEFAULT_USER_PASS, 12);
+
+      if (addressMatch) {
+        res.status(200).json({
+          message: "The address provided already exists. Please select it from the list above...",
+          ok: true,
+          addressFound: true,
+          address: addressMatch,
+        });
+      } else {
+        // Mark the new address as active
+        address.active = true;
+        user.password = !user.password ? hashedPassword : user.password;
+        user.address.push(address);
+        await user.save();
+        res
+          .status(200)
+          .json({ message: "Address saved successfully", ok: true, addressFound: false, address });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    } finally {
+      db.disconnectDB();
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  } finally {
-    db.disconnectDB();
-  }
+  });
 };
 
 export default handler;
