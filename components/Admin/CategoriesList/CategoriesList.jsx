@@ -48,7 +48,7 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
   return (
     <div className={styles.categories_list}>
       <div className={styles.header}>
-        <h2>{categories.length > 0 ? "Current categories" : "No categories to show"}</h2>
+        <h2>{categories?.length > 0 ? "Current categories" : "No categories to show"}</h2>
       </div>
 
       {categories?.map((category) => (
