@@ -1,14 +1,13 @@
 .admin_sidebar {
   width: 350px;
   max-width: 100%;
-  background-color: $base-dark-secondary;
-  color: #ffffff;
+  background-color: $base-white;
   height: 100vh;
   position: fixed;
   top: 0;
   transition: transform 0.3s linear; /* Change width to transform */
   overflow-y: auto;
-  padding-top: 20px;
+  padding-top: 1cqmax;
   transform: translateX(-100%);
   box-shadow: $base-shadow-3;
   z-index: 2;
@@ -31,14 +30,13 @@
       width: 2rem;
       height: 2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      color: $base-grey;
+      transition: all 0.3s linear;
+      color: $base-dark;
       background-color: rgba($color: $base-dark-grey, $alpha: 0.3);
       padding: 0.2rem;
       border-radius: 50%;
 
       &:hover {
-        color: $base-grey;
         background-color: rgba($color: $base-dark-grey, $alpha: 0.5);
       }
     }
@@ -59,20 +57,67 @@
     padding: 0;
 
     .nav_item {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
 
       a {
         display: flex;
         align-items: center;
+        gap: 0.5rem;
         text-decoration: none;
-        color: #ffffff;
+        color: $base-dark-secondary;
+        font-weight: 600;
         padding: 0.8rem;
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: #343a40;
+          background-color: $base-dark-grey;
+        }
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+          fill: $base-orange;
+          color: $base-orange;
         }
       }
     }
   }
+
+  &__bottom_nav {
+    .bottom_item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      li {
+        a {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          text-decoration: none;
+          color: $base-dark-secondary;
+          font-weight: 600;
+          padding: 0.8rem;
+          transition: background-color 0.3s ease;
+          border-radius: 50%;
+
+          &:hover {
+            background-color: $base-dark-grey;
+          }
+
+          svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: $base-dark;
+            color: $base-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+.active {
+  background-color: $base-grey;
 }

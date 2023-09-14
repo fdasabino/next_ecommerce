@@ -40,9 +40,7 @@ const UserMenu = (props) => {
           />
           <div className={styles.col}>
             <span>
-              {user.role === "user"
-                ? ` Welcome back, <br /> ${session?.user.name}!`
-                : "Hello Admin"}
+              {user?.role === "user" ? ` Welcome back, <br /> ${user?.name}!` : "Hello Admin"}
             </span>
             <small>{session?.user.email}</small>
             <Button onClick={handleSignOut} style="danger">
@@ -58,32 +56,28 @@ const UserMenu = (props) => {
           </Button>
         </div>
       )}
-      {user.role === "admin" && (
+      {user?.role === "admin" && (
         <>
           <Link href="/admin/dashboard">
             <li>Admin Panel</li>
           </Link>
         </>
       )}
-      {user.role === "user" && (
-        <>
-          <Link href="/profile">
-            <li>Account</li>
-          </Link>
-          <Link href="/profile/orders">
-            <li>My Orders</li>
-          </Link>
-          <Link href="/profile/messages">
-            <li>Message Center</li>
-          </Link>
-          <Link href="/profile/address">
-            <li>Addresses</li>
-          </Link>
-          <Link href="/profile/wishlist">
-            <li>Wishlist</li>
-          </Link>
-        </>
-      )}
+      <Link href="/profile">
+        <li>Account</li>
+      </Link>
+      <Link href="/profile/orders">
+        <li>My Orders</li>
+      </Link>
+      <Link href="/profile/messages">
+        <li>Message Center</li>
+      </Link>
+      <Link href="/profile/address">
+        <li>Addresses</li>
+      </Link>
+      <Link href="/profile/wishlist">
+        <li>Wishlist</li>
+      </Link>
     </ul>
   );
 };

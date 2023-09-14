@@ -16,8 +16,12 @@ const AdminHeader = ({ toggleSidebar, isExpanded, user }) => {
         <div className={styles.user}>
           <Image src={user?.image} width={300} height={300} alt={user?.name} />
           <div className={styles.user_info}>
-            <p>{user?.role}</p>
-            <h4>{user?.name}</h4>
+            <h4>
+              <span>
+                Welcome back, <br />
+              </span>{" "}
+              {user?.name}
+            </h4>
           </div>
         </div>
       </div>
