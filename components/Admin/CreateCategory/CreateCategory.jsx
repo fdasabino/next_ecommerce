@@ -30,7 +30,7 @@ const CreateCategory = ({ setData }) => {
       setName("");
       toast.success(data.message);
     } catch (error) {
-      toast.error(error.response.error);
+      toast.error(error.response?.data.error);
     }
   };
 

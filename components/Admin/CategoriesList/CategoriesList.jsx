@@ -19,26 +19,30 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
   // handle input change
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
+    setName(value);
   };
 
   // handle delete category
   const handleDeleteCategory = async (id) => {
     try {
       const res = await axios.put("/api/admin/category", { data: { id } });
-      console.log(res.data); // Add this line to check the response
       setCategories(res.data.categories);
       toast.success(res.data.message);
     } catch (error) {
-      console.error(error); // Add this line to log the error
       toast.error(error.response.data.error);
     }
   };
 
   // handle update category
   const handleUpdateCategory = async (id) => {
-    console.log(id);
-    setEditCategoryId(null);
+    try {
+      const res = await axios.patch("/api/admin/category", { data: { id, name } });
+      setCategories(res.data.categories);
+      toast.success(res.data.message);
+      setEditCategoryId(null);
+    } catch (error) {
+      toast.error(error.response.data.error);
+    }
   };
 
   return (
@@ -49,23 +53,31 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
 
       {categories?.map((category) => (
         <div className={styles.category} key={category._id}>
+          {/* category edit */}
           <div className={styles.category_name}>
+            {editCategoryId === category._id && <small>{category.name}</small>}
             {editCategoryId !== category._id && <h3>{category.name}</h3>}
             {editCategoryId === category._id && (
               <div className={styles.edit}>
                 <input
                   type="text"
                   className={styles.edit_input}
-                  value={name ? name : category.name}
                   onChange={handleChange}
+                  placeholder="Enter new category name"
                   autoFocus
                 />
-                <Button style="primary" onClick={() => handleUpdateCategory(category._id)}>
-                  <AiOutlineCheck />
-                </Button>
-                <Button style="danger" onClick={() => editCategoryHandler(category._id)}>
-                  <AiOutlineStop />
-                </Button>
+                <div className={styles.buttons}>
+                  <Button
+                    style="primary"
+                    onClick={() => handleUpdateCategory(category._id)}
+                    disabled={!name}
+                  >
+                    <AiOutlineCheck />
+                  </Button>
+                  <Button style="danger" onClick={() => editCategoryHandler(category._id)}>
+                    <AiOutlineStop />
+                  </Button>
+                </div>
               </div>
             )}
           </div>

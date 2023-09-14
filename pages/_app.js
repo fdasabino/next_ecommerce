@@ -33,12 +33,13 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
                 <Component {...pageProps} />
                 <ToastContainer
                   position="bottom-right"
-                  autoClose={10000}
+                  autoClose={2000}
                   newestOnTop={true}
+                  hideProgressBar={false}
                   closeOnClick
                   draggable
                   icon={false}
-                  theme="light"
+                  theme="dark"
                 />
               </PayPalScriptProvider>
             </RootLayout>

@@ -27,6 +27,26 @@ const handler = async (req, res) => {
         });
       }
 
+      // update category
+      if (method === "PATCH") {
+        const { id, name } = req.body.data;
+        const category = await Category.findByIdAndUpdate(id);
+
+        if (category.name === name) {
+          return res.status(400).json({ error: "Category already exists", ok: false });
+        }
+
+        category.name = name;
+        category.slug = slugify(name);
+        await category.save();
+
+        return res.status(200).json({
+          message: `Category "${name}" has been successfully updated...`,
+          ok: true,
+          categories: await Category.find({}).sort({ createdAt: -1 }),
+        });
+      }
+
       // delete category
       if (method === "PUT") {
         const { id } = req.body.data;
