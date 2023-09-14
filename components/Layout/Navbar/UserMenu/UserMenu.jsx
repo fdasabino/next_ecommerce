@@ -40,7 +40,7 @@ const UserMenu = (props) => {
           />
           <div className={styles.col}>
             <span>
-              {user?.role === "user" ? ` Welcome back, <br /> ${user?.name}!` : "Hello Admin"}
+              {user?.role === "user" ? ` Welcome back, \n ${user?.name}!` : "Hello Admin"}
             </span>
             <small>{session?.user.email}</small>
             <Button onClick={handleSignOut} style="danger">
