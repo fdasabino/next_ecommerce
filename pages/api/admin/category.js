@@ -1,4 +1,3 @@
-import authMiddleware from "@/middleware/auth";
 import Category from "@/models/Category";
 import db from "@/utils/db";
 import slugify from "slugify";

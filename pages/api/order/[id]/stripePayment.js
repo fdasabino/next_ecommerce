@@ -1,4 +1,3 @@
-import authMiddleware from "@/middleware/auth";
 import Cart from "@/models/Cart";
 import Order from "@/models/Order";
 import User from "@/models/User";
