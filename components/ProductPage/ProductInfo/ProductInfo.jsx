@@ -103,7 +103,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
         return;
       }
 
-      toast.success(
+      toast.info(
         `The quantity of "${data.name}" (${data.size.size}) in your cart has been updated to (${cartQuantity}x).`
       );
     } else {
@@ -118,7 +118,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
 
   const increaseCartQuantity = () => {
     if (cartQuantity >= quantity) {
-      toast.error(`The maximum quantity available is ${quantity} items...`);
+      toast.warning(`The maximum quantity available is ${quantity} items...`);
       return;
     }
 

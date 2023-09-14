@@ -35,11 +35,10 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
                   position="bottom-right"
                   autoClose={2000}
                   newestOnTop={true}
-                  hideProgressBar={false}
+                  hideProgressBar={true}
                   closeOnClick
                   draggable
-                  icon={false}
-                  theme="dark"
+                  theme="light"
                 />
               </PayPalScriptProvider>
             </RootLayout>
