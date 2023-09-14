@@ -9,7 +9,7 @@ const middleware = async (req) => {
     secureCookie: process.env.NODE_ENV === "production",
   });
 
-  if (pathname === "/checkout") {
+  if (pathname.startsWith("/checkout")) {
     if (!session) {
       return NextResponse.redirect(`${origin}`);
     }
@@ -19,7 +19,7 @@ const middleware = async (req) => {
     if (!session) return NextResponse.redirect(`${origin}`);
   }
 
-  if (pathname === "/admin") {
+  if (pathname.startsWith("/admin")) {
     if (!session) return NextResponse.redirect(`${origin}`);
     if (session.role !== "admin") return NextResponse.redirect(`${origin}`);
   }

@@ -1,5 +1,5 @@
 import { ErrorMessage, useField } from "formik";
-import React, { useState } from "react"; // Import React and useState
+import { useState } from "react"; // Import React and useState
 import { BiUser } from "react-icons/bi";
 import { IoEyeOffOutline, IoEyeOutline, IoKeyOutline } from "react-icons/io5";
 import { MdAlternateEmail, MdErrorOutline } from "react-icons/md";

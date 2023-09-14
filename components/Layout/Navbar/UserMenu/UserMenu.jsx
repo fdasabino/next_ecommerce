@@ -12,6 +12,7 @@ const UserMenu = (props) => {
 
   // Get session
   const { data: session } = useSession();
+  const { user } = session;
 
   // Sign out
   const handleSignOut = async () => {
@@ -39,7 +40,7 @@ const UserMenu = (props) => {
           />
           <div className={styles.col}>
             <span>
-              Welcome back, <br /> {session?.user.name}!
+              {user?.role === "user" ? ` Welcome back, <br /> ${user?.name}!` : "Hello Admin"}
             </span>
             <small>{session?.user.email}</small>
             <Button onClick={handleSignOut} style="danger">
@@ -54,6 +55,13 @@ const UserMenu = (props) => {
             Sign in <AiOutlineArrowRight />
           </Button>
         </div>
+      )}
+      {user?.role === "admin" && (
+        <>
+          <Link href="/admin/dashboard">
+            <li>Admin Panel</li>
+          </Link>
+        </>
       )}
       <Link href="/profile">
         <li>Account</li>
