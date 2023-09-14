@@ -1,6 +1,5 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import { useRouter } from "next/router";
-import React from "react";
 
 const AdminSubCategories = () => {
   const router = useRouter();

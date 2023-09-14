@@ -1,0 +1,43 @@
+.create_category {
+  user-select: none;
+  width: 100%;
+  max-width: 100%;
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.6rem 0 2rem 0;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: $base-dark;
+
+      @media (max-width: 768px) {
+        font-size: 1.1rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  form {
+    width: 100%;
+    max-width: 100%;
+
+    button {
+      margin: 0 auto !important;
+    }
+  }
+}
