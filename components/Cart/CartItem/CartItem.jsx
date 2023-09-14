@@ -30,7 +30,7 @@ const CartItem = ({ cartProducts }) => {
 
   const increaseCartQuantity = () => {
     if (cartQuantity >= cartProducts.availableQuantity) {
-      toast.error(
+      toast.warning(
         `The maximum quantity available for "${cartProducts.name}" is ${cartProducts.availableQuantity} items.`
       );
       return;
@@ -39,7 +39,7 @@ const CartItem = ({ cartProducts }) => {
     const newQuantity = cartQuantity + 1;
     setCartQuantity(newQuantity);
     dispatch(updateCart({ ...cartProducts, id: cartProducts._uid, addedQuantity: newQuantity }));
-    toast.success(`Quantity updated for "${cartProducts.name}". New quantity: ${newQuantity}.`);
+    toast.info(`Quantity updated for "${cartProducts.name}". New quantity: ${newQuantity}.`);
   };
 
   const decreaseCartQuantity = () => {
@@ -47,7 +47,7 @@ const CartItem = ({ cartProducts }) => {
       const newQuantity = cartQuantity - 1;
       setCartQuantity(newQuantity);
       dispatch(updateCart({ ...cartProducts, id: cartProducts._uid, addedQuantity: newQuantity }));
-      toast.success(`Quantity updated for "${cartProducts.name}". New quantity: ${newQuantity}.`);
+      toast.info(`Quantity updated for "${cartProducts.name}". New quantity: ${newQuantity}.`);
     }
   };
 
