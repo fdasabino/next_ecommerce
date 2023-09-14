@@ -1,15 +1,13 @@
 import Hamburger from "hamburger-react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { IoCogSharp } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
 import styles from "./AdminHeader.module.scss";
 
-const AdminHeader = ({ toggleSidebar, isExpanded, user }) => {
+const AdminHeader = ({ toggleSidebar, isExpanded, user, path }) => {
   const isSmall = useMediaQuery({ query: "(max-width: 480px)" });
   const isMedium = useMediaQuery({ query: "(max-width: 768px)" });
   const isLarge = useMediaQuery({ query: "(min-width: 800px)" });
-  const router = useRouter();
   return (
     <div className={styles.admin_header}>
       <div className={styles.col}>
@@ -30,7 +28,7 @@ const AdminHeader = ({ toggleSidebar, isExpanded, user }) => {
         <div className={styles.col}>
           <h2>
             <IoCogSharp />
-            Admin Tools - {router.pathname.split("/")[2]}
+            Admin Tools - {path.split("/")[path.split("/").length - 1]}
           </h2>
         </div>
       )}
