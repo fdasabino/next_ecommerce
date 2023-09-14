@@ -11,16 +11,13 @@ const AdminCategories = ({ categories }) => {
   const router = useRouter();
   const { pathname } = router;
   const path = pathname.split("/admin/dashboard")[1];
-
   const [data, setData] = useState(categories);
-
-  console.log(data);
 
   return (
     <AdminLayout path={path}>
       <div className={styles.admin_categories}>
         <CreateCategory setData={setData} />
-        <CategoriesList data={data} />
+        <CategoriesList setData={setData} data={data} />
       </div>
     </AdminLayout>
   );
@@ -28,6 +25,7 @@ const AdminCategories = ({ categories }) => {
 
 export default AdminCategories;
 
+// server side code
 export async function getServerSideProps(context) {
   db.connectDB();
   try {
