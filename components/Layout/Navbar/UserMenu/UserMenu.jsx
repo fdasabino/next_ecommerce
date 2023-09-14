@@ -12,7 +12,7 @@ const UserMenu = (props) => {
 
   // Get session
   const { data: session } = useSession();
-  const { user } = session;
+  const user = session?.user;
 
   // Sign out
   const handleSignOut = async () => {
