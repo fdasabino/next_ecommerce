@@ -43,7 +43,6 @@ const handler = async (req, res) => {
 
         if (name !== "" && subCategory.name !== name) {
           const existingSubCategory = await SubCategory.findOne({ name });
-
           if (existingSubCategory) {
             return res.status(400).json({ error: "Sub category already exists", ok: false });
           }
@@ -53,8 +52,8 @@ const handler = async (req, res) => {
           updateRequired = true;
         }
 
+        // compare parent id
         if (parent !== "" && subCategory.parent !== parent) {
-          console.log("Updating parent from", subCategory.parent, "to", parent);
           subCategory.parent = parent;
           updateRequired = true;
         }
@@ -62,7 +61,6 @@ const handler = async (req, res) => {
         if (updateRequired) {
           try {
             await subCategory.save();
-            console.log("Subcategory saved successfully:", subCategory);
           } catch (error) {
             console.error("Error saving subcategory:", error);
             return res.status(500).json({ error: "Internal server error", ok: false });
@@ -70,7 +68,7 @@ const handler = async (req, res) => {
         }
 
         return res.status(200).json({
-          message: `Sub category "${subCategory.name}" has been successfully updated...`,
+          message: `Sub category "${subCategory.name}", has been successfully updated...`,
           ok: true,
           subCategories: await SubCategory.find({}, "name")
             .sort({ createdAt: -1 })
