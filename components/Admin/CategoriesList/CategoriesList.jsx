@@ -55,7 +55,7 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
         <div className={styles.category} key={category._id}>
           {/* category edit */}
           <div className={styles.category_name}>
-            {editCategoryId === category._id && <small>{category.name}</small>}
+            {editCategoryId === category._id && <p>{`Edit "${category.name}" category`}</p>}
             {editCategoryId !== category._id && <h3>{category.name}</h3>}
             {editCategoryId === category._id && (
               <div className={styles.edit}>
