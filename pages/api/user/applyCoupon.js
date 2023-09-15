@@ -29,13 +29,27 @@ const handler = async (req, res) => {
 
       if (currentDate < startDate) {
         return res.json({
-          message: `Coupon not active yet. This code starts on: ${startDate.getFullYear()}`,
+          message: `Coupon not active yet. This code starts on: ${startDate.toLocaleDateString(
+            "en-GB",
+            {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            }
+          )}`,
           ok: false,
         });
       }
 
       if (currentDate > endDate) {
-        return res.json({ message: `Coupon expired on the: ${endDate.getFullYear()}`, ok: false });
+        return res.json({
+          message: `Coupon expired on the:${endDate.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })}`,
+          ok: false,
+        });
       }
 
       // apply discount to cart total
