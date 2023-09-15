@@ -81,7 +81,12 @@ const SubCategoriesList = ({
                 </div>
               </div>
             )}
-            {editSubCategoryId !== sub._id && <h3>{sub.name}</h3>}
+            {editSubCategoryId !== sub._id && (
+              <div className={styles.item_label}>
+                <h3>{sub.name}</h3>
+                <small>Category: {sub.parent.name}</small>
+              </div>
+            )}
             {editSubCategoryId === sub._id && (
               <div className={styles.edit}>
                 <input

@@ -23,7 +23,10 @@ const handler = async (req, res) => {
         return res.status(201).json({
           message: `Sub Category "${name}" has been successfully created...`,
           ok: true,
-          subCategories: await SubCategory.find({}).sort({ createdAt: -1 }),
+          subCategories: await SubCategory.find({})
+            .sort({ createdAt: -1 })
+            .populate("parent")
+            .exec(),
         });
       }
 
@@ -69,7 +72,10 @@ const handler = async (req, res) => {
         return res.status(200).json({
           message: `Sub category "${subCategory.name}" has been successfully updated...`,
           ok: true,
-          subCategories: await SubCategory.find({}, "name").sort({ createdAt: -1 }).limit(10),
+          subCategories: await SubCategory.find({}, "name")
+            .sort({ createdAt: -1 })
+            .populate("parent")
+            .exec(),
         });
       }
 
@@ -80,7 +86,10 @@ const handler = async (req, res) => {
         if (!subCategory) {
           return res.status(400).json({ error: "Category not found", ok: false });
         }
-        const subCategories = await SubCategory.find({}).sort({ createdAt: -1 });
+        const subCategories = await SubCategory.find({})
+          .sort({ createdAt: -1 })
+          .populate("parent")
+          .exec();
         return res.status(200).json({
           message: "Category has been successfully deleted...",
           ok: true,
