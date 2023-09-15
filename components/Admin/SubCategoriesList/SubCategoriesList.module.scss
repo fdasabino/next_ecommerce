@@ -54,6 +54,7 @@
 
     &:hover {
       box-shadow: $base-shadow-1;
+      background-color: rgba($color: $base-blue, $alpha: 0.1);
     }
 
     @media (max-width: 480px) {

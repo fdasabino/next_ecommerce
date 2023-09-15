@@ -54,14 +54,16 @@
 
     &:hover {
       box-shadow: $base-shadow-1;
+      background-color: rgba($color: $base-blue, $alpha: 0.1);
     }
 
     @media (max-width: 480px) {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 0.6rem;
+      gap: 1rem;
       padding: 1rem 0.5rem;
+      text-align: center;
     }
 
     .coupon_name {
