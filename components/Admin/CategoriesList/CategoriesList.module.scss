@@ -78,6 +78,16 @@
         text-transform: uppercase;
       }
 
+      h3 {
+        width: 100%;
+        display: block;
+        padding: 0.2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $base-dark;
+        text-transform: uppercase;
+      }
+
       .edit {
         width: 100%;
         max-width: 100%;
