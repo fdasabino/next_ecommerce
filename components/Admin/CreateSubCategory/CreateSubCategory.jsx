@@ -28,7 +28,6 @@ const CreateSubCategory = ({ setSubData, categories }) => {
   const handleSubmit = async () => {
     try {
       const { data } = await axios.post("/api/admin/subCategory", { name, parent });
-      console.log(data);
       setSubData(data.subCategories);
       setName("");
       setParent("");

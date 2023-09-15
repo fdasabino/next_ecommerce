@@ -43,7 +43,6 @@ const SubCategoriesList = ({
   const handleUpdateSubCategory = async (id) => {
     try {
       const res = await axios.patch("/api/admin/subCategory", { data: { id, name, parent } });
-      console.log(res.data);
       setSubCategories(res.data.subCategories);
       toast.success(res.data.message);
       setEditSubCategoryId(null);
