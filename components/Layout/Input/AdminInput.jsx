@@ -1,4 +1,5 @@
 import { ErrorMessage, useField } from "formik";
+import { BsCalendar3, BsPercent } from "react-icons/bs";
 import { CiDiscount1 } from "react-icons/ci";
 import { GoNumber } from "react-icons/go";
 import { MdErrorOutline } from "react-icons/md";
@@ -16,6 +17,8 @@ const iconMap = {
   address2: <PiTextAaThin />,
   country: <PiTextAaThin />,
   coupon: <CiDiscount1 />,
+  date: <BsCalendar3 />,
+  discount: <BsPercent />,
 };
 
 const AdminInput = ({ icon, placeholder, ...props }) => {
