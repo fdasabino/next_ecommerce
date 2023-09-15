@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
-    const categories = await Category.find({}).sort({ updatedAt: -1 }).lean();
+    const categories = await Category.find({}).sort({ createdAt: 1 }).lean();
     const subCategories = await SubCategory.find({})
       .populate({ path: "parent", model: Category })
       .sort({ updatedAt: -1 })
