@@ -12,8 +12,7 @@ import styles from "./CreateSubCategory.module.scss";
 const subCategoryValidation = Yup.object().shape({
   name: Yup.string()
     .min(3, "Sub category name must be at least 3 characters...")
-    .max(20, "Sub category name must be at most 20 characters...")
-    .matches(/^[A-zA-Z\s]*$/, "Sub category name should not have numbers or special characters..."),
+    .max(20, "Sub category name must be at most 20 characters..."),
   parent: Yup.string().required("Parent category is required..."),
 });
 

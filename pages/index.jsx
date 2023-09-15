@@ -1,33 +1,34 @@
 import FlashDeals from "@/components/Home/FlashDeals/FlashDeals";
 import MainSection from "@/components/Home/MainSection/MainSection";
+import Category from "@/models/Category";
+import { setCategories } from "@/redux-store/categoriesSlice";
 import { setCountry } from "@/redux-store/countrySlice";
-import { setProducts } from "@/redux-store/productsSlice";
 import styles from "@/styles/pages/Home.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
 import Head from "next/head";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Product from "../models/Product";
 
-const HomePage = ({ country, products }) => {
+const HomePage = ({ country, products, categories }) => {
   const dispatch = useDispatch();
+
+  // Set categories in redux store
+  const setCategoriesToStore = useCallback(() => {
+    dispatch(setCategories(categories));
+  }, [dispatch, categories]);
 
   // Set country in redux store
   const setCountryToStore = useCallback(() => {
     dispatch(setCountry(country));
   }, [country, dispatch]);
 
-  // Set products in redux store
-  const setProductsToStore = useCallback(() => {
-    dispatch(setProducts(products));
-  }, [products, dispatch]);
-
   // Set country in redux store on page load
   useEffect(() => {
     setCountryToStore();
-    setProductsToStore();
-  }, [setCountryToStore, setProductsToStore]);
+    setCategoriesToStore();
+  }, [setCountryToStore, setCategoriesToStore]);
 
   return (
     <>
@@ -54,6 +55,10 @@ export async function getServerSideProps() {
     const serializedProducts = JSON.parse(JSON.stringify(products));
     const productsArray = serializedProducts;
 
+    const categories = await Category.find({}).lean().exec();
+    const serializedCategories = JSON.parse(JSON.stringify(categories));
+    const categoriesArray = Object.values(serializedCategories);
+
     const { data } = await axios.get(
       `https://api.ipregistry.co/?key=${process.env.NEXT_APP_IP_REGISTRY_API}`
     );
@@ -62,6 +67,7 @@ export async function getServerSideProps() {
     return {
       props: {
         products: productsArray,
+        categories: categoriesArray,
         country,
       },
     };

@@ -6,12 +6,12 @@ import thunk from "redux-thunk";
 
 // reducers (slices)
 import cart from "./cartSlice";
+import categories from "./categoriesSlice";
 import country from "./countrySlice";
 import expandableSidebar from "./expandableSidebarSlice";
-import products from "./productsSlice";
 
 // combine all reducers
-const reducers = combineReducers({ cart, country, products, expandableSidebar });
+const reducers = combineReducers({ cart, country, categories, expandableSidebar });
 
 // config
 const config = {
