@@ -34,24 +34,21 @@ const handler = async (req, res) => {
       if (method === "PATCH") {
         const { id, name, parent } = req.body.data;
         let subCategory = await SubCategory.findById(id);
+        let updateRequired = false;
 
         if (!subCategory) {
           return res.status(404).json({ error: "Sub category not found", ok: false });
         }
-
-        let updateRequired = false;
 
         if (name !== "" && subCategory.name !== name) {
           const existingSubCategory = await SubCategory.findOne({ name });
           if (existingSubCategory) {
             return res.status(400).json({ error: "Sub category already exists", ok: false });
           }
-
           subCategory.name = name;
           subCategory.slug = slugify(name);
           updateRequired = true;
         }
-
         // compare parent id
         if (parent !== "" && subCategory.parent !== parent) {
           subCategory.parent = parent;
