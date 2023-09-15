@@ -4,18 +4,12 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./Summary.module.scss";
 
-const Summary = ({
-  applyCouponHandler,
-  coupon,
-  cart,
-  setCoupon,
-  discountFromDb,
-  disabled,
-  discount,
-}) => {
+const Summary = ({ applyCouponHandler, coupon, cart, setCoupon, disabled, discount }) => {
   const { discount: discountFromCart } = cart;
   const validateCoupon = Yup.object().shape({
-    coupon: Yup.string().required("Please enter a coupon code"),
+    coupon: Yup.string()
+      .min(3, "Coupon must be at least 3 characters...")
+      .max(20, "Coupon must be at most 20 characters..."),
   });
 
   const handleChange = (e) => {

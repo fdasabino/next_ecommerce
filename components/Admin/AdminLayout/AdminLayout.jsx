@@ -6,12 +6,10 @@ import AdminHeader from "../AdminHeader/AdminHeader";
 import AdminSideBar from "../AdminSidebar/AdminSideBar";
 import styles from "./AdminLayout.module.scss";
 
-const AdminLayout = ({ children, path }) => {
+const AdminLayout = ({ children, path, user }) => {
   const expandableSidebar = useSelector((state) => state.expandableSidebar);
   const { isExpanded } = expandableSidebar;
   const dispatch = useDispatch();
-  const { data: session } = useSession();
-  const user = session?.user;
 
   const toggleSidebar = () => {
     dispatch(toggleExpandableSidebar());

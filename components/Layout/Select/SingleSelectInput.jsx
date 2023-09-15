@@ -27,8 +27,8 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
           {data.map((option) => (
             <MenuItem
               style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
-              key={option.name}
-              value={option.name}
+              key={option._id}
+              value={option._id || option.name}
             >
               {option.name}
             </MenuItem>
