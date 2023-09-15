@@ -47,7 +47,6 @@ const SubCategoriesList = ({
       setSubCategories(res.data.subCategories);
       toast.success(res.data.message);
       setEditSubCategoryId(null);
-      window.location.reload(false);
     } catch (error) {
       toast.error(error.response.data.error);
     }
@@ -74,9 +73,11 @@ const SubCategoriesList = ({
                   <small>
                     <span>Current Name:</span> {sub.name}
                   </small>
-                  <small>
-                    <span>Parent Category:</span> {sub.parent.name}
-                  </small>
+                  {sub.parent && (
+                    <small>
+                      <span>Parent Category:</span> {sub.parent.name}
+                    </small>
+                  )}
                 </div>
               </div>
             )}
@@ -94,7 +95,7 @@ const SubCategoriesList = ({
                 />
                 <select
                   name="parent"
-                  value={parent ? parent : sub.parent._id}
+                  value={parent ? parent : sub.parent ? sub.parent._id : ""}
                   onChange={handleChange}
                   disabled={!editSubCategoryId}
                   className={styles.select}
