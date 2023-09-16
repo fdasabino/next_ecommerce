@@ -27,16 +27,16 @@ const ProductDetails = ({ product }) => {
             clickable: true,
           }}
           breakpoints={{
-            500: {
-              slidesPerView: 2,
+            480: {
+              slidesPerView: 1,
               spaceBetween: 20,
             },
-            600: {
+            768: {
               slidesPerView: 2,
               spaceBetween: 30,
             },
-            800: {
-              slidesPerView: 2,
+            1024: {
+              slidesPerView: 3,
               spaceBetween: 40,
             },
           }}
