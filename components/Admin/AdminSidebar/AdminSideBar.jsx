@@ -53,9 +53,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
           <span>Products</span>
         </div>
         <ul className={styles.nav_list}>
-          <li className={`${styles.nav_item} ${path === "products/all" ? styles.active : ""}`}>
-            <Link onClick={toggleSidebar} href="/admin/dashboard/products/all">
-              <FaThList /> All Products
+          <li className={`${styles.nav_item} ${path === "/products" ? styles.active : ""}`}>
+            <Link onClick={toggleSidebar} href="/admin/dashboard/products">
+              <FaThList /> Products
             </Link>
           </li>
           <li className={`${styles.nav_item} ${path === "/products/create" ? styles.active : ""}`}>

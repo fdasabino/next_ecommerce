@@ -1,0 +1,101 @@
+.product_details {
+  border-top: 1px solid $base-grey;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  .sub_products {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
+    gap: 1rem;
+
+    .sub_product {
+      width: 100%;
+      max-width: 350px;
+      border: 1px solid $base-grey;
+      box-shadow: $base-shadow-3;
+      border-radius: 5px;
+      padding: 0.8rem;
+
+      .sub_images {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border-bottom: 1px solid $base-grey;
+
+        img {
+          width: 100%;
+          max-width: 30px;
+          height: 100%;
+          max-height: 30px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 1px solid $base-info;
+        }
+      }
+
+      .sub_info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        border-bottom: 1px solid $base-grey;
+        margin-bottom: 0.5rem;
+
+        small {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-transform: uppercase;
+
+          span {
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+            font-weight: 600;
+            color: $base-dark;
+
+            svg {
+              width: 0.9rem;
+              height: 0.9rem;
+            }
+          }
+        }
+      }
+
+      .sub_sizes {
+        width: 100%;
+        max-width: 100%;
+        small {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          text-transform: uppercase;
+          font-size: 0.8rem;
+
+          .sizes_wrapper {
+            display: flex;
+            gap: 0.2rem;
+            span {
+              width: 25px;
+              height: 25px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.65rem;
+              color: $base-dark;
+              background-color: $base-grey;
+              border: $base-orange 1px solid;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
