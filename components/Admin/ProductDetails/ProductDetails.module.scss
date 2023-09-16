@@ -1,6 +1,6 @@
 .product_details {
   border-top: 1px solid $base-grey;
-  padding: 1rem;
+  padding: 2rem;
   margin-top: 1rem;
 
   .sub_products {
@@ -13,7 +13,7 @@
 
     .sub_product {
       width: 100%;
-      max-width: 350px;
+      max-width: 400px;
       border: 1px solid $base-grey;
       box-shadow: $base-shadow-3;
       border-radius: 5px;
