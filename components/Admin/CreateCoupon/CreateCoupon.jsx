@@ -77,6 +77,7 @@ const CreateCoupon = ({ setData }) => {
               type="date"
               value={startDate}
               name="startDate"
+              placeholder="Start date"
               icon="date"
               onChange={handleChange}
             />
@@ -84,6 +85,7 @@ const CreateCoupon = ({ setData }) => {
               type="date"
               value={endDate}
               name="endDate"
+              placeholder="End date"
               icon="date"
               onChange={handleChange}
             />

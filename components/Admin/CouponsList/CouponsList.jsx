@@ -116,6 +116,7 @@ const SubCategoriesList = ({ data, setData }) => {
                   type="date"
                   value={startDate}
                   name="startDate"
+                  placeholder="Start date"
                   icon="date"
                   onChange={handleChange}
                 />
@@ -123,6 +124,7 @@ const SubCategoriesList = ({ data, setData }) => {
                   type="date"
                   value={endDate}
                   name="endDate"
+                  placeholder="End date"
                   icon="date"
                   onChange={handleChange}
                 />
