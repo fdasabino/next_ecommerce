@@ -22,7 +22,7 @@ const ProductItem = ({ product, openId, toggleDetailsById }) => {
       <div className={styles.info}>
         <small>
           Category:
-          <span>{product.category.name}</span>
+          <span>#{product.category.name}</span>
         </small>
         <small>
           Brand:

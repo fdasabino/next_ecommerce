@@ -1,6 +1,7 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import ProductsList from "@/components/Admin/ProductsList/ProductsList";
 import Product from "@/models/Product";
+import SubCategory from "@/models/SubCategory";
 import User from "@/models/User";
 import styles from "@/styles/pages/AdminProducts.module.scss";
 import db from "@/utils/db";
@@ -14,6 +15,7 @@ const AdminProducts = ({ products: productsFromDB, user }) => {
   const path = pathname.split("/admin/dashboard")[1];
   const [products, setProducts] = useState(productsFromDB);
 
+  console.log(products);
   return (
     <AdminLayout path={path} user={user}>
       <div className={styles.admin_products}>
@@ -27,13 +29,14 @@ export default AdminProducts;
 
 // server side code
 export async function getServerSideProps(context) {
-  db.connectDB();
+  await db.connectDB();
   const session = await getSession(context);
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
     const products = await Product.find({})
+      .sort({ createdAt: -1 })
       .populate("category")
-      // .populate("subCategories")
+      .populate({ path: "subCategories", model: SubCategory })
       .lean()
       .exec();
     return {
@@ -49,6 +52,6 @@ export async function getServerSideProps(context) {
       },
     };
   } finally {
-    db.disconnectDB();
+    await db.disconnectDB();
   }
 }

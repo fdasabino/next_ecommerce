@@ -40,6 +40,7 @@
   .info {
     display: flex;
     flex-direction: column;
+    gap: 0.2rem;
     padding: 0.5rem;
 
     small {
@@ -48,6 +49,9 @@
       align-items: center;
       justify-content: space-between;
       text-transform: uppercase;
+      background-color: rgba($color: $base-blue, $alpha: 0.1);
+      padding: 0.2rem;
+      font-weight: 600;
 
       span {
         display: flex;
