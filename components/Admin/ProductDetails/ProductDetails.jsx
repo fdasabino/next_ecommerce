@@ -3,7 +3,7 @@ import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { BsTrash } from "react-icons/bs";
+import { BsEye, BsTrash } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { Navigation } from "swiper";
 import SwiperCore, { Pagination } from "swiper/core";
@@ -23,6 +23,9 @@ const ProductDetails = ({ product }) => {
   const router = useRouter();
   const editProduct = () => {
     router.push(`/admin/dashboard/product/${product._id}`);
+  };
+  const viewProduct = (i) => {
+    router.push(`/product/${product.slug}?color=${i}`);
   };
 
   return (
@@ -90,10 +93,13 @@ const ProductDetails = ({ product }) => {
                   </div>
                   <div className={styles.actions}>
                     <Button onClick={editProduct}>
-                      Edit <FiEdit />
+                      <FiEdit />
+                    </Button>
+                    <Button style="tertiary" onClick={() => viewProduct(i)}>
+                      <BsEye />
                     </Button>
                     <Button style="danger">
-                      Remove <BsTrash />
+                      <BsTrash />
                     </Button>
                   </div>
                 </div>
