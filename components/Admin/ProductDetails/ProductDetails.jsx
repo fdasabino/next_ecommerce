@@ -1,5 +1,10 @@
+import Button from "@/components/Layout/Button/Button";
 import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { BsTrash } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
 import { Navigation } from "swiper";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,6 +18,11 @@ const ProductDetails = ({ product }) => {
   const getColorName = (color) => {
     const colorName = GetColorName(color);
     return colorName;
+  };
+
+  const router = useRouter();
+  const editProduct = () => {
+    router.push(`/admin/dashboard/product/${product._id}`);
   };
 
   return (
@@ -29,17 +39,18 @@ const ProductDetails = ({ product }) => {
           breakpoints={{
             480: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 5,
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 30,
+              spaceBetween: 10,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 20,
             },
           }}
+          className={styles.swiper_container}
         >
           {product.subProducts.map((sub, i) => {
             const { images, sizes } = sub;
@@ -70,13 +81,20 @@ const ProductDetails = ({ product }) => {
                   </div>
                   <div className={styles.sub_sizes}>
                     <small>
-                      Sizes:
                       <div className={styles.sizes_wrapper}>
                         {sizes.map((size, k) => (
                           <span key={k}>{size.size}</span>
                         ))}
                       </div>
                     </small>
+                  </div>
+                  <div className={styles.actions}>
+                    <Button onClick={editProduct}>
+                      Edit <FiEdit />
+                    </Button>
+                    <Button style="danger">
+                      Remove <BsTrash />
+                    </Button>
                   </div>
                 </div>
               </SwiperSlide>
