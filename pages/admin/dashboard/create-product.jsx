@@ -106,7 +106,11 @@ const CreateProduct = ({ categories, parents, user }) => {
         });
       }
     };
-    getParentData();
+
+    // if the product has a parent get the parent data
+    if (product.parent) {
+      getParentData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product.parent]);
 
