@@ -1,11 +1,13 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import Button from "@/components/Layout/Button/Button";
+import DialogModal from "@/components/Layout/DialogModal/DialogModal";
 import AdminInput from "@/components/Layout/Input/AdminInput";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
 import User from "@/models/User";
+import { hideDialog, showDialog } from "@/redux-store/dialogSlice";
 import styles from "@/styles/pages/CreateProduct.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
@@ -15,6 +17,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 
 const productValidationSchema = Yup.object().shape({
@@ -85,6 +88,7 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [images, setImages] = useState([]);
   const [descriptionImages, setDescriptionImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   console.log("parents", parents);
   console.log("product", product);
@@ -107,6 +111,11 @@ const CreateProduct = ({ categories, parents, user }) => {
       }
     };
 
+    // empty the product state if the parent is changed reset the product state
+    if (product.parent === "") {
+      setProduct(initialState);
+    }
+
     // if the product has a parent get the parent data
     if (product.parent) {
       getParentData();
@@ -123,14 +132,6 @@ const CreateProduct = ({ categories, parents, user }) => {
     };
     getSubs();
   }, [product.category]);
-
-  useEffect(() => {
-    // empty the product state if the parent is changed reset the product state
-    if (product.parent === "") {
-      setProduct(initialState);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product.parent]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

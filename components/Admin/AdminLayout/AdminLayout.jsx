@@ -1,6 +1,8 @@
+import DialogModal from "@/components/Layout/DialogModal/DialogModal";
+import { hideDialog } from "@/redux-store/dialogSlice";
 import { toggleExpandableSidebar } from "@/redux-store/expandableSidebarSlice";
-import { useSession } from "next-auth/react";
 import Head from "next/head";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminHeader from "../AdminHeader/AdminHeader";
 import AdminSideBar from "../AdminSidebar/AdminSideBar";
@@ -15,6 +17,14 @@ const AdminLayout = ({ children, path, user }) => {
     dispatch(toggleExpandableSidebar());
   };
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(hideDialog());
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [dispatch]);
+
   return (
     <>
       <Head>
@@ -25,6 +35,7 @@ const AdminLayout = ({ children, path, user }) => {
 
       <div className={styles.admin_layout}>
         {isExpanded && <div className={styles.overlay} />}
+        <DialogModal />
         <AdminSideBar isExpanded={isExpanded} toggleSidebar={toggleSidebar} path={path} />
         <AdminHeader
           toggleSidebar={toggleSidebar}
