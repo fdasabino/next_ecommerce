@@ -34,7 +34,6 @@ const ProductDetails = ({ product }) => {
         <Swiper
           slidesPerView={1}
           spaceBetween={5}
-          loop={true}
           navigation={true}
           pagination={{
             clickable: true,
@@ -83,13 +82,12 @@ const ProductDetails = ({ product }) => {
                     </small>
                   </div>
                   <div className={styles.sub_sizes}>
-                    <small>
-                      <div className={styles.sizes_wrapper}>
-                        {sizes.map((size, k) => (
-                          <span key={k}>{size.size}</span>
-                        ))}
-                      </div>
-                    </small>
+                    <small>Available sizes:</small>
+                    <div className={styles.sizes_wrapper}>
+                      {sizes.map((size, k) => (
+                        <span key={k}>{size.size}</span>
+                      ))}
+                    </div>
                   </div>
                   <div className={styles.actions}>
                     <Button onClick={editProduct}>
