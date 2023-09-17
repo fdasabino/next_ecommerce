@@ -4,7 +4,9 @@ import db from "../../../utils/db";
 const handler = async (req, res) => {
   try {
     await db.connectDB();
-    const { id, color, size } = req.query;
+    const id = req.query.id;
+    const color = req.query.color || 0;
+    const size = req.query.size || 0;
 
     const product = await Product.findById(id).lean();
 
@@ -22,6 +24,8 @@ const handler = async (req, res) => {
       discount: product.discount,
       slug: product.slug,
       brand: product.brand,
+      category: product.category,
+      subCategories: product.subCategories,
       colorIndex: Number(color),
       shipping: product.shipping,
       size: subProduct.sizes[size],

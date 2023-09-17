@@ -8,18 +8,21 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
   return (
     <div>
       <FormControl fullWidth>
-        <InputLabel style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}>{placeholder}</InputLabel>
+        <InputLabel style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}>
+          {meta.touched && meta.error ? meta.error : placeholder}
+        </InputLabel>
         <Select
           style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
           fullWidth
           variant="outlined"
           name={field.name}
           select={field.select}
-          error={meta.touched && meta.error}
           label={placeholder}
           value={field.value}
           onChange={onChange}
           className={`${styles.select} ${meta.touched && meta.error ? styles.error : ""}`}
+          disabled={props.disabled}
+          error={meta.touched && meta.error ? true : false}
         >
           <MenuItem style={{ fontFamily: "Mulish", fontSize: "0.9rem" }} key="" value="">
             {placeholder}

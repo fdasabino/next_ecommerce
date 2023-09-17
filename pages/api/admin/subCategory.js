@@ -7,9 +7,21 @@ const handler = async (req, res) => {
   await db.connectDB();
   const { method } = req;
   const { name, parent } = req.body;
+  const { category } = req.query;
 
   try {
     await authMiddleware(req, res, async () => {
+      // get sub category
+      if (method === "GET") {
+        if (!category) {
+          return res.json([]);
+        }
+        const results = await SubCategory.find({ parent: category })
+          .sort({ createdAt: -1 })
+          .select("name")
+          .exec();
+        return res.json(results);
+      }
       // create sub category
       if (method === "POST") {
         const SubCategoryExists = await SubCategory.findOne({ name });

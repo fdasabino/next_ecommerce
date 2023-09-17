@@ -1,0 +1,39 @@
+.select {
+  position: relative;
+  width: 100% !important;
+  height: 50px !important;
+
+  background: $base-white !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 5px !important;
+  margin-bottom: 1rem !important;
+
+  &::placeholder {
+    color: $base-grey !important;
+  }
+
+  &:hover {
+    cursor: pointer;
+    outline: 1px solid $base-dark;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  svg {
+    width: 25px;
+    height: 25px;
+    stroke: $base-info;
+    fill: $base-info;
+  }
+}

@@ -8,7 +8,7 @@ import db from "@/utils/db";
 import axios from "axios";
 import Head from "next/head";
 import { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Product from "../models/Product";
 
 const HomePage = ({ country, products, categories }) => {
