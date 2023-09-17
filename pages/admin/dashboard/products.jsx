@@ -15,7 +15,6 @@ const AdminProducts = ({ products: productsFromDB, user }) => {
   const path = pathname.split("/admin/dashboard")[1];
   const [products, setProducts] = useState(productsFromDB);
 
-  console.log(products);
   return (
     <AdminLayout path={path} user={user}>
       <div className={styles.admin_products}>

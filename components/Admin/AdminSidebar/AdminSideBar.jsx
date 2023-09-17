@@ -58,8 +58,8 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
               <FaThList /> Products
             </Link>
           </li>
-          <li className={`${styles.nav_item} ${path === "/products/create" ? styles.active : ""}`}>
-            <Link onClick={toggleSidebar} href="/admin/dashboard/products/create">
+          <li className={`${styles.nav_item} ${path === "/createProduct" ? styles.active : ""}`}>
+            <Link onClick={toggleSidebar} href="/admin/dashboard/createProduct">
               <BsPatchPlus /> Create Product
             </Link>
           </li>
