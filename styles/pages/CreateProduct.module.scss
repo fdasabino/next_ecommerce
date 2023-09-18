@@ -1,11 +1,17 @@
 .create_product {
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
   gap: 3rem;
+
+  margin: 0 auto;
+
+  hr {
+    margin: 0;
+    border-top: 1px solid $base-orange;
+  }
 
   .header {
     margin-top: 1rem;
@@ -15,20 +21,38 @@
     }
   }
 
-  .inputs {
+  .selected_colors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem 0;
+    border: 1px solid rgba($color: $base-grey, $alpha: 0.3);
+    padding: 1rem;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
     .color_span {
-      width: 50px;
+      display: block;
+      width: 100px;
       height: 50px;
-      border-radius: 50%;
+      border-radius: 10px;
       margin-right: 1rem;
+      box-shadow: $base-shadow-1;
     }
 
     .image_span {
-      width: 50px;
+      display: block;
+      width: 100px;
       height: 50px;
-      border-radius: 50%;
+      border-radius: 10px;
       margin-right: 1rem;
       object-fit: cover;
+      box-shadow: $base-shadow-1;
     }
   }
 }

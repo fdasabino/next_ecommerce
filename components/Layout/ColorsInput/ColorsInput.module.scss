@@ -1,0 +1,56 @@
+.colors {
+  margin: 2rem 0;
+  .header {
+    background: $base-dark-grey;
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem;
+
+      svg {
+        width: 40px;
+        height: 40px;
+        background: $base-info;
+        padding: 0.5rem;
+        fill: $base-white;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+
+  .colors_info {
+    margin: 1rem 0;
+    border: 1px solid rgba($color: $base-grey, $alpha: 0.3);
+    padding: 1rem;
+
+    .color_wheel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+
+      .swatch {
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 10px !important;
+        margin-right: 1rem !important;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          scale: 1.1;
+        }
+      }
+    }
+  }
+}

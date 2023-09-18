@@ -1,5 +1,6 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import Button from "@/components/Layout/Button/Button";
+import ColorsInput from "@/components/Layout/ColorsInput/ColorsInput";
 import ImageInput from "@/components/Layout/ImageInput/ImageInput";
 import AdminInput from "@/components/Layout/Input/AdminInput";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
@@ -11,6 +12,7 @@ import styles from "@/styles/pages/CreateProduct.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
 import { Form, Formik } from "formik";
+import { GetColorName } from "hex-color-to-color-name";
 import { getSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -89,7 +91,6 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  console.log("parents", parents);
   console.log("product", product);
 
   useEffect(() => {
@@ -161,6 +162,7 @@ const CreateProduct = ({ categories, parents, user }) => {
         >
           {(formik) => (
             <Form>
+              {/* parent product */}
               <SingleSelectInput
                 name="parent"
                 value={product.parent}
@@ -168,6 +170,7 @@ const CreateProduct = ({ categories, parents, user }) => {
                 placeholder="Select a parent product / leave empty to create a new product"
                 onChange={handleChange}
               />
+              {/* images */}
               <ImageInput
                 name="imageInputFile"
                 header="Product Images"
@@ -176,129 +179,133 @@ const CreateProduct = ({ categories, parents, user }) => {
                 setImages={setImages}
                 setColorImage={setColorImage}
               />
-              <div className={styles.inputs}>
-                {product.color.image && (
-                  <Image
-                    src={product.color.image}
-                    width={250}
-                    height={250}
-                    alt={product.color.color}
-                  />
-                )}
-                {product.color.color && (
-                  <span
-                    className={styles.color_span}
-                    style={{ background: `${product.color.color}` }}
-                  />
-                )}
-                {product.color.image && (
-                  <span
-                    className={styles.image_span}
-                    style={{ background: `${product.color.color}` }}
-                  />
-                )}
-                {/* {
+              {/* selected color or image */}
+              {images.length > 0 && (
+                <>
+                  <div className={styles.selected_colors}>
+                    <h4>Selected color: {GetColorName(product.color.color)}</h4>
+
+                    {product.color.image && (
+                      <Image
+                        src={product.color.image}
+                        width={250}
+                        height={250}
+                        className={styles.image_span}
+                        alt={product.color.color}
+                      />
+                    )}
+
+                    {product.color.color && (
+                      <span
+                        className={styles.color_span}
+                        style={{ background: `${product.color.color}` }}
+                      />
+                    )}
+                  </div>
                   <ColorsInput
                     name="color"
                     product={product}
+                    header={"Pick a product color"}
                     setProduct={setProduct}
                     colorImage={colorImage}
                   />
-                } */}
-                {/* <StyleInput
+                </>
+              )}
+
+              {/* <StyleInput
                   name="styleInput"
                   product={product}
                   setProduct={setProduct}
                   colorImage={colorImage}
                 /> */}
 
-                <SingleSelectInput
-                  name="category"
-                  value={product.category}
-                  data={categories}
-                  placeholder="Select a parent category"
-                  onChange={handleChange}
+              <SingleSelectInput
+                name="category"
+                value={product.category}
+                data={categories}
+                placeholder="Select a parent category"
+                onChange={handleChange}
+                disabled={product.parent === "" ? false : true}
+              />
+              {product.category && (
+                <MultipleSelectInput
+                  value={product.subCategories}
+                  name="subCategories"
+                  placeholder="Select sub categories"
+                  handleChange={handleChange}
                   disabled={product.parent === "" ? false : true}
+                  data={subs}
+                  setSubs={setSubs}
                 />
-                {product.category && (
-                  <MultipleSelectInput
-                    value={product.subCategories}
-                    name="subCategories"
-                    placeholder="Select sub categories"
-                    handleChange={handleChange}
-                    disabled={product.parent === "" ? false : true}
-                    data={subs}
-                    setSubs={setSubs}
-                  />
-                )}
+              )}
 
-                <div className={styles.header}>
-                  <h2>Basic Info</h2>
-                </div>
+              <div className={styles.header}>
+                <h2>Basic Info</h2>
+              </div>
 
-                <AdminInput
-                  type="text"
-                  name="name"
-                  label="Name"
-                  placeholder="Product name"
-                  icon="name"
-                  onChange={handleChange}
-                />
-                <AdminInput
-                  type="text"
-                  name="description"
-                  label="Description"
-                  placeholder="Product description"
-                  icon="description"
-                  onChange={handleChange}
-                />
-                <AdminInput
-                  type="text"
-                  name="brand"
-                  label="Brand"
-                  placeholder="Product brand"
-                  icon="brand"
-                  onChange={handleChange}
-                />
-                <AdminInput
-                  type="text"
-                  name="sku"
-                  label="SKU"
-                  placeholder="Product SKU / Stock Keeping Unit"
-                  icon="barCode"
-                  onChange={handleChange}
-                />
-                <AdminInput
-                  type="number"
-                  name="discount"
-                  label="Discount"
-                  placeholder="Product discount"
-                  icon="discount"
-                  onChange={handleChange}
-                />
-                {/* <ImageInput
+              <AdminInput
+                type="text"
+                name="name"
+                label="Name"
+                placeholder="Product name"
+                icon="name"
+                onChange={handleChange}
+              />
+              <AdminInput
+                type="text"
+                name="description"
+                label="Description"
+                placeholder="Product description"
+                icon="description"
+                onChange={handleChange}
+              />
+              <AdminInput
+                type="text"
+                name="brand"
+                label="Brand"
+                placeholder="Product brand"
+                icon="brand"
+                onChange={handleChange}
+              />
+              <AdminInput
+                type="text"
+                name="sku"
+                label="SKU"
+                placeholder="Product SKU / Stock Keeping Unit"
+                icon="barCode"
+                onChange={handleChange}
+              />
+              <AdminInput
+                type="number"
+                name="discount"
+                label="Discount"
+                placeholder="Product discount"
+                icon="discount"
+                onChange={handleChange}
+              />
+              {/* <ImageInput
                 name="imageDescInputFile"
                 header="Product Description Images"
                 images={descriptionImages}
                 setImages={setDescriptionImages}
                 setColorImage={setColorImage}
               /> */}
-                {/* <SizesInput
+              {/* <SizesInput
                   sizes={product.sizes}
                   product={product}
                   setProduct={setProduct}               
               /> */}
-                {/* <DetailsInput
+              {/* <DetailsInput
                   sizes={product.details}
                   product={product}
                   setProduct={setProduct}               
               /> */}
-                {/* <QuestionsInput
+              {/* <QuestionsInput
                   sizes={product.questions}
                   product={product}
                   setProduct={setProduct}               
               /> */}
-              </div>
+
               <Button type="submit" style="primary">
                 Create Product <AiOutlinePlus />
               </Button>

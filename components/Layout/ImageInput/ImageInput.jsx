@@ -1,11 +1,10 @@
+import { showDialog } from "@/redux-store/dialogSlice";
 import { ErrorMessage, useField } from "formik";
+import Image from "next/image";
 import { useRef } from "react";
 import { BiErrorCircle } from "react-icons/bi";
-
-import { showDialog } from "@/redux-store/dialogSlice";
-import Image from "next/image";
 import { BsFolderPlus, BsTrash } from "react-icons/bs";
-import { GiExtractionOrb } from "react-icons/gi";
+import { IoMdColorFilter } from "react-icons/io";
 import { RiShape2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
@@ -16,15 +15,10 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
   const fileInput = useRef(null);
   const [meta, field] = useField(name);
 
-  console.log("meta", meta.error);
-  console.log("field", field);
-  console.log(images);
-
   const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
 
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
-    console.log("files", files);
 
     // loop through selected files and check file type and size and quantity
     files.forEach((file, i) => {
@@ -87,7 +81,7 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
     <div className={styles.image_input}>
       <div className={styles.header}>
         <h2 className={`${meta.error ? styles.error_header : ""}`}>
-          {meta.error && <BiErrorCircle />} {header}
+          {meta.error && <BiErrorCircle />} {header} <span>({images.length})</span>
         </h2>
         {meta.touched && meta.error && (
           <span className={styles.error_msg}>
@@ -95,6 +89,14 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
             <ErrorMessage name={name} />
           </span>
         )}
+        <Button
+          style={meta.error ? "danger" : "primary"}
+          type="reset"
+          disabled={images.length === 6 || meta.error}
+          onClick={() => fileInput.current.click()}
+        >
+          <BsFolderPlus />
+        </Button>
       </div>
       <div className={styles.input_wrapper}>
         <input
@@ -106,37 +108,14 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
           accept="image/jpeg,image/png,image/webp,image/jpg"
           onChange={handleImages}
         />
-        <Button
-          style={meta.error ? "danger" : "primary"}
-          type="reset"
-          disabled={images.length === 6 || meta.error}
-          onClick={() => fileInput.current.click()}
-        >
-          {text}
-          <BsFolderPlus />
-        </Button>
       </div>
       <div className={styles.images_main}>
         {images.length === 0 && (
           <div className={styles.no_image}>
-            <h4>No images uploaded yet.</h4>
+            <h4>No images uploaded yet</h4>
           </div>
         )}
-        <div
-          className={`${styles.grid} ${
-            images.length === 2
-              ? styles.grid_two
-              : images.length === 3
-              ? styles.grid_three
-              : images.length === 4
-              ? styles.grid_four
-              : images.length === 5
-              ? styles.grid_five
-              : images.length === 6
-              ? styles.grid_six
-              : ""
-          }`}
-        >
+        <div className={styles.grid}>
           {images.length > 0 &&
             images.map((image, i) => (
               <div key={i} className={styles.grid_wrapper}>
@@ -151,15 +130,10 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
                   >
                     <BsTrash />
                   </Button>
-                  <Button style="secondary">
-                    <GiExtractionOrb />
+                  <Button style="secondary" onClick={() => setColorImage(image)}>
+                    <IoMdColorFilter />
                   </Button>
-                  <Button
-                    style="tertiary"
-                    onClick={() => {
-                      setColorImage(image);
-                    }}
-                  >
+                  <Button style="tertiary">
                     <RiShape2Line />
                   </Button>
                 </div>
