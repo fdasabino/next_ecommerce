@@ -2,6 +2,7 @@
 import { ErrorMessage, useField } from "formik";
 import { useState } from "react";
 import { ColorExtractor } from "react-color-extractor";
+import { AiOutlineArrowDown } from "react-icons/ai";
 import { BsChevronBarUp } from "react-icons/bs";
 import styles from "./ColorsInput.module.scss";
 
@@ -37,7 +38,7 @@ const ColorsInput = ({ name, product, setProduct, colorImage, ...props }) => {
         {colors.length > 0 && (
           <>
             <h2>Select one of the colors below</h2>
-            <BsChevronBarUp
+            <AiOutlineArrowDown
               style={toggle ? { transform: "rotate(180deg)" } : ""}
               onClick={() => setToggle((prev) => !prev)}
             />
