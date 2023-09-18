@@ -1,6 +1,7 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import Button from "@/components/Layout/Button/Button";
 import ColorsInput from "@/components/Layout/ColorsInput/ColorsInput";
+import DetailsInput from "@/components/Layout/DetailsInput/DetailsInput";
 import ImageInput from "@/components/Layout/ImageInput/ImageInput";
 import AdminInput from "@/components/Layout/Input/AdminInput";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
@@ -94,6 +95,7 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [toggleBasicInfo, setToggleBasicInfo] = useState(false);
   const [toggleCategoryInfo, setToggleCategoryInfo] = useState(false);
   const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
+  const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -343,11 +345,18 @@ const CreateProduct = ({ categories, parents, user }) => {
                 setImages={setDescriptionImages}
                 setColorImage={setColorImage}
               /> */}
-              {/* <DetailsInput
-                  sizes={product.details}
-                  product={product}
-                  setProduct={setProduct}               
-              /> */}
+
+              <div className={styles.header}>
+                <h2>Details</h2>
+                <AiOutlineArrowDown
+                  style={toggleDetailsInfo ? { transform: "rotate(180deg)" } : ""}
+                  onClick={() => setToggleDetailsInfo((prev) => !prev)}
+                />
+              </div>
+
+              {toggleDetailsInfo && (
+                <DetailsInput details={product.details} product={product} setProduct={setProduct} />
+              )}
               {/* <QuestionsInput
                   sizes={product.questions}
                   product={product}
