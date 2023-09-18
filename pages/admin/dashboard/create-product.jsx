@@ -5,6 +5,7 @@ import DetailsInput from "@/components/Layout/DetailsInput/DetailsInput";
 import ImageInput from "@/components/Layout/ImageInput/ImageInput";
 import AdminInput from "@/components/Layout/Input/AdminInput";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
+import QuestionsInput from "@/components/Layout/QuestionsInput/QuestionsInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import SizesInput from "@/components/Layout/SizesInput/SizesInput";
 import StyleInput from "@/components/Layout/StyleInput/StyleInput";
@@ -76,8 +77,8 @@ const CreateProduct = ({ categories, parents, user }) => {
     ],
     questions: [
       {
-        name: "",
-        value: "",
+        question: "",
+        answer: "",
       },
     ],
     shippingFee: "",
@@ -96,6 +97,7 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [toggleCategoryInfo, setToggleCategoryInfo] = useState(false);
   const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
   const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
+  const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -338,14 +340,6 @@ const CreateProduct = ({ categories, parents, user }) => {
                 <SizesInput sizes={product.sizes} product={product} setProduct={setProduct} />
               )}
 
-              {/* <ImageInput
-                name="imageDescInputFile"
-                header="Product Description Images"
-                images={descriptionImages}
-                setImages={setDescriptionImages}
-                setColorImage={setColorImage}
-              /> */}
-
               <div className={styles.header}>
                 <h2>Details</h2>
                 <AiOutlineArrowDown
@@ -357,11 +351,21 @@ const CreateProduct = ({ categories, parents, user }) => {
               {toggleDetailsInfo && (
                 <DetailsInput details={product.details} product={product} setProduct={setProduct} />
               )}
-              {/* <QuestionsInput
-                  sizes={product.questions}
+              <div className={styles.header}>
+                <h2>Questions</h2>
+                <AiOutlineArrowDown
+                  style={toggleQuestionsInfo ? { transform: "rotate(180deg)" } : ""}
+                  onClick={() => setToggleQuestionsInfo((prev) => !prev)}
+                />
+              </div>
+
+              {toggleQuestionsInfo && (
+                <QuestionsInput
+                  questions={product.questions}
                   product={product}
-                  setProduct={setProduct}               
-              /> */}
+                  setProduct={setProduct}
+                />
+              )}
 
               <hr />
               <Button type="submit" style="primary">

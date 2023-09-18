@@ -16,8 +16,6 @@ const DetailsInput = ({ details, product, setProduct }) => {
     }
   };
 
-  console.log(product.details);
-
   return (
     <div className={styles.details_input}>
       {details && details.length === 0 && (
@@ -39,24 +37,24 @@ const DetailsInput = ({ details, product, setProduct }) => {
         details.map((detail, index) => (
           <div className={styles.details} key={index}>
             <div className={styles.input_group}>
-              <label htmlFor="name">Detail</label>
+              <label htmlFor="name">Name</label>
               <input
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Detail Name"
+                placeholder="Name"
                 value={detail.name}
                 onChange={(e) => handleDetails(e, index)}
               />
             </div>
 
             <div className={styles.input_group}>
-              <label htmlFor="value">Detail value</label>
+              <label htmlFor="value">Value</label>
               <input
                 id="value"
                 type="text"
                 name="value"
-                placeholder="Detail Value"
+                placeholder="Value"
                 value={detail.value}
                 onChange={(e) => handleDetails(e, index)}
               />
