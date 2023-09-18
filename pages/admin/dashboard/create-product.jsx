@@ -1,13 +1,12 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import Button from "@/components/Layout/Button/Button";
-import DialogModal from "@/components/Layout/DialogModal/DialogModal";
+import ImageInput from "@/components/Layout/ImageInput/ImageInput";
 import AdminInput from "@/components/Layout/Input/AdminInput";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
 import User from "@/models/User";
-import { hideDialog, showDialog } from "@/redux-store/dialogSlice";
 import styles from "@/styles/pages/CreateProduct.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
@@ -162,14 +161,21 @@ const CreateProduct = ({ categories, parents, user }) => {
         >
           {(formik) => (
             <Form>
-              {/* <ImageInput
+              <SingleSelectInput
+                name="parent"
+                value={product.parent}
+                data={parents}
+                placeholder="Select a parent product / leave empty to create a new product"
+                onChange={handleChange}
+              />
+              <ImageInput
                 name="imageInputFile"
                 header="Product Images"
                 text="Add Images"
                 images={images}
                 setImages={setImages}
                 setColorImage={setColorImage}
-              /> */}
+              />
               <div className={styles.inputs}>
                 {product.color.image && (
                   <Image
@@ -205,13 +211,7 @@ const CreateProduct = ({ categories, parents, user }) => {
                   setProduct={setProduct}
                   colorImage={colorImage}
                 /> */}
-                <SingleSelectInput
-                  name="parent"
-                  value={product.parent}
-                  data={parents}
-                  placeholder="Select a parent product"
-                  onChange={handleChange}
-                />
+
                 <SingleSelectInput
                   name="category"
                   value={product.category}

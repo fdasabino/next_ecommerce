@@ -1,0 +1,140 @@
+.image_input {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 1rem 0 2rem 0;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .header {
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+  }
+
+  .input_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .images_main {
+    width: 100%;
+    height: 100%;
+
+    .no_image {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h4 {
+        width: 100%;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-align: center;
+      }
+    }
+
+    .grid {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-gap: 1rem;
+      place-items: center;
+      margin: 1rem auto;
+
+      .grid_two {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 1.5rem;
+      }
+
+      .grid_three {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+
+      .grid_four {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      }
+
+      .grid_five {
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+      }
+
+      .grid_six {
+        grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+      }
+
+      .grid_wrapper {
+        position: relative;
+        margin-bottom: 1rem;
+        height: fit-content;
+
+        img {
+          width: 100%;
+          max-width: 130px;
+          height: 100%;
+          max-height: 130px;
+          object-fit: cover;
+          border-radius: 5px;
+          border: 1px solid $base-grey;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          @media (max-width: 768px) {
+            max-width: 180px;
+            max-height: 180px;
+          }
+
+          @media (max-width: 480px) {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+
+        .image_actions {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+          margin: 1rem 0;
+
+          button {
+            width: 30px !important;
+            height: 30px !important;
+            padding: 0.2rem !important;
+
+            @media (max-width: 480px) {
+              width: 50px !important;
+              height: auto !important;
+              padding: 0.5rem !important;
+            }
+
+            svg {
+              width: 100%;
+              height: 100%;
+              max-width: 15px !important;
+              max-height: 15px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import Slide from "@mui/material/Slide";
 import Link from "next/link";
 import { forwardRef } from "react";
 import { AiFillMessage } from "react-icons/ai";
+import { BiErrorCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./DialogModal.module.scss";
 
@@ -19,7 +20,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 const DialogModal = ({ type }) => {
   const dispatch = useDispatch();
   const dialog = useSelector((state) => state.dialog);
-  const test = dialog.msgs.find((x) => x.type === "error");
+  const test = dialog.msgs && dialog.msgs.find((x) => x.type === "error");
 
   const handleClose = () => {
     dispatch(hideDialog());
@@ -48,7 +49,8 @@ const DialogModal = ({ type }) => {
           {dialog.msgs &&
             dialog.msgs.map((msg, i) => (
               <DialogContentText className={styles.msg} id="alert-dialog-slide-description" key={i}>
-                <AiFillMessage />
+                {msg.type === "error" ? <BiErrorCircle /> : <AiFillMessage />}
+
                 <span>{msg.msg}</span>
               </DialogContentText>
             ))}
