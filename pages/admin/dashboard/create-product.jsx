@@ -20,7 +20,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlinePlus } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 
@@ -64,7 +63,7 @@ const CreateProduct = ({ categories, parents, user }) => {
     sizes: [
       {
         size: "",
-        quantity: "",
+        qty: "",
         price: "",
       },
     ],
