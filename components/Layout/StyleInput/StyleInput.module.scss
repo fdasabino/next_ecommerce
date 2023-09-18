@@ -1,4 +1,4 @@
-.colors {
+.style_input {
   margin: 2rem 0;
 
   .header {
@@ -42,35 +42,6 @@
 
     button {
       margin: 0 !important;
-    }
-  }
-
-  .colors_info {
-    margin: 1rem 0;
-    border: 1px solid rgba($color: $base-grey, $alpha: 0.3);
-    padding: 1rem;
-
-    .color_wheel {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      overflow: hidden;
-
-      .swatch {
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 10px !important;
-        margin-right: 1rem !important;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-
-        &:hover {
-          scale: 1.1;
-        }
-      }
     }
   }
 }

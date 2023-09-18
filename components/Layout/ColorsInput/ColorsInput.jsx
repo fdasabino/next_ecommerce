@@ -35,13 +35,13 @@ const ColorsInput = ({ name, product, setProduct, colorImage, ...props }) => {
     <div className={styles.colors}>
       <div className={styles.header}>
         {colors.length > 0 && (
-          <h2>
-            Select one of the colors below
+          <>
+            <h2>Select one of the colors below</h2>
             <BsChevronBarUp
               style={toggle ? { transform: "rotate(180deg)" } : ""}
               onClick={() => setToggle((prev) => !prev)}
             />
-          </h2>
+          </>
         )}
         {meta.touched && meta.error && (
           <span className={styles.error_msg}>

@@ -5,6 +5,7 @@ import ImageInput from "@/components/Layout/ImageInput/ImageInput";
 import AdminInput from "@/components/Layout/Input/AdminInput";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
+import StyleInput from "@/components/Layout/StyleInput/StyleInput";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
 import User from "@/models/User";
@@ -170,6 +171,7 @@ const CreateProduct = ({ categories, parents, user }) => {
                 placeholder="Select a parent product / leave empty to create a new product"
                 onChange={handleChange}
               />
+
               {/* images */}
               <ImageInput
                 name="imageInputFile"
@@ -179,12 +181,14 @@ const CreateProduct = ({ categories, parents, user }) => {
                 setImages={setImages}
                 setColorImage={setColorImage}
               />
+
               {/* selected color or image */}
               {images.length > 0 && (
                 <>
+                  <h4>
+                    Selected color: {product.color.color && GetColorName(product.color.color)}
+                  </h4>
                   <div className={styles.selected_colors}>
-                    <h4>Selected color: {GetColorName(product.color.color)}</h4>
-
                     {product.color.image && (
                       <Image
                         src={product.color.image}
@@ -212,13 +216,17 @@ const CreateProduct = ({ categories, parents, user }) => {
                 </>
               )}
 
-              {/* <StyleInput
-                  name="styleInput"
+              {/* style input */}
+              {product.color.color && (
+                <StyleInput
+                  name="colorImageInput"
                   product={product}
                   setProduct={setProduct}
                   colorImage={colorImage}
-                /> */}
+                />
+              )}
 
+              {/* category */}
               <SingleSelectInput
                 name="category"
                 value={product.category}
@@ -227,6 +235,8 @@ const CreateProduct = ({ categories, parents, user }) => {
                 onChange={handleChange}
                 disabled={product.parent === "" ? false : true}
               />
+
+              {/* sub categories */}
               {product.category && (
                 <MultipleSelectInput
                   value={product.subCategories}
