@@ -1,8 +1,5 @@
-import { ErrorMessage, useField } from "formik";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { MdStyle } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import Button from "../Button/Button";
 import styles from "./StyleInput.module.scss";
 
 const StyleInput = ({ name, product, setProduct, colorImage }) => {

@@ -3,13 +3,24 @@ import { ErrorMessage, useField } from "formik";
 import { useState } from "react";
 import { ColorExtractor } from "react-color-extractor";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import { BsChevronBarUp } from "react-icons/bs";
 import styles from "./ColorsInput.module.scss";
 
-const ColorsInput = ({ name, product, setProduct, colorImage, ...props }) => {
+const ColorsInput = ({ name, product, setProduct, colorImage }) => {
   const [colors, setColors] = useState([]);
   const [meta, field] = useField(name);
   const [toggle, setToggle] = useState(true);
+
+  // Handle input change
+  const handleInputChange = (e) => {
+    const newColor = e.target.value;
+    setProduct({
+      ...product,
+      color: {
+        color: newColor,
+        image: product.color.image,
+      },
+    });
+  };
 
   const renderSwatches = () => {
     return colors.map((color, index) => {
@@ -44,7 +55,7 @@ const ColorsInput = ({ name, product, setProduct, colorImage, ...props }) => {
             />
           </>
         )}
-        {meta.touched && meta.error && (
+        {meta.touched && meta.error[name] && (
           <span className={styles.error_msg}>
             <span></span>
             <ErrorMessage name={name} />
@@ -54,7 +65,13 @@ const ColorsInput = ({ name, product, setProduct, colorImage, ...props }) => {
       <ColorExtractor getColors={(colors) => setColors(colors)}>
         <img src={colorImage} style={{ display: "none" }} alt="color" />
       </ColorExtractor>
-      <input type="text" value={product.color.color} name={name} hidden {...field} {...props} />
+      <input
+        type="text"
+        value={product.color.color}
+        name={name}
+        onChange={handleInputChange}
+        hidden
+      />
       {colors.length > 0 && toggle && (
         <div className={styles.colors_info}>
           <div className={styles.color_wheel}>{renderSwatches()}</div>

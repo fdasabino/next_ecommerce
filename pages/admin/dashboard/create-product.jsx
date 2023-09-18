@@ -93,11 +93,11 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [images, setImages] = useState([]);
   const [descriptionImages, setDescriptionImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [toggleBasicInfo, setToggleBasicInfo] = useState(false);
-  const [toggleCategoryInfo, setToggleCategoryInfo] = useState(false);
-  const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
-  const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
-  const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(false);
+  const [toggleBasicInfo, setToggleBasicInfo] = useState(true);
+  const [toggleCategoryInfo, setToggleCategoryInfo] = useState(true);
+  const [toggleSizeInfo, setToggleSizeInfo] = useState(true);
+  const [toggleDetailsInfo, setToggleDetailsInfo] = useState(true);
+  const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -217,7 +217,6 @@ const CreateProduct = ({ categories, parents, user }) => {
                           />
                         )}
                       </div>
-
                       <ColorsInput
                         name="color"
                         product={product}
@@ -231,7 +230,7 @@ const CreateProduct = ({ categories, parents, user }) => {
               )}
 
               {/* style input */}
-              {product.color.color && (
+              {images.length > 0 && product.color.color && (
                 <StyleInput
                   name="colorImageInput"
                   product={product}
@@ -240,6 +239,7 @@ const CreateProduct = ({ categories, parents, user }) => {
                 />
               )}
 
+              {/* category */}
               <div className={styles.header}>
                 <h2>Category information</h2>
                 <AiOutlineArrowDown
@@ -247,8 +247,6 @@ const CreateProduct = ({ categories, parents, user }) => {
                   onClick={() => setToggleCategoryInfo((prev) => !prev)}
                 />
               </div>
-
-              {/* category */}
               {toggleCategoryInfo && (
                 <>
                   <SingleSelectInput
@@ -275,6 +273,7 @@ const CreateProduct = ({ categories, parents, user }) => {
                 </>
               )}
 
+              {/* basic inputs */}
               <div className={styles.header}>
                 <h2>Basic Information</h2>
                 <AiOutlineArrowDown
@@ -282,7 +281,6 @@ const CreateProduct = ({ categories, parents, user }) => {
                   onClick={() => setToggleBasicInfo((prev) => !prev)}
                 />
               </div>
-
               {toggleBasicInfo && (
                 <>
                   <AdminInput
@@ -328,6 +326,7 @@ const CreateProduct = ({ categories, parents, user }) => {
                 </>
               )}
 
+              {/* sizes */}
               <div className={styles.header}>
                 <h2>Sizes / Quantity / Price</h2>
                 <AiOutlineArrowDown
@@ -335,11 +334,11 @@ const CreateProduct = ({ categories, parents, user }) => {
                   onClick={() => setToggleSizeInfo((prev) => !prev)}
                 />
               </div>
-
               {toggleSizeInfo && (
                 <SizesInput sizes={product.sizes} product={product} setProduct={setProduct} />
               )}
 
+              {/* details */}
               <div className={styles.header}>
                 <h2>Details</h2>
                 <AiOutlineArrowDown
@@ -347,10 +346,11 @@ const CreateProduct = ({ categories, parents, user }) => {
                   onClick={() => setToggleDetailsInfo((prev) => !prev)}
                 />
               </div>
-
               {toggleDetailsInfo && (
                 <DetailsInput details={product.details} product={product} setProduct={setProduct} />
               )}
+
+              {/* questions */}
               <div className={styles.header}>
                 <h2>Questions</h2>
                 <AiOutlineArrowDown
@@ -358,7 +358,6 @@ const CreateProduct = ({ categories, parents, user }) => {
                   onClick={() => setToggleQuestionsInfo((prev) => !prev)}
                 />
               </div>
-
               {toggleQuestionsInfo && (
                 <QuestionsInput
                   questions={product.questions}

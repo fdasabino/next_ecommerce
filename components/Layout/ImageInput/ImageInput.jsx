@@ -10,73 +10,88 @@ import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
 import styles from "./ImageInput.module.scss";
 
+// Constants
+const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+
 const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...props }) => {
+  // Refs and State
   const dispatch = useDispatch();
   const fileInput = useRef(null);
   const [meta, field] = useField(name);
 
-  const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+  const validateFileType = (file) => {
+    if (!allowedFileTypes.includes(file.type)) {
+      dispatch(
+        showDialog({
+          header: "Unsupported file type",
+          msgs: [
+            {
+              msg: `${file.name} is not a supported file type. Try uploading JPG, JPEG, WEBP, or PNG files.`,
+              type: "error",
+            },
+          ],
+        })
+      );
+      return false;
+    }
+    return true;
+  };
 
+  const validateFileSize = (file) => {
+    if (file.size > 1024 * 1024 * 5) {
+      dispatch(
+        showDialog({
+          header: "File too large",
+          msgs: [
+            {
+              msg: `${file.name} is too large. Try uploading a file that is less than 5MB.`,
+              type: "error",
+            },
+          ],
+        })
+      );
+      return false;
+    }
+    return true;
+  };
+
+  const readAndSetImage = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      setImages((images) => [...images, e.target.result]);
+    };
+  };
+
+  // Event Handlers
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
 
-    // loop through selected files and check file type and size and quantity
-    files.forEach((file, i) => {
-      if (i === 6 || images.length === 6) {
+    // Validate and process files
+    files.forEach((file) => {
+      if (images.length >= 6) {
         dispatch(
           showDialog({
             header: "Maximum of 6 images are allowed.",
-            msgs: [
-              {
-                msg: `You can upload only up to 6 images.`,
-                type: "error",
-              },
-            ],
+            msgs: [{ msg: `You can upload only up to 6 images.`, type: "error" }],
           })
         );
         return;
       }
 
-      if (!allowedFileTypes.includes(file.type)) {
-        dispatch(
-          showDialog({
-            header: "Unsupported file type",
-            msgs: [
-              {
-                msg: `${file.name} is not a supported file type. Try uploading JPG, JPEG, WEBP or PNG files.`,
-                type: "error",
-              },
-            ],
-          })
-        );
-        files = files.filter((f) => f !== file.name);
+      if (!validateFileType(file)) {
         return;
       }
 
-      if (file.size > 1024 * 1024 * 5) {
-        dispatch(
-          showDialog({
-            header: "File too large",
-            msgs: [
-              {
-                msg: `${file.name} is too large. Try uploading a file that is less than 5MB.`,
-                type: "error",
-              },
-            ],
-          })
-        );
-        files = files.filter((f) => f !== file.name);
+      if (!validateFileSize(file)) {
         return;
       }
 
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        setImages((images) => [...images, e.target.result]);
-      };
+      readAndSetImage(file);
     });
   };
 
+  // Render JSX
   return (
     <div className={styles.image_input}>
       <div className={styles.header}>
