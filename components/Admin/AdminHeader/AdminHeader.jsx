@@ -36,7 +36,7 @@ const AdminHeader = ({ toggleSidebar, isExpanded, user, path }) => {
         <div className={styles.col}>
           <h2>
             <IoCogSharp />
-            Admin Tools - {path.split("/")[path.split("/").length - 1]}
+            {path.split("/")[path.split("/").length - 1]}
           </h2>
         </div>
       )}

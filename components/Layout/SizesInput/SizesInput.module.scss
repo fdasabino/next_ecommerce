@@ -45,6 +45,21 @@
     }
   }
 
+  button {
+    margin: 0 auto !important;
+    width: 100%;
+    max-width: 100%;
+    background: transparent !important;
+    border: 1px solid $base-info !important;
+    color: $base-info !important;
+    font-weight: 500 !important;
+
+    &:hover {
+      background: $base-info !important;
+      color: $base-white !important;
+    }
+  }
+
   .sizes {
     width: 100%;
     max-width: 100%;

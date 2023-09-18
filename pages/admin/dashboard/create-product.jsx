@@ -93,6 +93,8 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [loading, setLoading] = useState(false);
   const [toggleBasicInfo, setToggleBasicInfo] = useState(false);
   const [toggleCategoryInfo, setToggleCategoryInfo] = useState(false);
+  const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
+
   const dispatch = useDispatch();
 
   console.log("product", product);
@@ -322,7 +324,17 @@ const CreateProduct = ({ categories, parents, user }) => {
                 </>
               )}
 
-              <SizesInput sizes={product.sizes} product={product} setProduct={setProduct} />
+              <div className={styles.header}>
+                <h2>Sizes / Quantity / Price</h2>
+                <AiOutlineArrowDown
+                  style={toggleSizeInfo ? { transform: "rotate(180deg)" } : ""}
+                  onClick={() => setToggleSizeInfo((prev) => !prev)}
+                />
+              </div>
+
+              {toggleSizeInfo && (
+                <SizesInput sizes={product.sizes} product={product} setProduct={setProduct} />
+              )}
 
               {/* <ImageInput
                 name="imageDescInputFile"

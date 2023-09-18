@@ -1,6 +1,7 @@
 import { sizesList } from "@/data/sizes";
 import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { BsTrash } from "react-icons/bs";
 import Button from "../Button/Button";
 import styles from "./SizesInput.module.scss";
 
@@ -23,10 +24,6 @@ const SizesInput = ({ sizes, product, setProduct }) => {
 
   return (
     <div className={styles.sizes_input}>
-      <div className={styles.header}>
-        <h2>Sizes / Quantity / Price</h2>
-        <AiOutlinePlus />
-      </div>
       <Button
         type="reset"
         style="primary"
@@ -52,7 +49,15 @@ const SizesInput = ({ sizes, product, setProduct }) => {
           }
         }}
       >
-        {noSize ? "Add size" : "Remove size"}
+        {noSize ? (
+          <>
+            Add size <AiOutlinePlus />
+          </>
+        ) : (
+          <>
+            Remove size <BsTrash />
+          </>
+        )}
       </Button>
       {sizes.map((size, index) => (
         <div className={styles.sizes} key={index}>
