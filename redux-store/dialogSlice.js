@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const dialogSlice = createSlice({
   name: "dialog",
   initialState: {
-    show: true,
+    show: false,
     header: "",
     msgs: [
       {
