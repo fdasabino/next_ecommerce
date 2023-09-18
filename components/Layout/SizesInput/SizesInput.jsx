@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 import styles from "./SizesInput.module.scss";
 
 const SizesInput = ({ sizes, product, setProduct }) => {
-  const [noSize, setNoSize] = useState(false);
+  const [noSize, setNoSize] = useState(true);
 
   const handleSizeChange = (e, index) => {
     const values = [...sizes];
