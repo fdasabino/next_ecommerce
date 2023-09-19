@@ -18,22 +18,18 @@ const CreateReview = ({ product }) => {
 
   const handleSize = (size) => {
     setSize(size);
-    console.log(size);
   };
 
   const handleColor = (color) => {
     setColor(color);
-    console.log(color);
   };
 
   const handleFit = (fit) => {
     setFit(fit);
-    console.log(fit);
   };
 
   const handleReview = (e) => {
     setReview(e.target.value);
-    console.log(review);
   };
 
   const handleRating = (e) => {

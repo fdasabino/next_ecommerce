@@ -107,7 +107,6 @@ const CreateProduct = ({ categories, parents, user }) => {
   useEffect(() => {
     const getParentData = async () => {
       const res = await axios.get(`/api/product/${product.parent || ""}`);
-      console.log("res", res.data);
       if (res.data) {
         setProduct({
           ...product,
