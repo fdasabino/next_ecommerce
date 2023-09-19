@@ -94,10 +94,10 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [descriptionImages, setDescriptionImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [toggleBasicInfo, setToggleBasicInfo] = useState(true);
-  const [toggleCategoryInfo, setToggleCategoryInfo] = useState(true);
-  const [toggleSizeInfo, setToggleSizeInfo] = useState(true);
-  const [toggleDetailsInfo, setToggleDetailsInfo] = useState(true);
-  const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(true);
+  const [toggleCategoryInfo, setToggleCategoryInfo] = useState(false);
+  const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
+  const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
+  const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -225,51 +225,16 @@ const CreateProduct = ({ categories, parents, user }) => {
                         colorImage={colorImage}
                       />
                     </div>
+                    {/* style input */}
+                    {images.length > 0 && product.color.color && (
+                      <StyleInput
+                        name="colorImageInput"
+                        product={product}
+                        setProduct={setProduct}
+                        colorImage={colorImage}
+                      />
+                    )}
                   </div>
-                </>
-              )}
-
-              {/* style input */}
-              {images.length > 0 && product.color.color && (
-                <StyleInput
-                  name="colorImageInput"
-                  product={product}
-                  setProduct={setProduct}
-                  colorImage={colorImage}
-                />
-              )}
-
-              {/* category */}
-              <div className={styles.header}>
-                <h2>Category information</h2>
-                <AiOutlineArrowDown
-                  style={toggleCategoryInfo ? { transform: "rotate(180deg)" } : ""}
-                  onClick={() => setToggleCategoryInfo((prev) => !prev)}
-                />
-              </div>
-              {toggleCategoryInfo && (
-                <>
-                  <SingleSelectInput
-                    name="category"
-                    value={product.category}
-                    data={categories}
-                    placeholder="Select a parent category"
-                    onChange={handleChange}
-                    disabled={product.parent === "" ? false : true}
-                  />
-
-                  {/* sub categories */}
-                  {product.category && (
-                    <MultipleSelectInput
-                      value={product.subCategories}
-                      name="subCategories"
-                      placeholder="Select sub categories"
-                      handleChange={handleChange}
-                      disabled={product.parent === "" ? false : true}
-                      data={subs}
-                      setSubs={setSubs}
-                    />
-                  )}
                 </>
               )}
 
@@ -323,6 +288,40 @@ const CreateProduct = ({ categories, parents, user }) => {
                     icon="discount"
                     onChange={handleChange}
                   />
+                </>
+              )}
+
+              {/* category */}
+              <div className={styles.header}>
+                <h2>Category information</h2>
+                <AiOutlineArrowDown
+                  style={toggleCategoryInfo ? { transform: "rotate(180deg)" } : ""}
+                  onClick={() => setToggleCategoryInfo((prev) => !prev)}
+                />
+              </div>
+              {toggleCategoryInfo && (
+                <>
+                  <SingleSelectInput
+                    name="category"
+                    value={product.category}
+                    data={categories}
+                    placeholder="Select a parent category"
+                    onChange={handleChange}
+                    disabled={product.parent === "" ? false : true}
+                  />
+
+                  {/* sub categories */}
+                  {product.category && (
+                    <MultipleSelectInput
+                      value={product.subCategories}
+                      name="subCategories"
+                      placeholder="Select sub categories"
+                      handleChange={handleChange}
+                      disabled={product.parent === "" ? false : true}
+                      data={subs}
+                      setSubs={setSubs}
+                    />
+                  )}
                 </>
               )}
 

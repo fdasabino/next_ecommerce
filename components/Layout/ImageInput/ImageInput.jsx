@@ -1,10 +1,10 @@
-import { showDialog } from "@/redux-store/dialogSlice";
 import Image from "next/image";
 import { useRef } from "react";
 import { BsFolderPlus, BsTrash } from "react-icons/bs";
 import { IoMdColorFilter } from "react-icons/io";
 import { RiShape2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import Button from "../Button/Button";
 import styles from "./ImageInput.module.scss";
 
@@ -17,62 +17,22 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
   const handleImages = ({ target: { files } }) => {
     for (const file of files) {
       if (images.includes(file)) {
-        const dialog = {
-          header: "File already uploaded",
-          msgs: [
-            {
-              msg: `${file.name} is already uploaded. Try uploading a different file.`,
-              type: "error",
-            },
-          ],
-        };
-
-        dispatch(showDialog(dialog));
+        toast.error(`${file.name} is already uploaded.`);
         continue;
       }
 
       if (images.length > 6 || files.length > 6) {
-        const dialog = {
-          header: "Maximum of 6 images are allowed.",
-          msgs: [
-            {
-              msg: "You can upload only up to 6 images.",
-              type: "error",
-            },
-          ],
-        };
-
-        dispatch(showDialog(dialog));
+        toast.error("You can only upload 6 images...");
         break;
       }
 
       if (!allowedFileTypes.includes(file.type)) {
-        const dialog = {
-          header: "Unsupported file type",
-          msgs: [
-            {
-              msg: `${file.name} is not a supported file type. Try uploading JPG, JPEG, WEBP, or PNG files.`,
-              type: "error",
-            },
-          ],
-        };
-
-        dispatch(showDialog(dialog));
+        toast.error(`${file.name} is not a valid image file.`);
         continue;
       }
 
       if (file.size > 1024 * 1024 * 5) {
-        const dialog = {
-          header: "File too large",
-          msgs: [
-            {
-              msg: `${file.name} is too large. Try uploading a file that is less than 5MB.`,
-              type: "error",
-            },
-          ],
-        };
-
-        dispatch(showDialog(dialog));
+        toast.error(`${file.name} is too large. Max size is 5mb.`);
         continue;
       }
 

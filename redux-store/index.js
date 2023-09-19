@@ -8,10 +8,9 @@ import thunk from "redux-thunk";
 import cart from "./cartSlice";
 import categories from "./categoriesSlice";
 import country from "./countrySlice";
-import dialog from "./dialogSlice";
 import expandableSidebar from "./expandableSidebarSlice";
 // combine all reducers
-const reducers = combineReducers({ cart, country, categories, expandableSidebar, dialog });
+const reducers = combineReducers({ cart, country, categories, expandableSidebar });
 
 // config
 const config = {
