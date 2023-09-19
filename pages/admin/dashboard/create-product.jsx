@@ -13,7 +13,9 @@ import Category from "@/models/Category";
 import Product from "@/models/Product";
 import User from "@/models/User";
 import styles from "@/styles/pages/CreateProduct.module.scss";
+import dataURItoBlob from "@/utils/dataURItoBlob";
 import db from "@/utils/db";
+import { uploadImage } from "@/utils/imagesUpload";
 import { validateCreateProduct } from "@/utils/validation";
 import axios from "axios";
 import { Form, Formik } from "formik";
@@ -146,10 +148,66 @@ const CreateProduct = ({ categories, parents, user }) => {
     setProduct({ ...product, [name]: value });
   };
 
+  // helper function to create a new product
+  let uploaded_images = [];
+  let style_image = "";
+  const createProductHelper = async () => {
+    setLoading(true);
+    try {
+      // product images
+      if (images) {
+        let temp = images.map((img) => {
+          return dataURItoBlob(img);
+        });
+        const path = "product images";
+        let formData = new FormData();
+        // append the path to the form data
+        formData.append("path", path);
+
+        // append the images to the form data
+        temp.forEach((img) => {
+          formData.append("images", img);
+        });
+
+        uploaded_images = await uploadImage(formData);
+      }
+      // color image
+      if (product.color.image) {
+        let temp = dataURItoBlob(product.color.image);
+        let path = "color images";
+        let formData = new FormData();
+        formData.append("path", path);
+        formData.append("file", temp);
+        let cloudinary_style_img = await uploadImage(formData);
+        style_image = cloudinary_style_img.images[0].url;
+      }
+
+      // create the product
+      const { data } = await axios.post("/api/admin/product", {
+        ...product,
+        images: uploaded_images.images,
+        color: {
+          image: style_image,
+          color: product.color.color,
+        },
+      });
+
+      console.log("data", data);
+    } catch (error) {
+      toast.error("Something went wrong)");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // handle the creation of the product
-  const createProductHandler = async () => {
+  const createProduct = async () => {
     const validation = validateCreateProduct(product, images);
-    if (validation === true) toast.success("Product validated successfully");
+    if (validation === true) {
+      toast.success("Product validated successfully");
+      createProductHelper();
+    }
   };
 
   return (
@@ -171,7 +229,7 @@ const CreateProduct = ({ categories, parents, user }) => {
             styleInput: "",
           }}
           validationSchema={productValidationSchema}
-          onSubmit={() => createProductHandler()}
+          onSubmit={() => createProduct()}
         >
           {(formik) => (
             <Form>

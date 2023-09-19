@@ -1,3 +1,4 @@
+import adminMiddleware from "@/middleware/admin";
 import authMiddleware from "@/middleware/auth";
 import { imageMiddleware } from "@/middleware/image";
 import { uploadToCloudinaryHandler } from "@/utils/cloudinary";
@@ -20,6 +21,7 @@ export const config = {
 };
 
 const handler = nc()
+  .use(adminMiddleware)
   .use(authMiddleware)
   .use(fileUpload({ useTempFiles: true }))
   .use(bodyParser.json())

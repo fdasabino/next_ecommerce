@@ -13,12 +13,12 @@ export const uploadToCloudinaryHandler = async (file, path) => {
         if (err) {
           removeTmp(file.tempFilePath);
           reject(err);
-          res.status(500).json({ message: "Error uploading your image... Pls try again later" });
+        } else {
+          resolve({
+            public_id: result.public_id,
+            url: result.secure_url,
+          });
         }
-        resolve({
-          public_id: result.public_id,
-          url: result.secure_url,
-        });
       }
     );
   });
