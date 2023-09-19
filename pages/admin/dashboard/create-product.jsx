@@ -14,6 +14,7 @@ import Product from "@/models/Product";
 import User from "@/models/User";
 import styles from "@/styles/pages/CreateProduct.module.scss";
 import db from "@/utils/db";
+import { validateCreateProduct } from "@/utils/validation";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { GetColorName } from "hex-color-to-color-name";
@@ -22,6 +23,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowDown, AiOutlinePlus } from "react-icons/ai";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 const productValidationSchema = Yup.object().shape({
@@ -35,7 +37,6 @@ const productValidationSchema = Yup.object().shape({
     .required("Please choose one or more sub categories")
     .min(1, "Please choose one or more sub categories"),
   sku: Yup.string().required("Please enter a sku / stock keeping unit"),
-  color: Yup.string().required("Please enter a color"),
   description: Yup.string()
     .required("Please enter a description")
     .max(2000, "Description must be at most 100 characters"),
@@ -96,7 +97,6 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
   const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
   const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(false);
-  console.log("product", product);
 
   // load the parent product data if the product has a parent
   useEffect(() => {
@@ -147,7 +147,10 @@ const CreateProduct = ({ categories, parents, user }) => {
   };
 
   // handle the creation of the product
-  const createProduct = async () => {};
+  const createProductHandler = async () => {
+    const validation = validateCreateProduct(product, images);
+    if (validation === true) toast.success("Product validated successfully");
+  };
 
   return (
     <AdminLayout path={path} user={user}>
@@ -168,7 +171,7 @@ const CreateProduct = ({ categories, parents, user }) => {
             styleInput: "",
           }}
           validationSchema={productValidationSchema}
-          onSubmit={createProduct}
+          onSubmit={() => createProductHandler()}
         >
           {(formik) => (
             <Form>
@@ -289,6 +292,8 @@ const CreateProduct = ({ categories, parents, user }) => {
                       label="Discount"
                       placeholder="Product discount"
                       icon="discount"
+                      min="0"
+                      max="100"
                       onChange={handleChange}
                     />
                   </>
