@@ -3,7 +3,7 @@
 
   .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0 1rem;
@@ -47,8 +47,6 @@
 
   .colors_info {
     margin: 1rem 0;
-    border: 1px solid rgba($color: $base-grey, $alpha: 0.3);
-    padding: 1rem;
 
     .color_wheel {
       display: flex;

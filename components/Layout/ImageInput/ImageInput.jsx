@@ -1,8 +1,6 @@
 import { showDialog } from "@/redux-store/dialogSlice";
-import { ErrorMessage, useField } from "formik";
 import Image from "next/image";
 import { useRef } from "react";
-import { BiErrorCircle } from "react-icons/bi";
 import { BsFolderPlus, BsTrash } from "react-icons/bs";
 import { IoMdColorFilter } from "react-icons/io";
 import { RiShape2Line } from "react-icons/ri";
@@ -10,19 +8,46 @@ import { useDispatch } from "react-redux";
 import Button from "../Button/Button";
 import styles from "./ImageInput.module.scss";
 
-// Constants
-const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
-
 const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...props }) => {
-  // Refs and State
   const dispatch = useDispatch();
   const fileInput = useRef(null);
-  const [meta, field] = useField(name);
 
-  const validateFileType = (file) => {
-    if (!allowedFileTypes.includes(file.type)) {
-      dispatch(
-        showDialog({
+  const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+
+  const handleImages = ({ target: { files } }) => {
+    for (const file of files) {
+      if (images.includes(file)) {
+        const dialog = {
+          header: "File already uploaded",
+          msgs: [
+            {
+              msg: `${file.name} is already uploaded. Try uploading a different file.`,
+              type: "error",
+            },
+          ],
+        };
+
+        dispatch(showDialog(dialog));
+        continue;
+      }
+
+      if (images.length > 6 || files.length > 6) {
+        const dialog = {
+          header: "Maximum of 6 images are allowed.",
+          msgs: [
+            {
+              msg: "You can upload only up to 6 images.",
+              type: "error",
+            },
+          ],
+        };
+
+        dispatch(showDialog(dialog));
+        break;
+      }
+
+      if (!allowedFileTypes.includes(file.type)) {
+        const dialog = {
           header: "Unsupported file type",
           msgs: [
             {
@@ -30,17 +55,14 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
               type: "error",
             },
           ],
-        })
-      );
-      return false;
-    }
-    return true;
-  };
+        };
 
-  const validateFileSize = (file) => {
-    if (file.size > 1024 * 1024 * 5) {
-      dispatch(
-        showDialog({
+        dispatch(showDialog(dialog));
+        continue;
+      }
+
+      if (file.size > 1024 * 1024 * 5) {
+        const dialog = {
           header: "File too large",
           msgs: [
             {
@@ -48,66 +70,30 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
               type: "error",
             },
           ],
-        })
-      );
-      return false;
+        };
+
+        dispatch(showDialog(dialog));
+        continue;
+      }
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImages((images) => [...images, e.target.result]);
+      };
     }
-    return true;
   };
 
-  const readAndSetImage = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (e) => {
-      setImages((images) => [...images, e.target.result]);
-    };
-  };
-
-  // Event Handlers
-  const handleImages = (e) => {
-    let files = Array.from(e.target.files);
-
-    // Validate and process files
-    files.forEach((file) => {
-      if (images.length >= 6) {
-        dispatch(
-          showDialog({
-            header: "Maximum of 6 images are allowed.",
-            msgs: [{ msg: `You can upload only up to 6 images.`, type: "error" }],
-          })
-        );
-        return;
-      }
-
-      if (!validateFileType(file)) {
-        return;
-      }
-
-      if (!validateFileSize(file)) {
-        return;
-      }
-
-      readAndSetImage(file);
-    });
-  };
-
-  // Render JSX
   return (
     <div className={styles.image_input}>
       <div className={styles.header}>
-        <h2 className={`${meta.error ? styles.error_header : ""}`}>
-          {meta.error && <BiErrorCircle />} {header} <span>({images.length})</span>
+        <h2>
+          {header} <span>({images.length})</span>
         </h2>
-        {meta.touched && meta.error && (
-          <span className={styles.error_msg}>
-            <span></span>
-            <ErrorMessage name={name} />
-          </span>
-        )}
+
         <Button
-          style={meta.error ? "danger" : "primary"}
           type="reset"
-          disabled={images.length === 6 || meta.error}
+          disabled={images.length >= 6}
           onClick={() => fileInput.current.click()}
         >
           <BsFolderPlus />

@@ -1,14 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { ErrorMessage, useField } from "formik";
 import { useState } from "react";
 import { ColorExtractor } from "react-color-extractor";
-import { AiOutlineArrowDown } from "react-icons/ai";
 import styles from "./ColorsInput.module.scss";
 
 const ColorsInput = ({ name, product, setProduct, colorImage }) => {
   const [colors, setColors] = useState([]);
-  const [meta, field] = useField(name);
-  const [toggle, setToggle] = useState(true);
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -46,21 +42,7 @@ const ColorsInput = ({ name, product, setProduct, colorImage }) => {
   return (
     <div className={styles.colors}>
       <div className={styles.header}>
-        {colors.length > 0 && (
-          <>
-            <h2>Select one of the colors below</h2>
-            <AiOutlineArrowDown
-              style={toggle ? { transform: "rotate(180deg)" } : ""}
-              onClick={() => setToggle((prev) => !prev)}
-            />
-          </>
-        )}
-        {meta.touched && meta.error[name] && (
-          <span className={styles.error_msg}>
-            <span></span>
-            <ErrorMessage name={name} />
-          </span>
-        )}
+        <h2>Select one of the colors below</h2>
       </div>
       <ColorExtractor getColors={(colors) => setColors(colors)}>
         <img src={colorImage} style={{ display: "none" }} alt="color" />
@@ -72,7 +54,7 @@ const ColorsInput = ({ name, product, setProduct, colorImage }) => {
         onChange={handleInputChange}
         hidden
       />
-      {colors.length > 0 && toggle && (
+      {colors.length > 0 && (
         <div className={styles.colors_info}>
           <div className={styles.color_wheel}>{renderSwatches()}</div>
         </div>
