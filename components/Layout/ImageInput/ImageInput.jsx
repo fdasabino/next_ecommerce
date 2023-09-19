@@ -22,7 +22,7 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
       }
 
       if (images.length > 6 || files.length > 6) {
-        toast.error("You can only upload 6 images...");
+        toast.error(`You can upload up to 6 images... \n Please try again.`);
         break;
       }
 
@@ -32,7 +32,9 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
       }
 
       if (file.size > 1024 * 1024 * 5) {
-        toast.error(`${file.name} is too large. Max size is 5mb.`);
+        toast.error(
+          `${file.name.substring(0, 15)}... is too large. \n Max image size allowed is 5mb.`
+        );
         continue;
       }
 
