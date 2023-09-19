@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProductItem from "../ProductItem/ProductItem";
 import styles from "./ProductsList.module.scss";
 
-const ProductsList = ({ products, setProducts }) => {
+const ProductsList = ({ products }) => {
   const [openId, setOpenId] = useState(null);
   const toggleDetailsById = (id) => {
     setOpenId((prevOpenId) => (prevOpenId === id ? null : id));
@@ -11,7 +11,13 @@ const ProductsList = ({ products, setProducts }) => {
   return (
     <div className={styles.product_list}>
       <div className={styles.header}>
-        <h2>Current products in Database</h2>
+        <h2>
+          {products.length === 0
+            ? "No products in your database"
+            : products.length === 1
+            ? `Current products ${products.length} item`
+            : `Current products ${products.length} items`}
+        </h2>
       </div>
 
       <div className={styles.products_container}>

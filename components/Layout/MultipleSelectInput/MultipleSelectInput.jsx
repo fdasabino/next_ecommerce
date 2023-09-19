@@ -3,12 +3,20 @@ import { useField } from "formik";
 import React, { useEffect } from "react";
 import styles from "./MultipleSelectInput.module.scss";
 
-const MultipleSelectInput = ({ data, handleChange, value, name, placeholder, ...props }) => {
+const MultipleSelectInput = ({
+  data,
+  handleChange,
+  setSubs,
+  value,
+  name,
+  placeholder,
+  ...props
+}) => {
   const [field, meta] = useField(name);
 
   useEffect(() => {
-    props.setSubs(data);
-  }, [data, props]);
+    setSubs(data);
+  }, [data, setSubs]);
 
   const result = data.length
     ? data.reduce((obj, { _id, name }) => ({ ...obj, [_id]: name }), {})
@@ -25,7 +33,7 @@ const MultipleSelectInput = ({ data, handleChange, value, name, placeholder, ...
           multiple
           fullWidth
           variant="outlined"
-          name={field.name}
+          name={name}
           select={field.select}
           label={placeholder}
           value={field.value}
@@ -33,7 +41,6 @@ const MultipleSelectInput = ({ data, handleChange, value, name, placeholder, ...
           className={`${styles.select} ${meta.touched && meta.error ? styles.error : ""}`}
           disabled={props.disabled}
           error={meta.touched && meta.error ? true : false}
-          {...field}
           renderValue={(selected) => (
             <div>
               {selected.map((value) => (

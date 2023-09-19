@@ -8,7 +8,6 @@ import Reviews from "@/components/ProductPage/Reviews/Reviews";
 import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwiper/SimilarProductsSwiper";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
-import SubCategory from "@/models/SubCategory";
 import User from "@/models/User";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
@@ -22,7 +21,7 @@ import { BsChatLeftQuote } from "react-icons/bs";
 const SingleProductPage = ({ product }) => {
   const { data: session } = useSession();
 
-  const signinRedirect = () => {
+  const signInRedirect = () => {
     signIn();
   };
 
@@ -67,7 +66,7 @@ const SingleProductPage = ({ product }) => {
                     Be the first to review this product <BsChatLeftQuote />
                   </h2>
                 )}
-                <Button onClick={signinRedirect} style="primary">
+                <Button onClick={signInRedirect} style="primary">
                   Sign in to write a review <AiOutlineArrowRight />
                 </Button>
               </div>
@@ -96,10 +95,10 @@ export async function getServerSideProps(context) {
 
     const product = await Product.findOne({ slug })
       .populate({ path: "category", model: Category })
-      .populate({ path: "subCategories._id", model: SubCategory })
       .populate({ path: "reviews.reviewBy", model: User })
+      .lean()
+      .exec();
 
-      .lean();
     const subProduct = product.subProducts[color];
     const prices = subProduct.sizes.map((size) => size.price).sort((a, b) => a - b);
 

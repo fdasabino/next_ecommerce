@@ -31,6 +31,11 @@ const handler = async (req, res) => {
                 },
                 { new: true }
               );
+              return res.status(201).json({
+                message: `Product "${req.body.name}" has been successfully updated...`,
+                ok: true,
+                products: await Product.find({}).sort({ createdAt: -1 }),
+              });
             }
           } else {
             req.body.slug = slugify(req.body.name);

@@ -48,12 +48,12 @@ export const validateCreateProduct = (product, images) => {
   }
 
   if (sizes.some((size) => size.size === "" || size.qty === "" || size.price === "")) {
-    toast.error(`Please fill all information on size.`);
+    toast.error(`Please fill all information on size or remove field.`);
     return;
   }
 
   if (details.some((detail) => detail.name === "" || detail.value === "")) {
-    toast.error(`Please fill all information on size.`);
+    toast.error(`Please fill all information on details or remove field.`);
     return;
   }
 

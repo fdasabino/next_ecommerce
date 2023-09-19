@@ -184,7 +184,7 @@ const CreateProduct = ({ categories, parents, user }) => {
       }
 
       // create the product
-      const { data } = await axios.post("/api/admin/product", {
+      await axios.post("/api/admin/product", {
         ...product,
         images: uploaded_images.images,
         color: {
@@ -193,14 +193,14 @@ const CreateProduct = ({ categories, parents, user }) => {
         },
       });
 
-      setLoading(false);
       setProduct(initialState);
       setImages([]);
       toast.success("Product created successfully");
     } catch (error) {
-      setLoading(false);
       toast.error("Something went wrong)");
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
