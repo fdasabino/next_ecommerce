@@ -4,6 +4,7 @@ import ColorsInput from "@/components/Layout/ColorsInput/ColorsInput";
 import DetailsInput from "@/components/Layout/DetailsInput/DetailsInput";
 import ImageInput from "@/components/Layout/ImageInput/ImageInput";
 import AdminInput from "@/components/Layout/Input/AdminInput";
+import Loader from "@/components/Layout/Loader/Loader";
 import MultipleSelectInput from "@/components/Layout/MultipleSelectInput/MultipleSelectInput";
 import QuestionsInput from "@/components/Layout/QuestionsInput/QuestionsInput";
 import SingleSelectInput from "@/components/Layout/Select/SingleSelectInput";
@@ -99,6 +100,8 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
   const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
   const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(false);
+  let uploaded_images = [];
+  let style_image = "";
 
   // load the parent product data if the product has a parent
   useEffect(() => {
@@ -149,8 +152,6 @@ const CreateProduct = ({ categories, parents, user }) => {
   };
 
   // helper function to create a new product
-  let uploaded_images = [];
-  let style_image = "";
   const createProductHelper = async () => {
     setLoading(true);
     try {
@@ -192,12 +193,14 @@ const CreateProduct = ({ categories, parents, user }) => {
         },
       });
 
-      console.log("data", data);
+      setLoading(false);
+      setProduct(initialState);
+      setImages([]);
+      toast.success("Product created successfully");
     } catch (error) {
+      setLoading(false);
       toast.error("Something went wrong)");
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -213,243 +216,247 @@ const CreateProduct = ({ categories, parents, user }) => {
   return (
     <AdminLayout path={path} user={user}>
       <div className={styles.create_product}>
-        <Formik
-          enableReinitialize
-          initialValues={{
-            name: product.name,
-            brand: product.brand,
-            description: product.description,
-            category: product.category,
-            subCategories: product.subCategories,
-            parent: product.parent,
-            sku: product.sku,
-            discount: product.discount,
-            color: product.color.color,
-            imageInputFile: "",
-            styleInput: "",
-          }}
-          validationSchema={productValidationSchema}
-          onSubmit={() => createProduct()}
-        >
-          {(formik) => (
-            <Form>
-              {/* parent product */}
-              <div className={styles.item_wrapper}>
-                <SingleSelectInput
-                  name="parent"
-                  value={product.parent}
-                  data={parents}
-                  placeholder="Select a parent product / leave empty to create a new product"
-                  onChange={handleChange}
-                />
-              </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Formik
+            enableReinitialize
+            initialValues={{
+              name: product.name,
+              brand: product.brand,
+              description: product.description,
+              category: product.category,
+              subCategories: product.subCategories,
+              parent: product.parent,
+              sku: product.sku,
+              discount: product.discount,
+              color: product.color.color,
+              imageInputFile: "",
+              styleInput: "",
+            }}
+            validationSchema={productValidationSchema}
+            onSubmit={() => createProduct()}
+          >
+            {(formik) => (
+              <Form>
+                {/* parent product */}
+                <div className={styles.item_wrapper}>
+                  <SingleSelectInput
+                    name="parent"
+                    value={product.parent}
+                    data={parents}
+                    placeholder="Select a parent product / leave empty to create a new product"
+                    onChange={handleChange}
+                  />
+                </div>
 
-              {/* image input and colors selection */}
-              <div className={styles.item_wrapper}>
-                <ImageInput
-                  name="imageInputFile"
-                  header="Product Images"
-                  text="Add Images"
-                  images={images}
-                  setImages={setImages}
-                  setColorImage={setColorImage}
-                />
-                {images.length > 0 && (
-                  <>
-                    <div className={styles.selected_colors}>
-                      <h4>
-                        Selected color: {product.color.color && GetColorName(product.color.color)}
-                      </h4>
-                      <div className={styles.wrapper}>
-                        <div className={styles.picked_color}>
-                          {product.color.image && (
-                            <Image
-                              src={product.color.image}
-                              width={250}
-                              height={250}
-                              className={styles.image_span}
-                              alt={product.color.color}
-                            />
-                          )}
+                {/* image input and colors selection */}
+                <div className={styles.item_wrapper}>
+                  <ImageInput
+                    name="imageInputFile"
+                    header="Product Images"
+                    text="Add Images"
+                    images={images}
+                    setImages={setImages}
+                    setColorImage={setColorImage}
+                  />
+                  {images.length > 0 && (
+                    <>
+                      <div className={styles.selected_colors}>
+                        <h4>
+                          Selected color: {product.color.color && GetColorName(product.color.color)}
+                        </h4>
+                        <div className={styles.wrapper}>
+                          <div className={styles.picked_color}>
+                            {product.color.image && (
+                              <Image
+                                src={product.color.image}
+                                width={250}
+                                height={250}
+                                className={styles.image_span}
+                                alt={product.color.color}
+                              />
+                            )}
 
-                          {product.color.color && (
-                            <span
-                              className={styles.color_span}
-                              style={{ background: `${product.color.color}` }}
-                            />
-                          )}
+                            {product.color.color && (
+                              <span
+                                className={styles.color_span}
+                                style={{ background: `${product.color.color}` }}
+                              />
+                            )}
+                          </div>
+                          <ColorsInput
+                            name="color"
+                            product={product}
+                            header={"Pick a product color"}
+                            setProduct={setProduct}
+                            colorImage={colorImage}
+                          />
                         </div>
-                        <ColorsInput
-                          name="color"
-                          product={product}
-                          header={"Pick a product color"}
-                          setProduct={setProduct}
-                          colorImage={colorImage}
-                        />
+                        {/* style input */}
+                        {images.length > 0 && product.color.color && (
+                          <StyleInput
+                            name="colorImageInput"
+                            product={product}
+                            setProduct={setProduct}
+                            colorImage={colorImage}
+                          />
+                        )}
                       </div>
-                      {/* style input */}
-                      {images.length > 0 && product.color.color && (
-                        <StyleInput
-                          name="colorImageInput"
-                          product={product}
-                          setProduct={setProduct}
-                          colorImage={colorImage}
+                    </>
+                  )}
+                </div>
+
+                {/* basic inputs */}
+                <div className={styles.item_wrapper}>
+                  <div className={styles.header}>
+                    <h2>Basic Information</h2>
+                    <AiOutlineArrowDown
+                      style={toggleBasicInfo ? { transform: "rotate(180deg)" } : ""}
+                      onClick={() => setToggleBasicInfo((prev) => !prev)}
+                    />
+                  </div>
+                  {toggleBasicInfo && (
+                    <>
+                      <AdminInput
+                        type="text"
+                        name="name"
+                        label="Name"
+                        placeholder="Product name"
+                        icon="name"
+                        onChange={handleChange}
+                      />
+                      <AdminInput
+                        type="text"
+                        name="description"
+                        label="Description"
+                        placeholder="Product description"
+                        icon="description"
+                        onChange={handleChange}
+                      />
+                      <AdminInput
+                        type="text"
+                        name="brand"
+                        label="Brand"
+                        placeholder="Product brand"
+                        icon="brand"
+                        onChange={handleChange}
+                      />
+                      <AdminInput
+                        type="text"
+                        name="sku"
+                        label="SKU"
+                        placeholder="Product SKU / Stock Keeping Unit"
+                        icon="barCode"
+                        onChange={handleChange}
+                      />
+                      <AdminInput
+                        type="number"
+                        name="discount"
+                        label="Discount"
+                        placeholder="Product discount"
+                        icon="discount"
+                        min="0"
+                        max="100"
+                        onChange={handleChange}
+                      />
+                    </>
+                  )}
+                </div>
+
+                {/* category */}
+                <div className={styles.item_wrapper}>
+                  <div className={styles.header}>
+                    <h2>Category information</h2>
+                    <AiOutlineArrowDown
+                      style={toggleCategoryInfo ? { transform: "rotate(180deg)" } : ""}
+                      onClick={() => setToggleCategoryInfo((prev) => !prev)}
+                    />
+                  </div>
+                  {toggleCategoryInfo && (
+                    <>
+                      <SingleSelectInput
+                        name="category"
+                        value={product.category}
+                        data={categories}
+                        placeholder="Select a parent category"
+                        onChange={handleChange}
+                        disabled={product.parent === "" ? false : true}
+                      />
+
+                      {/* sub categories */}
+                      {product.category && (
+                        <MultipleSelectInput
+                          value={product.subCategories}
+                          name="subCategories"
+                          placeholder="Select sub categories"
+                          handleChange={handleChange}
+                          disabled={product.parent === "" ? false : true}
+                          data={subs}
+                          setSubs={setSubs}
                         />
                       )}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* basic inputs */}
-              <div className={styles.item_wrapper}>
-                <div className={styles.header}>
-                  <h2>Basic Information</h2>
-                  <AiOutlineArrowDown
-                    style={toggleBasicInfo ? { transform: "rotate(180deg)" } : ""}
-                    onClick={() => setToggleBasicInfo((prev) => !prev)}
-                  />
+                    </>
+                  )}
                 </div>
-                {toggleBasicInfo && (
-                  <>
-                    <AdminInput
-                      type="text"
-                      name="name"
-                      label="Name"
-                      placeholder="Product name"
-                      icon="name"
-                      onChange={handleChange}
-                    />
-                    <AdminInput
-                      type="text"
-                      name="description"
-                      label="Description"
-                      placeholder="Product description"
-                      icon="description"
-                      onChange={handleChange}
-                    />
-                    <AdminInput
-                      type="text"
-                      name="brand"
-                      label="Brand"
-                      placeholder="Product brand"
-                      icon="brand"
-                      onChange={handleChange}
-                    />
-                    <AdminInput
-                      type="text"
-                      name="sku"
-                      label="SKU"
-                      placeholder="Product SKU / Stock Keeping Unit"
-                      icon="barCode"
-                      onChange={handleChange}
-                    />
-                    <AdminInput
-                      type="number"
-                      name="discount"
-                      label="Discount"
-                      placeholder="Product discount"
-                      icon="discount"
-                      min="0"
-                      max="100"
-                      onChange={handleChange}
-                    />
-                  </>
-                )}
-              </div>
 
-              {/* category */}
-              <div className={styles.item_wrapper}>
-                <div className={styles.header}>
-                  <h2>Category information</h2>
-                  <AiOutlineArrowDown
-                    style={toggleCategoryInfo ? { transform: "rotate(180deg)" } : ""}
-                    onClick={() => setToggleCategoryInfo((prev) => !prev)}
-                  />
+                {/* sizes */}
+                <div className={styles.item_wrapper}>
+                  <div className={styles.header}>
+                    <h2>Sizes / Quantity / Price</h2>
+                    <AiOutlineArrowDown
+                      style={toggleSizeInfo ? { transform: "rotate(180deg)" } : ""}
+                      onClick={() => setToggleSizeInfo((prev) => !prev)}
+                    />
+                  </div>
+                  {toggleSizeInfo && (
+                    <SizesInput sizes={product.sizes} product={product} setProduct={setProduct} />
+                  )}
                 </div>
-                {toggleCategoryInfo && (
-                  <>
-                    <SingleSelectInput
-                      name="category"
-                      value={product.category}
-                      data={categories}
-                      placeholder="Select a parent category"
-                      onChange={handleChange}
-                      disabled={product.parent === "" ? false : true}
+
+                {/* details */}
+                <div className={styles.item_wrapper}>
+                  <div className={styles.header}>
+                    <h2>Details</h2>
+                    <AiOutlineArrowDown
+                      style={toggleDetailsInfo ? { transform: "rotate(180deg)" } : ""}
+                      onClick={() => setToggleDetailsInfo((prev) => !prev)}
                     />
-
-                    {/* sub categories */}
-                    {product.category && (
-                      <MultipleSelectInput
-                        value={product.subCategories}
-                        name="subCategories"
-                        placeholder="Select sub categories"
-                        handleChange={handleChange}
-                        disabled={product.parent === "" ? false : true}
-                        data={subs}
-                        setSubs={setSubs}
-                      />
-                    )}
-                  </>
-                )}
-              </div>
-
-              {/* sizes */}
-              <div className={styles.item_wrapper}>
-                <div className={styles.header}>
-                  <h2>Sizes / Quantity / Price</h2>
-                  <AiOutlineArrowDown
-                    style={toggleSizeInfo ? { transform: "rotate(180deg)" } : ""}
-                    onClick={() => setToggleSizeInfo((prev) => !prev)}
-                  />
+                  </div>
+                  {toggleDetailsInfo && (
+                    <DetailsInput
+                      details={product.details}
+                      product={product}
+                      setProduct={setProduct}
+                    />
+                  )}
                 </div>
-                {toggleSizeInfo && (
-                  <SizesInput sizes={product.sizes} product={product} setProduct={setProduct} />
-                )}
-              </div>
 
-              {/* details */}
-              <div className={styles.item_wrapper}>
-                <div className={styles.header}>
-                  <h2>Details</h2>
-                  <AiOutlineArrowDown
-                    style={toggleDetailsInfo ? { transform: "rotate(180deg)" } : ""}
-                    onClick={() => setToggleDetailsInfo((prev) => !prev)}
-                  />
+                {/* questions */}
+                <div className={styles.item_wrapper}>
+                  <div className={styles.header}>
+                    <h2>Questions</h2>
+                    <AiOutlineArrowDown
+                      style={toggleQuestionsInfo ? { transform: "rotate(180deg)" } : ""}
+                      onClick={() => setToggleQuestionsInfo((prev) => !prev)}
+                    />
+                  </div>
+                  {toggleQuestionsInfo && (
+                    <QuestionsInput
+                      questions={product.questions}
+                      product={product}
+                      setProduct={setProduct}
+                    />
+                  )}
                 </div>
-                {toggleDetailsInfo && (
-                  <DetailsInput
-                    details={product.details}
-                    product={product}
-                    setProduct={setProduct}
-                  />
-                )}
-              </div>
 
-              {/* questions */}
-              <div className={styles.item_wrapper}>
-                <div className={styles.header}>
-                  <h2>Questions</h2>
-                  <AiOutlineArrowDown
-                    style={toggleQuestionsInfo ? { transform: "rotate(180deg)" } : ""}
-                    onClick={() => setToggleQuestionsInfo((prev) => !prev)}
-                  />
-                </div>
-                {toggleQuestionsInfo && (
-                  <QuestionsInput
-                    questions={product.questions}
-                    product={product}
-                    setProduct={setProduct}
-                  />
-                )}
-              </div>
-
-              <Button type="submit" style="primary">
-                Create Product <AiOutlinePlus />
-              </Button>
-            </Form>
-          )}
-        </Formik>
+                <Button type="submit" style="primary">
+                  Create Product <AiOutlinePlus />
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        )}
       </div>
     </AdminLayout>
   );
