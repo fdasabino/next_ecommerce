@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
 let connection;
+
 // * connect to database
 const connectDB = async () => {
   if (connection && mongoose.connection.readyState === 1) {
-    console.log("Already connected to database...");
+    console.log("Already connected to the database...");
     return;
   }
 
@@ -20,14 +21,23 @@ const connectDB = async () => {
   }
 };
 
+connectDB();
+
 // * disconnect from database (only for production)
 const disconnectDB = async () => {
   if (connection && mongoose.connection.readyState === 1) {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV !== "production") {
+      console.log("Not disconnected from the database...");
+      return;
+    }
+
+    try {
       await mongoose.disconnect();
       connection.isConnected = false;
-    } else {
-      console.log("Not disconnected from database...");
+      console.log("Disconnected from the database...");
+    } catch (error) {
+      console.error("Database disconnection error:", error.message);
+      throw new Error(error.message);
     }
   }
 };
