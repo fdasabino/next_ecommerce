@@ -21,7 +21,6 @@ import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product }) => {
   const { data: session } = useSession();
-  console.log(product);
 
   const signInRedirect = () => {
     signIn();

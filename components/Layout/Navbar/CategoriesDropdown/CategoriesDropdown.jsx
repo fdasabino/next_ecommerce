@@ -15,13 +15,16 @@ const CategoriesDropdown = (props) => {
       <ul>
         {categoriesArray.length > 0 ? (
           <>
-            {categoriesArray.map((item) => (
-              <li key={item._id} onClick={() => setVisible(false)}>
-                <Link href={"/"}>
-                  <MdOutlineArrowRight /> {item.name}
-                </Link>
-              </li>
-            ))}
+            {categoriesArray.map((item, i) => {
+              if (!item.name) return;
+              return (
+                <li key={item._id || i} onClick={() => setVisible(false)}>
+                  <Link href={"/"}>
+                    <MdOutlineArrowRight /> {item.name}
+                  </Link>
+                </li>
+              );
+            })}
           </>
         ) : (
           <li>
