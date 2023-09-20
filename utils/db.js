@@ -23,14 +23,6 @@ const connectDB = async () => {
 // * disconnect from database (only for production)
 const disconnectDB = async () => {
   console.log("Not disconnected from database...");
-  // if (connection && mongoose.connection.readyState === 1) {
-  //   if (process.env.NODE_ENV === "production") {
-  //     await mongoose.disconnect();
-  //     connection.isConnected = false;
-  //   } else {
-  //     console.log("Not disconnected from database...");
-  //   }
-  // }
 };
 
 const db = { connectDB, disconnectDB };
