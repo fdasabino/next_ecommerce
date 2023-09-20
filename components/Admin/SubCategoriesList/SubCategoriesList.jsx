@@ -59,87 +59,90 @@ const SubCategoriesList = ({
         </h2>
       </div>
 
-      {subCategories?.map((sub) => (
-        <div className={styles.subcategory} key={sub._id}>
-          {/* category edit */}
-          <div className={styles.subcategory_name}>
-            {editSubCategoryId === sub._id && (
-              <div className={styles.edit_header}>
-                <div className={styles.title}>
-                  <p>Edit {`"${sub.name}"`} sub category </p>
-                </div>
-                <div className={styles.subtitle}>
-                  <small>
-                    <span>Current Name:</span> {sub.name}
-                  </small>
-                  {sub.parent && (
-                    <small>
-                      <span>Parent Category:</span> {sub.parent.name}
-                    </small>
-                  )}
-                </div>
+      {subCategories.length &&
+        subCategories
+          ?.sort((a, b) => a.name.localeCompare(b.name))
+          .map((sub) => (
+            <div className={styles.subcategory} key={sub._id}>
+              {/* category edit */}
+              <div className={styles.subcategory_name}>
+                {editSubCategoryId === sub._id && (
+                  <div className={styles.edit_header}>
+                    <div className={styles.title}>
+                      <p>Edit {`"${sub.name}"`} sub category </p>
+                    </div>
+                    <div className={styles.subtitle}>
+                      <small>
+                        <span>Current Name:</span> {sub.name}
+                      </small>
+                      {sub.parent && (
+                        <small>
+                          <span>Parent Category:</span> {sub.parent.name}
+                        </small>
+                      )}
+                    </div>
+                  </div>
+                )}
+                {editSubCategoryId !== sub._id && (
+                  <div className={styles.item_label}>
+                    <h3>{sub.name}</h3>
+                    <small>Category: {sub.parent.name}</small>
+                  </div>
+                )}
+                {editSubCategoryId === sub._id && (
+                  <div className={styles.edit}>
+                    <input
+                      type="text"
+                      className={styles.edit_input}
+                      name="name"
+                      value={name ? name : sub.name || ""}
+                      onChange={handleChange}
+                      placeholder="Enter new name"
+                      autoFocus
+                    />
+                    <select
+                      name="parent"
+                      value={parent ? parent : sub.parent ? sub.parent._id : ""}
+                      onChange={handleChange}
+                      disabled={!editSubCategoryId}
+                      className={styles.select}
+                    >
+                      {categories?.map((cat) => (
+                        <option key={cat._id} value={cat._id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className={styles.buttons}>
+                      <Button
+                        style="primary"
+                        onClick={() => handleUpdateSubCategory(sub._id)}
+                        disabled={!name && !parent}
+                      >
+                        <AiOutlineCheck />
+                      </Button>
+                      <Button style="danger" onClick={() => editSubCategoryHandler(sub._id)}>
+                        <AiOutlineStop />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-            {editSubCategoryId !== sub._id && (
-              <div className={styles.item_label}>
-                <h3>{sub.name}</h3>
-                <small>Category: {sub.parent.name}</small>
+              {/* category actions */}
+              <div className={styles.subcategory_actions}>
+                {editSubCategoryId !== sub._id && (
+                  <>
+                    <Button style="primary" onClick={() => editSubCategoryHandler(sub._id)}>
+                      <FiEdit />
+                    </Button>
+                    <Button style="danger" onClick={() => handleDeleteSubCategory(sub._id)}>
+                      <BsTrash />
+                    </Button>
+                  </>
+                )}
               </div>
-            )}
-            {editSubCategoryId === sub._id && (
-              <div className={styles.edit}>
-                <input
-                  type="text"
-                  className={styles.edit_input}
-                  name="name"
-                  value={name ? name : sub.name || ""}
-                  onChange={handleChange}
-                  placeholder="Enter new name"
-                  autoFocus
-                />
-                <select
-                  name="parent"
-                  value={parent ? parent : sub.parent ? sub.parent._id : ""}
-                  onChange={handleChange}
-                  disabled={!editSubCategoryId}
-                  className={styles.select}
-                >
-                  {categories?.map((cat) => (
-                    <option key={cat._id} value={cat._id}>
-                      {cat.name}
-                    </option>
-                  ))}
-                </select>
-                <div className={styles.buttons}>
-                  <Button
-                    style="primary"
-                    onClick={() => handleUpdateSubCategory(sub._id)}
-                    disabled={!name && !parent}
-                  >
-                    <AiOutlineCheck />
-                  </Button>
-                  <Button style="danger" onClick={() => editSubCategoryHandler(sub._id)}>
-                    <AiOutlineStop />
-                  </Button>
-                </div>
-              </div>
-            )}
-          </div>
-          {/* category actions */}
-          <div className={styles.subcategory_actions}>
-            {editSubCategoryId !== sub._id && (
-              <>
-                <Button style="primary" onClick={() => editSubCategoryHandler(sub._id)}>
-                  <FiEdit />
-                </Button>
-                <Button style="danger" onClick={() => handleDeleteSubCategory(sub._id)}>
-                  <BsTrash />
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-      ))}
+            </div>
+          ))}
     </div>
   );
 };

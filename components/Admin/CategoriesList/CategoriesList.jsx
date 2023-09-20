@@ -51,51 +51,54 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
         <h2>{categories?.length > 0 ? "Current categories" : "No categories to show"}</h2>
       </div>
 
-      {categories?.map((category) => (
-        <div className={styles.category} key={category._id}>
-          {/* category edit */}
-          <div className={styles.category_name}>
-            {editCategoryId === category._id && <p>{`Edit "${category.name}" category`}</p>}
-            {editCategoryId !== category._id && <h3>{category.name}</h3>}
-            {editCategoryId === category._id && (
-              <div className={styles.edit}>
-                <input
-                  type="text"
-                  className={styles.edit_input}
-                  onChange={handleChange}
-                  placeholder="Enter new category name"
-                  autoFocus
-                />
-                <div className={styles.buttons}>
-                  <Button
-                    style="primary"
-                    onClick={() => handleUpdateCategory(category._id)}
-                    disabled={!name}
-                  >
-                    <AiOutlineCheck />
-                  </Button>
-                  <Button style="danger" onClick={() => editCategoryHandler(category._id)}>
-                    <AiOutlineStop />
-                  </Button>
-                </div>
+      {categories.length &&
+        categories
+          ?.sort((a, b) => a.name.localeCompare(b.name))
+          .map((category) => (
+            <div className={styles.category} key={category._id}>
+              {/* category edit */}
+              <div className={styles.category_name}>
+                {editCategoryId === category._id && <p>{`Edit "${category.name}" category`}</p>}
+                {editCategoryId !== category._id && <h3>{category.name}</h3>}
+                {editCategoryId === category._id && (
+                  <div className={styles.edit}>
+                    <input
+                      type="text"
+                      className={styles.edit_input}
+                      onChange={handleChange}
+                      placeholder="Enter new category name"
+                      autoFocus
+                    />
+                    <div className={styles.buttons}>
+                      <Button
+                        style="primary"
+                        onClick={() => handleUpdateCategory(category._id)}
+                        disabled={!name}
+                      >
+                        <AiOutlineCheck />
+                      </Button>
+                      <Button style="danger" onClick={() => editCategoryHandler(category._id)}>
+                        <AiOutlineStop />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          {/* category actions */}
-          <div className={styles.category_actions}>
-            {editCategoryId !== category._id && (
-              <>
-                <Button style="primary" onClick={() => editCategoryHandler(category._id)}>
-                  <FiEdit />
-                </Button>
-                <Button style="danger" onClick={() => handleDeleteCategory(category._id)}>
-                  <BsTrash />
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-      ))}
+              {/* category actions */}
+              <div className={styles.category_actions}>
+                {editCategoryId !== category._id && (
+                  <>
+                    <Button style="primary" onClick={() => editCategoryHandler(category._id)}>
+                      <FiEdit />
+                    </Button>
+                    <Button style="danger" onClick={() => handleDeleteCategory(category._id)}>
+                      <BsTrash />
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
     </div>
   );
 };

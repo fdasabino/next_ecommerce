@@ -15,16 +15,16 @@ const CategoriesDropdown = (props) => {
       <ul>
         {categoriesArray.length > 0 ? (
           <>
-            {categoriesArray.map((item, i) => {
-              if (!item.name) return;
-              return (
+            {categoriesArray
+              .filter((item) => item.name) // Filter out items without a name
+              .sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically by name
+              .map((item, i) => (
                 <li key={item._id || i} onClick={() => setVisible(false)}>
                   <Link href={"/"}>
                     <MdOutlineArrowRight /> {item.name}
                   </Link>
                 </li>
-              );
-            })}
+              ))}
           </>
         ) : (
           <li>
