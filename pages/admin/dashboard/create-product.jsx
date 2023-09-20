@@ -208,7 +208,7 @@ const AdminCreateProduct = ({ categories, parents, user }) => {
     const validation = validateCreateProduct(product, images);
     if (validation === true) {
       toast.success("Product validated successfully");
-      createProductHelper();
+      await createProductHelper();
     }
   };
 
