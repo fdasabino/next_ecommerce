@@ -96,7 +96,7 @@ const CreateProduct = ({ categories, parents, user }) => {
   const [descriptionImages, setDescriptionImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [toggleBasicInfo, setToggleBasicInfo] = useState(true);
-  const [toggleCategoryInfo, setToggleCategoryInfo] = useState(false);
+  const [toggleCategoryInfo, setToggleCategoryInfo] = useState(true);
   const [toggleSizeInfo, setToggleSizeInfo] = useState(false);
   const [toggleDetailsInfo, setToggleDetailsInfo] = useState(false);
   const [toggleQuestionsInfo, setToggleQuestionsInfo] = useState(false);

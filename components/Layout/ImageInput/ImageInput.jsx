@@ -3,13 +3,11 @@ import { useRef } from "react";
 import { BsFolderPlus, BsTrash } from "react-icons/bs";
 import { IoMdColorFilter } from "react-icons/io";
 import { RiShape2Line } from "react-icons/ri";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Button from "../Button/Button";
 import styles from "./ImageInput.module.scss";
 
 const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...props }) => {
-  const dispatch = useDispatch();
   const fileInput = useRef(null);
 
   const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
@@ -85,6 +83,7 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
                 <Image src={image} width={400} height={400} alt={i} />
                 <div className={styles.image_actions}>
                   <Button
+                    type="button"
                     style="danger"
                     onClick={() => {
                       setImages(images.filter((img) => img !== image));
@@ -93,10 +92,10 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
                   >
                     <BsTrash />
                   </Button>
-                  <Button style="secondary" onClick={() => setColorImage(image)}>
+                  <Button type="button" style="secondary" onClick={() => setColorImage(image)}>
                     <IoMdColorFilter />
                   </Button>
-                  <Button style="tertiary">
+                  <Button type="button" style="tertiary">
                     <RiShape2Line />
                   </Button>
                 </div>

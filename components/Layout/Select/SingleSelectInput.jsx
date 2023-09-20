@@ -1,12 +1,22 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useField } from "formik";
+import { ErrorMessage, useField } from "formik";
+import { MdErrorOutline } from "react-icons/md";
 import styles from "./SingleSelectInput.module.scss";
 
 const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
   const [field, meta] = useField(props);
 
   return (
-    <div>
+    <>
+      {meta.error && meta.touched && (
+        <div className={styles.error_message}>
+          <span></span>
+          <p>
+            <ErrorMessage name={field.name} />
+          </p>
+          <MdErrorOutline />
+        </div>
+      )}
       <FormControl fullWidth>
         <InputLabel style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}>
           {meta.touched && meta.error ? meta.error : placeholder}
@@ -38,7 +48,7 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
           ))}
         </Select>
       </FormControl>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import { Chip, FormControl, InputLabel, ListItemText, MenuItem, Select } from "@mui/material";
-import { useField } from "formik";
+import { ErrorMessage, useField } from "formik";
 import React, { useEffect } from "react";
+import { MdErrorOutline } from "react-icons/md";
 import styles from "./MultipleSelectInput.module.scss";
 
 const MultipleSelectInput = ({
@@ -24,6 +25,15 @@ const MultipleSelectInput = ({
 
   return (
     <>
+      {meta.error && meta.touched && (
+        <div className={styles.error_message}>
+          <span></span>
+          <p>
+            <ErrorMessage name={field.name} />
+          </p>
+          <MdErrorOutline />
+        </div>
+      )}
       <FormControl fullWidth>
         <InputLabel style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}>
           {meta.touched && meta.error ? meta.error : placeholder}

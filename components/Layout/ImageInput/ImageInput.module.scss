@@ -9,6 +9,10 @@
     padding: 0 1rem;
     margin-bottom: 1rem;
 
+    .error_color {
+      color: $base-error-secondary;
+    }
+
     h2 {
       font-size: 1rem;
       font-weight: 600;
