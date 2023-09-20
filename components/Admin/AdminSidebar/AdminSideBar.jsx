@@ -10,7 +10,10 @@ import styles from "./AdminSideBar.module.scss";
 
 const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
   return (
-    <div className={`${styles.admin_sidebar} ${isExpanded ? styles.expanded : ""}`}>
+    <div
+      onMouseLeave={toggleSidebar}
+      className={`${styles.admin_sidebar} ${isExpanded ? styles.expanded : ""}`}
+    >
       <div className={styles.header}>
         <span>Admin Panel</span>
         <AiOutlineClose onClick={toggleSidebar} />
