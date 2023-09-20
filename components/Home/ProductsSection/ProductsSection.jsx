@@ -41,11 +41,13 @@ const ProductsSection = ({ products }) => {
           modules={[Navigation, Pagination, Autoplay]}
           className={styles.flash_deals_swiper}
         >
-          {products?.map((product) => (
-            <SwiperSlide key={product._id}>
-              <ProductCard product={product} />
-            </SwiperSlide>
-          ))}
+          {products
+            ?.sort((a, b) => a.category.name.localeCompare(b.category.name))
+            .map((product) => (
+              <SwiperSlide key={product._id}>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </section>

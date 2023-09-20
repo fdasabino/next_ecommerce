@@ -1,6 +1,7 @@
 import FlashDeals from "@/components/Home/FlashDeals/FlashDeals";
 import MainSection from "@/components/Home/MainSection/MainSection";
 import Category from "@/models/Category";
+import SubCategory from "@/models/SubCategory";
 import { setCategories } from "@/redux-store/categoriesSlice";
 import { setCountry } from "@/redux-store/countrySlice";
 import styles from "@/styles/pages/Home.module.scss";
@@ -14,6 +15,7 @@ import Product from "../models/Product";
 const HomePage = ({ country, products, categories }) => {
   const dispatch = useDispatch();
 
+  console.log(products);
   // Set categories in redux store
   const setCategoriesToStore = useCallback(() => {
     dispatch(setCategories(categories));
@@ -51,7 +53,12 @@ export async function getServerSideProps() {
   await db.connectDB();
 
   try {
-    const products = await Product.find({}).sort({ createdAt: -1 }).lean().exec();
+    const products = await Product.find({})
+      .sort({ createdAt: -1 })
+      .populate({ path: "category", model: Category })
+      .populate({ path: "subCategories", model: SubCategory })
+      .lean()
+      .exec();
     const serializedProducts = JSON.parse(JSON.stringify(products));
     const productsArray = serializedProducts;
 
