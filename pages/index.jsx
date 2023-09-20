@@ -15,7 +15,6 @@ import Product from "../models/Product";
 const HomePage = ({ country, products, categories }) => {
   const dispatch = useDispatch();
 
-  console.log(products);
   // Set categories in redux store
   const setCategoriesToStore = useCallback(() => {
     dispatch(setCategories(categories));
