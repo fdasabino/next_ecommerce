@@ -49,7 +49,7 @@ const productValidationSchema = Yup.object().shape({
     .max(100, "Discount must be at most 100"),
 });
 
-const CreateProduct = ({ categories, parents, user }) => {
+const AdminCreateProduct = ({ categories, parents, user }) => {
   const initialState = {
     name: "",
     description: "",
@@ -463,7 +463,7 @@ const CreateProduct = ({ categories, parents, user }) => {
   );
 };
 
-export default CreateProduct;
+export default AdminCreateProduct;
 
 // server side code
 export async function getServerSideProps(context) {
