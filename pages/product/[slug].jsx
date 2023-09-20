@@ -8,6 +8,7 @@ import Reviews from "@/components/ProductPage/Reviews/Reviews";
 import SimilarProductsSwiper from "@/components/ProductPage/SimilarProductsSwiper/SimilarProductsSwiper";
 import Category from "@/models/Category";
 import Product from "@/models/Product";
+import SubCategory from "@/models/SubCategory";
 import User from "@/models/User";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
@@ -20,6 +21,7 @@ import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product }) => {
   const { data: session } = useSession();
+  console.log(product);
 
   const signInRedirect = () => {
     signIn();
@@ -29,7 +31,7 @@ const SingleProductPage = ({ product }) => {
   const path = [
     { id: 1, name: "Home" },
     { id: 2, name: product?.category.name },
-    { id: 3, name: "Subcategory 1" },
+    { id: 3, name: product?.subCategories[0].name },
     {
       id: 4,
       name: product?.name.length > 30 ? `${product.name.substring(0, 30)}...` : product?.name,
@@ -95,6 +97,7 @@ export async function getServerSideProps(context) {
 
     const product = await Product.findOne({ slug })
       .populate({ path: "category", model: Category })
+      .populate({ path: "subCategories", model: SubCategory })
       .populate({ path: "reviews.reviewBy", model: User })
       .lean()
       .exec();
@@ -125,7 +128,7 @@ export async function getServerSideProps(context) {
     };
 
     return {
-      props: { product: JSON.parse(JSON.stringify(newProduct)) }, // will be passed to the page component as props
+      props: { product: JSON.parse(JSON.stringify(newProduct)) },
     };
   } catch (error) {
     console.log(error);
