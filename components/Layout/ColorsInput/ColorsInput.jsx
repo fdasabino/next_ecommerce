@@ -40,10 +40,7 @@ const ColorsInput = ({ name, product, setProduct, colorImage }) => {
   };
 
   return (
-    <div className={styles.colors}>
-      <div className={styles.header}>
-        <h2>Select one of the colors below</h2>
-      </div>
+    <>
       <ColorExtractor getColors={(colors) => setColors(colors)}>
         <img src={colorImage} style={{ display: "none" }} alt="color" />
       </ColorExtractor>
@@ -55,11 +52,16 @@ const ColorsInput = ({ name, product, setProduct, colorImage }) => {
         hidden
       />
       {colors.length > 0 && (
-        <div className={styles.colors_info}>
-          <div className={styles.color_wheel}>{renderSwatches()}</div>
+        <div className={styles.colors}>
+          <div className={styles.colors_info}>
+            <div className={styles.header}>
+              <h2>Select one of the colors below</h2>
+            </div>
+            <div className={styles.color_wheel}>{renderSwatches()}</div>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

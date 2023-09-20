@@ -254,19 +254,25 @@ const CreateProduct = ({ categories, parents, user }) => {
                   <ImageInput
                     name="imageInputFile"
                     header="Product Images"
-                    text="Add Images"
                     images={images}
                     setImages={setImages}
                     setColorImage={setColorImage}
                   />
                   {images.length > 0 && (
                     <>
-                      <div className={styles.selected_colors}>
-                        <h4>
-                          Selected color: {product.color.color && GetColorName(product.color.color)}
-                        </h4>
-                        <div className={styles.wrapper}>
+                      {product.color.color && (
+                        <div className={styles.selected_colors}>
+                          <h4>
+                            Selected color:{" "}
+                            {product.color.color && GetColorName(product.color.color)}
+                          </h4>
                           <div className={styles.picked_color}>
+                            {product.color.color && (
+                              <span
+                                className={styles.color_span}
+                                style={{ background: `${product.color.color}` }}
+                              />
+                            )}
                             {product.color.image && (
                               <Image
                                 src={product.color.image}
@@ -276,32 +282,28 @@ const CreateProduct = ({ categories, parents, user }) => {
                                 alt={product.color.color}
                               />
                             )}
-
-                            {product.color.color && (
-                              <span
-                                className={styles.color_span}
-                                style={{ background: `${product.color.color}` }}
-                              />
-                            )}
                           </div>
-                          <ColorsInput
-                            name="color"
-                            product={product}
-                            header={"Pick a product color"}
-                            setProduct={setProduct}
-                            colorImage={colorImage}
-                          />
                         </div>
-                        {/* style input */}
-                        {images.length > 0 && product.color.color && (
-                          <StyleInput
-                            name="colorImageInput"
-                            product={product}
-                            setProduct={setProduct}
-                            colorImage={colorImage}
-                          />
-                        )}
+                      )}
+
+                      {/* Color input */}
+                      <div className={styles.wrapper}>
+                        <ColorsInput
+                          name="color"
+                          product={product}
+                          setProduct={setProduct}
+                          colorImage={colorImage}
+                        />
                       </div>
+                      {/* style input */}
+                      {images.length > 0 && product.color.color && (
+                        <StyleInput
+                          name="colorImageInput"
+                          product={product}
+                          setProduct={setProduct}
+                          colorImage={colorImage}
+                        />
+                      )}
                     </>
                   )}
                 </div>

@@ -7,11 +7,9 @@ import { toast } from "react-toastify";
 import Button from "../Button/Button";
 import styles from "./ImageInput.module.scss";
 
-const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...props }) => {
+const ImageInput = ({ name, header, images, setImages, setColorImage }) => {
   const fileInput = useRef(null);
-
   const allowedFileTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
-
   const handleImages = ({ target: { files } }) => {
     for (const file of files) {
       if (images.includes(file)) {
@@ -48,9 +46,8 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
     <div className={styles.image_input}>
       <div className={styles.header}>
         <h2>
-          {header} <span>({images.length})</span>
+          {header} <span>(Max 6 / {6 - images.length} remaining)</span>
         </h2>
-
         <Button
           type="reset"
           disabled={images.length >= 6}
@@ -70,39 +67,41 @@ const ImageInput = ({ name, header, text, images, setImages, setColorImage, ...p
           onChange={handleImages}
         />
       </div>
-      <div className={styles.images_main}>
-        {images.length === 0 && (
-          <div className={styles.no_image}>
-            <h4>No images uploaded yet</h4>
-          </div>
-        )}
-        <div className={styles.grid}>
-          {images.length > 0 &&
-            images.map((image, i) => (
-              <div key={i} className={styles.grid_wrapper}>
-                <Image src={image} width={400} height={400} alt={i} />
-                <div className={styles.image_actions}>
-                  <Button
-                    type="button"
-                    style="danger"
-                    onClick={() => {
-                      setImages(images.filter((img) => img !== image));
-                      setColorImage("");
-                    }}
-                  >
-                    <BsTrash />
-                  </Button>
-                  <Button type="button" style="secondary" onClick={() => setColorImage(image)}>
-                    <IoMdColorFilter />
-                  </Button>
-                  <Button type="button" style="tertiary">
-                    <RiShape2Line />
-                  </Button>
-                </div>
-              </div>
-            ))}
+      {images.length === 0 && (
+        <div className={styles.no_image}>
+          <h2>No images uploaded yet</h2>
         </div>
-      </div>
+      )}
+      {images.length > 0 && (
+        <div className={styles.images_main}>
+          <div className={styles.grid}>
+            {images.length > 0 &&
+              images.map((image, i) => (
+                <div key={i} className={styles.grid_wrapper}>
+                  <Image src={image} width={400} height={400} alt={i} />
+                  <div className={styles.image_actions}>
+                    <Button
+                      type="button"
+                      style="danger"
+                      onClick={() => {
+                        setImages(images.filter((img) => img !== image));
+                        setColorImage("");
+                      }}
+                    >
+                      <BsTrash />
+                    </Button>
+                    <Button type="button" style="secondary" onClick={() => setColorImage(image)}>
+                      <IoMdColorFilter />
+                    </Button>
+                    <Button type="button" style="tertiary">
+                      <RiShape2Line />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
