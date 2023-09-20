@@ -127,7 +127,9 @@ export async function getServerSideProps(context) {
     };
 
     return {
-      props: { product: JSON.parse(JSON.stringify(newProduct)) },
+      props: {
+        product: JSON.parse(JSON.stringify(newProduct)),
+      },
     };
   } catch (error) {
     console.log(error);
@@ -135,6 +137,6 @@ export async function getServerSideProps(context) {
       props: { product: null },
     };
   } finally {
-    db.disconnectDB();
+    await db.disconnectDB();
   }
 }
