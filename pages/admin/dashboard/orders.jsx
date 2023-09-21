@@ -1,27 +1,27 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
-import UsersList from "@/components/Admin/UsersList/UsersList";
+import OrderList from "@/components/Admin/OrdersList/OrderList";
+import Order from "@/models/Order";
 import User from "@/models/User";
-import styles from "@/styles/pages/AdminUsers.module.scss";
+import styles from "@/styles/pages/AdminOrders.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
 
-const AdminUsers = ({ user, users }) => {
+const AdminOrders = ({ user, orders }) => {
   const router = useRouter();
   const { pathname } = router;
   const path = pathname.split("/admin/dashboard")[1];
 
   return (
     <AdminLayout path={path} user={user}>
-      <div className={styles.users}>
-        <UsersList rows={users} />
+      <div className={styles.admin_orders}>
+        <OrderList orders={orders} />
       </div>
     </AdminLayout>
   );
 };
 
-export default AdminUsers;
+export default AdminOrders;
 
 // server side code
 export async function getServerSideProps(context) {
@@ -29,12 +29,14 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
-    const users = await User.find({}).sort({ createdAt: -1 }).lean();
-
+    const orders = await Order.find({})
+      .populate({ path: "user", model: User })
+      .sort({ createdAt: -1 })
+      .lean();
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),
-        users: JSON.parse(JSON.stringify(users)),
+        orders: JSON.parse(JSON.stringify(orders)),
       },
     };
   } catch (error) {
