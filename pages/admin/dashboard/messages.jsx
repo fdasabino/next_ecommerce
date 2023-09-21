@@ -1,25 +1,26 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import User from "@/models/User";
-import styles from "@/styles/pages/AdminDashboard.module.scss";
+import styles from "@/styles/pages/AdminMessages.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const AdminDashboard = ({ user }) => {
+const AdminSales = ({ user }) => {
   const router = useRouter();
   const { pathname } = router;
-  const path = pathname;
+  const path = pathname.split("/admin/dashboard")[1];
+  console.log(path);
 
   return (
     <AdminLayout path={path} user={user}>
-      <div className={styles.admin_dashboard}>
+      <div className={styles.admin_messages}>
         <h1>page under construction - apologies for any inconvenience</h1>
       </div>
     </AdminLayout>
   );
 };
 
-export default AdminDashboard;
+export default AdminSales;
 
 // server side code
 export async function getServerSideProps(context) {
