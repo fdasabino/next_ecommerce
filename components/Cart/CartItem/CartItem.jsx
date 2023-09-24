@@ -1,7 +1,6 @@
 import { removeFromCart, updateCart } from "@/redux-store/cartSlice";
 import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
 import { Tooltip } from "@mui/material";
-import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import { useState } from "react";
 import { TbMinus, TbPlus } from "react-icons/tb";
@@ -17,11 +16,6 @@ const CartItem = ({ cartProducts }) => {
   const isLargeScreen = useMediaQuery({ query: "(min-width: 900px)" });
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-
-  const getColorName = (color) => {
-    const colorName = GetColorName(color);
-    return colorName;
-  };
 
   const handleRemoveItem = () => {
     dispatch(removeFromCart({ id: cartProducts._uid }));
@@ -94,7 +88,6 @@ const CartItem = ({ cartProducts }) => {
         <small>
           Color:{" "}
           <span>
-            {getColorName(cartProducts.color.color)}{" "}
             <small style={{ backgroundColor: `${cartProducts.color.color}` }} />
           </span>
         </small>
@@ -140,8 +133,8 @@ const CartItem = ({ cartProducts }) => {
           className={styles.swiper_container}
         >
           {cartProducts.images.length > 0 &&
-            cartProducts.images.map((image) => (
-              <SwiperSlide key={image.public_url}>
+            cartProducts.images.map((image, i) => (
+              <SwiperSlide key={i}>
                 <Image src={image.url} width={600} height={600} alt={cartProducts.name} />
               </SwiperSlide>
             ))}

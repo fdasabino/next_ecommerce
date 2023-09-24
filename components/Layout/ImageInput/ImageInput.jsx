@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { BsFolderPlus, BsTrash } from "react-icons/bs";
-import { IoMdColorFilter } from "react-icons/io";
 import { RiShape2Line } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Button from "../Button/Button";
@@ -89,9 +88,6 @@ const ImageInput = ({ name, header, images, setImages, setColorImage }) => {
                       }}
                     >
                       <BsTrash />
-                    </Button>
-                    <Button type="button" style="secondary" onClick={() => setColorImage(image)}>
-                      <IoMdColorFilter />
                     </Button>
                     <Button type="button" style="tertiary">
                       <RiShape2Line />

@@ -288,12 +288,7 @@ const AdminCreateProduct = ({ categories, parents, user }) => {
 
                       {/* Color input */}
                       <div className={styles.wrapper}>
-                        <ColorsInput
-                          name="color"
-                          product={product}
-                          setProduct={setProduct}
-                          colorImage={colorImage}
-                        />
+                        <ColorsInput name="color" product={product} setProduct={setProduct} />
                       </div>
                       {/* style input */}
                       {images.length > 0 && product.color.color && (

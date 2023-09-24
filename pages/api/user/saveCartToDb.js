@@ -3,9 +3,6 @@ import Cart from "@/models/Cart";
 import Product from "@/models/Product";
 import User from "@/models/User";
 import db from "@/utils/db";
-import { GetColorName } from "hex-color-to-color-name";
-
-const getColorName = (color) => GetColorName(color);
 
 const processCartItem = async (cartItem) => {
   const { _id, color, colorIndex, addedQuantity, size, discount } = cartItem;
@@ -24,7 +21,7 @@ const processCartItem = async (cartItem) => {
   return {
     name,
     product,
-    color: { color: getColorName(cartColor), image: color.image },
+    color: { color: cartColor, image: color.image },
     image: url,
     qty,
     size: productSize,

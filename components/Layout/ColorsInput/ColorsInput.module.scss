@@ -1,74 +1,13 @@
-.colors {
-  margin: 2rem 0;
+.color_picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 
-  .header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
-    h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 0.5rem;
-
-      @media (max-width: 480px) {
-        font-size: 0.7rem;
-      }
-    }
-
-    svg {
-      width: 35px;
-      height: 35px;
-      fill: $base-white;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      background: $base-info;
-      padding: 0.2rem;
-      border-radius: 50%;
-
-      @media (max-width: 480px) {
-        width: 25px;
-        height: 25px;
-      }
-
-      &:hover {
-        scale: 1.1;
-      }
-    }
-
-    button {
-      margin: 0 !important;
-    }
-  }
-
-  .colors_info {
-    margin: 1rem 0;
-
-    .color_wheel {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      overflow: hidden;
-
-      .swatch {
-        width: 50px !important;
-        height: 50px !important;
-        border-radius: 10px !important;
-        margin-right: 1rem !important;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-
-        &:hover {
-          scale: 1.1;
-        }
-      }
-    }
+  button {
+    margin: 0 auto !important;
   }
 }

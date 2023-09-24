@@ -1,10 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
-import { ColorExtractor } from "react-color-extractor";
+import { BlockPicker } from "react-color";
+import { MdColorize } from "react-icons/md";
+import Button from "../Button/Button";
 import styles from "./ColorsInput.module.scss";
 
-const ColorsInput = ({ name, product, setProduct, colorImage }) => {
-  const [colors, setColors] = useState([]);
+const ColorsInput = ({ name, product, setProduct }) => {
+  const [pickerVisible, setPickerVisible] = useState(false);
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -18,32 +19,8 @@ const ColorsInput = ({ name, product, setProduct, colorImage }) => {
     });
   };
 
-  const renderSwatches = () => {
-    return colors.map((color, index) => {
-      return (
-        <div
-          className={styles.swatch}
-          key={index}
-          style={{ backgroundColor: color }}
-          onClick={() => {
-            setProduct({
-              ...product,
-              color: {
-                color,
-                image: product.color.image,
-              },
-            });
-          }}
-        />
-      );
-    });
-  };
-
   return (
-    <>
-      <ColorExtractor getColors={(colors) => setColors(colors)}>
-        <img src={colorImage} style={{ display: "none" }} alt="color" />
-      </ColorExtractor>
+    <div className={styles.color_picker}>
       <input
         type="text"
         value={product.color.color}
@@ -51,17 +28,26 @@ const ColorsInput = ({ name, product, setProduct, colorImage }) => {
         onChange={handleInputChange}
         hidden
       />
-      {colors.length > 0 && (
-        <div className={styles.colors}>
-          <div className={styles.colors_info}>
-            <div className={styles.header}>
-              <h2>Select one of the colors below</h2>
-            </div>
-            <div className={styles.color_wheel}>{renderSwatches()}</div>
-          </div>
+      <Button onClick={() => setPickerVisible(!pickerVisible)}>
+        Color Picker <MdColorize />
+      </Button>
+      {pickerVisible && (
+        <div className={styles.picker}>
+          <BlockPicker
+            color={product.color.color}
+            onChange={(newColor) => {
+              setProduct({
+                ...product,
+                color: {
+                  color: newColor.hex,
+                  image: product.color.image,
+                },
+              });
+            }}
+          />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

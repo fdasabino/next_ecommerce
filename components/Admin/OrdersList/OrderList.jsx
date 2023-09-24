@@ -1,5 +1,3 @@
-// todo 1: fix issue with color
-
 import Image from "next/image";
 import { useState } from "react";
 import { AiOutlineArrowUp } from "react-icons/ai";
