@@ -27,7 +27,7 @@ const OrderList = ({ orders }) => {
                   <span>Order Date:</span> {order.createdAt.substring(0, 10)}
                 </div>
                 <div className={styles.order_total}>
-                  <span>Order Total:</span> ${order.total}
+                  <span>Order Total:</span> ${order.total.toFixed(2)}
                 </div>
                 <div className={styles.order_btn_switch}>
                   <AiOutlineArrowUp
@@ -85,7 +85,7 @@ const OrderList = ({ orders }) => {
                       })}
                     </div>
                     <div className={styles.order_details_body_heading}>
-                      <h2>Customer Information</h2>
+                      <h2>Customer & delivery info</h2>
                     </div>
                     <div className={styles.order_details_body_customer}>
                       <div className={styles.customer_details}>
@@ -94,7 +94,6 @@ const OrderList = ({ orders }) => {
                         <Image src={order.user.image} width={150} height={150} alt="avatar" />
                       </div>
                       <div className={styles.delivery_info}>
-                        <h2>Delivery Address</h2>
                         <p>
                           {order.shippingAddress.firstName} {order.shippingAddress.lastName},
                         </p>

@@ -34,7 +34,7 @@
     .order {
       width: 100%;
       max-width: 100%;
-      border: 1px solid rgba($color: $base-dark-grey, $alpha: 0.2);
+      margin-bottom: 2rem;
 
       .order_heading {
         position: relative;
@@ -49,10 +49,10 @@
         background-color: $base-white;
         box-shadow: $base-shadow-1;
         transition: all 0.3s ease-in-out;
-        cursor: pointer;
+        border-radius: 16px 16px 0 0;
 
         &:hover {
-          background-color: rgba($color: $base-info, $alpha: 0.1);
+          background-color: rgba($color: $base-dark-grey, $alpha: 0.5);
         }
 
         @media (max-width: 768px) {
@@ -70,9 +70,9 @@
           align-items: center;
           text-transform: uppercase;
           font-size: 0.7rem;
+          font-weight: bold;
 
           span {
-            font-size: 1rem;
             font-weight: 600;
             color: $base-dark;
           }
@@ -81,22 +81,17 @@
             flex-direction: row;
             align-items: center;
             gap: 0.5rem;
-          }
-
-          @media (max-width: 480px) {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            font-size: 0.6rem;
           }
         }
 
         .order_btn_switch {
           position: absolute;
-          top: 50%;
-          right: 16px;
+          top: 4%;
+          right: -5px;
           transform: translateY(-50%);
           transition: all 0.3s ease-in-out;
+          cursor: pointer;
 
           svg {
             font-size: 2rem;
@@ -107,17 +102,13 @@
             padding: 0.5rem;
             border-radius: 50%;
             transition: all 0.3s ease-in-out;
-
-            &:hover {
-              background-color: rgba($color: $base-info, $alpha: 0.8);
-              color: $base-white;
-            }
           }
         }
       }
 
       .order_details {
         background-color: rgba($color: $base-dark-grey, $alpha: 0.2);
+        border-radius: 0 0 16px 16px;
 
         .order_details_heading {
           width: 100%;
@@ -128,10 +119,8 @@
           place-items: center;
           justify-items: center;
           padding: 1rem;
-          background-color: $base-white;
-          box-shadow: $base-shadow-1;
+          background-color: rgba($color: $base-info, $alpha: 0.1);
           transition: all 0.3s ease-in-out;
-          cursor: pointer;
 
           @media (max-width: 768px) {
             grid-template-columns: repeat(1, 1fr);
@@ -148,9 +137,9 @@
             align-items: center;
             text-transform: uppercase;
             font-size: 0.7rem;
+            font-weight: bold;
 
             span {
-              font-size: 1rem;
               font-weight: 600;
               color: $base-dark;
             }
@@ -159,13 +148,7 @@
               flex-direction: row;
               align-items: center;
               gap: 0.5rem;
-            }
-
-            @media (max-width: 480px) {
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              gap: 0.5rem;
+              font-size: 0.6rem;
             }
           }
         }
@@ -173,18 +156,17 @@
         .order_details_body {
           display: flex;
           flex-direction: column;
+          border-radius: 0 0 16px 16px;
 
           .order_details_body_heading {
-            background-color: $base-info;
             padding: 1rem;
-            margin-bottom: 1rem;
             text-align: center;
 
             h2 {
               text-transform: uppercase;
               font-size: 1rem;
               font-weight: 600;
-              color: $base-white;
+              background-color: rgba($color: $base-info, $alpha: 0.1);
             }
           }
 
@@ -205,22 +187,25 @@
               max-width: 100%;
               display: flex;
               flex-direction: column;
+              align-items: center;
+              gap: 0.2rem;
               border: 1px solid rgba($color: $base-dark-grey, $alpha: 0.2);
-              background: rgba($color: $base-info, $alpha: 0.1);
+              box-shadow: $base-shadow-3;
               padding: 1rem;
-              margin-bottom: 1rem;
 
               .product_name,
               .product_price,
               .product_quantity,
               .product_size {
-                font-size: 0.8rem;
-                font-weight: 600;
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+                font-size: 0.7rem;
                 color: $base-dark;
                 text-transform: uppercase;
+                font-weight: bold;
 
                 span {
-                  font-size: 1rem;
                   font-weight: 600;
                   color: $base-dark;
                 }
@@ -229,10 +214,10 @@
                 display: flex;
                 flex-direction: row;
                 gap: 0.5rem;
-                margin-bottom: 1rem;
+
                 img {
-                  width: 50px;
-                  height: 50px;
+                  width: 30px;
+                  height: 30px;
                   object-fit: cover;
                   border-radius: 50%;
                   box-shadow: $base-shadow-1;
@@ -240,19 +225,10 @@
 
                 .color_span {
                   display: block;
-                  width: 50px;
-                  height: 50px;
+                  width: 30px;
+                  height: 30px;
                   border-radius: 50%;
                   box-shadow: $base-shadow-1;
-
-                  @media (max-width: 768px) {
-                    width: 70px;
-                    height: 70px;
-                  }
-                  @media (max-width: 480px) {
-                    width: 50px;
-                    height: 50px;
-                  }
                 }
               }
             }
@@ -275,6 +251,9 @@
               display: flex;
               flex-direction: column;
               align-items: center;
+              gap: 0.5rem;
+              border-bottom: 1px solid rgba($color: $base-dark-grey, $alpha: 0.2);
+              padding: 1rem 0;
 
               h2 {
                 text-transform: uppercase;
