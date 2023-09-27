@@ -25,6 +25,12 @@ const ProductItem = ({ product, openId, toggleDetailsById }) => {
           <span>#{product.category.name}</span>
         </small>
         <small>
+          Sub-Categories:
+          {product.subCategories.map((sub) => (
+            <span key={sub._id}>{sub.name}</span>
+          ))}
+        </small>
+        <small>
           Brand:
           <span>{product.brand}</span>
         </small>
