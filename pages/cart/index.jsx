@@ -57,7 +57,6 @@ const CartPage = ({ groupedProducts }) => {
     { id: 2, name: "Cart" },
   ];
 
-  console.log(similarProducts);
   return (
     <>
       <Head>
