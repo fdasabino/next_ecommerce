@@ -4,7 +4,7 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./SimilarProductsSwiper.module.scss";
 
-const SimilarProductsSwiper = ({ products }) => {
+const SimilarProductsSwiper = ({ products, category }) => {
   const breakpoints = {
     400: {
       slidesPerView: 2,
@@ -27,7 +27,7 @@ const SimilarProductsSwiper = ({ products }) => {
   return (
     <div className={styles.similar_product_swiper}>
       <div className={styles.similar_product_swiper__title}>
-        <h2>Similar Products</h2>
+        <h2>More in {category}</h2>
       </div>
 
       <Swiper

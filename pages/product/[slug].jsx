@@ -54,7 +54,10 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
             <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
 
-          <SimilarProductsSwiper products={productsWithSameCategory} />
+          <SimilarProductsSwiper
+            products={productsWithSameCategory}
+            category={product?.category.name}
+          />
           <Reviews reviews={product.reviews} numReviews={product.numReviews} />
 
           <div className={styles.single_product_page__create_review}>
