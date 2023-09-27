@@ -1,22 +1,17 @@
-import { women_swiper } from "@/data/home_data";
-import Image from "next/image";
+import ProductCard from "@/components/Home/ProductCard/ProductCard";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./CartSwiper.module.scss";
 
-const CartSwiper = () => {
+const CartSwiper = ({ similarProducts }) => {
   return (
     <Swiper
-      slidesPerView={2}
+      slidesPerView={1}
       grabCursor={true}
       spaceBetween={30}
       breakpoints={{
-        380: {
-          slidesPerView: 3,
-          spaceBetween: 10,
-        },
         480: {
-          slidesPerView: 4,
+          slidesPerView: 2,
           spaceBetween: 10,
         },
         768: {
@@ -32,9 +27,9 @@ const CartSwiper = () => {
       modules={[Navigation]}
       className={styles.cart__swiper}
     >
-      {women_swiper.map((item, i) => (
+      {similarProducts.map((item, i) => (
         <SwiperSlide key={i}>
-          <Image src={item.image} width={600} height={600} alt={item.name} />
+          <ProductCard product={item} />
         </SwiperSlide>
       ))}
     </Swiper>
