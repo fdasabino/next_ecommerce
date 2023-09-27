@@ -56,6 +56,8 @@ const CartPage = ({ groupedProducts }) => {
     { id: 1, name: "Home" },
     { id: 2, name: "Cart" },
   ];
+
+  console.log(similarProducts);
   return (
     <>
       <Head>
@@ -87,12 +89,14 @@ const CartPage = ({ groupedProducts }) => {
                 </div>
               </div>
             )}
-            <div className={styles.cart__swiper_container}>
-              <h3>
-                You might also like <BsFillBagHeartFill />
-              </h3>
-              <CartSwiper similarProducts={similarProducts} />
-            </div>
+            {similarProducts.length > 0 && (
+              <div className={styles.cart__swiper_container}>
+                <h3>
+                  You might also like <BsFillBagHeartFill />
+                </h3>
+                <CartSwiper similarProducts={similarProducts} />
+              </div>
+            )}
           </div>
         )}
       </div>
