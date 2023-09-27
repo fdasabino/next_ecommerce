@@ -1,11 +1,29 @@
-import { similar_products } from "@/data/home_data";
-import Image from "next/image";
-import Link from "next/link";
+import ProductCard from "@/components/Home/ProductCard/ProductCard";
+import React from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./SimilarProductsSwiper.module.scss";
 
-const SimilarProductsSwiper = () => {
+const SimilarProductsSwiper = ({ products }) => {
+  const breakpoints = {
+    400: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    600: {
+      slidesPerView: 3,
+      spaceBetween: 10,
+    },
+    768: {
+      slidesPerView: 4,
+      spaceBetween: 10,
+    },
+    900: {
+      slidesPerView: 6,
+      spaceBetween: 20,
+    },
+  };
+
   return (
     <div className={styles.similar_product_swiper}>
       <div className={styles.similar_product_swiper__title}>
@@ -13,32 +31,17 @@ const SimilarProductsSwiper = () => {
       </div>
 
       <Swiper
-        slidesPerView={2}
+        slidesPerView={1}
+        grabCursor
         spaceBetween={30}
-        grabCursor={true}
-        navigation={true}
-        breakpoints={{
-          480: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 5,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 6,
-            spaceBetween: 50,
-          },
-        }}
+        breakpoints={breakpoints}
+        navigation
         modules={[Navigation]}
         className={styles.similar_product_swiper__container}
       >
-        {similar_products.map((product, i) => (
-          <SwiperSlide key={i}>
-            <Link href="/">
-              <Image src={product} width={600} height={600} alt="placeholder" />
-            </Link>
+        {products.map((product) => (
+          <SwiperSlide key={product._id}>
+            <ProductCard product={product} />
           </SwiperSlide>
         ))}
       </Swiper>

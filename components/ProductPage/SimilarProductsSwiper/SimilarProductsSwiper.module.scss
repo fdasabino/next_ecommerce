@@ -1,7 +1,7 @@
 .similar_product_swiper {
   width: 100%;
   max-width: 1200px;
-  height: 300px;
+  height: fit-content;
   margin: 0 auto;
 
   &__title {
@@ -13,6 +13,7 @@
       font-size: 1.8rem;
       font-weight: 500;
       padding: 0 0.5rem;
+      text-transform: uppercase;
 
       @media (max-width: 768px) {
         font-size: 1.5rem;

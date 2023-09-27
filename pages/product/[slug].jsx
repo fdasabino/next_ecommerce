@@ -19,14 +19,14 @@ import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
-const SingleProductPage = ({ product }) => {
+const SingleProductPage = ({ product, productsWithSameCategory }) => {
+  const [activeImage, setActiveImage] = useState("");
   const { data: session } = useSession();
 
   const signInRedirect = () => {
     signIn();
   };
 
-  const [activeImage, setActiveImage] = useState("");
   const path = [
     { id: 1, name: "Home" },
     { id: 2, name: product?.category.name },
@@ -54,7 +54,7 @@ const SingleProductPage = ({ product }) => {
             <ProductInfo product={product} setActiveImage={setActiveImage} />
           </div>
 
-          <SimilarProductsSwiper />
+          <SimilarProductsSwiper products={productsWithSameCategory} />
           <Reviews reviews={product.reviews} numReviews={product.numReviews} />
 
           <div className={styles.single_product_page__create_review}>
@@ -94,40 +94,52 @@ export async function getServerSideProps(context) {
 
     await db.connectDB();
 
-    const product = await Product.findOne({ slug })
-      .populate({ path: "category", model: Category })
-      .populate({ path: "subCategories", model: SubCategory })
-      .populate({ path: "reviews.reviewBy", model: User })
-      .lean()
-      .exec();
+    const [products, product] = await Promise.all([
+      Product.find({}).lean().exec(),
+      Product.findOne({ slug })
+        .populate({ path: "category", model: Category })
+        .populate({ path: "subCategories", model: SubCategory })
+        .populate({ path: "reviews.reviewBy", model: User })
+        .lean()
+        .exec(),
+    ]);
 
     const subProduct = product.subProducts[color];
-    const prices = subProduct.sizes.map((size) => size.price).sort((a, b) => a - b);
+    const { sizes, discount, _id: sku, images } = subProduct;
+
+    const prices = sizes.map((size) => size.price).sort((a, b) => a - b);
+    const colors = product.subProducts.map((subProduct) => subProduct.color);
+    const allSizes = product.subProducts
+      .map((product) => product.sizes)
+      .flat()
+      .sort((a, b) => a.size - b.size)
+      .filter(
+        (element, index, array) => array.findIndex((ele2) => ele2.size === element.size) === index
+      );
 
     const newProduct = {
       ...product,
-      images: subProduct.images,
-      sizes: subProduct.sizes,
-      discount: subProduct.discount,
-      sku: subProduct._id,
-      colors: product.subProducts.map((subProduct) => subProduct.color),
+      images,
+      sizes,
+      discount,
+      sku,
+      colors,
       priceRange: prices.length > 1 ? `From: ${prices[0]}$ to: ${prices[prices.length - 1]}$` : "",
-      priceBeforeDiscount: subProduct.sizes[size].price.toFixed(2),
-      price: calculateDiscountedPrice(subProduct.sizes[size], subProduct.discount),
-      quantity: subProduct.sizes[size].qty,
-      allSizes: product.subProducts
-        .map((product) => {
-          return product.sizes;
-        })
-        .flat()
-        .sort((a, b) => a.size - b.size)
-        .filter(
-          (element, index, array) => array.findIndex((ele2) => ele2.size === element.size) === index
-        ),
+      priceBeforeDiscount: sizes[size].price.toFixed(2),
+      price: calculateDiscountedPrice(sizes[size], discount),
+      quantity: sizes[size].qty,
+      allSizes,
     };
+
+    const productsWithSameCategory = products.filter(
+      (p) =>
+        p.category._id.toString() === newProduct.category._id.toString() &&
+        p._id.toString() !== product._id.toString()
+    );
 
     return {
       props: {
+        productsWithSameCategory: JSON.parse(JSON.stringify(productsWithSameCategory)),
         product: JSON.parse(JSON.stringify(newProduct)),
       },
     };
