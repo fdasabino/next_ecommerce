@@ -18,13 +18,31 @@ const OrderList = ({ orders }) => {
       <div className={styles.wrapper}>
         {orders.map((order) => {
           return (
-            <div className={styles.order} key={order._id}>
-              <div className={styles.order_heading}>
+            <div
+              style={
+                orderBtnSwitch === order._id
+                  ? { border: "1px solid #1191e730", borderRadius: "16px" }
+                  : null
+              }
+              className={styles.order}
+              key={order._id}
+            >
+              <div
+                style={
+                  orderBtnSwitch === order._id
+                    ? { background: "#1192e765", borderBottom: "1px solid #1191e730" }
+                    : null
+                }
+                className={styles.order_heading}
+              >
                 <div className={styles.order_id}>
                   <span>Order ID:</span> {order._id}
                 </div>
                 <div className={styles.order_date}>
                   <span>Order Date:</span> {order.createdAt.substring(0, 10)}
+                </div>
+                <div className={styles.order_coupon}>
+                  <span>Coupon:</span> {order.couponApplied}
                 </div>
                 <div className={styles.order_total}>
                   <span>Order Total:</span> ${order.total.toFixed(2)}
@@ -95,14 +113,14 @@ const OrderList = ({ orders }) => {
                       </div>
                       <div className={styles.delivery_info}>
                         <p>
-                          {order.shippingAddress.firstName} {order.shippingAddress.lastName},
+                          {order.shippingAddress.firstName} {order.shippingAddress.lastName}
                         </p>
-                        <p>{order.shippingAddress.phoneNumber},</p>
-                        <p>{order.shippingAddress.address1},</p>
-                        {order.shippingAddress.address2 && <p>{order.shippingAddress.address2},</p>}
-                        <p>{order.shippingAddress.state},</p>
-                        <p>{order.shippingAddress.city},</p>
-                        <p>{order.shippingAddress.zipCode},</p>
+                        <p>{order.shippingAddress.phoneNumber}</p>
+                        <p>{order.shippingAddress.address1}</p>
+                        {order.shippingAddress.address2 && <p>{order.shippingAddress.address2}</p>}
+                        <p>{order.shippingAddress.state}</p>
+                        <p>{order.shippingAddress.city}</p>
+                        <p>{order.shippingAddress.zipCode}</p>
                         <p>{order.shippingAddress.country}</p>
                       </div>
                     </div>

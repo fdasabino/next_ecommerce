@@ -9,7 +9,10 @@
     margin: 3rem 1.5rem 0 1.5rem;
 
     h2 {
+      display: flex;
+      align-items: center;
       color: $base-white;
+      gap: 0.5rem;
       font-size: 1.8rem;
       font-weight: 500;
       padding: 0 0.5rem;

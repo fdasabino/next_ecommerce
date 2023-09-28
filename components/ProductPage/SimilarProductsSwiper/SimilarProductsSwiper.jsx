@@ -1,5 +1,6 @@
 import ProductCard from "@/components/Home/ProductCard/ProductCard";
 import React from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./SimilarProductsSwiper.module.scss";
@@ -27,7 +28,9 @@ const SimilarProductsSwiper = ({ products, category }) => {
   return (
     <div className={styles.similar_product_swiper}>
       <div className={styles.similar_product_swiper__title}>
-        <h2>More in {category}</h2>
+        <h2>
+          <AiOutlinePlus /> {category}
+        </h2>
       </div>
 
       <Swiper

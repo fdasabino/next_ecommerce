@@ -41,7 +41,7 @@
         width: 100%;
         max-width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-gap: 0.5rem;
         place-items: center;
         justify-items: center;
@@ -62,7 +62,8 @@
 
         .order_date,
         .order_id,
-        .order_total {
+        .order_total,
+        .order_coupon {
           width: 100%;
           max-width: 100%;
           display: flex;
@@ -119,7 +120,6 @@
           place-items: center;
           justify-items: center;
           padding: 1rem;
-          background-color: rgba($color: $base-info, $alpha: 0.1);
           transition: all 0.3s ease-in-out;
 
           @media (max-width: 768px) {
@@ -159,47 +159,57 @@
           border-radius: 0 0 16px 16px;
 
           .order_details_body_heading {
-            padding: 1rem;
             text-align: center;
+            margin-top: 0.3rem;
 
             h2 {
               text-transform: uppercase;
               font-size: 1rem;
               font-weight: 600;
-              background-color: rgba($color: $base-info, $alpha: 0.1);
+              background-color: rgba($color: $base-info, $alpha: 0.3);
             }
           }
 
           .order_details_body_items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-            place-items: center;
-            justify-items: center;
-            padding: 1rem;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
             gap: 0.5rem;
+            margin-top: 0.3rem;
 
-            @media (max-width: 768px) {
-              grid-template-columns: repeat(auto-fit, minmax(1, auto));
-              place-items: start;
-            }
             .product {
               width: 100%;
               max-width: 100%;
               display: flex;
-              flex-direction: column;
+              justify-content: space-evenly;
               align-items: center;
               gap: 0.2rem;
-              border: 1px solid rgba($color: $base-dark-grey, $alpha: 0.2);
-              box-shadow: $base-shadow-3;
+              background-color: rgba($color: $base-info, $alpha: 0.2);
               padding: 1rem;
+              transition: all 0.2s ease-in-out;
+
+              &:hover {
+                box-shadow: $base-shadow-3;
+              }
+
+              @media (max-width: 600px) {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.5rem;
+              }
 
               .product_name,
               .product_price,
               .product_quantity,
               .product_size {
                 width: 100%;
-                max-width: 100%;
-                text-align: center;
+                max-width: 100px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 font-size: 0.7rem;
                 color: $base-dark;
                 text-transform: uppercase;
@@ -208,6 +218,13 @@
                 span {
                   font-weight: 600;
                   color: $base-dark;
+                }
+
+                @media (max-width: 600px) {
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 0.5rem;
+                  max-width: 100%;
                 }
               }
               .product_images {

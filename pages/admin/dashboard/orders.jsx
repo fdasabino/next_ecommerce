@@ -12,6 +12,8 @@ const AdminOrders = ({ user, orders }) => {
   const { pathname } = router;
   const path = pathname.split("/admin/dashboard")[1];
 
+  console.log(orders);
+
   return (
     <AdminLayout path={path} user={user}>
       <div className={styles.admin_orders}>
@@ -30,9 +32,10 @@ export async function getServerSideProps(context) {
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
     const orders = await Order.find({})
-      .populate({ path: "user", model: User })
+      .populate({ path: "user", model: User, select: "name email image" })
       .sort({ createdAt: -1 })
-      .lean();
+      .lean()
+      .exec();
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),
