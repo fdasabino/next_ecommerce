@@ -89,7 +89,7 @@
         .order_btn_switch {
           position: absolute;
           top: 4%;
-          right: -5px;
+          left: -15px;
           transform: translateY(-50%);
           transition: all 0.3s ease-in-out;
           cursor: pointer;
@@ -102,6 +102,32 @@
 
             padding: 0.5rem;
             border-radius: 50%;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+
+        .order_check {
+          position: absolute;
+          top: 40%;
+          right: 10px;
+          transform: translateY(-50%);
+          transition: all 0.3s ease-in-out;
+
+          svg {
+            font-size: 1.2rem;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+
+        .order_delivery {
+          position: absolute;
+          top: 70%;
+          right: 10px;
+          transform: translateY(-50%);
+          transition: all 0.3s ease-in-out;
+
+          svg {
+            font-size: 1.2rem;
             transition: all 0.3s ease-in-out;
           }
         }

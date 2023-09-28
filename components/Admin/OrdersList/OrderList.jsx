@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
-import { AiOutlineArrowUp } from "react-icons/ai";
+import { AiOutlineArrowUp, AiOutlineCheck, AiOutlineIssuesClose } from "react-icons/ai";
+import { MdAttachMoney, MdMoneyOffCsred } from "react-icons/md";
 import styles from "./OrderList.module.scss";
 
 const OrderList = ({ orders }) => {
@@ -53,6 +54,16 @@ const OrderList = ({ orders }) => {
                     onClick={() => openOrder(order._id)}
                     style={orderBtnSwitch === order._id ? { transform: "rotate(180deg)" } : ""}
                   />
+                </div>
+                <div className={styles.order_check}>
+                  {order.isPaid ? <MdAttachMoney color="green" /> : <MdMoneyOffCsred color="red" />}
+                </div>
+                <div className={styles.order_delivery}>
+                  {order.status === "Delivered" ? (
+                    <AiOutlineCheck color="green" />
+                  ) : (
+                    <AiOutlineIssuesClose color="red" />
+                  )}
                 </div>
               </div>
               {orderBtnSwitch === order._id && (
