@@ -1,3 +1,4 @@
+import Notifications from "@/components/Layout/Notifications/Notifications";
 import Hamburger from "hamburger-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -47,6 +48,7 @@ const AdminHeader = ({ toggleSidebar, isExpanded, user, path }) => {
           toggle={toggleSidebar}
           size={isSmall ? 16 : isMedium ? 20 : 24}
         />
+        <Notifications />
       </div>
     </div>
   );

@@ -11,6 +11,8 @@ const nextConfig = {
       "res.cloudinary.com",
       "ae01.alicdn.com",
       "img.ltwebstatic.com",
+      "randomuser.me",
+      "images.unsplash.com",
     ],
   },
   sassOptions: {
