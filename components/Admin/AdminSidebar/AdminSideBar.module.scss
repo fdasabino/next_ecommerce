@@ -7,10 +7,10 @@
   top: 0;
   transition: transform 0.3s linear; /* Change width to transform */
   overflow-y: auto;
-  padding-top: 1cqmax;
+  padding-top: 1rem;
   transform: translateX(-100%);
   box-shadow: $base-shadow-3;
-  z-index: 2;
+  z-index: 10;
 
   @media (max-width: 480px) {
     width: 100%;

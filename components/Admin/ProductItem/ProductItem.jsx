@@ -11,7 +11,10 @@ const ProductItem = ({ product, openId, toggleDetailsById }) => {
   return (
     <div className={styles.product}>
       <div className={styles.title}>
-        <h3>{product.name.length > 25 ? `${product.name.substring(0, 25)}...` : product.name}</h3>
+        <div className={styles.wrapper}>
+          <h3>{product.name.length > 30 ? `${product.name.substring(0, 30)}...` : product.name}</h3>
+          <span>({product?.subProducts?.length}) sub products</span>
+        </div>
         <Button
           style={!isActive ? "primary" : "danger"}
           onClick={() => toggleDetailsById(product._id)}
