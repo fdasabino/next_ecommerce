@@ -26,7 +26,7 @@ const AdminDashboard = ({ user, users, orders, products }) => {
   });
 
   const recentUsers = users.slice(0, 4);
-  const recentOrders = orders.slice(0, 5);
+  const recentOrders = orders.slice(0, 4);
 
   return (
     <AdminLayout path={path} user={user}>
