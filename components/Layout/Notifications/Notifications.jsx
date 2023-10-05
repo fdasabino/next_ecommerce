@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineBell } from "react-icons/ai";
 import styles from "./Notifications.module.scss";
-//-----------------------
+
 const Notifications = () => {
   const [show, setShow] = useState(false);
 
   const toggleShow = () => {
     setShow((prev) => !prev);
   };
+
   return (
     <div className={styles.dropdown} onClick={toggleShow}>
       <div className={styles.dropdown__svg}>
@@ -23,17 +24,17 @@ const Notifications = () => {
         <div className={styles.dropdown__content_notifications}>
           {notificationsData.map((n, i) => (
             <div key={i}>
-              {n.type == "order" ? (
-                <div className={styles.dropdown__content_notifications_notification} key={i}>
+              {n.type === "order" ? (
+                <div className={styles.dropdown__content_notifications_notification}>
                   <Image src={n.image} width={100} height={100} alt="" />
                   <p>
-                    <span>{n.user}</span> has created a new order, total of {n.total} $
+                    <span>{n.user}</span> created a new order. Total of ${n.total}
                   </p>
                 </div>
               ) : (
-                <div className={styles.dropdown__content_notifications_notification} key={i}>
+                <div className={styles.dropdown__content_notifications_notification}>
                   <Image src={n.image} width={100} height={100} alt="" />
-                  <span>{n.user}</span> new Account created.
+                  <span>{n.user}</span> created a new account
                 </div>
               )}
             </div>

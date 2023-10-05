@@ -14,41 +14,46 @@ const AdminHeader = ({ toggleSidebar, isExpanded, user, path }) => {
 
   return (
     <div className={styles.admin_header}>
-      <div className={styles.col}>
-        <div className={styles.user}>
-          <Image
-            src={user?.image || session?.user?.image}
-            width={300}
-            height={300}
-            alt={user?.name || session?.user?.name}
-          />
-          <div className={styles.user_info}>
-            <h4>
-              <span>
-                Welcome back, <br />
-              </span>{" "}
-              {user?.name || session?.user?.name}
-            </h4>
+      <div className={styles.top}>
+        <div className={styles.col}>
+          <div className={styles.user}>
+            <Image
+              src={user?.image || session?.user?.image}
+              width={300}
+              height={300}
+              alt={user?.name || session?.user?.name}
+            />
+            <div className={styles.user_info}>
+              <h4>
+                <span>
+                  Welcome back, <br />
+                </span>{" "}
+                {user?.name || session?.user?.name}
+              </h4>
+            </div>
           </div>
         </div>
-      </div>
-
-      {isLarge && (
+        {isLarge && (
+          <div className={styles.col}>
+            <h2>
+              <IoCogSharp />
+              {path.split("/")[path.split("/").length - 1]}
+            </h2>
+          </div>
+        )}
         <div className={styles.col}>
-          <h2>
-            <IoCogSharp />
-            {path.split("/")[path.split("/").length - 1]}
-          </h2>
+          <Hamburger
+            toggled={isExpanded}
+            toggle={toggleSidebar}
+            size={isSmall ? 16 : isMedium ? 20 : 24}
+          />
+          <Notifications />
         </div>
-      )}
-
-      <div className={styles.col}>
-        <Hamburger
-          toggled={isExpanded}
-          toggle={toggleSidebar}
-          size={isSmall ? 16 : isMedium ? 20 : 24}
-        />
-        <Notifications />
+      </div>
+      <div className={styles.bottom}>
+        <label htmlFor="admin_search">
+          <input id="admin_search" type="text" placeholder="Search here..." />
+        </label>
       </div>
     </div>
   );

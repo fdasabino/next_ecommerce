@@ -1,20 +1,22 @@
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
+import Order from "@/models/Order";
+import Product from "@/models/Product";
 import User from "@/models/User";
 import styles from "@/styles/pages/AdminDashboard.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const AdminDashboard = ({ user }) => {
+const AdminDashboard = ({ user, users, orders, products }) => {
   const router = useRouter();
   const { pathname } = router;
   const path = pathname;
 
+  console.log(orders);
+
   return (
     <AdminLayout path={path} user={user}>
-      <div className={styles.admin_dashboard}>
-        <h1>page under construction - apologies for any inconvenience</h1>
-      </div>
+      <div className={styles.admin_dashboard}></div>
     </AdminLayout>
   );
 };
@@ -27,9 +29,15 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
+    const users = await User.find({}).lean();
+    const orders = await Order.find().populate({ path: "user", model: User }).lean();
+    const products = await Product.find({}).lean();
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),
+        users: JSON.parse(JSON.stringify(users)),
+        orders: JSON.parse(JSON.stringify(orders)),
+        products: JSON.parse(JSON.stringify(products)),
       },
     };
   } catch (error) {
