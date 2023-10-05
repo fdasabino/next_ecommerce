@@ -3,9 +3,10 @@ import { AiFillMessage, AiOutlineClose } from "react-icons/ai";
 import { BsGraphUpArrow, BsPatchPlus } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
-import { IoListCircleSharp, IoNotificationsCircleSharp } from "react-icons/io5";
+import { IoNotificationsCircleSharp } from "react-icons/io5";
 import { MdOutlineCategory, MdSpaceDashboard } from "react-icons/md";
 import { RiCoupon3Fill, RiLogoutCircleFill, RiSettings2Fill } from "react-icons/ri";
+import { SlHandbag } from "react-icons/sl";
 import styles from "./AdminSideBar.module.scss";
 
 const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
@@ -31,7 +32,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
         </li>
         <li className={`${styles.nav_item} ${path === "/orders" ? styles.active : ""}`}>
           <Link onClick={toggleSidebar} href="/admin/dashboard/orders">
-            <IoListCircleSharp /> Orders
+            <SlHandbag /> Orders
           </Link>
         </li>
         <li className={`${styles.nav_item} ${path === "/users" ? styles.active : ""}`}>

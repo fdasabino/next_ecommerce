@@ -1,3 +1,4 @@
+import AdminCard from "@/components/Admin/AdminCard/AdminCard";
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
@@ -6,17 +7,32 @@ import styles from "@/styles/pages/AdminDashboard.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { FaThList } from "react-icons/fa";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { ImUsers } from "react-icons/im";
+import { SlHandbag } from "react-icons/sl";
 
 const AdminDashboard = ({ user, users, orders, products }) => {
   const router = useRouter();
   const { pathname } = router;
   const path = pathname;
 
-  console.log(orders);
+  const totalEarnings = orders.reduce((acc, order) => acc + order.total, 0);
+  const formattedEarnings = totalEarnings.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
   return (
     <AdminLayout path={path} user={user}>
-      <div className={styles.admin_dashboard}></div>
+      <div className={styles.admin_dashboard}>
+        <div className={styles.cards}>
+          <AdminCard icon={<GiTakeMyMoney />} title="Total earnings" count={formattedEarnings} />
+          <AdminCard icon={<ImUsers />} title="Users" count={users.length} />
+          <AdminCard icon={<SlHandbag />} title="Orders" count={orders.length} />
+          <AdminCard icon={<FaThList />} title="Products" count={products.length} />
+        </div>
+      </div>
     </AdminLayout>
   );
 };
