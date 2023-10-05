@@ -9,7 +9,6 @@ import { getSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import { FaThList } from "react-icons/fa";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { ImUsers } from "react-icons/im";
@@ -44,58 +43,63 @@ const AdminDashboard = ({ user, users, orders, products }) => {
 
         <div className={styles.data}>
           <div className={styles.heading}>
-            <h2>Recent Orders</h2>
-            <Link href={"/admin/dashboard/orders"}>View all</Link>
+            <h2>{orders.length > 0 ? "Recent Orders" : "No orders to show"}</h2>
+            {orders.length > 0 && <Link href={"/admin/dashboard/orders"}>View all</Link>}
           </div>
-          <div className={styles.orders}>
-            {recentOrders.map((order) => (
-              <div key={order._id} className={styles.order}>
-                <div className={styles.order_info}>
-                  <h4>{order.user.name}</h4>
-                  <p>{order.createdAt.substring(0, 10)}</p>
-                  <p>${order.total.toFixed(2)}</p>
-                  <p>{order.isPaid ? "Paid" : "Not Paid"}</p>
-                  <div
-                    className={`${styles.status} ${
-                      order.status == "Not Processed"
-                        ? styles.not_processed
-                        : order.status == "Processing"
-                        ? styles.processing
-                        : order.status == "Dispatched"
-                        ? styles.dispatched
-                        : order.status == "Cancelled"
-                        ? styles.cancelled
-                        : order.status == "Completed"
-                        ? styles.completed
-                        : ""
-                    }`}
-                  >
-                    {order.status}
-                  </div>
-                  <div className={styles.details}>
-                    <Link href={`/order/${order._id}`}>Details</Link>
+          {orders.length > 0 && (
+            <div className={styles.orders}>
+              {recentOrders.map((order) => (
+                <div key={order._id} className={styles.order}>
+                  <div className={styles.order_info}>
+                    <h4>{order.user.name}</h4>
+                    <p>{order.createdAt.substring(0, 10)}</p>
+                    <p>${order.total.toFixed(2)}</p>
+                    <p>{order.isPaid ? "Paid" : "Not Paid"}</p>
+                    <div
+                      className={`${styles.status} ${
+                        order.status == "Not Processed"
+                          ? styles.not_processed
+                          : order.status == "Processing"
+                          ? styles.processing
+                          : order.status == "Dispatched"
+                          ? styles.dispatched
+                          : order.status == "Cancelled"
+                          ? styles.cancelled
+                          : order.status == "Completed"
+                          ? styles.completed
+                          : ""
+                      }`}
+                    >
+                      {order.status}
+                    </div>
+                    <div className={styles.details}>
+                      <Link href={`/order/${order._id}`}>Details</Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+
           <div className={styles.heading}>
-            <h2>Recent Users</h2>
-            <Link href={"/admin/dashboard/users"}>View all</Link>
+            <h2>{users.length > 0 ? "Recent users" : "No users to show"}</h2>
+            {users.length > 0 && <Link href={"/admin/dashboard/users"}>View all</Link>}
           </div>
-          <div className={styles.users}>
-            {recentUsers.map((user) => (
-              <div key={user._id} className={styles.user}>
-                <div className={styles.user_image}>
-                  <Image src={user.image} alt={user.name} width={50} height={50} />
+          {users.length > 0 && (
+            <div className={styles.users}>
+              {recentUsers.map((user) => (
+                <div key={user._id} className={styles.user}>
+                  <div className={styles.user_image}>
+                    <Image src={user.image} alt={user.name} width={50} height={50} />
+                  </div>
+                  <div className={styles.user_details}>
+                    <h4>{user.name}</h4>
+                    <p>{user.email}</p>
+                  </div>
                 </div>
-                <div className={styles.user_details}>
-                  <h4>{user.name}</h4>
-                  <p>{user.email}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </AdminLayout>
