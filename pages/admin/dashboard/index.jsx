@@ -1,5 +1,7 @@
 import AdminCard from "@/components/Admin/AdminCard/AdminCard";
 import AdminLayout from "@/components/Admin/AdminLayout/AdminLayout";
+import AdminOrderCard from "@/components/Admin/AdminOrderCard/AdminOrderCard";
+import AdminUserCard from "@/components/Admin/AdminUserCard/AdminUserCard";
 import Order from "@/models/Order";
 import Product from "@/models/Product";
 import User from "@/models/User";
@@ -49,34 +51,7 @@ const AdminDashboard = ({ user, users, orders, products }) => {
           {orders.length > 0 && (
             <div className={styles.orders}>
               {recentOrders.map((order) => (
-                <div key={order._id} className={styles.order}>
-                  <div className={styles.order_info}>
-                    <h4>{order.user.name}</h4>
-                    <p>{order.createdAt.substring(0, 10)}</p>
-                    <p>${order.total.toFixed(2)}</p>
-                    <p>{order.isPaid ? "Paid" : "Not Paid"}</p>
-                    <div
-                      className={`${styles.status} ${
-                        order.status == "Not Processed"
-                          ? styles.not_processed
-                          : order.status == "Processing"
-                          ? styles.processing
-                          : order.status == "Dispatched"
-                          ? styles.dispatched
-                          : order.status == "Cancelled"
-                          ? styles.cancelled
-                          : order.status == "Completed"
-                          ? styles.completed
-                          : ""
-                      }`}
-                    >
-                      {order.status}
-                    </div>
-                    <div className={styles.details}>
-                      <Link href={`/order/${order._id}`}>Details</Link>
-                    </div>
-                  </div>
-                </div>
+                <AdminOrderCard key={order._id} order={order} />
               ))}
             </div>
           )}
@@ -88,15 +63,7 @@ const AdminDashboard = ({ user, users, orders, products }) => {
           {users.length > 0 && (
             <div className={styles.users}>
               {recentUsers.map((user) => (
-                <div key={user._id} className={styles.user}>
-                  <div className={styles.user_image}>
-                    <Image src={user.image} alt={user.name} width={50} height={50} />
-                  </div>
-                  <div className={styles.user_details}>
-                    <h4>{user.name}</h4>
-                    <p>{user.email}</p>
-                  </div>
-                </div>
+                <AdminUserCard key={user._id} user={user} />
               ))}
             </div>
           )}
@@ -115,11 +82,12 @@ export async function getServerSideProps(context) {
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
     const users = await User.find({}).sort({ createdAt: -1 }).lean();
+    const products = await Product.find({}).lean();
     const orders = await Order.find()
       .sort({ createdAt: -1 })
       .populate({ path: "user", model: User })
       .lean();
-    const products = await Product.find({}).lean();
+
     return {
       props: {
         user: JSON.parse(JSON.stringify(user)),
