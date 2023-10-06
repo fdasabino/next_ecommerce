@@ -47,12 +47,14 @@
 
   .status {
     width: 100%;
-    max-width: 100%;
+    max-width: fit-content;
     font-size: 0.8rem;
     font-weight: 500;
     z-index: 1;
     text-transform: uppercase;
     text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
   }
 
   .details {
@@ -66,10 +68,18 @@
     margin-top: 0.5rem;
 
     a {
-      padding: 0.5rem 1rem;
-      background-color: $base-blue;
-      color: #fff;
-      border-radius: 5px;
+      position: relative;
+      padding: 5px 10px;
+      border: 1px solid $base-info;
+      color: $base-info;
+      border-radius: 4px;
+      text-transform: uppercase;
+      transition: all 0.3s ease 0s;
+
+      &:hover {
+        background: $base-blue;
+        color: $base-white;
+      }
     }
   }
 
@@ -78,7 +88,7 @@
     width: 100%;
     padding-top: 100%;
     border-radius: 50%;
-    background-image: linear-gradient(to bottom right, $base-white, $base-success);
+    background-image: linear-gradient(to bottom right, $base-white, $base-dark-grey);
     position: absolute;
     top: 0;
     left: -50%;
@@ -90,20 +100,4 @@
       transform: scale(3);
     }
   }
-}
-
-.not_processed {
-  color: #e3503e;
-}
-.processing {
-  color: #54b7d3;
-}
-.dispatched {
-  color: #1e91cf;
-}
-.cancelled {
-  color: #e3d4d4;
-}
-.completed {
-  color: #4cb64c;
 }

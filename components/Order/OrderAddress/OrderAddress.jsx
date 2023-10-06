@@ -8,8 +8,17 @@ import styles from "./OrderAddress.module.scss";
 const OrderAddress = ({ order }) => {
   const { shippingAddress, user } = order;
   const router = useRouter();
+
+  console.log(user);
+
   const redirectToDashboard = () => {
-    router.push("/");
+    if (user.role === "admin") {
+      router.push("/admin/dashboard");
+      return;
+    } else {
+      router.push("/");
+      return;
+    }
   };
 
   return (
@@ -50,7 +59,8 @@ const OrderAddress = ({ order }) => {
                 Payment Status: <span>{order.paymentResult.status}</span>
               </p>
               <Button onClick={redirectToDashboard}>
-                Dashboard <MdOutlineSpaceDashboard />
+                {user.role === "admin" ? "Admin dashboard" : "Dashboard"}{" "}
+                <MdOutlineSpaceDashboard />
               </Button>
             </div>
           )}

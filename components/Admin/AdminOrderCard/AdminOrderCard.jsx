@@ -9,19 +9,33 @@ const AdminOrderCard = ({ order }) => {
       <p>${order.total.toFixed(2)}</p>
       <p>{order.isPaid ? "Paid" : "Not Paid"}</p>
       <div
-        className={`${styles.status} ${
-          order.status == "Not Processed"
-            ? styles.not_processed
-            : order.status == "Processing"
-            ? styles.processing
-            : order.status == "Dispatched"
-            ? styles.dispatched
-            : order.status == "Cancelled"
-            ? styles.cancelled
-            : order.status == "Completed"
-            ? styles.completed
-            : ""
-        }`}
+        style={{
+          color:
+            order.status == "Not Processed"
+              ? "#fff"
+              : order.status == "Processing"
+              ? "#000"
+              : order.status == "Dispatched"
+              ? "#fff"
+              : order.status == "Cancelled"
+              ? "#000"
+              : order.status == "Completed"
+              ? "#000"
+              : "",
+          backgroundColor:
+            order.status == "Not Processed"
+              ? "#ed4337"
+              : order.status == "Processing"
+              ? "#54b7d3"
+              : order.status == "Dispatched"
+              ? "#1e91cf"
+              : order.status == "Cancelled"
+              ? "#fac80f"
+              : order.status == "Completed"
+              ? "#6cc070"
+              : "",
+        }}
+        className={styles.status}
       >
         {order.status}
       </div>

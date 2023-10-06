@@ -17,18 +17,6 @@
       font-weight: 600;
       font-size: 1rem;
     }
-
-    a {
-      position: relative;
-      padding: 5px 10px;
-      background: $base-blue;
-      color: #fff;
-      border-radius: 4px;
-      text-transform: uppercase;
-      &:hover {
-        background: $base-blue;
-      }
-    }
   }
 
   .cards {
@@ -55,6 +43,7 @@
     padding: 0 1.5rem;
     display: grid;
     grid-template-columns: 2fr, 1fr;
+    gap: 1rem;
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
@@ -75,12 +64,14 @@
       a {
         position: relative;
         padding: 5px 10px;
-        background: $base-blue;
-        color: #fff;
+        border: 1px solid $base-info;
+        color: $base-info;
         border-radius: 4px;
         text-transform: uppercase;
+        transition: all 0.3s ease 0s;
         &:hover {
           background: $base-blue;
+          color: $base-white;
         }
       }
     }
