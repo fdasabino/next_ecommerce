@@ -5,11 +5,8 @@ import { BsPinMap } from "react-icons/bs";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import styles from "./OrderAddress.module.scss";
 
-const OrderAddress = ({ order }) => {
-  const { shippingAddress, user } = order;
+const OrderAddress = ({ order, user }) => {
   const router = useRouter();
-
-  console.log(user);
 
   const redirectToDashboard = () => {
     if (user.role === "admin") {
@@ -32,20 +29,20 @@ const OrderAddress = ({ order }) => {
         <div className={styles.body__text}>
           <div className={styles.left}>
             <div className={styles.image}>
-              <Image src={user.image} width={200} height={200} alt={user.name} />
+              <Image src={order.user.image} width={200} height={200} alt={user.name} />
             </div>
-            <div className="">
+            <div>
               <p>
-                {shippingAddress.firstName} {shippingAddress.lastName}
+                {order.shippingAddress.firstName} {order.shippingAddress.lastName}
               </p>
-              <p>{user.email}</p>
-              <p>{shippingAddress.phoneNumber}</p>
+              <p>{order.user.email}</p>
+              <p>{order.shippingAddress.phoneNumber}</p>
               <p>
-                {shippingAddress.address1}, {shippingAddress.zipCode}
+                {order.shippingAddress.address1}, {order.shippingAddress.zipCode}
               </p>
-              {shippingAddress.address2 && <p>{shippingAddress.address2}</p>}
+              {order.shippingAddress.address2 && <p>{order.shippingAddress.address2}</p>}
               <p>
-                {shippingAddress.city}, {shippingAddress.country}
+                {order.shippingAddress.city}, {order.shippingAddress.country}
               </p>
               <small>Billing and delivery address are the same *</small>
             </div>
