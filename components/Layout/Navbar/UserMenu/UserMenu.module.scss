@@ -45,6 +45,16 @@
       font-weight: 500;
       color: $base-dark;
       cursor: default;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      svg {
+        fill: $base-orange;
+        stroke: $base-orange;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
     }
 
     small {

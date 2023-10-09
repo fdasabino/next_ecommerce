@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { RiAdminLine } from "react-icons/ri";
 import { toast } from "react-toastify";
 import Button from "../../Button/Button";
 import styles from "./UserMenu.module.scss";
@@ -41,6 +42,7 @@ const UserMenu = (props) => {
           <div className={styles.col}>
             <span>
               {user?.role === "user" ? ` Welcome back, \n ${user?.name}!` : "Hello Admin"}
+              {user?.role === "admin" && <RiAdminLine />}
             </span>
             <small>{session?.user.email}</small>
             <Button onClick={handleSignOut} style="danger">
