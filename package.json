@@ -34,7 +34,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.6.0",
     "mongoose": "^7.2.2",
-    "next": "13.4.4",
+    "next": "^13.5.4",
     "next-auth": "^4.22.1",
     "next-connect": "^0.12.1",
     "next-redux-wrapper": "^8.1.0",
