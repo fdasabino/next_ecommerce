@@ -8,7 +8,6 @@ import User from "@/models/User";
 import styles from "@/styles/pages/AdminDashboard.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaThList } from "react-icons/fa";
