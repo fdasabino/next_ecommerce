@@ -24,7 +24,7 @@ export const config = {
 const handler = nc()
   .use(adminMiddleware)
   .use(authMiddleware)
-  .use(fileUpload({ useTempFiles: true }))
+  .use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }))
   .use(bodyParser.json())
   .use(imageMiddleware);
 
