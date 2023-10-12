@@ -36,6 +36,7 @@
     opacity: 0.5;
     cursor: not-allowed;
     touch-action: none;
+    box-shadow: none;
   }
 
   @media (max-width: 768px) {
@@ -73,6 +74,7 @@
     &:disabled {
       background-color: $bgColor;
       box-shadow: none;
+      transform: none;
     }
   }
 

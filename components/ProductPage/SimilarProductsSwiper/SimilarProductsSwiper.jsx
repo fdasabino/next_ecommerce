@@ -7,21 +7,17 @@ import styles from "./SimilarProductsSwiper.module.scss";
 
 const SimilarProductsSwiper = ({ products, category }) => {
   const breakpoints = {
-    400: {
+    480: {
       slidesPerView: 2,
       spaceBetween: 10,
     },
-    600: {
-      slidesPerView: 3,
-      spaceBetween: 10,
-    },
     768: {
-      slidesPerView: 4,
-      spaceBetween: 10,
+      slidesPerView: 3,
+      spaceBetween: 15,
     },
-    900: {
-      slidesPerView: 6,
-      spaceBetween: 20,
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 30,
     },
   };
 
@@ -36,7 +32,6 @@ const SimilarProductsSwiper = ({ products, category }) => {
       <Swiper
         slidesPerView={1}
         grabCursor
-        spaceBetween={30}
         breakpoints={breakpoints}
         navigation
         modules={[Navigation]}
