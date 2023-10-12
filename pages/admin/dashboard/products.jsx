@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
   try {
     const user = await User.findOne({ _id: session.user._id }).lean();
     const products = await Product.find({})
-      .sort({ createdAt: -1 })
+      .sort({ name: 1 })
       .populate("category")
       .populate({ path: "subCategories", model: SubCategory })
       .lean()
