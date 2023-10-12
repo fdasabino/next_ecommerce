@@ -38,6 +38,7 @@ handler.post(async (req, res) => {
       images.push(img);
       removeTmp(file.tempFilePath);
     }
+    console.log("Uploaded images:", images); // Log the uploaded images
     res.status(200).json({ message: "Images uploaded successfully", images });
   } catch (error) {
     return res.status(500).json({ message: error.message });
