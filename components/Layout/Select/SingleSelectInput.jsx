@@ -37,15 +37,17 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
           <MenuItem style={{ fontFamily: "Mulish", fontSize: "0.9rem" }} key="" value="">
             {placeholder}
           </MenuItem>
-          {data.map((option) => (
-            <MenuItem
-              style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
-              key={option._id}
-              value={option._id || option.name}
-            >
-              {option.name}
-            </MenuItem>
-          ))}
+          {data
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((option) => (
+              <MenuItem
+                style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
+                key={option._id}
+                value={option._id || option.name}
+              >
+                {option.name}
+              </MenuItem>
+            ))}
         </Select>
       </FormControl>
     </>
