@@ -56,6 +56,10 @@ const ProductCard = ({ product }) => {
                   <Image
                     key={index}
                     className={index === active ? styles.active : ""}
+                    onTouchStart={() => {
+                      setImages(product.subProducts[index].images);
+                      setActive(index);
+                    }}
                     onMouseOver={() => {
                       setImages(product.subProducts[index].images);
                       setActive(index);

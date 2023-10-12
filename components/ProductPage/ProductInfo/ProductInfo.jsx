@@ -240,6 +240,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
             {sizes &&
               sizes.map((s, i) => (
                 <Link
+                  onTouchStart={() => setSelectedSize(i)}
                   onClick={() => setSelectedSize(i)}
                   key={i}
                   href={`/product/${slug}?color=${color}&size=${i}`}
@@ -260,11 +261,11 @@ const ProductInfo = ({ product, setActiveImage }) => {
         <div className={styles.product_info__add_to_cart}>
           <h5>Select Quantity:</h5>
           <div className={styles.wrapper}>
-            <button onClick={decreaseCartQuantity}>
+            <button onClick={decreaseCartQuantity} onTouchStart={decreaseCartQuantity}>
               <TbMinus />
             </button>
             <span>{cartQuantity}</span>
-            <button onClick={increaseCartQuantity}>
+            <button onClick={increaseCartQuantity} onTouchStart={increaseCartQuantity}>
               <TbPlus />
             </button>
           </div>
