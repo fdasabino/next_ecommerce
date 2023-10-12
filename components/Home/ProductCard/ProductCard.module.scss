@@ -1,9 +1,14 @@
 .product_card {
   position: relative;
   width: 100%;
-  max-width: 170px;
+  max-width: 180px;
   height: fit-content;
   margin: 1rem 0;
+
+  @media (max-width: 830px) {
+    max-width: 150px;
+    margin: 0.5rem;
+  }
 
   &__info {
     width: 100%;
@@ -28,11 +33,15 @@
   }
 
   &__colors {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: -30px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.8rem;
     transition: all 0.3s linear;
+    z-index: 5;
 
     img {
       width: 1.5rem;

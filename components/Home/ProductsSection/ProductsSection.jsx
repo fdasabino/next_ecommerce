@@ -1,5 +1,5 @@
 import { BsFillBagHeartFill } from "react-icons/bs";
-import { Autoplay, Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard from "../ProductCard/ProductCard";
 import styles from "./ProductsSection.module.scss";
@@ -13,8 +13,8 @@ const ProductsSection = ({ products, category }) => {
       </div>
       <div className={styles.products_section__swiper_wrapper}>
         <Swiper
-          slidesPerView={2}
-          spaceBetween={10}
+          slidesPerView={1}
+          spaceBetween={0}
           grabCursor={true}
           navigation={true}
           autoplay={{
@@ -28,17 +28,17 @@ const ProductsSection = ({ products, category }) => {
             },
             768: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: 15,
             },
             1024: {
-              slidesPerView: 5,
-              spaceBetween: 30,
+              slidesPerView: 4,
+              spaceBetween: 20,
             },
           }}
           pagination={{
             dynamicBullets: true,
           }}
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Navigation, Pagination]}
           className={styles.flash_deals_swiper}
         >
           {products

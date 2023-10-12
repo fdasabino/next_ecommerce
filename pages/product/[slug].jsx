@@ -120,6 +120,18 @@ export async function getServerSideProps(context) {
         (element, index, array) => array.findIndex((ele2) => ele2.size === element.size) === index
       );
 
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    });
+
+    const formattedPrices =
+      prices.length === 1
+        ? formatter.format(prices[0])
+        : prices[0] === prices[prices.length - 1]
+        ? formatter.format(prices[0])
+        : `${formatter.format(prices[0])} to ${formatter.format(prices[prices.length - 1])}`;
+
     const newProduct = {
       ...product,
       images,
@@ -127,7 +139,7 @@ export async function getServerSideProps(context) {
       discount,
       sku,
       colors,
-      priceRange: prices.length > 1 ? `From: ${prices[0]}$ to: ${prices[prices.length - 1]}$` : "",
+      priceRange: formattedPrices,
       priceBeforeDiscount: sizes[size].price.toFixed(2),
       price: calculateDiscountedPrice(sizes[size], discount),
       quantity: sizes[size].qty,

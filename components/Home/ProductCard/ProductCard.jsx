@@ -18,6 +18,18 @@ const ProductCard = ({ product }) => {
     setColors(product.subProducts.map((subProduct) => subProduct.color));
   }, [active, product.subProducts, setPrices]);
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  const formattedPrices =
+    prices.length === 1
+      ? formatter.format(prices[0])
+      : prices[0] === prices[prices.length - 1]
+      ? formatter.format(prices[0])
+      : `${formatter.format(prices[0])} to ${formatter.format(prices[prices.length - 1])}`;
+
   return (
     <div className={styles.product_card}>
       <div className={styles.product_card__container}>
@@ -35,13 +47,7 @@ const ProductCard = ({ product }) => {
 
         <div className={styles.product_card__info}>
           <h2>{product.name.length > 20 ? `${product.name.substring(0, 20)}...` : product.name}</h2>
-          <span>
-            {prices.length === 1
-              ? prices[0].toLocaleString() + "$"
-              : `from ${prices[0].toLocaleString()}$ to  ${prices[
-                  prices.length - 1
-                ].toLocaleString()}$`}
-          </span>
+          <span>{formattedPrices}</span>
 
           <div className={styles.product_card__colors}>
             {colors &&

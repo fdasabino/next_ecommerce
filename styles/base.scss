@@ -31,6 +31,10 @@ $base-button-transition: all 1s linear;
   max-width: 1400px;
   margin: 0 auto;
   padding: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
 }
 
 .mx_4 {
@@ -47,13 +51,12 @@ $base-button-transition: all 1s linear;
   .swiper-button-prev,
   .swiper-button-next {
     position: absolute;
-    top: 50% !important;
+    top: 90% !important;
     transition: all 0.2s ease-in-out 0s !important;
     width: 50px !important;
     height: 50px !important;
     color: $base-dark !important;
     background-color: rgba(0, 0, 0, 0) !important;
-    border-radius: 50% !important;
     scale: 0.5 !important;
 
     &:hover {
