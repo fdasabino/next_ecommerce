@@ -11,11 +11,11 @@ const CartSwiper = ({ similarProducts }) => {
       spaceBetween: 10,
     },
     768: {
-      slidesPerView: 4,
-      spaceBetween: 10,
+      slidesPerView: 3,
+      spaceBetween: 15,
     },
-    900: {
-      slidesPerView: 6,
+    1024: {
+      slidesPerView: 4,
       spaceBetween: 20,
     },
   };
