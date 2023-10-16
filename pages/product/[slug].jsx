@@ -20,8 +20,10 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product, productsWithSameCategory }) => {
+  const [reviews, setReviews] = useState(product.reviews);
   const [activeImage, setActiveImage] = useState("");
   const { data: session } = useSession();
+  console.log(reviews);
 
   const signInRedirect = () => {
     signIn();
@@ -58,11 +60,11 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
             products={productsWithSameCategory}
             category={product?.category.name}
           />
-          <Reviews reviews={product.reviews} numReviews={product.numReviews} />
+          <Reviews reviews={reviews} numReviews={product.numReviews} />
 
           <div className={styles.single_product_page__create_review}>
             {session ? (
-              <CreateReview product={product} />
+              <CreateReview product={product} setReviews={setReviews} />
             ) : (
               <div className={styles.not_signed_in}>
                 {product.reviews.length === 0 && (
