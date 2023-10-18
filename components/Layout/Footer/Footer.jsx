@@ -1,4 +1,5 @@
 import { footerLinks } from "@/constants";
+import { IconButton, Tooltip } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { BiMailSend } from "react-icons/bi";
@@ -106,7 +107,13 @@ const Footer = () => {
           <p> ShoppyFlow© {new Date().getUTCFullYear()} All Rights Reserved</p>
         </div>
       </div>
-      <GoMoveToTop className={styles.back_to_top} onClick={scrollToTop} />
+      <div className={styles.back_to_top}>
+        <Tooltip title="Back to top" placement="left" arrow>
+          <IconButton>
+            <GoMoveToTop onClick={scrollToTop} />
+          </IconButton>
+        </Tooltip>
+      </div>
     </footer>
   );
 };
