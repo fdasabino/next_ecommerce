@@ -1,5 +1,5 @@
 import Button from "@/components/Layout/Button/Button";
-import DotLoader from "@/components/Layout/DotLoader/DotLoader";
+import Loader from "@/components/Layout/Loader/Loader";
 import Path from "@/components/Layout/Path/Path";
 import CreateReview from "@/components/ProductPage/CreateReview/CreateReview";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
@@ -62,7 +62,7 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
             category={product?.category.name}
           />
           {loading ? (
-            <DotLoader />
+            <Loader />
           ) : (
             <>
               <Reviews reviews={reviews} numReviews={product.numReviews} />

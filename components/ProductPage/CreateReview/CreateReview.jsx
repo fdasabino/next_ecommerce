@@ -11,6 +11,7 @@ import Select from "../Select/Select";
 import styles from "./CreateReview.module.scss";
 
 const CreateReview = ({ product, setReviews, setLoading }) => {
+  console.log(product);
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [fit, setFit] = useState("");
@@ -118,6 +119,7 @@ const CreateReview = ({ product, setReviews, setLoading }) => {
 
       // send review data to server
       const res = await axios.put(`/api/product/${product._id}/review`, reviewData);
+      console.log(res.data);
       if (res.data) {
         setReviews(res.data.reviews);
         toast.success(res.data.message);
@@ -128,6 +130,7 @@ const CreateReview = ({ product, setReviews, setLoading }) => {
         setRating(0);
         setImages([]);
       }
+      window.location.reload(false);
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
@@ -136,7 +139,7 @@ const CreateReview = ({ product, setReviews, setLoading }) => {
     }
   };
 
-  useEffect(() => {}, [rating]);
+  useEffect(() => {}, [rating, product.reviews, product.numReviews]);
 
   return (
     <div className={styles.create_review}>
