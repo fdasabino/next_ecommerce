@@ -61,37 +61,33 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
             products={productsWithSameCategory}
             category={product?.category.name}
           />
-          {loading ? <DotLoader /> : <Reviews reviews={reviews} numReviews={product.numReviews} />}
-          <div className={styles.single_product_page__create_review}>
-            {session ? (
-              <>
-                {loading ? (
-                  <DotLoader />
-                ) : (
+          {loading ? (
+            <DotLoader />
+          ) : (
+            <>
+              <Reviews reviews={reviews} numReviews={product.numReviews} />
+              <div className={styles.single_product_page__create_review}>
+                {session ? (
                   <CreateReview product={product} setReviews={setReviews} setLoading={setLoading} />
+                ) : (
+                  <div className={styles.not_signed_in}>
+                    {product.reviews.length === 0 && (
+                      <h2>
+                        Be the first to review this product <BsChatLeftQuote />
+                      </h2>
+                    )}
+                    <Button onClick={signInRedirect} style="primary">
+                      Sign in to write a review <AiOutlineArrowRight />
+                    </Button>
+                  </div>
                 )}
-              </>
-            ) : (
-              <div className={styles.not_signed_in}>
-                {product.reviews.length === 0 && (
-                  <h2>
-                    Be the first to review this product <BsChatLeftQuote />
-                  </h2>
-                )}
-                <Button onClick={signInRedirect} style="primary">
-                  Sign in to write a review <AiOutlineArrowRight />
-                </Button>
               </div>
-            )}
-          </div>
-          {product.reviews.length > 0 && (
-            <div className={styles.single_product_page__review_table}>
-              {loading ? (
-                <DotLoader />
-              ) : (
-                <ReviewTable reviews={reviews} productName={product.name} />
+              {product.reviews.length > 0 && (
+                <div className={styles.single_product_page__review_table}>
+                  <ReviewTable reviews={reviews} productName={product.name} />
+                </div>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
