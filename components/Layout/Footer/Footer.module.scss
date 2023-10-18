@@ -1,4 +1,5 @@
 .footer {
+  position: relative;
   background: url("/svgs/world_map.svg");
   background-color: $base-grey;
   background-position: 50% 100%;
@@ -215,6 +216,30 @@
         text-align: center;
         color: $base-dark;
       }
+    }
+  }
+  .back_to_top {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    z-index: 999;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: $base-white;
+    }
+
+    &:hover {
+      background-color: rgba($color: $base-info, $alpha: 0.2);
     }
   }
 }

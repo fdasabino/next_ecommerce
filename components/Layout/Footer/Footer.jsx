@@ -14,12 +14,18 @@ import {
   FaTwitter,
   FaWhatsapp,
 } from "react-icons/fa";
+import { GoMoveToTop } from "react-icons/go";
 import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {
   const country = useSelector((state) => state.country);
+
+  // back to top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className={styles.footer}>
@@ -100,6 +106,7 @@ const Footer = () => {
           <p> ShoppyFlow© {new Date().getUTCFullYear()} All Rights Reserved</p>
         </div>
       </div>
+      <GoMoveToTop className={styles.back_to_top} onClick={scrollToTop} />
     </footer>
   );
 };
