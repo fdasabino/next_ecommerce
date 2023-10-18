@@ -1,4 +1,5 @@
 import Button from "@/components/Layout/Button/Button";
+import DotLoader from "@/components/Layout/DotLoader/DotLoader";
 import Path from "@/components/Layout/Path/Path";
 import CreateReview from "@/components/ProductPage/CreateReview/CreateReview";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
@@ -20,10 +21,10 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product, productsWithSameCategory }) => {
+  const [loading, setLoading] = useState(false);
   const [reviews, setReviews] = useState(product.reviews);
   const [activeImage, setActiveImage] = useState("");
   const { data: session } = useSession();
-  console.log(reviews);
 
   const signInRedirect = () => {
     signIn();
@@ -60,11 +61,16 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
             products={productsWithSameCategory}
             category={product?.category.name}
           />
-          <Reviews reviews={reviews} numReviews={product.numReviews} />
-
+          {loading ? <DotLoader /> : <Reviews reviews={reviews} numReviews={product.numReviews} />}
           <div className={styles.single_product_page__create_review}>
             {session ? (
-              <CreateReview product={product} setReviews={setReviews} />
+              <>
+                {loading ? (
+                  <DotLoader />
+                ) : (
+                  <CreateReview product={product} setReviews={setReviews} setLoading={setLoading} />
+                )}
+              </>
             ) : (
               <div className={styles.not_signed_in}>
                 {product.reviews.length === 0 && (
@@ -80,7 +86,11 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
           </div>
           {product.reviews.length > 0 && (
             <div className={styles.single_product_page__review_table}>
-              <ReviewTable reviews={product.reviews} productName={product.name} />
+              {loading ? (
+                <DotLoader />
+              ) : (
+                <ReviewTable reviews={reviews} productName={product.name} />
+              )}
             </div>
           )}
         </div>

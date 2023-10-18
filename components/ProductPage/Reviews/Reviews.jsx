@@ -1,4 +1,5 @@
 import { Rating } from "@mui/material";
+import { useEffect } from "react";
 import styles from "./Reviews.module.scss";
 
 const Reviews = ({ reviews, numReviews }) => {
@@ -6,10 +7,9 @@ const Reviews = ({ reviews, numReviews }) => {
   let averageRating = 0;
   if (Array.isArray(reviews) && reviews.length > 0) {
     arrayOfRatings = reviews.map((review) => review.rating);
-    averageRating = arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length;
-    console.log(averageRating);
-  } else {
-    console.log("No reviews or invalid data.");
+    averageRating = (
+      arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length
+    ).toFixed(1);
   }
 
   const countReviews = (ratings) => {
@@ -56,6 +56,8 @@ const Reviews = ({ reviews, numReviews }) => {
   const reviewCount = countReviews(arrayOfRatings);
   const ratingPercentage = calculateRatingPercentage(arrayOfRatings);
 
+  useEffect(() => {}, [reviews.length, numReviews]);
+
   return (
     <div className={styles.reviews}>
       <div className={styles.reviews__title}>
@@ -69,8 +71,8 @@ const Reviews = ({ reviews, numReviews }) => {
               <Rating
                 precision={0.5}
                 name="half-rating-read"
-                defaultValue={averageRating}
-                value={averageRating}
+                defaultValue={Number(averageRating)}
+                value={Number(averageRating)}
                 readOnly
               />
             )}
