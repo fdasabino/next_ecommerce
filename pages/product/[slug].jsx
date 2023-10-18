@@ -1,4 +1,5 @@
 import Button from "@/components/Layout/Button/Button";
+import Loader from "@/components/Layout/Loader/Loader";
 import Path from "@/components/Layout/Path/Path";
 import CreateReview from "@/components/ProductPage/CreateReview/CreateReview";
 import ProductInfo from "@/components/ProductPage/ProductInfo/ProductInfo";
@@ -20,6 +21,8 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product, productsWithSameCategory }) => {
+  const [loading, setLoading] = useState(false);
+  const [reviews, setReviews] = useState(product.reviews);
   const [activeImage, setActiveImage] = useState("");
   const { data: session } = useSession();
 
@@ -58,28 +61,33 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
             products={productsWithSameCategory}
             category={product?.category.name}
           />
-          <Reviews reviews={product.reviews} numReviews={product.numReviews} />
-
-          <div className={styles.single_product_page__create_review}>
-            {session ? (
-              <CreateReview product={product} />
-            ) : (
-              <div className={styles.not_signed_in}>
-                {product.reviews.length === 0 && (
-                  <h2>
-                    Be the first to review this product <BsChatLeftQuote />
-                  </h2>
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <Reviews reviews={reviews} numReviews={product.numReviews} />
+              <div className={styles.single_product_page__create_review}>
+                {session ? (
+                  <CreateReview product={product} setReviews={setReviews} setLoading={setLoading} />
+                ) : (
+                  <div className={styles.not_signed_in}>
+                    {product.reviews.length === 0 && (
+                      <h2>
+                        Be the first to review this product <BsChatLeftQuote />
+                      </h2>
+                    )}
+                    <Button onClick={signInRedirect} style="primary">
+                      Sign in to write a review <AiOutlineArrowRight />
+                    </Button>
+                  </div>
                 )}
-                <Button onClick={signInRedirect} style="primary">
-                  Sign in to write a review <AiOutlineArrowRight />
-                </Button>
               </div>
-            )}
-          </div>
-          {product.reviews.length > 0 && (
-            <div className={styles.single_product_page__review_table}>
-              <ReviewTable reviews={product.reviews} productName={product.name} />
-            </div>
+              {product.reviews.length > 0 && (
+                <div className={styles.single_product_page__review_table}>
+                  <ReviewTable reviews={reviews} productName={product.name} />
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

@@ -1,11 +1,16 @@
 import { Rating } from "@mui/material";
+import { useEffect } from "react";
 import styles from "./Reviews.module.scss";
 
 const Reviews = ({ reviews, numReviews }) => {
-  const arrayOfRatings = reviews.map((review) => review.rating);
-
-  const averageRating =
-    arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length || 0;
+  let arrayOfRatings = [];
+  let averageRating = 0;
+  if (Array.isArray(reviews) && reviews.length > 0) {
+    arrayOfRatings = reviews.map((review) => review.rating);
+    averageRating = (
+      arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length
+    ).toFixed(1);
+  }
 
   const countReviews = (ratings) => {
     const reviewCount = {
@@ -51,21 +56,23 @@ const Reviews = ({ reviews, numReviews }) => {
   const reviewCount = countReviews(arrayOfRatings);
   const ratingPercentage = calculateRatingPercentage(arrayOfRatings);
 
+  useEffect(() => {}, [reviews.length, numReviews]);
+
   return (
     <div className={styles.reviews}>
       <div className={styles.reviews__title}>
-        <h2>Customer Reviews ({numReviews || reviews.length})</h2>
+        <h2>Customer Reviews ({numReviews})</h2>
       </div>
       <div className={styles.reviews__stats}>
         <div className={styles.stats_overview}>
-          {reviews.length > 0 && <span>Average Rating</span>}
+          {reviews && reviews.length > 0 && <span>Average Rating</span>}
           <div className={styles.overview_rating}>
             {averageRating > 0 && (
               <Rating
                 precision={0.5}
                 name="half-rating-read"
-                defaultValue={averageRating}
-                value={averageRating}
+                defaultValue={Number(averageRating)}
+                value={Number(averageRating)}
                 readOnly
               />
             )}
@@ -73,7 +80,7 @@ const Reviews = ({ reviews, numReviews }) => {
           </div>
         </div>
         {/* Breakdown of reviews by star rating */}
-        {reviews.length > 0 && (
+        {reviews && reviews.length > 0 && (
           <div className={styles.reviews__stats_breakdown}>
             <div className={styles.breakdown_left}>
               {Object.entries(reviewCount)

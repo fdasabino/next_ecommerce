@@ -1,5 +1,8 @@
 import Button from "@/components/Layout/Button/Button";
+import dataURItoBlob from "@/utils/dataURItoBlob";
+import { uploadImage } from "@/utils/imagesUpload";
 import { Rating } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -7,7 +10,8 @@ import ImageUpload from "../ImageUpload/ImageUpload";
 import Select from "../Select/Select";
 import styles from "./CreateReview.module.scss";
 
-const CreateReview = ({ product }) => {
+const CreateReview = ({ product, setReviews, setLoading }) => {
+  console.log(product);
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [fit, setFit] = useState("");
@@ -15,6 +19,7 @@ const CreateReview = ({ product }) => {
   const [rating, setRating] = useState(0);
   const [images, setImages] = useState([]);
   const fits = ["small", "perfect", "large"];
+  let uploadedImages = [];
 
   const handleSize = (size) => {
     setSize(size);
@@ -72,7 +77,69 @@ const CreateReview = ({ product }) => {
     setImages(images.filter((x) => x !== image));
   };
 
-  useEffect(() => {}, [rating]);
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    try {
+      let msgs = [];
+      // validation
+      if (!review) msgs.push({ msg: "Review is required", type: "error" });
+      if (!rating) msgs.push({ msg: "Rating is required", type: "error" });
+      if (!color) msgs.push({ msg: "Color is required", type: "error" });
+      if (!size) msgs.push({ msg: "Size is required", type: "error" });
+      if (!fit) msgs.push({ msg: "Fit is required", type: "error" });
+      if (images.length === 0)
+        msgs.push({ msg: "You need to upload at least one image", type: "error" });
+      if (msgs.length > 0) {
+        msgs.forEach((msg) => toast[msg.type](msg.msg));
+        return;
+      }
+
+      // upload images
+      if (images.length > 0) {
+        let temp = images.map((image) => {
+          return dataURItoBlob(image);
+        });
+        const path = "review images";
+        const formData = new FormData();
+        formData.append("path", path);
+        temp.forEach((image) => formData.append("file", image));
+        uploadedImages = await uploadImage(formData);
+      }
+
+      // create review data
+      const reviewData = {
+        review,
+        rating,
+        color,
+        size,
+        fit,
+        images: uploadedImages.images,
+      };
+
+      // send review data to server
+      const res = await axios.put(`/api/product/${product._id}/review`, reviewData);
+      console.log(res.data);
+      if (res.data) {
+        setReviews(res.data.reviews);
+        toast.success(res.data.message);
+        setSize("");
+        setColor("");
+        setFit("");
+        setReview("");
+        setRating(0);
+        setImages([]);
+      }
+      window.location.reload(false);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {}, [rating, product.reviews, product.numReviews]);
 
   return (
     <div className={styles.create_review}>
@@ -118,7 +185,11 @@ const CreateReview = ({ product }) => {
               onChange={handleRating}
               precision={1}
             />
-            <Button disabled={!review || !rating || !color || !fit || !size} style="tertiary">
+            <Button
+              disabled={!review || !rating || !color || !fit || !size || images.length === 0}
+              style="tertiary"
+              onClick={handleSubmit}
+            >
               Submit review <AiOutlineArrowRight />
             </Button>
           </div>
