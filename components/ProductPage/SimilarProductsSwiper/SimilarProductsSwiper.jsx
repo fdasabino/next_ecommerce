@@ -1,7 +1,7 @@
 import ProductCard from "@/components/Home/ProductCard/ProductCard";
 import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { Navigation } from "swiper";
+import { Mousewheel, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./SimilarProductsSwiper.module.scss";
 
@@ -17,7 +17,7 @@ const SimilarProductsSwiper = ({ products, category }) => {
     },
     1024: {
       slidesPerView: 4,
-      spaceBetween: 30,
+      spaceBetween: 50,
     },
   };
 
@@ -31,10 +31,12 @@ const SimilarProductsSwiper = ({ products, category }) => {
 
       <Swiper
         slidesPerView={1}
-        grabCursor
+        grabCursor={true}
+        mousewheel={true}
         breakpoints={breakpoints}
-        navigation
-        modules={[Navigation]}
+        navigation={true}
+        pagination={{ dynamicBullets: true }}
+        modules={[Navigation, Pagination, Mousewheel]}
         className={styles.similar_product_swiper__container}
       >
         {products.map((product) => (

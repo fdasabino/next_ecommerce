@@ -7,7 +7,7 @@ import { TbMinus, TbPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { toast } from "react-toastify";
-import { Navigation } from "swiper";
+import { Mousewheel, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./CartItem.module.scss";
 
@@ -110,6 +110,8 @@ const CartItem = ({ cartProducts }) => {
       <div className={styles.images}>
         <Swiper
           grabCursor={true}
+          mousewheel={true}
+          pagination={{ dynamicBullets: true }}
           navigation={isLargeScreen ? false : true}
           breakpoints={{
             380: {
@@ -129,7 +131,7 @@ const CartItem = ({ cartProducts }) => {
               spaceBetween: 20,
             },
           }}
-          modules={[Navigation]}
+          modules={[Navigation, Pagination, Mousewheel]}
           className={styles.swiper_container}
         >
           {cartProducts.images.length > 0 &&

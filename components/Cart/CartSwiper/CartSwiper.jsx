@@ -1,6 +1,6 @@
 import ProductCard from "@/components/Home/ProductCard/ProductCard";
 import React from "react";
-import { Navigation } from "swiper";
+import { Mousewheel, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./CartSwiper.module.scss";
 
@@ -16,18 +16,20 @@ const CartSwiper = ({ similarProducts }) => {
     },
     1024: {
       slidesPerView: 4,
-      spaceBetween: 20,
+      spaceBetween: 50,
     },
   };
 
   return (
     <Swiper
       slidesPerView={1}
-      grabCursor
+      grabCursor={true}
+      pagination={{ dynamicBullets: true }}
       spaceBetween={30}
       breakpoints={breakpoints}
-      navigation
-      modules={[Navigation]}
+      navigation={true}
+      mousewheel={true}
+      modules={[Navigation, Pagination, Mousewheel]}
       className={styles.cart__swiper}
     >
       {similarProducts.map((item) => (
