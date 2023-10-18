@@ -1,5 +1,5 @@
 import { flashDealsArray } from "@/data/home_data";
-import { Autoplay, Navigation } from "swiper";
+import { Autoplay, Mousewheel, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Card from "../Card/Card";
 import styles from "./FlashDealsSwiper.module.scss";
@@ -12,6 +12,7 @@ const FlashDealsSwiper = () => {
         spaceBetween={20}
         grabCursor={true}
         navigation={true}
+        mousewheel={true}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
@@ -30,7 +31,7 @@ const FlashDealsSwiper = () => {
             spaceBetween: 50,
           },
         }}
-        modules={[Navigation, Autoplay]}
+        modules={[Navigation, Autoplay, Mousewheel]}
         className={styles.flash_deals_swiper}
       >
         {flashDealsArray.map((item, i) => (

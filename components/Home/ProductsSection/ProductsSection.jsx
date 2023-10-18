@@ -1,5 +1,5 @@
 import { BsFillBagHeartFill } from "react-icons/bs";
-import { Navigation, Pagination } from "swiper";
+import { Mousewheel, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard from "../ProductCard/ProductCard";
 import styles from "./ProductsSection.module.scss";
@@ -21,6 +21,7 @@ const ProductsSection = ({ products, category }) => {
             delay: 5000,
             disableOnInteraction: false,
           }}
+          mousewheel={true}
           breakpoints={{
             480: {
               slidesPerView: 2,
@@ -38,7 +39,7 @@ const ProductsSection = ({ products, category }) => {
           pagination={{
             dynamicBullets: true,
           }}
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination, Mousewheel]}
           className={styles.flash_deals_swiper}
         >
           {products
