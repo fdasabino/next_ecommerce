@@ -16,7 +16,8 @@ import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
 import db from "@/utils/db";
 import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
@@ -25,7 +26,8 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
   const [reviews, setReviews] = useState(product.reviews);
   const [activeImage, setActiveImage] = useState("");
   const { data: session } = useSession();
-
+  const router = useRouter();
+  const slug = router.query.slug;
   const signInRedirect = () => {
     signIn();
   };
@@ -39,6 +41,12 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
       name: product?.name.length > 30 ? `${product.name.substring(0, 30)}...` : product?.name,
     },
   ];
+
+  useEffect(() => {
+    if (product.slug === slug && reviews) {
+      setReviews(product.reviews);
+    }
+  }, [reviews, product.reviews, product.slug, slug]);
 
   return (
     <>
