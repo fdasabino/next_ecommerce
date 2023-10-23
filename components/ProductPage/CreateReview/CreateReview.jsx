@@ -11,7 +11,6 @@ import Select from "../Select/Select";
 import styles from "./CreateReview.module.scss";
 
 const CreateReview = ({ product, setReviews, setLoading }) => {
-  console.log(product);
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [fit, setFit] = useState("");
