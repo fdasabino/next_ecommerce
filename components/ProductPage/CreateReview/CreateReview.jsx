@@ -3,7 +3,7 @@ import dataURItoBlob from "@/utils/dataURItoBlob";
 import { uploadImage } from "@/utils/imagesUpload";
 import { Rating } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { toast } from "react-toastify";
 import ImageUpload from "../ImageUpload/ImageUpload";
@@ -136,8 +136,6 @@ const CreateReview = ({ product, setReviews, setLoading }) => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {}, [rating, product.reviews, product.numReviews]);
 
   return (
     <div className={styles.create_review}>

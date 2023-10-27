@@ -1,5 +1,4 @@
 import { Rating } from "@mui/material";
-import { useEffect } from "react";
 import styles from "./Reviews.module.scss";
 
 const Reviews = ({ reviews, numReviews }) => {
@@ -55,8 +54,6 @@ const Reviews = ({ reviews, numReviews }) => {
 
   const reviewCount = countReviews(arrayOfRatings);
   const ratingPercentage = calculateRatingPercentage(arrayOfRatings);
-
-  useEffect(() => {}, [reviews.length, numReviews]);
 
   return (
     <div className={styles.reviews}>
