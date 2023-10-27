@@ -109,8 +109,8 @@ const Footer = () => {
       </div>
       <div className={styles.back_to_top}>
         <Tooltip title="Back to top" placement="left" arrow>
-          <IconButton>
-            <GoMoveToTop onClick={scrollToTop} />
+          <IconButton onClick={scrollToTop}>
+            <GoMoveToTop />
           </IconButton>
         </Tooltip>
       </div>
