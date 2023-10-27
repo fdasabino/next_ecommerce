@@ -22,13 +22,17 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
 const SingleProductPage = ({ product, productsWithSameCategory, productInWishlist }) => {
-  const [inWishlist, setInWishlist] = useState(false);
+  const router = useRouter();
+  const color = router.query.color;
+  const slug = router.query.slug;
+  const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [reviews, setReviews] = useState(product.reviews);
   const [activeImage, setActiveImage] = useState("");
-  const { data: session } = useSession();
-  const router = useRouter();
-  const slug = router.query.slug;
+  const [inWishlist, setInWishlist] = useState(
+    productInWishlist !== false && productInWishlist.color === color ? true : false
+  );
+
   const signInRedirect = () => {
     signIn();
   };
@@ -47,7 +51,13 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
     if (product.slug === slug && reviews) {
       setReviews(product.reviews);
     }
-  }, [reviews, product.reviews, product.slug, slug]);
+
+    if (productInWishlist !== false && productInWishlist.color === color) {
+      setInWishlist(true);
+    } else {
+      setInWishlist(false);
+    }
+  }, [reviews, product.reviews, product.slug, slug, color, productInWishlist]);
 
   return (
     <>
@@ -135,12 +145,15 @@ export async function getServerSideProps(context) {
 
     const productInWishlist =
       user && user.wishlist
-        ? user.wishlist.find((p) => p.product.toString() === product._id.toString()) || false
+        ? user.wishlist.find(
+            (p) =>
+              p.product.toString() === product._id.toString() &&
+              p.color.toString() === color.toString()
+          ) || false
         : false;
 
     const subProduct = product.subProducts[color];
     const { sizes, discount, _id: sku, images } = subProduct;
-
     const prices = sizes.map((size) => size.price).sort((a, b) => a - b);
     const colors = product.subProducts.map((subProduct) => subProduct.color);
     const allSizes = product.subProducts
@@ -187,7 +200,9 @@ export async function getServerSideProps(context) {
       props: {
         productsWithSameCategory: JSON.parse(JSON.stringify(productsWithSameCategory)),
         product: JSON.parse(JSON.stringify(newProduct)),
-        productInWishlist: productInWishlist ? true : false,
+        productInWishlist: productInWishlist
+          ? JSON.parse(JSON.stringify(productInWishlist))
+          : false,
       },
     };
   } catch (error) {

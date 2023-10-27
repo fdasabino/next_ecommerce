@@ -18,7 +18,7 @@ import ProductAccordion from "../ProductAccordion/ProductAccordion";
 import Share from "../Share/Share";
 import styles from "./ProductInfo.module.scss";
 
-const ProductInfo = ({ product, setActiveImage, productInWishlist, inWishlist, setInWishlist }) => {
+const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => {
   const {
     name,
     reviews,
@@ -57,11 +57,7 @@ const ProductInfo = ({ product, setActiveImage, productInWishlist, inWishlist, s
     if (selectedSizeValue && selectedColorValue) {
       setCartQuantity(1);
     }
-
-    if (productInWishlist) {
-      setInWishlist(true);
-    }
-  }, [selectedSize, size, selectedColorValue, selectedSizeValue, productInWishlist, setInWishlist]);
+  }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
 
   const handleAddToCart = async () => {
     const { data } = await axios.get(
@@ -190,30 +186,32 @@ const ProductInfo = ({ product, setActiveImage, productInWishlist, inWishlist, s
         <div className={styles.product_info__title}>
           <div className={styles.wrapper}>
             <h1>{name}</h1>
+            {session && (
+              <Tooltip
+                title={inWishlist ? "Remove product from wishlist" : "Add to wishlist"}
+                TransitionComponent={Zoom}
+              >
+                <IconButton
+                  onClick={() =>
+                    inWishlist
+                      ? removeFromWishlist(product._id, color)
+                      : addToWishlist(product._id, color)
+                  }
+                >
+                  {inWishlist ? (
+                    <BsHeartFill size={18} color={"red"} />
+                  ) : (
+                    <BsHeart size={18} color={"red"} />
+                  )}
+                </IconButton>
+              </Tooltip>
+            )}
           </div>
 
-          {session && (
-            <Tooltip
-              title={inWishlist ? "Remove product from wishlist" : "Add to wishlist"}
-              TransitionComponent={Zoom}
-            >
-              <IconButton
-                onClick={() =>
-                  inWishlist
-                    ? removeFromWishlist(product._id, color)
-                    : addToWishlist(product._id, color)
-                }
-              >
-                {inWishlist ? (
-                  <BsHeartFill size={18} color={"red"} />
-                ) : (
-                  <BsHeart size={18} color={"red"} />
-                )}
-              </IconButton>
-            </Tooltip>
-          )}
-
-          <small>{getColorName(colors[color].color)}</small>
+          <div className={styles.color}>
+            <span style={{ background: colors[color].color }} />
+            <small>{getColorName(colors[color].color)}</small>
+          </div>
         </div>
 
         {/* description */}

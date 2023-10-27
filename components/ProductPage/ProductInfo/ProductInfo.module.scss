@@ -23,6 +23,9 @@
 
   &__title {
     position: relative;
+    width: 100%;
+    max-width: fit-content;
+    padding: 0 1rem;
     font-size: 0.7rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -30,15 +33,35 @@
     white-space: pre-wrap;
 
     .wrapper {
+      width: 100%;
+      max-width: 100%;
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 0.5rem;
     }
 
-    small {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: $base-dark;
+    .color {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin: 1rem 0;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      span {
+        position: static;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+      }
+      small {
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: $base-dark;
+      }
     }
 
     @media (max-width: 768px) {
