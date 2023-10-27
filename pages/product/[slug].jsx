@@ -14,14 +14,15 @@ import User from "@/models/User";
 import styles from "@/styles/pages/SingleProductPage.module.scss";
 import { calculateDiscountedPrice } from "@/utils/calculateDiscount";
 import db from "@/utils/db";
-import { signIn, useSession } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { BsChatLeftQuote } from "react-icons/bs";
 
-const SingleProductPage = ({ product, productsWithSameCategory }) => {
+const SingleProductPage = ({ product, productsWithSameCategory, productInWishlist }) => {
+  const [inWishlist, setInWishlist] = useState(false);
   const [loading, setLoading] = useState(false);
   const [reviews, setReviews] = useState(product.reviews);
   const [activeImage, setActiveImage] = useState("");
@@ -62,7 +63,13 @@ const SingleProductPage = ({ product, productsWithSameCategory }) => {
           <div className={styles.single_product_page__main}>
             <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
             <div className={styles.vertical_line} />
-            <ProductInfo product={product} setActiveImage={setActiveImage} />
+            <ProductInfo
+              product={product}
+              setActiveImage={setActiveImage}
+              productInWishlist={productInWishlist}
+              setInWishlist={setInWishlist}
+              inWishlist={inWishlist}
+            />
           </div>
 
           <SimilarProductsSwiper
@@ -108,20 +115,28 @@ export default SingleProductPage;
 // server side
 export async function getServerSideProps(context) {
   try {
+    await db.connectDB();
     const { query } = context;
     const { slug, color, size = 0 } = query;
+    const session = await getSession(context);
 
-    await db.connectDB();
+    const user =
+      session && session.user
+        ? await User.findOne({ email: session.user.email }).lean().exec()
+        : null;
 
-    const [products, product] = await Promise.all([
-      Product.find({}).lean().exec(),
-      Product.findOne({ slug })
-        .populate({ path: "category", model: Category })
-        .populate({ path: "subCategories", model: SubCategory })
-        .populate({ path: "reviews.reviewBy", model: User })
-        .lean()
-        .exec(),
-    ]);
+    const products = await Product.find({}).lean().exec();
+    const product = await Product.findOne({ slug })
+      .populate({ path: "category", model: Category })
+      .populate({ path: "subCategories", model: SubCategory })
+      .populate({ path: "reviews.reviewBy", model: User })
+      .lean()
+      .exec();
+
+    const productInWishlist =
+      user && user.wishlist
+        ? user.wishlist.find((p) => p.product.toString() === product._id.toString()) || false
+        : false;
 
     const subProduct = product.subProducts[color];
     const { sizes, discount, _id: sku, images } = subProduct;
@@ -172,6 +187,7 @@ export async function getServerSideProps(context) {
       props: {
         productsWithSameCategory: JSON.parse(JSON.stringify(productsWithSameCategory)),
         product: JSON.parse(JSON.stringify(newProduct)),
+        productInWishlist: productInWishlist ? true : false,
       },
     };
   } catch (error) {

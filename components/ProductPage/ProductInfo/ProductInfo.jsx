@@ -5,11 +5,12 @@ import Rating from "@mui/material/Rating";
 import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 import { GetColorName } from "hex-color-to-color-name";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { BsCartPlus, BsHeartFill } from "react-icons/bs";
+import { BsCartPlus, BsHeart, BsHeartFill } from "react-icons/bs";
 import { TbMinus, TbPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -17,7 +18,7 @@ import ProductAccordion from "../ProductAccordion/ProductAccordion";
 import Share from "../Share/Share";
 import styles from "./ProductInfo.module.scss";
 
-const ProductInfo = ({ product, setActiveImage }) => {
+const ProductInfo = ({ product, setActiveImage, productInWishlist, inWishlist, setInWishlist }) => {
   const {
     name,
     reviews,
@@ -47,6 +48,7 @@ const ProductInfo = ({ product, setActiveImage }) => {
   const isColorSelected = selectedColorValue === 0;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (!selectedSize) {
@@ -55,7 +57,11 @@ const ProductInfo = ({ product, setActiveImage }) => {
     if (selectedSizeValue && selectedColorValue) {
       setCartQuantity(1);
     }
-  }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
+
+    if (productInWishlist) {
+      setInWishlist(true);
+    }
+  }, [selectedSize, size, selectedColorValue, selectedSizeValue, productInWishlist, setInWishlist]);
 
   const handleAddToCart = async () => {
     const { data } = await axios.get(
@@ -136,6 +142,47 @@ const ProductInfo = ({ product, setActiveImage }) => {
     return colorName;
   };
 
+  const addToWishlist = async (id, colorIndex) => {
+    try {
+      if (!session) {
+        return signIn();
+      }
+      const { data } = await axios.patch("/api/user/wishlist", {
+        productId: id,
+        color: colorIndex,
+      });
+      if (data.added === true) {
+        toast.success(data.message);
+        setInWishlist(true);
+      }
+      if (data.exists === true) {
+        toast.info(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  const removeFromWishlist = async (id, colorIndex) => {
+    try {
+      if (!session) {
+        return signIn();
+      }
+      const { data } = await axios.put(`/api/user/wishlist`, {
+        productId: id,
+        color: colorIndex,
+      });
+      if (data.removed === true) {
+        toast.success(data.message);
+        setInWishlist(false);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className={styles.product_info}>
       <div className={styles.product_info__container}>
@@ -145,11 +192,27 @@ const ProductInfo = ({ product, setActiveImage }) => {
             <h1>{name}</h1>
           </div>
 
-          <Tooltip title="Add to wishlist" TransitionComponent={Zoom}>
-            <IconButton>
-              <BsHeartFill size={18} color="#5a31f4" />
-            </IconButton>
-          </Tooltip>
+          {session && (
+            <Tooltip
+              title={inWishlist ? "Remove product from wishlist" : "Add to wishlist"}
+              TransitionComponent={Zoom}
+            >
+              <IconButton
+                onClick={() =>
+                  inWishlist
+                    ? removeFromWishlist(product._id, color)
+                    : addToWishlist(product._id, color)
+                }
+              >
+                {inWishlist ? (
+                  <BsHeartFill size={18} color={"red"} />
+                ) : (
+                  <BsHeart size={18} color={"red"} />
+                )}
+              </IconButton>
+            </Tooltip>
+          )}
+
           <small>{getColorName(colors[color].color)}</small>
         </div>
 
