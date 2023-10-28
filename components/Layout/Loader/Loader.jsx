@@ -3,15 +3,13 @@ import styles from "./Loader.module.scss";
 const Loader = () => {
   return (
     <div className={styles.loader}>
-      <div className={`${styles.cell} ${styles.d_0}`} />
-      <div className={`${styles.cell} ${styles.d_1}`} />
-      <div className={`${styles.cell} ${styles.d_2}`} />
-      <div className={`${styles.cell} ${styles.d_1}`} />
-      <div className={`${styles.cell} ${styles.d_2}`} />
-      <div className={`${styles.cell} ${styles.d_2}`} />
-      <div className={`${styles.cell} ${styles.d_3}`} />
-      <div className={`${styles.cell} ${styles.d_3}`} />
-      <div className={`${styles.cell} ${styles.d_4}`} />
+      <h2 className={styles.heading}>Loading...</h2>
+      <div className={styles.loading}>
+        <div className={styles.load} />
+        <div className={styles.load} />
+        <div className={styles.load} />
+        <div className={styles.load} />
+      </div>
     </div>
   );
 };

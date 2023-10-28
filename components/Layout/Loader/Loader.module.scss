@@ -1,91 +1,62 @@
 .loader {
-  --cell-size: 52px;
-  --cell-spacing: 1px;
-  --cells: 3;
-  --total-size: calc(var(--cells) * (var(--cell-size) + 2 * var(--cell-spacing)));
   display: flex;
-  flex-wrap: wrap;
-  width: var(--total-size);
-  height: var(--total-size);
-  margin: 2rem auto;
-}
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  width: 100%;
 
-.cell {
-  flex: 0 0 var(--cell-size);
-  margin: var(--cell-spacing);
-  background-color: transparent;
-  box-sizing: border-box;
-  border-radius: 4px;
-  animation: 1.5s ripple ease infinite;
-
-  &.d-1 {
-    animation-delay: 100ms;
+  .heading {
+    color: black;
+    letter-spacing: 0.2em;
+    margin-bottom: 1em;
+    font-size: 1.5rem;
   }
 
-  &.d-2 {
-    animation-delay: 200ms;
+  .loading {
+    display: flex;
+    width: 5em;
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
   }
 
-  &.d-3 {
-    animation-delay: 300ms;
+  .load {
+    width: 5rem;
+    height: 3px;
+    background-color: $base-violet;
+    animation: 1s move_5011 infinite;
+    border-radius: 5px;
+    margin: 0.1em;
   }
 
-  &.d-4 {
-    animation-delay: 400ms;
+  .load:nth-child(1) {
+    animation-delay: 0.2s;
   }
 
-  &:nth-child(1) {
-    --cell-color: #00ff87;
+  .load:nth-child(2) {
+    animation-delay: 0.4s;
   }
 
-  &:nth-child(2) {
-    --cell-color: #0cfd95;
-  }
-
-  &:nth-child(3) {
-    --cell-color: #17fba2;
-  }
-
-  &:nth-child(4) {
-    --cell-color: #23f9b2;
-  }
-
-  &:nth-child(5) {
-    --cell-color: #30f7c3;
-  }
-
-  &:nth-child(6) {
-    --cell-color: #3df5d4;
-  }
-
-  &:nth-child(7) {
-    --cell-color: #45f4de;
-  }
-
-  &:nth-child(8) {
-    --cell-color: #53f1f0;
-  }
-
-  &:nth-child(9) {
-    --cell-color: #60efff;
+  .load:nth-child(3) {
+    animation-delay: 0.6s;
   }
 }
 
-/*Animation*/
-@keyframes ripple {
+@keyframes move_5011 {
   0% {
-    background-color: transparent;
+    width: 0.2em;
   }
 
-  30% {
-    background-color: var(--cell-color);
+  25% {
+    width: 0.7em;
   }
 
-  60% {
-    background-color: transparent;
+  50% {
+    width: 1.5em;
   }
 
   100% {
-    background-color: transparent;
+    width: 0.2em;
   }
 }

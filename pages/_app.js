@@ -1,9 +1,12 @@
+import Loader from "@/components/Layout/Loader/Loader";
 import RootLayout from "@/components/Layout/RootLayout/RootLayout";
 import store from "@/redux-store/index";
 import "@/styles/globals.scss";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -18,6 +21,26 @@ import "swiper/css/pagination";
 const persistor = persistStore(store);
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const start = () => {
+      setLoading(true);
+    };
+    const end = () => {
+      setLoading(false);
+    };
+    router.events.on("routeChangeStart", start);
+    router.events.on("routeChangeComplete", end);
+    router.events.on("routeChangeError", end);
+    return () => {
+      router.events.off("routeChangeStart", start);
+      router.events.off("routeChangeComplete", end);
+      router.events.off("routeChangeError", end);
+    };
+  }, [router]);
+
   return (
     <>
       <Head>
@@ -26,11 +49,11 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SessionProvider session={session}>
-        <Provider store={store}>
-          <PersistGate persistor={persistor} loading={null}>
+        <PersistGate persistor={persistor} loading={null}>
+          <Provider store={store}>
             <RootLayout>
               <PayPalScriptProvider>
-                <Component {...pageProps} />
+                {loading ? <Loader /> : <Component {...pageProps} />}
                 <ToastContainer
                   position="bottom-right"
                   autoClose={2000}
@@ -42,8 +65,8 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
                 />
               </PayPalScriptProvider>
             </RootLayout>
-          </PersistGate>
-        </Provider>
+          </Provider>
+        </PersistGate>
       </SessionProvider>
     </>
   );

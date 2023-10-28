@@ -3,15 +3,18 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 3em;
+
   width: fit-content;
+  height: 2.7em;
+
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  border-radius: 3px;
+
+  border-radius: 4px;
   letter-spacing: 1px;
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
@@ -55,12 +58,26 @@
   &:hover {
     -webkit-box-shadow: 9px 9px 33px $base-grey, -9px -9px 33px $base-dark-grey;
     box-shadow: 9px 9px 33px $base-grey, -9px -9px 33px $base-dark-grey;
-    -webkit-transform: translateY(-2px);
-    -ms-transform: translateY(-2px);
-    transform: translateY(-2px);
+
+    &:disabled {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      -webkit-transform: none;
+      -ms-transform: none;
+      transform: none;
+
+      svg {
+        width: 1.2em;
+        height: 1.2em;
+        -webkit-transform: none;
+        -ms-transform: none;
+        transform: none;
+      }
+    }
 
     svg {
-      font-size: 1.2em;
+      width: 1.3em;
+      height: 1.3em;
       -webkit-transform: translateX(-5px);
       -ms-transform: translateX(-5px);
       transform: translateX(-5px);
@@ -98,7 +115,7 @@
 // Buttons
 .btnPrimary {
   @include button-styles;
-  @include button-background(#008cff, #0055ff, 0.98);
+  @include button-background($base-blue, #0055ff, 0.98);
 }
 
 .btnSecondary {

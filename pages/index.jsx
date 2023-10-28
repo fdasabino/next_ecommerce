@@ -8,10 +8,9 @@ import styles from "@/styles/pages/Home.module.scss";
 import db from "@/utils/db";
 import axios from "axios";
 import Head from "next/head";
-import { Suspense, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Product from "../models/Product";
-import Loading from "./loading";
 
 const HomePage = ({ country, products, categories }) => {
   const dispatch = useDispatch();
@@ -39,12 +38,8 @@ const HomePage = ({ country, products, categories }) => {
       </Head>
       <div className={styles.home}>
         <div className={styles.container}>
-          <Suspense fallback={<Loading />}>
-            <MainSection products={products} />
-          </Suspense>
-          <Suspense fallback={<Loading />}>
-            <FlashDeals />
-          </Suspense>
+          <MainSection products={products} />
+          <FlashDeals />
         </div>
       </div>
     </>
