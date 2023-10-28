@@ -3,11 +3,15 @@ import styles from "./Loader.module.scss";
 const Loader = () => {
   return (
     <div className={styles.loader}>
-      <div className={styles.spinner} />
-      <div className={styles.loading_wrapper}>
-        <h2>Loading</h2>
-        <div className={styles.dots} />
-      </div>
+      <div className={`${styles.cell} ${styles.d_0}`} />
+      <div className={`${styles.cell} ${styles.d_1}`} />
+      <div className={`${styles.cell} ${styles.d_2}`} />
+      <div className={`${styles.cell} ${styles.d_1}`} />
+      <div className={`${styles.cell} ${styles.d_2}`} />
+      <div className={`${styles.cell} ${styles.d_2}`} />
+      <div className={`${styles.cell} ${styles.d_3}`} />
+      <div className={`${styles.cell} ${styles.d_3}`} />
+      <div className={`${styles.cell} ${styles.d_4}`} />
     </div>
   );
 };
