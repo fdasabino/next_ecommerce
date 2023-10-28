@@ -26,7 +26,7 @@ const Button = ({ children, style, className, ...rest }) => {
   }
 
   return (
-    <button className={`${buttonClass} ${className}`} {...rest}>
+    <button role="button" className={`${buttonClass} ${className}`} {...rest}>
       {children}
     </button>
   );
