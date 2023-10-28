@@ -1,3 +1,4 @@
+import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import Link from "next/link";
 import { PiClipboardTextThin } from "react-icons/pi";
@@ -37,7 +38,7 @@ const CheckoutCart = ({ cart }) => {
                   Size: <span>{product.size}</span>
                 </p>
                 <p>
-                  Color: <span>{product.color.color}</span>
+                  Color: <span>{GetColorName(product.color.color)}</span>
                 </p>
               </div>
             </div>

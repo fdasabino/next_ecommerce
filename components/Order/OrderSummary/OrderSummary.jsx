@@ -1,4 +1,5 @@
 import { Button as MuiButton, Tooltip } from "@mui/material";
+import { GetColorName } from "hex-color-to-color-name";
 import Image from "next/image";
 import { useState } from "react";
 import { BsChevronBarExpand } from "react-icons/bs";
@@ -81,7 +82,7 @@ const OrderSummary = ({ order }) => {
                   )}
                   <div className={styles.product__info__style}>
                     <p>
-                      Color: <span>{product.color.color}</span>
+                      Color: <span>{GetColorName(product.color.color)}</span>
                     </p>
                     <p>
                       Size: <span>{product.size}</span>
