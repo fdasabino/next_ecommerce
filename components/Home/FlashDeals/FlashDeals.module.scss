@@ -9,6 +9,7 @@
     align-items: center;
     color: $base-white;
     background-color: $base-dark-secondary;
+    text-transform: uppercase;
 
     @media (max-width: 768px) {
       justify-content: center;

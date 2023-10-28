@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 *:before,
@@ -23,10 +24,9 @@
 }
 
 body {
-  font-family: "Mulish", sans-serif;
-  font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -35,18 +35,23 @@ main {
   margin: 0 0 5rem 0;
 }
 
-p,
-a,
-small,
-span,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  font-family: "Kosugi Maru", sans-serif;
+  font-weight: 400;
+}
+
+p,
+a,
+small,
+span {
   font-family: "Rajdhani", sans-serif;
-  font-weight: 500;
+  color: $base-dark;
+  font-weight: 400;
 }
 
 p,
@@ -59,12 +64,17 @@ h6 {
   overflow-wrap: break-word;
 }
 
+input,
 textarea,
 select,
 option,
 label {
   transition: all 0.5s linear;
-  font-family: "Rajdhani", sans-serif !important;
+  font-family: "Mullish", sans-serif !important;
+
+  &::placeholder {
+    font-family: "Quicksand", sans-serif !important;
+  }
 }
 
 .MuiButtonBase-root,
@@ -82,8 +92,10 @@ svg {
 }
 
 a {
+  font-family: "Kosugi Maru", sans-serif !important;
   text-decoration: none;
   color: $base-dark;
+  letter-spacing: 1px;
 }
 
 ul {
@@ -96,6 +108,7 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+  font-family: "Quicksand", sans-serif !important;
 }
 
 hr {
@@ -116,19 +129,32 @@ hr {
 }
 
 .Toastify__toast {
-  border-radius: 5px !important;
+  border-radius: 10px !important;
   font-family: "Rajdhani", sans-serif !important;
   font-size: 0.9rem !important;
   font-weight: 600 !important;
   transition: all 0.2s linear !important;
   white-space: pre-line !important;
   text-transform: uppercase !important;
-  color: #000000 !important;
+  color: #fff !important;
   text-align: center !important;
   padding: 1rem !important;
-  border: 1px solid $base-dark-grey !important;
+  border: none !important;
 
   &:hover {
     scale: 0.95 !important;
+  }
+
+  &.Toastify__toast--success {
+    background: $base-success !important;
+  }
+  &.Toastify__toast--info {
+    background: $base-blue !important;
+  }
+  &.Toastify__toast--warning {
+    background: $base-warning-secondary !important;
+  }
+  &.Toastify__toast--error {
+    background: $base-error !important;
   }
 }

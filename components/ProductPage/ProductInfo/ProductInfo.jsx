@@ -170,7 +170,7 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
         color: colorIndex,
       });
       if (data.removed === true) {
-        toast.success(data.message);
+        toast.info(data.message);
         setInWishlist(false);
       }
     } catch (error) {

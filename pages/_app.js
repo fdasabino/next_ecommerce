@@ -55,13 +55,13 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
               <PayPalScriptProvider>
                 {loading ? <Loader /> : <Component {...pageProps} />}
                 <ToastContainer
-                  position="bottom-right"
+                  position="top-left"
                   autoClose={2000}
                   newestOnTop={true}
                   hideProgressBar={true}
                   closeOnClick
                   draggable
-                  theme="light"
+                  theme="colored"
                 />
               </PayPalScriptProvider>
             </RootLayout>
