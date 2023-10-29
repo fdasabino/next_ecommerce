@@ -15,7 +15,7 @@ const Path = ({ path }) => {
             {step.slug ? (
               <Link href={`/category/${step?.slug}`}>{step.name}</Link>
             ) : (
-              <Link href="/"> {step.name}</Link>
+              <Link href="/">{step.name}</Link>
             )}
           </li>
         ))}

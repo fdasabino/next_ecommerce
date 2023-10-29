@@ -5,6 +5,7 @@ import Product from "@/models/Product";
 import styles from "@/styles/pages/CategoryPage.module.scss";
 import db from "@/utils/db";
 import Head from "next/head";
+import Image from "next/image";
 import React from "react";
 
 const CategoryPage = ({ productsWithSameCategory, slug }) => {
@@ -28,11 +29,20 @@ const CategoryPage = ({ productsWithSameCategory, slug }) => {
               {productsWithSameCategory?.length > 0 && ` (${productsWithSameCategory?.length})`}
             </h1>
           </div>
-          <div className={styles.category_page__container__products}>
-            {productsWithSameCategory.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
+          {productsWithSameCategory.length ? (
+            <div className={styles.category_page__container__products}>
+              {productsWithSameCategory.map((product) => {
+                return <ProductCard key={product._id} product={product} />;
+              })}
+            </div>
+          ) : (
+            <div className={styles.empty}>
+              <Image src="/images/empty_page.png" width={300} height={300} alt="Empty" />
+              <h2>
+                No products available... We are working on our inventory to fill this page for you!
+              </h2>
+            </div>
+          )}
         </div>
       </div>
     </>

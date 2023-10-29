@@ -30,9 +30,13 @@
     padding: 0.5rem;
 
     h1 {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
       text-transform: uppercase;
+
+      @media (max-width: 480px) {
+        font-size: 0.8rem;
+      }
     }
   }
   &__container__products {
@@ -41,7 +45,6 @@
     place-items: center;
     justify-content: center;
     gap: 2rem;
-
     margin: 0 2rem;
 
     @media (max-width: 768px) {
@@ -50,6 +53,38 @@
 
     @media (max-width: 500px) {
       grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .empty {
+    width: 100%;
+    max-width: 500px;
+    margin: 3rem auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    border: 1px solid $base-grey;
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-align: justify;
+
+      @media (max-width: 480px) {
+        font-size: 0.8rem;
+      }
     }
   }
 }
