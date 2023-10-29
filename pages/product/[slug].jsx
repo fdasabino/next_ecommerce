@@ -39,10 +39,9 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
 
   const path = [
     { id: 1, name: "Home" },
-    { id: 2, name: product?.category.name },
-    { id: 3, name: product?.subCategories[0].name },
+    { id: 2, name: product?.category.name, slug: product?.category.slug },
     {
-      id: 4,
+      id: 3,
       name: product?.name.length > 30 ? `${product.name.substring(0, 30)}...` : product?.name,
     },
   ];

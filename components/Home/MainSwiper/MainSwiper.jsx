@@ -44,14 +44,11 @@ const MainSwiper = () => {
               <h2>Find your style</h2>
               <small>Where do you want to start?</small>
               <div className={styles.ctas}>
-                <Link href="/">
+                <Link href={`/category/women's-fashion`}>
                   <Button style="secondary">Women</Button>
                 </Link>
-                <Link href="/">
+                <Link href={`/category/men's-fashion`}>
                   <Button style="secondary">Men</Button>
-                </Link>
-                <Link href="/">
-                  <Button style="secondary">Kids</Button>
                 </Link>
               </div>
             </div>

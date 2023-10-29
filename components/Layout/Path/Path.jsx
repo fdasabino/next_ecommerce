@@ -1,4 +1,3 @@
-// todo: add links to path
 import Link from "next/link";
 import styles from "./Path.module.scss";
 
@@ -13,7 +12,11 @@ const Path = ({ path }) => {
             aria-current={index === path.length - 1 ? "page" : undefined}
           >
             {index !== 0 && <span className={styles.path__separator}>/</span>}
-            <span>{step.name}</span>
+            {step.slug ? (
+              <Link href={`/category/${step?.slug}`}>{step.name}</Link>
+            ) : (
+              <Link href="/"> {step.name}</Link>
+            )}
           </li>
         ))}
       </ul>

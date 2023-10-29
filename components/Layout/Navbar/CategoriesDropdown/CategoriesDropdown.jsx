@@ -20,7 +20,7 @@ const CategoriesDropdown = (props) => {
               .sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically by name
               .map((item, i) => (
                 <li key={item._id || i} onClick={() => setVisible(false)}>
-                  <Link href={"/"}>
+                  <Link href={`/category/${item.slug}`}>
                     <MdOutlineArrowRight /> {item.name}
                   </Link>
                 </li>
