@@ -41,7 +41,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Kosugi Maru", sans-serif;
+  font-family: "Red Hat Display", sans-serif;
   font-weight: 400;
 }
 
@@ -49,7 +49,7 @@ p,
 a,
 small,
 span {
-  font-family: "Rajdhani", sans-serif;
+  font-family: "Exo 2", sans-serif;
   color: $base-dark;
   font-weight: 400;
 }
@@ -70,7 +70,7 @@ select,
 option,
 label {
   transition: all 0.5s linear;
-  font-family: "Mullish", sans-serif !important;
+  font-family: "Quicksand", sans-serif !important;
 
   &::placeholder {
     font-family: "Quicksand", sans-serif !important;
@@ -79,7 +79,7 @@ label {
 
 .MuiButtonBase-root,
 .MuiSelect-select {
-  font-family: "Rajdhani", sans-serif !important;
+  font-family: "Exo 2", sans-serif !important;
   font-weight: 500 !important;
   font-size: 0.8rem !important;
 }
@@ -92,7 +92,7 @@ svg {
 }
 
 a {
-  font-family: "Kosugi Maru", sans-serif !important;
+  font-family: "Red Hat Display", sans-serif !important;
   text-decoration: none;
   color: $base-dark;
   letter-spacing: 1px;
@@ -108,7 +108,7 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "Exo 2", sans-serif !important;
 }
 
 hr {
@@ -130,9 +130,7 @@ hr {
 
 .Toastify__toast {
   border-radius: 10px !important;
-  font-family: "Rajdhani", sans-serif !important;
-  font-size: 0.9rem !important;
-  font-weight: 600 !important;
+  font-family: "Quicksand", sans-serif !important;
   transition: all 0.2s linear !important;
   white-space: pre-line !important;
   text-transform: uppercase !important;
@@ -140,6 +138,11 @@ hr {
   text-align: center !important;
   padding: 1rem !important;
   border: none !important;
+
+  div {
+    font-size: 0.7rem !important;
+    font-weight: 600 !important;
+  }
 
   &:hover {
     scale: 0.95 !important;

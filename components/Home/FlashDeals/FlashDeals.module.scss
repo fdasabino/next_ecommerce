@@ -4,30 +4,33 @@
   background: $base-white;
 
   &__header {
+    width: 100%;
+    max-width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.5rem;
     color: $base-white;
     background-color: $base-dark-secondary;
     text-transform: uppercase;
+    padding: 0.5rem;
 
     @media (max-width: 768px) {
       justify-content: center;
-      gap: 0.5rem;
+      padding: 0.3rem;
     }
 
     h2 {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.3rem;
       padding: 0 0.5rem;
 
       @media (max-width: 768px) {
-        font-size: 1.5rem;
+        font-size: 1rem;
 
         svg {
-          font-size: 1.5rem;
+          font-size: 1rem;
         }
       }
 

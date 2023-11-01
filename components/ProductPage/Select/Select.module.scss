@@ -37,7 +37,6 @@
 
     &:active {
       border: 1px solid $base-dark;
-      background: $base-dark;
       color: $base-white;
     }
 
@@ -49,7 +48,7 @@
     }
 
     span {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 600;
       display: flex;
       align-items: center;

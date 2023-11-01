@@ -306,13 +306,13 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                   key={i}
                   href={`/product/${slug}?color=${color}&size=${i}`}
                 >
-                  <div
+                  <span
                     className={`${styles.product_info__sizes_size} ${
                       +size === i && styles.activeSize
                     }`}
                   >
                     {s.size}
-                  </div>
+                  </span>
                 </Link>
               ))}
           </div>
