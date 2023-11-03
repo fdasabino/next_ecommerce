@@ -1,205 +1,205 @@
 .questions_input {
-  margin: 1rem 0;
+    margin: 1rem 0;
 
-  .add_details {
-    width: 100%;
-    max-width: 100%;
-    padding: 0 0.5rem;
-    display: flex;
-    justify-content: flex-end;
+    .add_details {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0.5rem;
+        display: flex;
+        justify-content: flex-end;
 
-    p {
-      font-size: 1rem;
-      font-weight: 600;
-      color: $base-dark;
-      display: block;
-      text-transform: uppercase;
-      padding: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+        p {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $base-dark;
+            display: block;
+            text-transform: uppercase;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
 
-      svg {
-        width: 20px;
-        height: 20px;
-        fill: $base-white;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-        background: $base-green;
-        padding: 0.2rem;
-        border-radius: 50%;
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: $base-white;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                background: $base-green;
+                padding: 0.2rem;
+                border-radius: 50%;
 
-        &:hover {
-          scale: 1.1;
+                &:hover {
+                    scale: 1.1;
+                }
+            }
         }
-      }
-    }
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-
-    h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 0.5rem;
-
-      @media (max-width: 480px) {
-        font-size: 0.7rem;
-      }
     }
 
-    svg {
-      width: 35px;
-      height: 35px;
-      fill: $base-white;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      background: $base-info;
-      padding: 0.2rem;
-      border-radius: 50%;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
 
-      @media (max-width: 480px) {
-        width: 25px;
-        height: 25px;
-      }
+        h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.5rem;
 
-      &:hover {
-        scale: 1.1;
-      }
+            @media (max-width: 480px) {
+                font-size: 0.7rem;
+            }
+        }
+
+        svg {
+            width: 35px;
+            height: 35px;
+            fill: $base-white;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            background: $base-info;
+            padding: 0.2rem;
+            border-radius: 50%;
+
+            @media (max-width: 480px) {
+                width: 25px;
+                height: 25px;
+            }
+
+            &:hover {
+                scale: 1.1;
+            }
+        }
+
+        button {
+            margin: 0 !important;
+        }
     }
 
     button {
-      margin: 0 !important;
-    }
-  }
-
-  button {
-    margin: 0 auto !important;
-    width: 100%;
-    max-width: 100%;
-    background: transparent !important;
-    border: 1px solid $base-info !important;
-    color: $base-info !important;
-    font-weight: 500 !important;
-
-    &:hover {
-      background: $base-info !important;
-      color: $base-white !important;
-    }
-  }
-
-  .questions {
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-    grid-gap: 0.5rem;
-    place-items: center;
-    justify-items: center;
-
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-    }
-
-    @media (max-width: 600px) {
-      grid-template-columns: repeat(auto-fit, minmax(100px, auto));
-    }
-
-    @media (max-width: 480px) {
-      grid-template-columns: repeat(auto-fit, minmax(80px, auto));
-    }
-
-    @media (max-width: 480px) {
-      grid-template-columns: repeat(auto-fit, minmax(60px, auto));
-    }
-
-    .input_group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-
-      label {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: $base-dark;
-        display: block;
-      }
-
-      input {
+        margin: 0 auto !important;
         width: 100%;
         max-width: 100%;
-        height: 100%;
-        max-height: 30px;
-        padding: 0.5rem;
-        border-radius: 5px;
-        border: 1px solid $base-grey;
-        background-color: $base-white;
-        color: $base-dark;
-        font-size: 0.9rem;
-        font-weight: 500;
-        outline: none;
-        transition: all 0.2s ease-in-out;
+        background: transparent !important;
+        border: 1px solid $base-info !important;
+        color: $base-info !important;
+        font-weight: 500 !important;
 
-        &:focus {
-          border: 1px solid $base-info;
+        &:hover {
+            background: $base-info !important;
+            color: $base-white !important;
         }
+    }
 
-        &::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
+    .questions {
+        width: 100%;
+        max-width: 100%;
+        margin: 1rem auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+        grid-gap: 0.5rem;
+        place-items: center;
+        justify-items: center;
+
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(auto-fit, minmax(150px, auto));
         }
 
         @media (max-width: 600px) {
-          font-size: 0.7rem;
-          width: fit-content !important;
-          padding: 0.3rem;
+            grid-template-columns: repeat(auto-fit, minmax(100px, auto));
         }
-      }
-    }
 
-    .action_btns {
-      width: 100%;
-      max-width: fit-content;
-      height: 100%;
-      padding-top: 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.2rem;
-
-      svg {
-        width: 25px;
-        height: 25px;
-        fill: $base-white;
-        stroke: $base-white;
-        cursor: pointer;
-        border-radius: 5px;
-        padding: 0.2rem;
-
-        @media (max-width: 600px) {
-          width: 20px;
-          height: 20px;
+        @media (max-width: 480px) {
+            grid-template-columns: repeat(auto-fit, minmax(80px, auto));
         }
-      }
 
-      svg:first-child {
-        background-color: $base-error-secondary;
-      }
+        @media (max-width: 480px) {
+            grid-template-columns: repeat(auto-fit, minmax(60px, auto));
+        }
 
-      svg:last-child {
-        background-color: $base-success;
-      }
+        .input_group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+
+            label {
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: $base-dark;
+                display: block;
+            }
+
+            input {
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                max-height: 30px;
+                padding: 0.5rem;
+                border-radius: 5px;
+                border: 1px solid $base-grey;
+                background-color: $base-white;
+                color: $base-dark;
+                font-size: 0.9rem;
+                font-weight: 500;
+                outline: none;
+                transition: all 0.2s ease-in-out;
+
+                &:focus {
+                    border: 1px solid $base-info;
+                }
+
+                &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
+                @media (max-width: 600px) {
+                    font-size: 0.7rem;
+                    width: fit-content !important;
+                    padding: 0.3rem;
+                }
+            }
+        }
+
+        .action_btns {
+            width: 100%;
+            max-width: fit-content;
+            height: 100%;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+
+            svg {
+                width: 25px;
+                height: 25px;
+                fill: $base-white;
+                stroke: $base-white;
+                cursor: pointer;
+                border-radius: 5px;
+                padding: 0.2rem;
+
+                @media (max-width: 600px) {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            svg:first-child {
+                background-color: $base-error-secondary;
+            }
+
+            svg:last-child {
+                background-color: $base-success;
+            }
+        }
     }
-  }
 }

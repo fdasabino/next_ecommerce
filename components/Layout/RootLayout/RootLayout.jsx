@@ -4,15 +4,15 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 
 const RootLayout = ({ children }) => {
-  const router = useRouter();
-  return (
-    <>
-      {router.pathname === "/" && <Banner />}
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
-    </>
-  );
+    const router = useRouter();
+    return (
+        <>
+            {router.pathname === "/" && <Banner />}
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+        </>
+    );
 };
 
 export default RootLayout;

@@ -1,114 +1,114 @@
 .image_input {
-  margin: 2rem 0;
+    margin: 2rem 0;
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-
-    h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 0.5rem;
-
-      @media (max-width: 480px) {
-        font-size: 0.7rem;
-      }
-    }
-
-    button {
-      margin: 0 !important;
-    }
-  }
-
-  .input_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  .no_image {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    h2 {
-      width: 100%;
-      max-width: 100%;
-      white-space: nowrap;
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      text-align: center;
-    }
-  }
-  .images_main {
-    border: 1px solid rgba($color: $base-grey, $alpha: 1);
-    padding: 1rem;
-    width: 100%;
-    height: 100%;
-  }
-
-  .grid {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    place-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
-
-    @media (max-width: 900px) {
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    }
-
-    .grid_wrapper {
-      position: relative;
-      margin-bottom: 1rem;
-      height: fit-content;
-
-      img {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        max-width: 200px;
-        height: 100%;
-        max-height: 200px;
-        object-fit: cover;
-        border-radius: 5px;
-        border: 1px solid $base-grey;
-        transition: all 0.3s ease-in-out;
+        padding: 0 1rem;
+        margin-bottom: 1rem;
 
-        &:hover {
-          transform: scale(1.1);
+        h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0.5rem;
+
+            @media (max-width: 480px) {
+                font-size: 0.7rem;
+            }
         }
 
-        @media (max-width: 480px) {
-          max-width: 100%;
-          height: auto;
+        button {
+            margin: 0 !important;
         }
-      }
+    }
 
-      .image_actions {
+    .input_wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0.5rem;
-        margin: 1rem 0;
-
-        button {
-          max-width: fit-content !important;
-          padding: 0.5rem !important;
-        }
-      }
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 2rem;
     }
-  }
+
+    .no_image {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+            width: 100%;
+            max-width: 100%;
+            white-space: nowrap;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+        }
+    }
+    .images_main {
+        border: 1px solid rgba($color: $base-grey, $alpha: 1);
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    .grid {
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        place-items: center;
+        gap: 1rem;
+        padding: 0.5rem;
+
+        @media (max-width: 900px) {
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        }
+
+        .grid_wrapper {
+            position: relative;
+            margin-bottom: 1rem;
+            height: fit-content;
+
+            img {
+                width: 100%;
+                max-width: 200px;
+                height: 100%;
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 5px;
+                border: 1px solid $base-grey;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+
+                @media (max-width: 480px) {
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+
+            .image_actions {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 1rem 0;
+
+                button {
+                    max-width: fit-content !important;
+                    padding: 0.5rem !important;
+                }
+            }
+        }
+    }
 }

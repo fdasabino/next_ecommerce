@@ -1,103 +1,103 @@
 .product {
-  width: 100%;
-  max-width: 100%;
-  border: 1px solid $base-grey;
-  border-radius: 5px;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-
-  .title {
-    text-transform: uppercase;
-    font-weight: 500;
-    color: $base-dark;
-    background-color: rgba($color: $base-blue, $alpha: 0.2);
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: $base-blue 1px solid;
-    .wrapper {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-      h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        flex: 1;
-
-        @media (max-width: 480px) {
-          font-size: 0.8rem;
-        }
-      }
-      span {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: $base-dark;
-        margin-left: 0.5rem;
-        @media (max-width: 480px) {
-          font-size: 0.7rem;
-        }
-      }
-    }
-
-    button {
-      flex: 1;
-      width: fit-content !important;
-      height: fit-content !important;
-      padding: 0.2rem !important;
-    }
-  }
-
-  .info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.5rem;
-
-    small {
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-transform: uppercase;
-      background-color: rgba($color: $base-blue, $alpha: 0.1);
-      padding: 0.2rem;
-      font-weight: 600;
-
-      span {
-        display: flex;
-        align-items: center;
-        gap: 0.1rem;
-        font-weight: 600;
-        color: $base-dark;
-
-        svg {
-          width: 0.9rem;
-          height: 0.9rem;
-          fill: gold;
-        }
-      }
-    }
-  }
-
-  .summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     max-width: 100%;
+    border: 1px solid $base-grey;
+    border-radius: 5px;
 
-    font-size: 0.7rem;
-    font-weight: 600;
-    font-style: italic;
+    @media (max-width: 768px) {
+        max-width: 100%;
+    }
 
-    color: $base-dark;
+    .title {
+        text-transform: uppercase;
+        font-weight: 500;
+        color: $base-dark;
+        background-color: rgba($color: $base-blue, $alpha: 0.2);
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: $base-blue 1px solid;
+        .wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            h3 {
+                font-size: 1rem;
+                font-weight: 600;
+                flex: 1;
 
-    margin: auto auto;
-    padding: 0.5rem;
-  }
+                @media (max-width: 480px) {
+                    font-size: 0.8rem;
+                }
+            }
+            span {
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: $base-dark;
+                margin-left: 0.5rem;
+                @media (max-width: 480px) {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+
+        button {
+            flex: 1;
+            width: fit-content !important;
+            height: fit-content !important;
+            padding: 0.2rem !important;
+        }
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        padding: 0.5rem;
+
+        small {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-transform: uppercase;
+            background-color: rgba($color: $base-blue, $alpha: 0.1);
+            padding: 0.2rem;
+            font-weight: 600;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 0.1rem;
+                font-weight: 600;
+                color: $base-dark;
+
+                svg {
+                    width: 0.9rem;
+                    height: 0.9rem;
+                    fill: gold;
+                }
+            }
+        }
+    }
+
+    .summary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 0.7rem;
+        font-weight: 600;
+        font-style: italic;
+
+        color: $base-dark;
+
+        margin: auto auto;
+        padding: 0.5rem;
+    }
 }

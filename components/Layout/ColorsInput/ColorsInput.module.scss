@@ -1,13 +1,13 @@
 .color_picker {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
 
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
 
-  button {
-    margin: 0 auto !important;
-  }
+    button {
+        margin: 0 auto !important;
+    }
 }

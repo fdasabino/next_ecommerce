@@ -1,164 +1,164 @@
 .order__products {
-  width: 100%;
-  max-width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media (max-width: 768px) {
     width: 100%;
     max-width: 100%;
     height: fit-content;
-  }
-
-  .header {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      svg {
-        width: 1.2rem;
-        height: 1.2rem;
-        margin-right: 0.5rem;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 1.2rem;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 1rem;
-      }
-    }
-  }
-
-  .product {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    gap: 1rem;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      max-width: 100%;
-    }
-
-    border-radius: 10px;
-    border: 1px solid $base-dark-grey;
-    box-shadow: $base-shadow-3;
-
-    .product__image {
-      width: 100%;
-      max-width: 100px;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        border-radius: 10px 0 0 10px;
-      }
-
-      @media (max-width: 768px) {
-        max-width: 150px;
-      }
-    }
-
-    &__info {
-      padding: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-
-      h2 {
-        font-size: 1rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        text-decoration: underline;
-        text-underline-offset: 0.2 rem;
-      }
-
-      &__style {
-        display: flex;
-        flex-direction: column;
-        gap: 0.1rem;
-
-        p {
-          font-size: 0.9rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          margin-bottom: 0.2rem;
-
-          small {
-            width: 10px;
-            height: 10px;
-          }
-
-          span {
-            width: 100%;
-            font-weight: 400;
-          }
-        }
-      }
-    }
-  }
-
-  &__total {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-transform: uppercase;
+    gap: 1rem;
 
-    .wrapper {
-      width: 100%;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem;
-      border-top: 1px solid $base-dark-grey;
-      border-bottom: 1px solid $base-dark-grey;
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 100%;
+        height: fit-content;
+    }
 
-      .tax {
-        color: $base-redish;
+    .header {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
 
-        p {
-          font-weight: 600;
+        @media (max-width: 768px) {
+            flex-direction: column;
         }
-      }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
 
-      .totals {
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+                margin-right: 0.5rem;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 1.2rem;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .product {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        gap: 1rem;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        border-radius: 10px;
+        border: 1px solid $base-dark-grey;
+        box-shadow: $base-shadow-3;
+
+        .product__image {
+            width: 100%;
+            max-width: 100px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center top;
+                border-radius: 10px 0 0 10px;
+            }
+
+            @media (max-width: 768px) {
+                max-width: 150px;
+            }
+        }
+
+        &__info {
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            h2 {
+                font-size: 1rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                text-decoration: underline;
+                text-underline-offset: 0.2 rem;
+            }
+
+            &__style {
+                display: flex;
+                flex-direction: column;
+                gap: 0.1rem;
+
+                p {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    margin-bottom: 0.2rem;
+
+                    small {
+                        width: 10px;
+                        height: 10px;
+                    }
+
+                    span {
+                        width: 100%;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+
+    &__total {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        gap: 0.2rem;
-        p {
-          font-weight: 600;
+        align-items: center;
+        text-transform: uppercase;
+
+        .wrapper {
+            width: 100%;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-top: 1px solid $base-dark-grey;
+            border-bottom: 1px solid $base-dark-grey;
+
+            .tax {
+                color: $base-redish;
+
+                p {
+                    font-weight: 600;
+                }
+            }
+
+            .totals {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.2rem;
+                p {
+                    font-weight: 600;
+                }
+            }
         }
-      }
-    }
 
-    small {
-      font-size: 0.8rem;
-      color: $base-dark;
-      font-weight: 600;
+        small {
+            font-size: 0.8rem;
+            color: $base-dark;
+            font-weight: 600;
 
-      span {
-        color: $base-success;
-        font-weight: 600;
-      }
+            span {
+                color: $base-success;
+                font-weight: 600;
+            }
+        }
     }
-  }
 }

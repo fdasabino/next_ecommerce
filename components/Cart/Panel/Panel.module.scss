@@ -1,141 +1,141 @@
 .panel {
-  width: 100%;
-  height: fit-content;
-  background-color: $base-white;
-  border: 1px solid $base-grey;
-  box-shadow: $base-shadow-3;
-  border-radius: 5px;
-  padding: 0.8rem;
+    width: 100%;
+    height: fit-content;
+    background-color: $base-white;
+    border: 1px solid $base-grey;
+    box-shadow: $base-shadow-3;
+    border-radius: 5px;
+    padding: 0.8rem;
 
-  hr {
-    margin: 0.5rem 0.5rem 2rem 0.5rem;
-    border-top: 1px solid $base-grey !important;
-  }
-
-  .header {
-    h2 {
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.1rem;
-      font-weight: 600;
+    hr {
+        margin: 0.5rem 0.5rem 2rem 0.5rem;
+        border-top: 1px solid $base-grey !important;
     }
-  }
 
-  .body {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    height: 100%;
-
-    .subtotal {
-      display: flex;
-      flex-direction: column;
-
-      .row1 {
-        h3 {
-          text-transform: uppercase;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.8rem;
-
-          span {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: $base-dark-secondary;
-          }
+    .header {
+        h2 {
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
-      }
+    }
 
-      .row2 {
-        h3 {
-          text-transform: uppercase;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.8rem;
-
-          span {
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: $base-dark-secondary;
-          }
-        }
-      }
-
-      .row3 {
+    .body {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        margin-top: 1rem;
+        justify-content: stretch;
+        height: 100%;
 
-        button {
-          width: 100%;
-          max-width: 100%;
-        }
+        .subtotal {
+            display: flex;
+            flex-direction: column;
 
-        small {
-          text-align: center;
-          font-size: 0.8rem;
+            .row1 {
+                h3 {
+                    text-transform: uppercase;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 0.8rem;
 
-          a {
-            color: $base-dark;
-            text-decoration: none;
-            font-size: 0.8rem;
-          }
-        }
-      }
-
-      .row4 {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1rem;
-
-        @media screen and (min-width: 900px) {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        @media screen and (max-width: 768px) {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .payment_methods {
-          display: flex;
-          gap: 0.5rem;
-
-          svg {
-            font-size: 1.5rem;
-            fill: $base-dark-secondary;
-          }
-        }
-        .disclaimer {
-          display: flex;
-          align-items: center;
-          gap: 0.2rem;
-          margin-top: 1rem;
-          text-align: center;
-
-          p {
-            text-transform: uppercase;
-            font-size: 0.7rem;
-          }
-
-          svg {
-            font-size: 1.3rem;
-            fill: $base-success;
-          }
-
-          @media screen and (max-width: 500px) {
-            p {
-              font-size: 0.5rem;
+                    span {
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                        color: $base-dark-secondary;
+                    }
+                }
             }
-          }
+
+            .row2 {
+                h3 {
+                    text-transform: uppercase;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 0.8rem;
+
+                    span {
+                        font-size: 0.8rem;
+                        font-weight: 500;
+                        color: $base-dark-secondary;
+                    }
+                }
+            }
+
+            .row3 {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 1rem;
+
+                button {
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                small {
+                    text-align: center;
+                    font-size: 0.8rem;
+
+                    a {
+                        color: $base-dark;
+                        text-decoration: none;
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+
+            .row4 {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1rem;
+
+                @media screen and (min-width: 900px) {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                @media screen and (max-width: 768px) {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .payment_methods {
+                    display: flex;
+                    gap: 0.5rem;
+
+                    svg {
+                        font-size: 1.5rem;
+                        fill: $base-dark-secondary;
+                    }
+                }
+                .disclaimer {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.2rem;
+                    margin-top: 1rem;
+                    text-align: center;
+
+                    p {
+                        text-transform: uppercase;
+                        font-size: 0.7rem;
+                    }
+
+                    svg {
+                        font-size: 1.3rem;
+                        fill: $base-success;
+                    }
+
+                    @media screen and (max-width: 500px) {
+                        p {
+                            font-size: 0.5rem;
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

@@ -14,8 +14,8 @@ const reducers = combineReducers({ cart, country, categories, expandableSidebar 
 
 // config
 const config = {
-  key: "root",
-  storage,
+    key: "root",
+    storage,
 };
 
 // persist reducer
@@ -23,9 +23,9 @@ const persistedReducer = persistReducer(config, reducers);
 
 // store
 const store = configureStore({
-  reducer: persistedReducer,
-  devTools: process.env.NODE_ENV === "development",
-  middleware: [thunk],
+    reducer: persistedReducer,
+    devTools: process.env.NODE_ENV === "development",
+    middleware: [thunk],
 });
 
 export default store;

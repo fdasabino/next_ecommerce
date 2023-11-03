@@ -5,29 +5,29 @@ import FlashDealsSwiper from "../FlashDealsSwiper/FlashDealsSwiper";
 import styles from "./FlashDeals.module.scss";
 
 const FlashDeals = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-  const renderFlashDeals = () => {
-    return (
-      <section className={styles.flash_deals}>
-        <div className={styles.flash_deals__header}>
-          <h2>
-            Flash Deals
-            <MdFlashOn />
-          </h2>
-        </div>
-        {!isMobile && (
-          <div className={styles.flash_deals__countdown}>
-            <CountDown date={new Date(2023, 11, 25)} />
-          </div>
-        )}
-        <div className={styles.flash_deals__container}>
-          <FlashDealsSwiper />
-        </div>
-      </section>
-    );
-  };
+    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+    const renderFlashDeals = () => {
+        return (
+            <section className={styles.flash_deals}>
+                <div className={styles.flash_deals__header}>
+                    <h2>
+                        Flash Deals
+                        <MdFlashOn />
+                    </h2>
+                </div>
+                {!isMobile && (
+                    <div className={styles.flash_deals__countdown}>
+                        <CountDown date={new Date(2023, 11, 25)} />
+                    </div>
+                )}
+                <div className={styles.flash_deals__container}>
+                    <FlashDealsSwiper />
+                </div>
+            </section>
+        );
+    };
 
-  return renderFlashDeals();
+    return renderFlashDeals();
 };
 
 export default FlashDeals;

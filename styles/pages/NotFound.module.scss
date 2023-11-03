@@ -1,65 +1,65 @@
 .not_found {
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 1000px;
-  margin: 0 auto;
-
-  &__container {
+    user-select: none;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    max-width: 500px;
-    width: 100%;
-    background-image: url("/svgs/animated_shape.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    justify-content: flex-start;
+    max-width: 1000px;
+    margin: 0 auto;
 
-    @media screen and (max-width: 500px) {
-      max-width: 350px;
-      margin-top: 1rem;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;
+        width: 100%;
+        background-image: url("/svgs/animated_shape.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @media screen and (max-width: 500px) {
+            max-width: 350px;
+            margin-top: 1rem;
+        }
+
+        border: 2px solid $base-grey;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: $base-shadow-3;
+
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin: 1rem 0;
+
+            @media screen and (max-width: 500px) {
+                font-size: 2rem;
+            }
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 1.7rem;
+
+            @media screen and (max-width: 500px) {
+                font-size: 1.2rem;
+            }
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+
+            @media screen and (max-width: 500px) {
+                font-size: 0.9rem;
+            }
+        }
     }
-
-    border: 2px solid $base-grey;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: $base-shadow-3;
-
-    img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin: 1rem 0;
-
-      @media screen and (max-width: 500px) {
-        font-size: 2rem;
-      }
-    }
-
-    h2 {
-      text-transform: uppercase;
-      font-size: 1.7rem;
-
-      @media screen and (max-width: 500px) {
-        font-size: 1.2rem;
-      }
-    }
-
-    p {
-      font-size: 1rem;
-      margin: 1rem 0;
-      text-align: center;
-
-      @media screen and (max-width: 500px) {
-        font-size: 0.9rem;
-      }
-    }
-  }
 }

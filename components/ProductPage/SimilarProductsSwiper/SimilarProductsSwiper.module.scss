@@ -1,32 +1,32 @@
 .similar_product_swiper {
-  width: 100%;
-  max-width: 1200px;
-  height: fit-content;
-  margin: 0 auto;
-
-  &__title {
-    background: $base-dark-secondary;
-    margin: 3rem 1.5rem 0 1.5rem;
-
-    h2 {
-      display: flex;
-      align-items: center;
-      color: $base-white;
-      gap: 0.5rem;
-      font-size: 1.8rem;
-      font-weight: 500;
-      padding: 0 0.5rem;
-      text-transform: uppercase;
-
-      @media (max-width: 768px) {
-        font-size: 1.5rem;
-      }
-    }
-  }
-
-  &__container {
     width: 100%;
-    height: 100%;
-    padding: 1.5rem;
-  }
+    max-width: 1200px;
+    height: fit-content;
+    margin: 0 auto;
+
+    &__title {
+        background: $base-dark-secondary;
+        margin: 3rem 1.5rem 0 1.5rem;
+
+        h2 {
+            display: flex;
+            align-items: center;
+            color: $base-white;
+            gap: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 500;
+            padding: 0 0.5rem;
+            text-transform: uppercase;
+
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        padding: 1.5rem;
+    }
 }

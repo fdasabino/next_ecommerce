@@ -1,91 +1,91 @@
 .product_card {
-  position: relative;
-  width: 100%;
-  max-width: 180px;
-  height: fit-content;
-  margin: 1rem 0;
-
-  @media (max-width: 830px) {
-    max-width: 150px;
-    margin: 0.5rem;
-  }
-
-  &__info {
+    position: relative;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 180px;
+    height: fit-content;
+    margin: 1rem 0;
 
-    h2 {
-      font-size: 0.8rem;
-      white-space: pre-wrap;
-      text-align: center;
-      font-weight: 400;
-      margin: 0;
-      color: $base-dark-secondary;
-    }
-    span {
-      color: $base-error-secondary;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      font-size: 0.8rem;
-    }
-  }
-
-  &__colors {
-    position: absolute;
-    top: 0;
-    left: -30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    transition: all 0.3s linear;
-    z-index: 5;
-
-    img {
-      width: 1.5rem;
-      height: 1.5rem;
-
-      object-fit: cover;
-
-      border: 1px solid $base-dark-secondary;
-      border-radius: 50%;
-
-      cursor: pointer;
-      outline-offset: 1.5px !important;
-
-      &:hover {
-        outline: 1.5px solid $base-orange;
-      }
-    }
-    .active {
-      outline: 1.5px solid $base-orange;
+    @media (max-width: 830px) {
+        max-width: 150px;
+        margin: 0.5rem;
     }
 
-    span {
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-  }
+    &__info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-  &__discount {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 0.5rem;
-    background-color: rgba($color: $base-orange, $alpha: 0.5);
-    color: $base-white;
-    font-weight: 600;
-    font-size: 0.8rem;
-    z-index: 5;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
+        h2 {
+            font-size: 0.8rem;
+            white-space: pre-wrap;
+            text-align: center;
+            font-weight: 400;
+            margin: 0;
+            color: $base-dark-secondary;
+        }
+        span {
+            color: $base-error-secondary;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+        }
+    }
+
+    &__colors {
+        position: absolute;
+        top: 0;
+        left: -30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        transition: all 0.3s linear;
+        z-index: 5;
+
+        img {
+            width: 1.5rem;
+            height: 1.5rem;
+
+            object-fit: cover;
+
+            border: 1px solid $base-dark-secondary;
+            border-radius: 50%;
+
+            cursor: pointer;
+            outline-offset: 1.5px !important;
+
+            &:hover {
+                outline: 1.5px solid $base-orange;
+            }
+        }
+        .active {
+            outline: 1.5px solid $base-orange;
+        }
+
+        span {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    }
+
+    &__discount {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 0.5rem;
+        background-color: rgba($color: $base-orange, $alpha: 0.5);
+        color: $base-white;
+        font-weight: 600;
+        font-size: 0.8rem;
+        z-index: 5;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
 }

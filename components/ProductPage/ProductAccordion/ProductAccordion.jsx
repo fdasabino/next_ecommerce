@@ -5,36 +5,36 @@ import { BsChevronDown } from "react-icons/bs";
 import styles from "./ProductAccordion.module.scss";
 
 const ProductAccordion = ({ details }) => {
-  return (
-    <div className={styles.product_accordion}>
-      <Accordion className={styles.product_accordion__wrapper}>
-        <AccordionSummary
-          expandIcon={<BsChevronDown />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          className={styles.product_accordion__title}
-        >
-          <h3>Product details</h3>
-        </AccordionSummary>
+    return (
+        <div className={styles.product_accordion}>
+            <Accordion className={styles.product_accordion__wrapper}>
+                <AccordionSummary
+                    expandIcon={<BsChevronDown />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    className={styles.product_accordion__title}
+                >
+                    <h3>Product details</h3>
+                </AccordionSummary>
 
-        {details.map((detail, i) => {
-          if (detail.name === "Color") return;
-          return (
-            <AccordionDetails key={detail._id}>
-              <div className={styles.product_accordion__details}>
-                <div className={styles.product_accordion__details_left}>
-                  <h3>{detail.name}:</h3>
-                </div>
-                <div className={styles.product_accordion__details_right}>
-                  <h3>{detail.value}</h3>
-                </div>
-              </div>
-            </AccordionDetails>
-          );
-        })}
-      </Accordion>
-    </div>
-  );
+                {details.map((detail, i) => {
+                    if (detail.name === "Color") return;
+                    return (
+                        <AccordionDetails key={detail._id}>
+                            <div className={styles.product_accordion__details}>
+                                <div className={styles.product_accordion__details_left}>
+                                    <h3>{detail.name}:</h3>
+                                </div>
+                                <div className={styles.product_accordion__details_right}>
+                                    <h3>{detail.value}</h3>
+                                </div>
+                            </div>
+                        </AccordionDetails>
+                    );
+                })}
+            </Accordion>
+        </div>
+    );
 };
 
 export default ProductAccordion;

@@ -1,21 +1,21 @@
 .order {
-  user-select: none;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+    user-select: none;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 
-  &__wrapper {
-    margin: 0 2rem;
-  }
-
-  &__main {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 2rem;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
+    &__wrapper {
+        margin: 0 2rem;
     }
-  }
+
+    &__main {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        margin-bottom: 2rem;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
 }

@@ -1,67 +1,67 @@
 .order__header {
-  margin: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  div {
+    margin: 0 2rem;
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-    @media (max-width: 768px) {
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    p {
-      color: $base-dark;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      span {
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: 0.9rem;
+    div {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
 
         @media (max-width: 768px) {
-          font-size: 0.8rem;
+            align-items: center;
+            gap: 0.5rem;
         }
-      }
-    }
-  }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+        p {
+            color: $base-dark;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            span {
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 0.9rem;
 
-  h2 {
-    white-space: nowrap;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    svg {
-      width: 1.6rem;
-      height: 1.6rem;
+                @media (max-width: 768px) {
+                    font-size: 0.8rem;
+                }
+            }
+        }
     }
 
-    @media (max-width: 600px) {
-      font-size: 1.4rem;
-
-      svg {
-        width: 1.4rem;
-        height: 1.4rem;
-      }
+    @media (max-width: 768px) {
+        flex-direction: column;
     }
 
-    @media (max-width: 400px) {
-      font-size: 1.2rem;
+    h2 {
+        white-space: nowrap;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        svg {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
 
-      svg {
-        width: 1.2rem;
-        height: 1.2rem;
-      }
+        @media (max-width: 600px) {
+            font-size: 1.4rem;
+
+            svg {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            font-size: 1.2rem;
+
+            svg {
+                width: 1.2rem;
+                height: 1.2rem;
+            }
+        }
     }
-  }
 }

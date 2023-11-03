@@ -1,130 +1,130 @@
 .form_input {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  height: 45px;
-
-  background: $base-white;
-  border: 1px solid $base-grey;
-
-  padding: 0.4rem 0.5rem;
-  margin: 10px 0;
-  border-radius: 5px;
-
-  display: grid;
-  grid-template-columns: 10% auto 10%;
-  align-items: center;
-  justify-items: center;
-
-  margin-bottom: 1rem;
-
-  /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  /* Firefox */
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
-
-  &:focus-within {
-    outline: 1px solid $base-info;
-  }
-
-  svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    stroke: $base-info;
-    fill: $base-info;
-  }
-
-  input {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0.5rem 0.5rem;
-    line-height: 1;
-    font-weight: 500;
-    font-size: 0.8rem;
-    color: $base-dark-secondary;
+    position: relative;
     width: 100%;
+    max-width: 100%;
+    height: 45px;
 
-    &:disabled {
-      cursor: not-allowed;
+    background: $base-white;
+    border: 1px solid $base-grey;
+
+    padding: 0.4rem 0.5rem;
+    margin: 10px 0;
+    border-radius: 5px;
+
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    align-items: center;
+    justify-items: center;
+
+    margin-bottom: 1rem;
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 
-    &::placeholder {
-      color: $base-dark-grey;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      text-align: center;
-      @media (max-width: 480px) {
-        font-size: 0.6rem;
-      }
+    /* Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
     }
-  }
 
-  .password_icon {
-    cursor: pointer;
+    &:focus-within {
+        outline: 1px solid $base-info;
+    }
+
     svg {
-      width: 1.3rem !important;
-      height: 1.3rem !important;
-      stroke: $base-dark !important;
+        width: 1.5rem;
+        height: 1.5rem;
+        stroke: $base-info;
+        fill: $base-info;
     }
-  }
+
+    input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 0.5rem 0.5rem;
+        line-height: 1;
+        font-weight: 500;
+        font-size: 0.8rem;
+        color: $base-dark-secondary;
+        width: 100%;
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+
+        &::placeholder {
+            color: $base-dark-grey;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            text-align: center;
+            @media (max-width: 480px) {
+                font-size: 0.6rem;
+            }
+        }
+    }
+
+    .password_icon {
+        cursor: pointer;
+        svg {
+            width: 1.3rem !important;
+            height: 1.3rem !important;
+            stroke: $base-dark !important;
+        }
+    }
 }
 
 .wrapper_error {
-  border: 1px solid $base-light-error;
+    border: 1px solid $base-light-error;
 
-  &:focus-within {
-    outline: 1px solid $base-light-error;
-  }
+    &:focus-within {
+        outline: 1px solid $base-light-error;
+    }
 
-  svg {
-    stroke: $base-light-error;
-    fill: $base-light-error;
-  }
+    svg {
+        stroke: $base-light-error;
+        fill: $base-light-error;
+    }
 }
 
 .error_message {
-  position: relative;
-  max-width: 100%;
-  width: 100%;
-  background-color: $base-error;
-  border-radius: 10px;
-  padding: 0.7rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  @media (max-width: 700px) {
+    position: relative;
     max-width: 100%;
-  }
+    width: 100%;
+    background-color: $base-error;
+    border-radius: 10px;
+    padding: 0.7rem;
 
-  span {
-    position: absolute;
-    bottom: -10px;
-    left: 1rem;
-    border-top: 10px solid $base-error;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  p {
-    color: $base-white !important;
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
+    @media (max-width: 700px) {
+        max-width: 100%;
+    }
 
-  svg {
-    width: 20px;
-    height: 20px;
-    stroke: $base-white !important;
-    fill: $base-white !important;
-  }
+    span {
+        position: absolute;
+        bottom: -10px;
+        left: 1rem;
+        border-top: 10px solid $base-error;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+
+    p {
+        color: $base-white !important;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+        stroke: $base-white !important;
+        fill: $base-white !important;
+    }
 }

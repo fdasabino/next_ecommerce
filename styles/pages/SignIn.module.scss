@@ -1,105 +1,105 @@
 .signin {
-  position: relative;
-  max-width: 1000px;
-  overflow: hidden;
-  user-select: none;
-  margin: 0 auto;
+    position: relative;
+    max-width: 1000px;
+    overflow: hidden;
+    user-select: none;
+    margin: 0 auto;
 
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 4rem;
-  }
-
-  &__container {
-    padding: 1rem;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  &__form {
-    margin-top: 1rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
+
     @media (max-width: 768px) {
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      margin: 0;
-    }
-
-    p {
-      color: $base-grey;
-      font-size: 0.9rem;
-
-      @media (max-width: 768px) {
-        font-size: 0.8rem;
-      }
-    }
-
-    form {
-      width: 100%;
-      max-width: 350px;
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      button {
-        width: 100% !important;
-        max-width: 100% !important;
-      }
-
-      .forgot_password {
-        display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        margin-top: 1rem;
-        max-width: 350px;
-
-        a {
-          color: $base-dark;
-          font-size: 0.85rem;
-          transition: all 0.1s linear;
-
-          &:hover {
-            color: $base-blue;
-          }
-        }
-      }
+        margin-bottom: 4rem;
     }
-  }
+
+    &__container {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    &__form {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @media (max-width: 768px) {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        p {
+            color: $base-grey;
+            font-size: 0.9rem;
+
+            @media (max-width: 768px) {
+                font-size: 0.8rem;
+            }
+        }
+
+        form {
+            width: 100%;
+            max-width: 350px;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            button {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .forgot_password {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1rem;
+                max-width: 350px;
+
+                a {
+                    color: $base-dark;
+                    font-size: 0.85rem;
+                    transition: all 0.1s linear;
+
+                    &:hover {
+                        color: $base-blue;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .signin__providers {
-  user-select: none;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  span {
-    position: relative;
-    color: $base-grey;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    width: 100%;
-    text-align: center;
-  }
-
-  .provider_container {
-    max-width: 350px;
+    user-select: none;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-  }
+
+    span {
+        position: relative;
+        color: $base-grey;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .provider_container {
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

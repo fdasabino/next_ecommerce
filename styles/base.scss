@@ -28,80 +28,80 @@ $base-cubic-bezier: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $base-button-transition: all 1s linear;
 
 .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
 
-  @media (max-width: 768px) {
-    padding: 0.5rem;
-  }
+    @media (max-width: 768px) {
+        padding: 0.5rem;
+    }
 }
 
 .mx_4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .swiper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-height: fit-content !important;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: fit-content !important;
 
-  .swiper-button-prev,
-  .swiper-button-next {
-    position: absolute;
-    top: 90% !important;
-    transition: all 0.2s ease-in-out 0s !important;
-    width: 50px !important;
-    height: 50px !important;
-    color: $base-dark !important;
-    background-color: rgba(0, 0, 0, 0) !important;
-    scale: 0.5 !important;
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: absolute;
+        top: 90% !important;
+        transition: all 0.2s ease-in-out 0s !important;
+        width: 50px !important;
+        height: 50px !important;
+        color: $base-dark !important;
+        background-color: rgba(0, 0, 0, 0) !important;
+        scale: 0.5 !important;
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1) !important;
-      scale: 1 !important;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+            scale: 1 !important;
+        }
     }
-  }
 
-  .swiper-button-prev {
-    left: 0 !important;
-  }
+    .swiper-button-prev {
+        left: 0 !important;
+    }
 
-  .swiper-button-next {
-    right: 0 !important;
-  }
+    .swiper-button-next {
+        right: 0 !important;
+    }
 }
 
 .swiper-slide {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 
-  @media (max-width: 768px) {
-    object-position: center center;
-  }
+    @media (max-width: 768px) {
+        object-position: center center;
+    }
 }
 
 .swiper-pagination-bullet,
 .swiper-pagination-bullet-active {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 // zoom image package
 .zoomed-image {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  max-width: 100%;
-  cursor: pointer;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-width: 100%;
+    cursor: pointer;
 }

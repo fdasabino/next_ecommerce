@@ -19,329 +19,352 @@ import Share from "../Share/Share";
 import styles from "./ProductInfo.module.scss";
 
 const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => {
-  const {
-    name,
-    reviews,
-    numReviews,
-    discount,
-    priceBeforeDiscount,
-    price,
-    priceRange,
-    shipping,
-    colors,
-    slug,
-    sizes,
-    quantity,
-    subProducts,
-  } = product;
+    const {
+        name,
+        reviews,
+        numReviews,
+        discount,
+        priceBeforeDiscount,
+        price,
+        priceRange,
+        shipping,
+        colors,
+        slug,
+        sizes,
+        quantity,
+        subProducts,
+    } = product;
 
-  const router = useRouter();
-  const { color, size } = router.query;
-  const [selectedSize, setSelectedSize] = useState(parseInt(size));
-  const [selectedColor, setSelectedColor] = useState(parseInt(color));
-  const [cartQuantity, setCartQuantity] = useState(1);
-  const arrayOfRatings = reviews.map((review) => review.rating);
-  const averageRating =
-    arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length || 0;
-  const selectedSizeValue = selectedSize || size;
-  const selectedColorValue = selectedColor || color;
-  const isColorSelected = selectedColorValue === 0;
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
-  const { data: session } = useSession();
+    const router = useRouter();
+    const { color, size } = router.query;
+    const [selectedSize, setSelectedSize] = useState(parseInt(size));
+    const [selectedColor, setSelectedColor] = useState(parseInt(color));
+    const [cartQuantity, setCartQuantity] = useState(1);
+    const arrayOfRatings = reviews.map((review) => review.rating);
+    const averageRating =
+        arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length || 0;
+    const selectedSizeValue = selectedSize || size;
+    const selectedColorValue = selectedColor || color;
+    const isColorSelected = selectedColorValue === 0;
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.cart);
+    const { data: session } = useSession();
 
-  useEffect(() => {
-    if (!selectedSize) {
-      setSelectedSize(size);
-    }
-    if (selectedSizeValue && selectedColorValue) {
-      setCartQuantity(1);
-    }
-  }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
+    useEffect(() => {
+        if (!selectedSize) {
+            setSelectedSize(size);
+        }
+        if (selectedSizeValue && selectedColorValue) {
+            setCartQuantity(1);
+        }
+    }, [selectedSize, size, selectedColorValue, selectedSizeValue]);
 
-  const handleAddToCart = async () => {
-    const { data } = await axios.get(
-      `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
-    );
+    const handleAddToCart = async () => {
+        const { data } = await axios.get(
+            `/api/product/${product._id}?color=${selectedColorValue}&size=${selectedSizeValue}`
+        );
 
-    let _uid = `${product._id}_${selectedColorValue}_${selectedSizeValue}`;
-    let existingProduct = cart.cartItems.find((item) => item._uid === _uid);
+        let _uid = `${product._id}_${selectedColorValue}_${selectedSizeValue}`;
+        let existingProduct = cart.cartItems.find((item) => item._uid === _uid);
 
-    if (!selectedColorValue) {
-      toast.error("Please select a color...");
-      return;
-    }
-
-    if (!selectedSizeValue) {
-      toast.error("Please select a size...");
-      return;
-    }
-
-    if (cartQuantity > data.quantity) {
-      toast.error(`The maximum quantity available is ${data.quantity} items...`);
-      return;
-    }
-
-    if (data.quantity === 0) {
-      toast.error(`This product is out of stock...`);
-      return;
-    }
-
-    if (existingProduct) {
-      let newCart = cart.cartItems.map((item) => {
-        if (item._uid === existingProduct._uid) {
-          return { ...item, addedQuantity: cartQuantity, discount };
+        if (!selectedColorValue) {
+            toast.error("Please select a color...");
+            return;
         }
 
-        return item;
-      });
+        if (!selectedSizeValue) {
+            toast.error("Please select a size...");
+            return;
+        }
 
-      dispatch(updateCart(newCart));
+        if (cartQuantity > data.quantity) {
+            toast.error(`The maximum quantity available is ${data.quantity} items...`);
+            return;
+        }
 
-      if (cartQuantity === existingProduct.addedQuantity) {
-        toast.info(
-          `The quantity of "${data.name}" (${data.size.size}) in your cart is already (${cartQuantity}x).`
-        );
-        return;
-      }
+        if (data.quantity === 0) {
+            toast.error(`This product is out of stock...`);
+            return;
+        }
 
-      toast.info(
-        `The quantity of "${data.name}" (${data.size.size}) in your cart has been updated to (${cartQuantity}x).`
-      );
-    } else {
-      dispatch(
-        addToCart({ ...data, addedQuantity: cartQuantity, size: data.size, _uid, discount })
-      );
-      toast.success(
-        `Added (${cartQuantity}x) "${data.name}", size ${data.size.size}, to your cart.`
-      );
-    }
-  };
+        if (existingProduct) {
+            let newCart = cart.cartItems.map((item) => {
+                if (item._uid === existingProduct._uid) {
+                    return { ...item, addedQuantity: cartQuantity, discount };
+                }
 
-  const increaseCartQuantity = () => {
-    if (cartQuantity >= quantity) {
-      toast.warning(`The maximum quantity available is ${quantity} items...`);
-      return;
-    }
+                return item;
+            });
 
-    setCartQuantity((prev) => prev + 1);
-  };
+            dispatch(updateCart(newCart));
 
-  const decreaseCartQuantity = () => {
-    if (cartQuantity > 1) {
-      setCartQuantity((prev) => prev - 1);
-    }
-  };
+            if (cartQuantity === existingProduct.addedQuantity) {
+                toast.info(
+                    `The quantity of "${data.name}" (${data.size.size}) in your cart is already (${cartQuantity}x).`
+                );
+                return;
+            }
 
-  const getColorName = (color) => {
-    const colorName = GetColorName(color);
-    return colorName;
-  };
+            toast.info(
+                `The quantity of "${data.name}" (${data.size.size}) in your cart has been updated to (${cartQuantity}x).`
+            );
+        } else {
+            dispatch(
+                addToCart({ ...data, addedQuantity: cartQuantity, size: data.size, _uid, discount })
+            );
+            toast.success(
+                `Added (${cartQuantity}x) "${data.name}", size ${data.size.size}, to your cart.`
+            );
+        }
+    };
 
-  const addToWishlist = async (id, colorIndex) => {
-    try {
-      if (!session) {
-        return signIn();
-      }
-      const { data } = await axios.patch("/api/user/wishlist", {
-        productId: id,
-        color: colorIndex,
-      });
-      if (data.added === true) {
-        toast.success(data.message);
-        setInWishlist(true);
-      }
-      if (data.exists === true) {
-        toast.info(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
+    const increaseCartQuantity = () => {
+        if (cartQuantity >= quantity) {
+            toast.warning(`The maximum quantity available is ${quantity} items...`);
+            return;
+        }
 
-  const removeFromWishlist = async (id, colorIndex) => {
-    try {
-      if (!session) {
-        return signIn();
-      }
-      const { data } = await axios.put(`/api/user/wishlist`, {
-        productId: id,
-        color: colorIndex,
-      });
-      if (data.removed === true) {
-        toast.info(data.message);
-        setInWishlist(false);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
+        setCartQuantity((prev) => prev + 1);
+    };
 
-  return (
-    <div className={styles.product_info}>
-      <div className={styles.product_info__container}>
-        {/* title */}
-        <div className={styles.product_info__title}>
-          <div className={styles.wrapper}>
-            <h1>{name}</h1>
-            {session && (
-              <Tooltip
-                title={inWishlist ? "Remove product from wishlist" : "Add to wishlist"}
-                TransitionComponent={Zoom}
-              >
-                <IconButton
-                  onClick={() =>
-                    inWishlist
-                      ? removeFromWishlist(product._id, color)
-                      : addToWishlist(product._id, color)
-                  }
-                >
-                  {inWishlist ? (
-                    <BsHeartFill size={18} color={"red"} />
-                  ) : (
-                    <BsHeart size={18} color={"red"} />
-                  )}
-                </IconButton>
-              </Tooltip>
-            )}
-          </div>
+    const decreaseCartQuantity = () => {
+        if (cartQuantity > 1) {
+            setCartQuantity((prev) => prev - 1);
+        }
+    };
 
-          <div className={styles.color}>
-            <span style={{ background: colors[color].color }} />
-            <small>{getColorName(colors[color].color)}</small>
-          </div>
-        </div>
+    const getColorName = (color) => {
+        const colorName = GetColorName(color);
+        return colorName;
+    };
 
-        {/* description */}
-        <div className={styles.product_info__description}>
-          <small>{product.description}</small>
-        </div>
+    const addToWishlist = async (id, colorIndex) => {
+        try {
+            if (!session) {
+                return signIn();
+            }
+            const { data } = await axios.patch("/api/user/wishlist", {
+                productId: id,
+                color: colorIndex,
+            });
+            if (data.added === true) {
+                toast.success(data.message);
+                setInWishlist(true);
+            }
+            if (data.exists === true) {
+                toast.info(data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    };
 
-        {/* accordion */}
-        <ProductAccordion details={product.details} />
+    const removeFromWishlist = async (id, colorIndex) => {
+        try {
+            if (!session) {
+                return signIn();
+            }
+            const { data } = await axios.put(`/api/user/wishlist`, {
+                productId: id,
+                color: colorIndex,
+            });
+            if (data.removed === true) {
+                toast.info(data.message);
+                setInWishlist(false);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
+    };
 
-        {/* reviews */}
-        <div className={styles.product_info__rating}>
-          <Rating
-            name="half-rating-read"
-            defaultValue={averageRating}
-            value={averageRating}
-            precision={0.5}
-            readOnly
-          />
-          <p>
-            {numReviews} {numReviews === 1 ? "/ review" : "/ reviews"}
-          </p>
-        </div>
-
-        {/* discount */}
-        {selectedSizeValue && (
-          <div className={styles.product_info__discount}>
-            {discount > 0 && (
-              <>
-                <small>{priceBeforeDiscount}$</small>
-                <p>(-{discount}%)</p>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* price */}
-        <div className={styles.product_info__price}>
-          {!selectedSizeValue && priceRange ? <p>{priceRange}</p> : <h2>{price.toFixed(2)}$</h2>}
-        </div>
-
-        {/* Shipping */}
-        <div className={styles.product_info__shipping}>
-          {shipping ? <small> {`+${shipping}$ shipping fee`}</small> : <span>Free Shipping</span>}
-        </div>
-
-        {/* colors */}
-        <div className={styles.product_info__colors}>
-          {!selectedColorValue || (isColorSelected && <h4>Select a color:</h4>)}
-          <div className={styles.wrapper}>
-            {colors.length > 0 &&
-              colors.map((c, i) => (
-                <Tooltip title={getColorName(c.color)} key={i}>
-                  <Link
-                    href={`/product/${slug}?color=${i}`}
-                    onClick={() => setSelectedColor(i)}
-                    onMouseEnter={() => setActiveImage(subProducts[i].images[0].url)}
-                    onTouchStart={() => setActiveImage(subProducts[i].images[0].url)}
-                    onMouseLeave={() => setActiveImage("")}
-                    onTouchEnd={() => setActiveImage("")}
-                  >
-                    <div className={`${+color === i && styles.activeColor}`}>
-                      <Image src={c.image} width={50} height={50} alt="current color" />
+    return (
+        <div className={styles.product_info}>
+            <div className={styles.product_info__container}>
+                {/* title */}
+                <div className={styles.product_info__title}>
+                    <div className={styles.wrapper}>
+                        <h1>{name}</h1>
+                        {session && (
+                            <Tooltip
+                                title={
+                                    inWishlist ? "Remove product from wishlist" : "Add to wishlist"
+                                }
+                                TransitionComponent={Zoom}
+                            >
+                                <IconButton
+                                    onClick={() =>
+                                        inWishlist
+                                            ? removeFromWishlist(product._id, color)
+                                            : addToWishlist(product._id, color)
+                                    }
+                                >
+                                    {inWishlist ? (
+                                        <BsHeartFill size={18} color={"red"} />
+                                    ) : (
+                                        <BsHeart size={18} color={"red"} />
+                                    )}
+                                </IconButton>
+                            </Tooltip>
+                        )}
                     </div>
-                  </Link>
-                </Tooltip>
-              ))}
-          </div>
-        </div>
 
-        {/* quantity available */}
-        <div className={styles.product_info__quantity}>
-          {selectedSizeValue ? (
-            <span>Availability: {quantity} items available</span>
-          ) : (
-            <small>{`Availability: ${sizes.reduce(
-              (acc, curr) => acc + curr.qty,
-              0
-            )} items for all sizes`}</small>
-          )}
-        </div>
+                    <div className={styles.color}>
+                        <span style={{ background: colors[color].color }} />
+                        <small>{getColorName(colors[color].color)}</small>
+                    </div>
+                </div>
 
-        {/* sizes */}
-        <div className={styles.product_info__sizes}>
-          {!selectedSizeValue && <h4>Select a size:</h4>}
-          <div className={styles.wrapper}>
-            {sizes &&
-              sizes.map((s, i) => (
-                <Link
-                  onTouchStart={() => setSelectedSize(i)}
-                  onClick={() => setSelectedSize(i)}
-                  key={i}
-                  href={`/product/${slug}?color=${color}&size=${i}`}
-                >
-                  <span
-                    className={`${styles.product_info__sizes_size} ${
-                      +size === i && styles.activeSize
-                    }`}
-                  >
-                    {s.size}
-                  </span>
-                </Link>
-              ))}
-          </div>
-        </div>
+                {/* description */}
+                <div className={styles.product_info__description}>
+                    <small>{product.description}</small>
+                </div>
 
-        {/* add to cart */}
-        <div className={styles.product_info__add_to_cart}>
-          <h5>Select Quantity:</h5>
-          <div className={styles.wrapper}>
-            <button onClick={decreaseCartQuantity} onTouchStart={decreaseCartQuantity}>
-              <TbMinus />
-            </button>
-            <span>{cartQuantity}</span>
-            <button onClick={increaseCartQuantity} onTouchStart={increaseCartQuantity}>
-              <TbPlus />
-            </button>
-          </div>
-        </div>
+                {/* accordion */}
+                <ProductAccordion details={product.details} />
 
-        {/* ctas */}
-        <div className={styles.product_info__ctas}>
-          <Button onClick={handleAddToCart} style="tertiary" disabled={quantity < 1 || !size}>
-            Add to cart <BsCartPlus size={20} />
-          </Button>
+                {/* reviews */}
+                <div className={styles.product_info__rating}>
+                    <Rating
+                        name="half-rating-read"
+                        defaultValue={averageRating}
+                        value={averageRating}
+                        precision={0.5}
+                        readOnly
+                    />
+                    <p>
+                        {numReviews} {numReviews === 1 ? "/ review" : "/ reviews"}
+                    </p>
+                </div>
+
+                {/* discount */}
+                {selectedSizeValue && (
+                    <div className={styles.product_info__discount}>
+                        {discount > 0 && (
+                            <>
+                                <small>{priceBeforeDiscount}$</small>
+                                <p>(-{discount}%)</p>
+                            </>
+                        )}
+                    </div>
+                )}
+
+                {/* price */}
+                <div className={styles.product_info__price}>
+                    {!selectedSizeValue && priceRange ? (
+                        <p>{priceRange}</p>
+                    ) : (
+                        <h2>{price.toFixed(2)}$</h2>
+                    )}
+                </div>
+
+                {/* Shipping */}
+                <div className={styles.product_info__shipping}>
+                    {shipping ? (
+                        <small> {`+${shipping}$ shipping fee`}</small>
+                    ) : (
+                        <span>Free Shipping</span>
+                    )}
+                </div>
+
+                {/* colors */}
+                <div className={styles.product_info__colors}>
+                    {!selectedColorValue || (isColorSelected && <h4>Select a color:</h4>)}
+                    <div className={styles.wrapper}>
+                        {colors.length > 0 &&
+                            colors.map((c, i) => (
+                                <Tooltip title={getColorName(c.color)} key={i}>
+                                    <Link
+                                        href={`/product/${slug}?color=${i}`}
+                                        onClick={() => setSelectedColor(i)}
+                                        onMouseEnter={() =>
+                                            setActiveImage(subProducts[i].images[0].url)
+                                        }
+                                        onTouchStart={() =>
+                                            setActiveImage(subProducts[i].images[0].url)
+                                        }
+                                        onMouseLeave={() => setActiveImage("")}
+                                        onTouchEnd={() => setActiveImage("")}
+                                    >
+                                        <div className={`${+color === i && styles.activeColor}`}>
+                                            <Image
+                                                src={c.image}
+                                                width={50}
+                                                height={50}
+                                                alt="current color"
+                                            />
+                                        </div>
+                                    </Link>
+                                </Tooltip>
+                            ))}
+                    </div>
+                </div>
+
+                {/* quantity available */}
+                <div className={styles.product_info__quantity}>
+                    {selectedSizeValue ? (
+                        <span>Availability: {quantity} items available</span>
+                    ) : (
+                        <small>{`Availability: ${sizes.reduce(
+                            (acc, curr) => acc + curr.qty,
+                            0
+                        )} items for all sizes`}</small>
+                    )}
+                </div>
+
+                {/* sizes */}
+                <div className={styles.product_info__sizes}>
+                    {!selectedSizeValue && <h4>Select a size:</h4>}
+                    <div className={styles.wrapper}>
+                        {sizes &&
+                            sizes.map((s, i) => (
+                                <Link
+                                    onTouchStart={() => setSelectedSize(i)}
+                                    onClick={() => setSelectedSize(i)}
+                                    key={i}
+                                    href={`/product/${slug}?color=${color}&size=${i}`}
+                                >
+                                    <span
+                                        className={`${styles.product_info__sizes_size} ${
+                                            +size === i && styles.activeSize
+                                        }`}
+                                    >
+                                        {s.size}
+                                    </span>
+                                </Link>
+                            ))}
+                    </div>
+                </div>
+
+                {/* add to cart */}
+                <div className={styles.product_info__add_to_cart}>
+                    <h5>Select Quantity:</h5>
+                    <div className={styles.wrapper}>
+                        <button onClick={decreaseCartQuantity} onTouchStart={decreaseCartQuantity}>
+                            <TbMinus />
+                        </button>
+                        <span>{cartQuantity}</span>
+                        <button onClick={increaseCartQuantity} onTouchStart={increaseCartQuantity}>
+                            <TbPlus />
+                        </button>
+                    </div>
+                </div>
+
+                {/* ctas */}
+                <div className={styles.product_info__ctas}>
+                    <Button
+                        onClick={handleAddToCart}
+                        style="tertiary"
+                        disabled={quantity < 1 || !size}
+                    >
+                        Add to cart <BsCartPlus size={20} />
+                    </Button>
+                </div>
+            </div>
+            <Share />
         </div>
-      </div>
-      <Share />
-    </div>
-  );
+    );
 };
 
 export default ProductInfo;
