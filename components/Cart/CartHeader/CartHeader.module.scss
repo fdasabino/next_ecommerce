@@ -25,11 +25,13 @@
 
     h2 {
       text-transform: uppercase;
-      font-size: 1.6rem;
-    }
-  }
+      font-size: 1.1rem;
 
-  .right {
+      span {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+    }
   }
 }
 
@@ -46,27 +48,29 @@
 
   h2 {
     text-transform: uppercase;
+    font-size: 1rem;
   }
 
   small {
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
 
   button {
     margin-top: 0.5rem;
   }
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     padding: 0.5rem;
     text-align: center;
     white-space: nowrap;
-  }
 
-  @media screen and (max-width: 500px) {
     h2 {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
     }
 
-    white-space: pre;
+    small {
+      font-size: 0.7rem;
+    }
   }
 }

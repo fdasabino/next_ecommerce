@@ -18,6 +18,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 1.1rem;
+      font-weight: 600;
     }
   }
 
@@ -37,9 +39,10 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 1rem;
+          font-size: 0.8rem;
 
           span {
+            font-size: 0.8rem;
             font-weight: 500;
             color: $base-dark-secondary;
           }
@@ -52,9 +55,10 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 1rem;
+          font-size: 0.8rem;
 
           span {
+            font-size: 0.8rem;
             font-weight: 500;
             color: $base-dark-secondary;
           }
@@ -74,6 +78,13 @@
 
         small {
           text-align: center;
+          font-size: 0.8rem;
+
+          a {
+            color: $base-dark;
+            text-decoration: none;
+            font-size: 0.8rem;
+          }
         }
       }
 

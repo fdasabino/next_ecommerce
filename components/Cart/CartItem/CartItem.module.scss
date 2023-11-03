@@ -45,6 +45,8 @@
     flex-direction: column;
 
     .wrapper {
+      width: 100%;
+      max-width: 100%;
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -57,9 +59,12 @@
       }
 
       .left {
+        width: 100%;
+        max-width: 100%;
         display: flex;
         gap: 1rem;
         align-items: center;
+        justify-content: space-between;
 
         @media (max-width: 768px) {
           flex-direction: column;
@@ -68,12 +73,16 @@
         }
 
         h3 {
-          text-align: center;
+          text-align: left;
           text-transform: uppercase;
-          font-size: 1.4rem;
+          font-size: 1rem;
           font-weight: 600;
           margin: 0;
           padding: 0;
+
+          @media (max-width: 768px) {
+            font-size: 0.8rem;
+          }
         }
 
         .divider {
@@ -88,11 +97,15 @@
 
         p {
           text-transform: uppercase;
-          text-align: center;
+          text-align: right;
           font-size: 1rem;
           font-weight: 500;
           margin: 0;
           padding: 0;
+
+          @media (max-width: 768px) {
+            font-size: 0.8rem;
+          }
         }
       }
       small {
@@ -112,9 +125,9 @@
 
     small {
       text-transform: uppercase;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 400;
-      margin: 0;
+      margin: 0.3rem 0;
       padding: 0;
       display: flex;
       justify-content: space-between;
@@ -126,7 +139,7 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 1rem;
+        font-size: 0.8rem;
 
         button {
           display: flex;
@@ -188,7 +201,8 @@
     .wrapper {
       display: flex;
       justify-content: space-between;
-
+      align-items: center;
+      margin-top: 0.5rem;
       .remove {
         text-transform: uppercase;
 
@@ -199,6 +213,8 @@
           gap: 0.5rem;
           cursor: pointer;
           transition: all 0.2s linear;
+          font-size: 0.8rem;
+
           &:hover {
             color: $base-redish;
           }
