@@ -20,7 +20,8 @@
 
     h2 {
       text-transform: uppercase;
-      font-size: 1.6rem;
+      font-size: 1.1rem;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -33,11 +34,13 @@
     }
 
     small {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 500;
 
       a {
+        font-size: 0.7rem;
+        font-weight: 500;
         color: $base-info;
         text-decoration: underline;
       }
@@ -82,6 +85,9 @@
       .item_details {
         display: flex;
         flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        padding: 0.5rem 1rem;
 
         h3 {
           font-size: 0.9rem;
@@ -98,17 +104,17 @@
         }
 
         p {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           font-weight: 600;
           text-transform: uppercase;
           color: $base-dark;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
 
           span {
-            font-weight: 700;
-          }
-
-          @media (max-width: 400px) {
             font-size: 0.7rem;
+            font-weight: 700;
           }
         }
       }

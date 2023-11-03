@@ -27,16 +27,23 @@
       width: 100%;
 
       h2 {
-        font-size: 1.6rem;
+        font-size: 1.1rem;
         text-transform: uppercase;
         display: flex;
         align-items: center;
         gap: 0.5rem;
         border-bottom: 1px solid #ff9100;
+
+        svg {
+          width: 1.1rem;
+          height: 1.1rem;
+        }
       }
 
       .header_wrapper {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
         gap: 1rem;
 
         @media (max-width: 600px) {
@@ -47,6 +54,7 @@
         button {
           width: 2rem;
           height: 1.5rem;
+
           svg {
             width: 0.7rem;
             height: 0.7rem;
@@ -54,7 +62,7 @@
         }
 
         small {
-          font-size: 0.8rem;
+          font-size: 0.7rem;
           text-transform: uppercase;
           font-weight: 600;
         }
@@ -230,6 +238,7 @@
             cursor: default;
             color: $base-success;
             text-align: center;
+            font-size: 0.8rem;
           }
 
           .btns {
@@ -260,19 +269,17 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
 
             @media (max-width: 800px) {
               max-width: 100%;
               width: 100%;
-              font-size: 1rem;
             }
 
             @media (max-width: 480px) {
               max-width: 100%;
               width: 100%;
-              font-size: 0.8rem;
             }
 
             svg {
