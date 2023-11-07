@@ -26,6 +26,11 @@ const AdminDashboard = ({ user, users, orders, products }) => {
         currency: "USD",
     });
 
+    const subProducts = products
+        .map((product) => product.subProducts)
+        .map((subProduct) => subProduct.length);
+    const subProductsCount = subProducts.reduce((acc, count) => acc + count, 0);
+
     const recentUsers = users.slice(0, 4);
     const recentOrders = orders.slice(0, 4);
 
@@ -44,6 +49,7 @@ const AdminDashboard = ({ user, users, orders, products }) => {
                     <AdminCard icon={<ImUsers />} title="Users" count={users.length} />
                     <AdminCard icon={<SlHandbag />} title="Orders" count={orders.length} />
                     <AdminCard icon={<FaThList />} title="Products" count={products.length} />
+                    <AdminCard icon={<FaThList />} title="Sub Products" count={subProductsCount} />
                 </div>
 
                 <div className={styles.data}>
@@ -53,6 +59,7 @@ const AdminDashboard = ({ user, users, orders, products }) => {
                             <Link href={"/admin/dashboard/orders"}>View all</Link>
                         )}
                     </div>
+
                     {orders.length > 0 && (
                         <div className={styles.orders}>
                             {recentOrders.map((order) => (
