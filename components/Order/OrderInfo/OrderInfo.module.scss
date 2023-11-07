@@ -24,9 +24,15 @@
         justify-content: center;
 
         p {
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
+
+            span {
+                font-size: 0.8rem;
+                font-weight: 400;
+                text-transform: uppercase;
+            }
 
             @media (max-width: 480px) {
                 font-size: 0.8rem;
