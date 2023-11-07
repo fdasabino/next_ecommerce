@@ -2,6 +2,7 @@
     border-top: 1px solid $base-grey;
     padding: 2rem;
     margin-top: 1rem;
+    min-height: fit-content !important;
 
     .sub_products {
         width: 100%;
@@ -10,7 +11,7 @@
         .swiper_container {
             width: 100% !important;
             max-width: 100% !important;
-            height: 400px !important;
+            height: fit-content !important;
         }
 
         .sub_product {
@@ -74,12 +75,14 @@
                     background-color: rgba($color: $base-blue, $alpha: 0.1);
                     color: $base-dark;
                     padding: 0.2rem 0.5rem;
+                    font-size: 0.8rem;
 
                     span {
                         display: flex;
                         align-items: center;
                         gap: 0.1rem;
                         font-weight: 600;
+                        font-size: 0.8rem;
 
                         svg {
                             width: 0.9rem;
@@ -97,6 +100,7 @@
                 background-color: rgba($color: $base-blue, $alpha: 0.1);
 
                 small {
+                    font-size: 0.8rem;
                     text-align: center;
                     text-transform: uppercase;
                     color: $base-dark;
@@ -115,7 +119,7 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 0.9rem;
+                        font-size: 0.8rem;
                         color: $base-dark;
                         background-color: $base-grey;
                         border: $base-blue 1px solid;
