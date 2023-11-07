@@ -74,6 +74,7 @@
                 gap: 0.1rem;
                 font-weight: 600;
                 color: $base-dark;
+                font-size: 0.8rem;
 
                 svg {
                     width: 0.9rem;
@@ -91,13 +92,15 @@
         width: 100%;
         max-width: 100%;
 
-        font-size: 0.7rem;
         font-weight: 600;
-        font-style: italic;
 
         color: $base-dark;
 
         margin: auto auto;
         padding: 0.5rem;
+
+        summary {
+            font-size: 0.7rem;
+        }
     }
 }
