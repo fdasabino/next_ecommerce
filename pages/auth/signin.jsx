@@ -35,28 +35,25 @@ export default SignIn;
 export async function getServerSideProps(context) {
     const { req, query } = context;
     const { callbackUrl } = query;
-    const session = await getSession({ req });
-    const csrfToken = await getCsrfToken(context);
-
-    // redirect to home if user is already logged in
-    if (session) {
-        return {
-            redirect: {
-                destination: callbackUrl,
-            },
-        };
-    }
-
     try {
+        const session = await getSession({ req });
+        const csrfToken = await getCsrfToken(context);
         const providers = await getProviders();
 
+        if (session) {
+            return {
+                redirect: {
+                    destination: callbackUrl,
+                },
+            };
+        }
         return {
             props: { providers, csrfToken, callbackUrl },
         };
     } catch (error) {
         console.error(error);
         return {
-            props: { providers: [] }, // return empty providers array if there's an error
+            props: { providers: [] },
         };
     }
 }
