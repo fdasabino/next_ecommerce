@@ -87,16 +87,16 @@
 // Buttons
 .btnPrimary {
     @include button-styles;
-    @include button-background($base-white, $base-info, $base-info, $base-info, $base-white, 0.98);
+    @include button-background($base-info, $base-white, $base-info, $base-blue, $base-white, 0.98);
 }
 
 .btnSecondary {
     @include button-styles;
     @include button-background(
+        $base-dark-secondary,
         $base-white,
         $base-dark-secondary,
-        $base-dark-secondary,
-        $base-dark-secondary,
+        $base-dark,
         $base-white,
         0.98
     );
@@ -105,10 +105,10 @@
 .btnTertiary {
     @include button-styles;
     @include button-background(
+        $base-success,
         $base-white,
         $base-success,
-        $base-success,
-        $base-success,
+        $base-green,
         $base-white,
         0.98
     );
@@ -117,10 +117,10 @@
 .btnDanger {
     @include button-styles;
     @include button-background(
+        $base-error,
         $base-white,
         $base-error,
-        $base-error,
-        $base-error,
+        $base-error-secondary,
         $base-white,
         0.98
     );
