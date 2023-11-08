@@ -1,18 +1,19 @@
 import Loader from "@/components/Layout/Loader/Loader";
 import RootLayout from "@/components/Layout/RootLayout/RootLayout";
 import store from "@/redux-store/index";
-import "@/styles/globals.scss";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+
+import "@/styles/globals.scss";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/navigation";
