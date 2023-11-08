@@ -58,23 +58,16 @@ export async function getServerSideProps() {
             .populate({ path: "subCategories", model: SubCategory })
             .lean()
             .exec();
-        const serializedProducts = JSON.parse(JSON.stringify(products));
-        const productsArray = serializedProducts;
-
         const categories = await Category.find({}).lean().exec();
-        const serializedCategories = JSON.parse(JSON.stringify(categories));
-        const categoriesArray = Object.values(serializedCategories);
-
         const { data } = await axios.get(
             `https://api.ipregistry.co/?key=${process.env.NEXT_APP_IP_REGISTRY_API}`
         );
-        const country = data.location.country;
 
         return {
             props: {
-                products: productsArray,
-                categories: categoriesArray,
-                country,
+                products: JSON.parse(JSON.stringify(products)),
+                categories: JSON.parse(JSON.stringify(categories)),
+                country: data.location.country,
             },
         };
     } catch (error) {
