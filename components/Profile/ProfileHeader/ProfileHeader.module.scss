@@ -1,0 +1,93 @@
+.profile_header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas: "left center right";
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas: "left" "right";
+    }
+
+    &__left {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        @media (max-width: 768px) {
+            flex-direction: row;
+            margin-left: 3rem;
+        }
+
+        &__avatar {
+            width: 100%;
+            height: 100%;
+            max-width: 50px;
+            max-height: 50px;
+            min-width: 30px;
+            min-height: 30px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &__wrapper {
+            width: 100%;
+            margin-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @media (max-width: 768px) {
+                margin-left: 0;
+                align-items: flex-start;
+            }
+        }
+
+        &__name,
+        &__email {
+            p {
+                font-size: 0.9rem;
+                font-weight: 500;
+
+                @media (max-width: 768px) {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+    &__center {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+    &__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+    }
+}
