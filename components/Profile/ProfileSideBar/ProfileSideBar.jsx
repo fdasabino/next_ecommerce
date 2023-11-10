@@ -12,7 +12,7 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
     return (
         <div className={`${styles.profile_sidebar} ${isExpanded ? styles.expanded : ""}`}>
             <div className={styles.header}>
-                <span>User Panel</span>
+                <h4>User Panel</h4>
                 <AiOutlineClose onClick={toggleSidebar} />
             </div>
             <hr />

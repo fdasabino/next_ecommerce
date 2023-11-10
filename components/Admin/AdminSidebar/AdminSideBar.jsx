@@ -13,7 +13,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
     return (
         <div className={`${styles.admin_sidebar} ${isExpanded ? styles.expanded : ""}`}>
             <div className={styles.header}>
-                <span>Admin Panel</span>
+                <h4>Admin Panel</h4>
                 <AiOutlineClose onClick={toggleSidebar} />
             </div>
             <hr />
