@@ -1,7 +1,12 @@
 import Hamburger from "hamburger-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { AiFillMessage, AiFillStar } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
+import { FaRegAddressCard } from "react-icons/fa";
+import { GoPackageDependents } from "react-icons/go";
 import { IoCogSharp } from "react-icons/io5";
+import { RiLogoutCircleFill } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
 import styles from "./ProfileHeader.module.scss";
 
@@ -10,6 +15,49 @@ const ProfileHeader = ({ toggleSidebar, isExpanded, user, path }) => {
     const isMedium = useMediaQuery({ query: "(max-width: 768px)" });
     const isLarge = useMediaQuery({ query: "(min-width: 800px)" });
     const { data: session } = useSession(); // backup session
+    const splitPath = path.split("/")[path.split("/").length - 1];
+
+    const renderTitle = () => {
+        switch (splitPath) {
+            case "profile":
+                return (
+                    <>
+                        <CgProfile />
+                        <h2>Profile</h2>
+                    </>
+                );
+            case "orders":
+                return (
+                    <>
+                        <GoPackageDependents />
+                        <h2>Orders</h2>
+                    </>
+                );
+            case "messages":
+                return (
+                    <>
+                        <AiFillMessage />
+                        <h2>Messages</h2>
+                    </>
+                );
+            case "addresses":
+                return (
+                    <>
+                        <FaRegAddressCard />
+                        <h2>Addresses</h2>
+                    </>
+                );
+            case "wishlist":
+                return (
+                    <>
+                        <AiFillStar />
+                        <h2>Wishlist</h2>
+                    </>
+                );
+            default:
+                return null;
+        }
+    };
 
     return (
         <div className={styles.profile_header}>
@@ -32,14 +80,7 @@ const ProfileHeader = ({ toggleSidebar, isExpanded, user, path }) => {
                         </div>
                     </div>
                 </div>
-                {isLarge && (
-                    <div className={styles.col}>
-                        <h2>
-                            <IoCogSharp />
-                            {path.split("/")[path.split("/").length - 1]}
-                        </h2>
-                    </div>
-                )}
+                {isLarge && <div className={styles.col}>{renderTitle()}</div>}
                 <div className={styles.col}>
                     <Hamburger
                         toggled={isExpanded}

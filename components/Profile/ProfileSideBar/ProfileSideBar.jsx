@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { AiFillMessage, AiOutlineClose } from "react-icons/ai";
+import { AiFillMessage, AiFillStar, AiOutlineClose } from "react-icons/ai";
+import { BiMessageSquareDots } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { FaRegAddressCard } from "react-icons/fa";
+import { GoPackageDependents } from "react-icons/go";
 import { IoNotificationsCircleSharp } from "react-icons/io5";
-import { MdSpaceDashboard } from "react-icons/md";
 import { RiLogoutCircleFill, RiSettings2Fill } from "react-icons/ri";
 import styles from "./ProfileSideBar.module.scss";
 
@@ -16,7 +19,39 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
             <ul className={styles.nav_list}>
                 <li className={`${styles.nav_item} ${path === "/profile" ? styles.active : ""}`}>
                     <Link onClick={toggleSidebar} href="/profile">
-                        <MdSpaceDashboard /> Dashboard
+                        <CgProfile /> Profile
+                    </Link>
+                </li>
+                <li
+                    className={`${styles.nav_item} ${
+                        path === "/profile/orders" ? styles.active : ""
+                    }`}>
+                    <Link onClick={toggleSidebar} href="/profile/orders">
+                        <GoPackageDependents /> Orders
+                    </Link>
+                </li>
+                <li
+                    className={`${styles.nav_item} ${
+                        path === "/profile/messages" ? styles.active : ""
+                    }`}>
+                    <Link onClick={toggleSidebar} href="/profile/messages">
+                        <BiMessageSquareDots /> Messages
+                    </Link>
+                </li>
+                <li
+                    className={`${styles.nav_item} ${
+                        path === "/profile/addresses" ? styles.active : ""
+                    }`}>
+                    <Link onClick={toggleSidebar} href="/profile/addresses">
+                        <FaRegAddressCard /> Addresses
+                    </Link>
+                </li>
+                <li
+                    className={`${styles.nav_item} ${
+                        path === "/profile/wishlist" ? styles.active : ""
+                    }`}>
+                    <Link onClick={toggleSidebar} href="/profile/wishlist">
+                        <AiFillStar /> Wishlist
                     </Link>
                 </li>
             </ul>

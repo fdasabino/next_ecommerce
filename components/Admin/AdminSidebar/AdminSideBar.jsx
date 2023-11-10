@@ -23,8 +23,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                 <li
                     className={`${styles.nav_item} ${
                         path === "/admin/dashboard" ? styles.active : ""
-                    }`}
-                >
+                    }`}>
                     <Link onClick={toggleSidebar} href="/admin/dashboard">
                         <MdSpaceDashboard /> Dashboard
                     </Link>
@@ -61,8 +60,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     <li
                         className={`${styles.nav_item} ${
                             path === "/products" ? styles.active : ""
-                        }`}
-                    >
+                        }`}>
                         <Link onClick={toggleSidebar} href="/admin/dashboard/products">
                             <FaThList /> Products
                         </Link>
@@ -70,8 +68,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     <li
                         className={`${styles.nav_item} ${
                             path === "/create-product" ? styles.active : ""
-                        }`}
-                    >
+                        }`}>
                         <Link onClick={toggleSidebar} href="/admin/dashboard/create-product">
                             <BsPatchPlus /> Create Product
                         </Link>
@@ -89,8 +86,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     <li
                         className={`${styles.nav_item} ${
                             path === "/categories" ? styles.active : ""
-                        }`}
-                    >
+                        }`}>
                         <Link onClick={toggleSidebar} href="/admin/dashboard/categories">
                             <MdOutlineCategory /> Categories
                         </Link>
@@ -98,8 +94,7 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     <li
                         className={`${styles.nav_item} ${
                             path === "/subCategories" ? styles.active : ""
-                        }`}
-                    >
+                        }`}>
                         <Link onClick={toggleSidebar} href="/admin/dashboard/subCategories">
                             <MdOutlineCategory style={{ transform: "rotate(90deg)" }} /> Sub
                             Categories
@@ -116,8 +111,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                 </div>
                 <ul className={styles.nav_list}>
                     <li
-                        className={`${styles.nav_item} ${path === "/coupons" ? styles.active : ""}`}
-                    >
+                        className={`${styles.nav_item} ${
+                            path === "/coupons" ? styles.active : ""
+                        }`}>
                         <Link onClick={toggleSidebar} href="/admin/dashboard/coupons">
                             <RiCoupon3Fill /> Coupons
                         </Link>
