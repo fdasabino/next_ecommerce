@@ -1,9 +1,11 @@
 import Hamburger from "hamburger-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { IoCogSharp } from "react-icons/io5";
 import { useMediaQuery } from "react-responsive";
 import styles from "./ProfileHeader.module.scss";
-const ProfileHeader = ({ path, user }) => {
+
+const ProfileHeader = ({ toggleSidebar, isExpanded, user, path }) => {
     const isSmall = useMediaQuery({ query: "(max-width: 480px)" });
     const isMedium = useMediaQuery({ query: "(max-width: 768px)" });
     const isLarge = useMediaQuery({ query: "(min-width: 800px)" });
@@ -11,29 +13,40 @@ const ProfileHeader = ({ path, user }) => {
 
     return (
         <div className={styles.profile_header}>
-            <div className={styles.profile_header__left}>
-                <div className={styles.profile_header__left__avatar}>
-                    <Image
-                        src={user.image || session.user.image}
-                        width={150}
-                        height={150}
-                        alt={user.name}
+            <div className={styles.top}>
+                <div className={styles.col}>
+                    <div className={styles.user}>
+                        <Image
+                            src={user?.image || session?.user?.image}
+                            width={300}
+                            height={300}
+                            alt={user?.name || session?.user?.name}
+                        />
+                        <div className={styles.user_info}>
+                            <h4>
+                                <span>
+                                    Welcome back, <br />
+                                </span>{" "}
+                                {user?.name || session?.user?.name}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                {isLarge && (
+                    <div className={styles.col}>
+                        <h2>
+                            <IoCogSharp />
+                            {path.split("/")[path.split("/").length - 1]}
+                        </h2>
+                    </div>
+                )}
+                <div className={styles.col}>
+                    <Hamburger
+                        toggled={isExpanded}
+                        toggle={toggleSidebar}
+                        size={isSmall ? 16 : isMedium ? 20 : 24}
                     />
                 </div>
-                <div className={styles.profile_header__left__wrapper}>
-                    <div className={styles.profile_header__left__name}>
-                        <p>{user.name || session.user.name}</p>
-                    </div>
-                    <div className={styles.profile_header__left__email}>
-                        <p>{user.email || session.user.name}</p>
-                    </div>
-                </div>
-            </div>
-            <div className={styles.profile_header__center}>
-                <p>{path.split("/")[1]}</p>
-            </div>
-            <div className={styles.profile_header__right}>
-                <Hamburger size={24} />
             </div>
         </div>
     );
