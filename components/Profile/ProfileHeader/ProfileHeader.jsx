@@ -1,12 +1,11 @@
 import Hamburger from "hamburger-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { AiFillMessage, AiFillStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import { BiMessageSquareDots } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { FaRegAddressCard } from "react-icons/fa";
 import { GoPackageDependents } from "react-icons/go";
-import { IoCogSharp } from "react-icons/io5";
-import { RiLogoutCircleFill } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
 import styles from "./ProfileHeader.module.scss";
 
@@ -36,7 +35,7 @@ const ProfileHeader = ({ toggleSidebar, isExpanded, user, path }) => {
             case "messages":
                 return (
                     <>
-                        <AiFillMessage />
+                        <BiMessageSquareDots />
                         <h2>Messages</h2>
                     </>
                 );
