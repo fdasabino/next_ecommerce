@@ -1,18 +1,19 @@
-import { GrNext, GrPrevious } from "react-icons/gr";
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import Button from "../Button/Button";
 import styles from "./Pagination.module.scss";
 
 const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
     return (
         <div className={styles.pagination}>
-            <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                <GrPrevious />
-            </button>
+            <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+                <FaArrowAltCircleLeft />
+            </Button>
             <span>{currentPage}</span>
-            <button
+            <Button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}>
-                <GrNext />
-            </button>
+                <FaArrowAltCircleRight />
+            </Button>
         </div>
     );
 };

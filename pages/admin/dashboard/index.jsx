@@ -43,7 +43,7 @@ const AdminDashboard = ({ user, users, orders, products }) => {
                 <div className={styles.cards}>
                     <AdminCard
                         icon={<GiTakeMyMoney />}
-                        title="Total earnings"
+                        title="Earnings"
                         count={formattedEarnings}
                     />
                     <AdminCard icon={<ImUsers />} title="Users" count={users.length} />
