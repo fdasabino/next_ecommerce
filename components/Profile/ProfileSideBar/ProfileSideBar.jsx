@@ -13,7 +13,7 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
     return (
         <div className={`${styles.profile_sidebar} ${isExpanded ? styles.expanded : ""}`}>
             <div className={styles.header}>
-                <h4>User Panel</h4>
+                <h3>User Options</h3>
                 <AiOutlineClose onClick={toggleSidebar} />
             </div>
             <hr />
@@ -56,7 +56,7 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     </Link>
                 </li>
             </ul>
-            <hr />
+            <div className={styles.separator}></div>
             {/* Bottom nav */}
             <nav className={styles.profile_sidebar__bottom_nav}>
                 <ul className={styles.bottom_item}>
