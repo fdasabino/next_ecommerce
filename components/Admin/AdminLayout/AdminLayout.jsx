@@ -23,7 +23,7 @@ const AdminLayout = ({ children, path, user }) => {
             </Head>
 
             <div className={styles.admin_layout}>
-                {isExpanded && <div className={styles.overlay} />}
+                {isExpanded && <div className={styles.overlay} onClick={toggleSidebar} />}
                 <AdminSideBar isExpanded={isExpanded} toggleSidebar={toggleSidebar} path={path} />
                 <AdminHeader
                     toggleSidebar={toggleSidebar}

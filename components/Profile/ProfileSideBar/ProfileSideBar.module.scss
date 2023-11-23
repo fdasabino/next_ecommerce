@@ -91,7 +91,11 @@
             gap: 1rem;
 
             li {
-                a {
+                button {
+                    background-color: transparent;
+                }
+                a,
+                button {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;

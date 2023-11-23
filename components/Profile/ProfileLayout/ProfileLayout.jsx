@@ -22,7 +22,7 @@ const ProfileLayout = ({ children, user, path }) => {
             </Head>
 
             <div className={styles.profile_layout}>
-                {isExpanded && <div className={styles.overlay} />}
+                {isExpanded && <div className={styles.overlay} onClick={toggleSidebar} />}
                 <ProfileSideBar isExpanded={isExpanded} toggleSidebar={toggleSidebar} path={path} />
                 <ProfileHeader
                     user={user}

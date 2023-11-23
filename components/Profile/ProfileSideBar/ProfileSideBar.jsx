@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { AiFillMessage, AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { BiMessageSquareDots } from "react-icons/bi";
@@ -75,9 +76,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
+                        <button title="Click to sign out" onClick={() => signOut()}>
                             <RiLogoutCircleFill />
-                        </Link>
+                        </button>
                     </li>
                 </ul>
             </nav>
