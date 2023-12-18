@@ -1,5 +1,6 @@
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useLayoutEffect } from "react";
 import { AiFillMessage, AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -10,6 +11,17 @@ import { RiLogoutCircleFill, RiSettings2Fill } from "react-icons/ri";
 import styles from "./ProfileSideBar.module.scss";
 
 const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
+    // disable page scrolling when menu is expanded
+    useLayoutEffect(() => {
+        if (isExpanded) {
+            document.body.style.overflow = "hidden";
+            console.log("scrolling disabled");
+        } else {
+            document.body.style.overflow = "visible";
+            console.log("scrolling enabled");
+        }
+    }, [isExpanded]);
+
     return (
         <div className={`${styles.profile_sidebar} ${isExpanded ? styles.expanded : ""}`}>
             <div className={styles.header}>
@@ -19,7 +31,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
             <hr />
             <ul className={styles.nav_list}>
                 <li className={`${styles.nav_item} ${path === "/profile" ? styles.active : ""}`}>
-                    <Link onClick={toggleSidebar} href="/profile">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/profile">
                         <CgProfile /> Profile
                     </Link>
                 </li>
@@ -27,7 +41,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     className={`${styles.nav_item} ${
                         path === "/profile/orders" ? styles.active : ""
                     }`}>
-                    <Link onClick={toggleSidebar} href="/profile/orders">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/profile/orders">
                         <GoPackageDependents /> Orders
                     </Link>
                 </li>
@@ -35,7 +51,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     className={`${styles.nav_item} ${
                         path === "/profile/messages" ? styles.active : ""
                     }`}>
-                    <Link onClick={toggleSidebar} href="/profile/messages">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/profile/messages">
                         <BiMessageSquareDots /> Messages
                     </Link>
                 </li>
@@ -43,7 +61,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     className={`${styles.nav_item} ${
                         path === "/profile/addresses" ? styles.active : ""
                     }`}>
-                    <Link onClick={toggleSidebar} href="/profile/addresses">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/profile/addresses">
                         <FaRegAddressCard /> Addresses
                     </Link>
                 </li>
@@ -51,7 +71,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     className={`${styles.nav_item} ${
                         path === "/profile/wishlist" ? styles.active : ""
                     }`}>
-                    <Link onClick={toggleSidebar} href="/profile/wishlist">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/profile/wishlist">
                         <AiFillStar /> Wishlist
                     </Link>
                 </li>
@@ -76,7 +98,9 @@ const ProfileSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         </Link>
                     </li>
                     <li>
-                        <button title="Click to sign out" onClick={() => signOut()}>
+                        <button
+                            title="Click to sign out"
+                            onClick={() => signOut()}>
                             <RiLogoutCircleFill />
                         </button>
                     </li>

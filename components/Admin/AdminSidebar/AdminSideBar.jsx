@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useLayoutEffect } from "react";
 import { AiFillMessage, AiOutlineClose } from "react-icons/ai";
 import { BsGraphUpArrow, BsPatchPlus } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
@@ -10,6 +11,16 @@ import { SlHandbag } from "react-icons/sl";
 import styles from "./AdminSideBar.module.scss";
 
 const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
+    useLayoutEffect(() => {
+        if (isExpanded) {
+            document.body.style.overflow = "hidden";
+            console.log("scrolling disabled");
+        } else {
+            document.body.style.overflow = "visible";
+            console.log("scrolling enabled");
+        }
+    }, [isExpanded]);
+
     return (
         <div className={`${styles.admin_sidebar} ${isExpanded ? styles.expanded : ""}`}>
             <div className={styles.header}>
@@ -24,27 +35,37 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                     className={`${styles.nav_item} ${
                         path === "/admin/dashboard" ? styles.active : ""
                     }`}>
-                    <Link onClick={toggleSidebar} href="/admin/dashboard">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/admin/dashboard">
                         <MdSpaceDashboard /> Dashboard
                     </Link>
                 </li>
                 <li className={`${styles.nav_item} ${path === "/sales" ? styles.active : ""}`}>
-                    <Link onClick={toggleSidebar} href="/admin/dashboard/sales">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/admin/dashboard/sales">
                         <BsGraphUpArrow /> Sales
                     </Link>
                 </li>
                 <li className={`${styles.nav_item} ${path === "/orders" ? styles.active : ""}`}>
-                    <Link onClick={toggleSidebar} href="/admin/dashboard/orders">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/admin/dashboard/orders">
                         <SlHandbag /> Orders
                     </Link>
                 </li>
                 <li className={`${styles.nav_item} ${path === "/users" ? styles.active : ""}`}>
-                    <Link onClick={toggleSidebar} href="/admin/dashboard/users">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/admin/dashboard/users">
                         <ImUsers /> Users
                     </Link>
                 </li>
                 <li className={`${styles.nav_item} ${path === "/messages" ? styles.active : ""}`}>
-                    <Link onClick={toggleSidebar} href="/admin/dashboard/messages">
+                    <Link
+                        onClick={toggleSidebar}
+                        href="/admin/dashboard/messages">
                         <AiFillMessage /> Messages
                     </Link>
                 </li>
@@ -61,7 +82,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         className={`${styles.nav_item} ${
                             path === "/products" ? styles.active : ""
                         }`}>
-                        <Link onClick={toggleSidebar} href="/admin/dashboard/products">
+                        <Link
+                            onClick={toggleSidebar}
+                            href="/admin/dashboard/products">
                             <FaThList /> Products
                         </Link>
                     </li>
@@ -69,7 +92,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         className={`${styles.nav_item} ${
                             path === "/create-product" ? styles.active : ""
                         }`}>
-                        <Link onClick={toggleSidebar} href="/admin/dashboard/create-product">
+                        <Link
+                            onClick={toggleSidebar}
+                            href="/admin/dashboard/create-product">
                             <BsPatchPlus /> Create Product
                         </Link>
                     </li>
@@ -87,7 +112,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         className={`${styles.nav_item} ${
                             path === "/categories" ? styles.active : ""
                         }`}>
-                        <Link onClick={toggleSidebar} href="/admin/dashboard/categories">
+                        <Link
+                            onClick={toggleSidebar}
+                            href="/admin/dashboard/categories">
                             <MdOutlineCategory /> Categories
                         </Link>
                     </li>
@@ -95,7 +122,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         className={`${styles.nav_item} ${
                             path === "/subCategories" ? styles.active : ""
                         }`}>
-                        <Link onClick={toggleSidebar} href="/admin/dashboard/subCategories">
+                        <Link
+                            onClick={toggleSidebar}
+                            href="/admin/dashboard/subCategories">
                             <MdOutlineCategory style={{ transform: "rotate(90deg)" }} /> Sub
                             Categories
                         </Link>
@@ -114,7 +143,9 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
                         className={`${styles.nav_item} ${
                             path === "/coupons" ? styles.active : ""
                         }`}>
-                        <Link onClick={toggleSidebar} href="/admin/dashboard/coupons">
+                        <Link
+                            onClick={toggleSidebar}
+                            href="/admin/dashboard/coupons">
                             <RiCoupon3Fill /> Coupons
                         </Link>
                     </li>
