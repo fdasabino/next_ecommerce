@@ -20,7 +20,7 @@ const Profile = ({ user, orders }) => {
                 <div className={styles.profile__orders}>
                     {orders
                         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                        .slice(0, 6)
+                        .slice(0, 5)
                         .map((order) => (
                             <OrderCard
                                 key={order._id}
