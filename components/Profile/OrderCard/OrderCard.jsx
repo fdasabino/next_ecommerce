@@ -1,10 +1,12 @@
-import Button from "@/components/Layout/Button/Button";
 import { IconButton } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
 import { MdOutlineReadMore } from "react-icons/md";
 import styles from "./OrderCard.module.scss";
+
 const OrderCard = ({ order }) => {
     console.log(order);
+    const router = useRouter();
 
     const formattedDate = new Date(order.createdAt).toLocaleDateString(undefined, {
         month: "long",
@@ -21,6 +23,10 @@ const OrderCard = ({ order }) => {
 
     const formattedStatus = order.status.charAt(0).toUpperCase() + order.status.slice(1);
     // enum: ["Not Processed", "Processing", "Dispatched", "Cancelled", "Completed"],
+
+    const showOrderDetails = (id) => {
+        router.push(`/order/${id}`);
+    };
 
     return (
         <div
@@ -54,7 +60,7 @@ const OrderCard = ({ order }) => {
             <div className={styles.order__card__header}>
                 <div className={styles.amount}>
                     <h2>{formattedTotal}</h2>
-                    <IconButton>
+                    <IconButton onClick={() => showOrderDetails(order._id)}>
                         <MdOutlineReadMore />
                     </IconButton>
                 </div>
