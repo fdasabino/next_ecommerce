@@ -2,6 +2,7 @@ import OrderCard from "@/components/Profile/OrderCard/OrderCard";
 import ProfileLayout from "@/components/Profile/ProfileLayout/ProfileLayout";
 import Order from "@/models/Order";
 import styles from "@/styles/pages/Profile.module.scss";
+import { Button, Tooltip } from "@mui/material";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -16,11 +17,14 @@ const Profile = ({ user, orders }) => {
             <div className={styles.profile}>
                 <div className={styles.profile__heading}>
                     <h2>Latest orders</h2>
+                    <Tooltip title="View all orders">
+                        <Button onClick={() => router.push("/profile/orders")}>View all</Button>
+                    </Tooltip>
                 </div>
                 <div className={styles.profile__orders}>
                     {orders
                         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                        .slice(0, 5)
+                        .slice(0, 4)
                         .map((order) => (
                             <OrderCard
                                 key={order._id}

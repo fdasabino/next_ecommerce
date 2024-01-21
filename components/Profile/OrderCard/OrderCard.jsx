@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import { MdOutlineReadMore } from "react-icons/md";
@@ -29,40 +29,15 @@ const OrderCard = ({ order }) => {
     };
 
     return (
-        <div
-            className={styles.order__card}
-            style={{
-                borderLeft:
-                    order.status === "Not Processed"
-                        ? "5px solid #ed8f2acf"
-                        : order.status === "Processing"
-                        ? "5px solid #1567d2"
-                        : order.status === "Dispatched"
-                        ? "5px solid #aaffaa"
-                        : order.status === "Cancelled"
-                        ? "5px solid #ffaaaa"
-                        : order.status === "Completed"
-                        ? "5px solid #aaffaa"
-                        : "5px solid #ed8f2acf",
-                borderColor:
-                    order.status === "Not Processed"
-                        ? "#ed8f2acf"
-                        : order.status === "Processing"
-                        ? "#1567d2"
-                        : order.status === "Dispatched"
-                        ? "#aaffaa"
-                        : order.status === "Cancelled"
-                        ? "#ffaaaa"
-                        : order.status === "Completed"
-                        ? "#aaffaa"
-                        : "#ed8f2acf",
-            }}>
+        <div className={styles.order__card}>
             <div className={styles.order__card__header}>
                 <div className={styles.amount}>
                     <h2>{formattedTotal}</h2>
-                    <IconButton onClick={() => showOrderDetails(order._id)}>
-                        <MdOutlineReadMore />
-                    </IconButton>
+                    <Tooltip title="View order details">
+                        <IconButton onClick={() => showOrderDetails(order._id)}>
+                            <MdOutlineReadMore />
+                        </IconButton>
+                    </Tooltip>
                 </div>
             </div>
             <div className={styles.order__card__body}>
@@ -70,7 +45,23 @@ const OrderCard = ({ order }) => {
                     <h3>{formattedDate}</h3>
                 </div>
                 <div className={styles.status}>
-                    <h4>{formattedStatus}</h4>
+                    <h4
+                        style={{
+                            color:
+                                order.status === "Not Processed"
+                                    ? "black"
+                                    : order.status === "Processing"
+                                    ? "blue"
+                                    : order.status === "Dispatched"
+                                    ? "purple"
+                                    : order.status === "Cancelled"
+                                    ? "red"
+                                    : order.status === "Completed"
+                                    ? "darkGreen"
+                                    : "#black",
+                        }}>
+                        {formattedStatus}
+                    </h4>
                 </div>
             </div>
             <div className={styles.order__card__footer}>

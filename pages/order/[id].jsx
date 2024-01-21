@@ -10,9 +10,7 @@ import db from "@/utils/db";
 import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
-import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -30,20 +28,12 @@ const reducer = (state, action) => {
 };
 
 const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
-    const router = useRouter();
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
     const [{ loading, success, error }, dispatch] = useReducer(reducer, {
         loading: true,
         order: {},
         error: null,
     });
-
-    useEffect(() => {
-        if (order.user !== user._id) {
-            toast.error("Looks like you are not authorized to view this order");
-            router.push("/profile");
-        }
-    }, [order, user, router]);
 
     useEffect(() => {
         if (!order._id || success) {
@@ -106,23 +96,47 @@ export default OrderPage;
 
 // server side
 export async function getServerSideProps(context) {
-    db.connectDB();
-    const { query } = context;
-    const session = await getSession(context);
-    const id = query?.id;
+    try {
+        db.connectDB();
+        const { query } = context;
+        const session = await getSession(context);
+        const id = query?.id;
 
-    const user = await User.findOne({ _id: session.user._id }).lean();
-    const order = await Order.findById(id).populate("user").lean().exec();
-    let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
-    let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
+        const user = await User.findOne({ _id: session.user._id }).lean();
+        const order = await Order.findById(id).populate("user").lean().exec();
+        let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
+        let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
 
-    db.disconnectDB();
-    return {
-        props: {
-            user: JSON.parse(JSON.stringify(user)),
-            order: JSON.parse(JSON.stringify(order)),
-            paypalClientID: paypal_client_id,
-            stripePublicKey: stripe_public_key,
-        },
-    };
+        // Authorization check
+        const notAuthorized = !order || user._id.toString() !== order.user._id.toString();
+        if (notAuthorized) {
+            console.log("Not authorized to view this order" + id);
+            db.disconnectDB();
+
+            return {
+                redirect: {
+                    destination: "/profile",
+                    permanent: false,
+                },
+            };
+        }
+
+        db.disconnectDB();
+        return {
+            props: {
+                user: JSON.parse(JSON.stringify(user)),
+                order: JSON.parse(JSON.stringify(order)),
+                paypalClientID: paypal_client_id,
+                stripePublicKey: stripe_public_key,
+            },
+        };
+    } catch (error) {
+        console.error("Error in getServerSideProps:", error);
+        return {
+            redirect: {
+                destination: "/error", // Redirect to an error page
+                permanent: false,
+            },
+        };
+    }
 }
