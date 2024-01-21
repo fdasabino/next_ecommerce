@@ -10,7 +10,9 @@ import db from "@/utils/db";
 import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
+import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -28,12 +30,20 @@ const reducer = (state, action) => {
 };
 
 const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
+    const router = useRouter();
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
     const [{ loading, success, error }, dispatch] = useReducer(reducer, {
         loading: true,
         order: {},
         error: null,
     });
+
+    useEffect(() => {
+        if (order.user !== user._id) {
+            toast.error("Looks like you are not authorized to view this order");
+            router.push("/profile");
+        }
+    }, [order, user, router]);
 
     useEffect(() => {
         if (!order._id || success) {
@@ -55,8 +65,14 @@ const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
     return (
         <>
             <Head>
-                <meta name="robots" content="noindex" />
-                <meta name="description" content="Complete your order" />
+                <meta
+                    name="robots"
+                    content="noindex"
+                />
+                <meta
+                    name="description"
+                    content="Complete your order"
+                />
                 <title>Complete order | {order?._id.substring(0, 10)}...</title>
             </Head>
             <div className={styles.order}>
@@ -64,7 +80,10 @@ const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
                 <div className={styles.order__wrapper}>
                     <OrderInfo order={order} />
                     <div className={styles.order__main}>
-                        <OrderAddress order={order} user={user} />
+                        <OrderAddress
+                            order={order}
+                            user={user}
+                        />
                         {!order.isPaid && (
                             <OrderPayment
                                 order={order}
