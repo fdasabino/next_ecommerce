@@ -9,13 +9,8 @@ const OrderAddress = ({ order, user }) => {
     const router = useRouter();
 
     const redirectToDashboard = () => {
-        if (user.role === "admin") {
-            router.push("/admin/dashboard");
-            return;
-        } else {
-            router.push("/");
-            return;
-        }
+        router.push("/profile");
+        return;
     };
 
     return (
@@ -63,7 +58,7 @@ const OrderAddress = ({ order, user }) => {
                                 Payment Status: <span>{order.paymentResult.status}</span>
                             </p>
                             <Button onClick={redirectToDashboard}>
-                                {user.role === "admin" ? "Admin dashboard" : "Dashboard"}{" "}
+                                Dashboard
                                 <MdOutlineSpaceDashboard />
                             </Button>
                         </div>

@@ -16,7 +16,7 @@ const Profile = ({ user, orders }) => {
             path={path}>
             <div className={styles.profile}>
                 <div className={styles.profile__heading}>
-                    <h2>Latest orders</h2>
+                    <h2>Latest orders {orders.length > 0 && `(${orders.length})`}</h2>
                     <Tooltip title="View all orders">
                         <Button onClick={() => router.push("/profile/orders")}>View all</Button>
                     </Tooltip>

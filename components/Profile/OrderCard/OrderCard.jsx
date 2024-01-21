@@ -5,7 +5,6 @@ import { MdOutlineReadMore } from "react-icons/md";
 import styles from "./OrderCard.module.scss";
 
 const OrderCard = ({ order }) => {
-    console.log(order);
     const router = useRouter();
 
     const formattedDate = new Date(order.createdAt).toLocaleDateString(undefined, {
@@ -22,7 +21,6 @@ const OrderCard = ({ order }) => {
     });
 
     const formattedStatus = order.status.charAt(0).toUpperCase() + order.status.slice(1);
-    // enum: ["Not Processed", "Processing", "Dispatched", "Cancelled", "Completed"],
 
     const showOrderDetails = (id) => {
         router.push(`/order/${id}`);
@@ -58,7 +56,7 @@ const OrderCard = ({ order }) => {
                                     ? "red"
                                     : order.status === "Completed"
                                     ? "darkGreen"
-                                    : "#black",
+                                    : "black",
                         }}>
                         {formattedStatus}
                     </h4>
