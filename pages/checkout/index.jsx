@@ -46,7 +46,10 @@ const CheckoutPage = ({ cart, user, totalWithDiscountApplied }) => {
                 </div>
                 <div className={styles.checkout_bottom}>
                     <div className={styles.checkout_bottom_left}>
-                        <CheckoutCart cart={cart} user={user} />
+                        <CheckoutCart
+                            cart={cart}
+                            user={user}
+                        />
                     </div>
                     <div className={styles.checkout_bottom_right}>
                         <PaymentMethod

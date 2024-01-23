@@ -50,7 +50,10 @@ const StyleInput = ({ name, product, setProduct, colorImage }) => {
         <div className={styles.style_input}>
             <div className={styles.header}>
                 <h2>Pick a product style image</h2>
-                <MdStyle type="reset" onClick={() => inputRef.current.click()} />
+                <MdStyle
+                    type="reset"
+                    onClick={() => inputRef.current.click()}
+                />
             </div>
 
             <input

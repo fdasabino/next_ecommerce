@@ -12,7 +12,9 @@ const AdminSales = ({ user }) => {
     console.log(path);
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_messages}>
                 <h1>page under construction - apologies for any inconvenience</h1>
             </div>

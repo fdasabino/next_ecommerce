@@ -32,8 +32,7 @@ const FlashDealsSwiper = () => {
                     },
                 }}
                 modules={[Navigation, Autoplay, Mousewheel]}
-                className={styles.flash_deals_swiper}
-            >
+                className={styles.flash_deals_swiper}>
                 {flashDealsArray.map((item, i) => (
                     <SwiperSlide key={i}>
                         <Card item={item} />

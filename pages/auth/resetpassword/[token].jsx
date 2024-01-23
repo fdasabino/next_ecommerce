@@ -77,8 +77,7 @@ const ResetPassword = ({ userId }) => {
                                         confirm_password: confirmPassword,
                                     }}
                                     validationSchema={passwordValidation}
-                                    onSubmit={handleSubmit}
-                                >
+                                    onSubmit={handleSubmit}>
                                     {(form) => (
                                         <Form>
                                             <FormInput
@@ -95,7 +94,9 @@ const ResetPassword = ({ userId }) => {
                                                 placeholder="Confirm new password"
                                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                             />
-                                            <Button type="submit" style="primary">
+                                            <Button
+                                                type="submit"
+                                                style="primary">
                                                 Reset password <AiOutlineArrowRight />
                                             </Button>
                                         </Form>

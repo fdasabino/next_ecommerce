@@ -68,7 +68,10 @@ const Panel = ({ saveCartToDbHandler }) => {
                         </h3>
                     </div>
                     <div className={styles.row3}>
-                        <Button disabled={!session} onClick={saveCartToDbHandler} style="secondary">
+                        <Button
+                            disabled={!session}
+                            onClick={saveCartToDbHandler}
+                            style="secondary">
                             Checkout <AiOutlineArrowRight />
                         </Button>
                         <small>

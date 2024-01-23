@@ -35,7 +35,9 @@ const QuestionsInput = ({ questions, product, setProduct }) => {
             )}
             {questions &&
                 questions.map((question, index) => (
-                    <div className={styles.questions} key={index}>
+                    <div
+                        className={styles.questions}
+                        key={index}>
                         <div className={styles.input_group}>
                             <label htmlFor="name">Question</label>
                             <input

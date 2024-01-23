@@ -9,19 +9,17 @@ const middleware = async (req) => {
         secureCookie: process.env.NODE_ENV === "production",
     });
 
-    if (pathname.startsWith("/checkout")) {
-        if (!session) {
-            return NextResponse.redirect(`${origin}`);
-        }
+    if (
+        (pathname.startsWith("/checkout") ||
+            pathname.startsWith("/order") ||
+            pathname.startsWith("/profile")) &&
+        !session
+    ) {
+        return NextResponse.redirect(`${origin}`);
     }
 
-    if (pathname.startsWith("/order")) {
-        if (!session) return NextResponse.redirect(`${origin}`);
-    }
-
-    if (pathname.startsWith("/admin")) {
-        if (!session) return NextResponse.redirect(`${origin}`);
-        if (session.role !== "admin") return NextResponse.redirect(`${origin}`);
+    if (pathname.startsWith("/admin") && (!session || session.role !== "admin")) {
+        return NextResponse.redirect(`${origin}`);
     }
 };
 

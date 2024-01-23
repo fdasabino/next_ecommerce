@@ -24,8 +24,7 @@ const ProductSwiper = ({ images }) => {
         <div
             className={styles.product_swiper}
             onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+            onMouseLeave={handleMouseLeave}>
             <Swiper
                 ref={swiperRef}
                 centeredSlides={true}
@@ -35,8 +34,7 @@ const ProductSwiper = ({ images }) => {
                     speed: 500,
                 }}
                 modules={[Autoplay]}
-                className={styles.product_swiper__wrapper}
-            >
+                className={styles.product_swiper__wrapper}>
                 {images.map((image, index) => (
                     <SwiperSlide key={index}>
                         <Image

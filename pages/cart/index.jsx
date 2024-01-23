@@ -79,7 +79,10 @@ const CartPage = ({ groupedProducts }) => {
                                         {cart &&
                                             cart.cartItems.length > 0 &&
                                             cart.cartItems.map((item) => (
-                                                <CartItem key={item._uid} cartProducts={item} />
+                                                <CartItem
+                                                    key={item._uid}
+                                                    cartProducts={item}
+                                                />
                                             ))}
                                     </div>
                                     <div className={styles.right}>

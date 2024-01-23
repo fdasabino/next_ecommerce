@@ -17,9 +17,14 @@ const AdminCoupons = ({ user, coupons }) => {
 
     return (
         <div className={styles.admin_coupons}>
-            <AdminLayout path={path} user={user}>
+            <AdminLayout
+                path={path}
+                user={user}>
                 <CreateCoupon setData={setData} />
-                <CouponsList data={data} setData={setData} />
+                <CouponsList
+                    data={data}
+                    setData={setData}
+                />
             </AdminLayout>
         </div>
     );

@@ -53,8 +53,7 @@ const ImageInput = ({ name, header, images, setImages, setColorImage }) => {
                 <Button
                     type="reset"
                     disabled={images.length >= 6}
-                    onClick={() => fileInput.current.click()}
-                >
+                    onClick={() => fileInput.current.click()}>
                     <BsFolderPlus />
                 </Button>
             </div>
@@ -79,8 +78,15 @@ const ImageInput = ({ name, header, images, setImages, setColorImage }) => {
                     <div className={styles.grid}>
                         {images.length > 0 &&
                             images.map((image, i) => (
-                                <div key={i} className={styles.grid_wrapper}>
-                                    <Image src={image} width={400} height={400} alt={i} />
+                                <div
+                                    key={i}
+                                    className={styles.grid_wrapper}>
+                                    <Image
+                                        src={image}
+                                        width={400}
+                                        height={400}
+                                        alt={i}
+                                    />
                                     <div className={styles.image_actions}>
                                         <Button
                                             type="button"
@@ -88,11 +94,12 @@ const ImageInput = ({ name, header, images, setImages, setColorImage }) => {
                                             onClick={() => {
                                                 setImages(images.filter((img) => img !== image));
                                                 setColorImage("");
-                                            }}
-                                        >
+                                            }}>
                                             <BsTrash />
                                         </Button>
-                                        <Button type="button" style="tertiary">
+                                        <Button
+                                            type="button"
+                                            style="tertiary">
                                             <RiShape2Line />
                                         </Button>
                                     </div>

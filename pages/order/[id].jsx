@@ -55,16 +55,29 @@ const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
     return (
         <>
             <Head>
-                <meta name="robots" content="noindex" />
-                <meta name="description" content="Complete your order" />
-                <title>Complete order | {order?._id.substring(0, 10)}...</title>
+                <meta
+                    name="robots"
+                    content="noindex"
+                />
+                <meta
+                    name="description"
+                    content="Complete your order"
+                />
+                <title>
+                    {order.isPaid
+                        ? `Order completed ✅`
+                        : `Complete order | ${order?._id.substring(0, 10)}...`}
+                </title>
             </Head>
             <div className={styles.order}>
                 <OrderHeader order={order} />
                 <div className={styles.order__wrapper}>
                     <OrderInfo order={order} />
                     <div className={styles.order__main}>
-                        <OrderAddress order={order} user={user} />
+                        <OrderAddress
+                            order={order}
+                            user={user}
+                        />
                         {!order.isPaid && (
                             <OrderPayment
                                 order={order}
@@ -87,23 +100,47 @@ export default OrderPage;
 
 // server side
 export async function getServerSideProps(context) {
-    db.connectDB();
-    const { query } = context;
-    const session = await getSession(context);
-    const id = query?.id;
+    try {
+        db.connectDB();
+        const { query } = context;
+        const session = await getSession(context);
+        const id = query?.id;
 
-    const user = await User.findOne({ _id: session.user._id }).lean();
-    const order = await Order.findById(id).populate("user").lean().exec();
-    let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
-    let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
+        const user = await User.findOne({ _id: session.user._id }).lean();
+        const order = await Order.findById(id).populate("user").lean().exec();
+        let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
+        let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
 
-    db.disconnectDB();
-    return {
-        props: {
-            user: JSON.parse(JSON.stringify(user)),
-            order: JSON.parse(JSON.stringify(order)),
-            paypalClientID: paypal_client_id,
-            stripePublicKey: stripe_public_key,
-        },
-    };
+        // Authorization check
+        const notAuthorized = !order || user._id.toString() !== order.user._id.toString();
+        if (notAuthorized) {
+            console.log("Not authorized to view this order" + id);
+            db.disconnectDB();
+
+            return {
+                redirect: {
+                    destination: "/profile",
+                    permanent: false,
+                },
+            };
+        }
+
+        db.disconnectDB();
+        return {
+            props: {
+                user: JSON.parse(JSON.stringify(user)),
+                order: JSON.parse(JSON.stringify(order)),
+                paypalClientID: paypal_client_id,
+                stripePublicKey: stripe_public_key,
+            },
+        };
+    } catch (error) {
+        console.error("Error in getServerSideProps:", error);
+        return {
+            redirect: {
+                destination: "/error", // Redirect to an error page
+                permanent: false,
+            },
+        };
+    }
 }

@@ -50,11 +50,12 @@ const ReviewTable = ({ reviews, productName }) => {
                         const isOpen = index === openIndex;
 
                         return (
-                            <div key={_id} className={styles.table__user}>
+                            <div
+                                key={_id}
+                                className={styles.table__user}>
                                 <div
                                     onClick={() => handleVisible(index)}
-                                    className={styles.user_wrapper}
-                                >
+                                    className={styles.user_wrapper}>
                                     <div className={styles.user_wrapper_left}>
                                         <Image
                                             src={image ? image : defaultImage}
@@ -63,7 +64,11 @@ const ReviewTable = ({ reviews, productName }) => {
                                             alt={name ? name : "USER"}
                                         />
                                         <span>{name ? name.split(" ")[0] : "USER"}</span>
-                                        <Rating name="read-only" value={rating} readOnly />
+                                        <Rating
+                                            name="read-only"
+                                            value={rating}
+                                            readOnly
+                                        />
                                     </div>
                                     <div className={styles.user_wrapper_right}>
                                         {isOpen ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
@@ -72,8 +77,7 @@ const ReviewTable = ({ reviews, productName }) => {
                                 {isOpen && (
                                     <div
                                         className={styles.table__body}
-                                        onMouseLeave={() => setOpenIndex(null)}
-                                    >
+                                        onMouseLeave={() => setOpenIndex(null)}>
                                         <div className={styles.table__body__info}>
                                             <div className={styles.left}>
                                                 <p>
@@ -121,7 +125,9 @@ const ReviewTable = ({ reviews, productName }) => {
                     {loadMore ? (
                         <DotLoader />
                     ) : (
-                        <Button style="primary" onClick={handleLoadMore}>
+                        <Button
+                            style="primary"
+                            onClick={handleLoadMore}>
                             Load More...
                         </Button>
                     )}

@@ -78,7 +78,9 @@ const StripeForm = ({ order }) => {
         <div className={styles.stripe__form}>
             <form onSubmit={handleSubmit}>
                 <CardElement options={CARD_OPTIONS} />
-                <Button disabled={loading} type="submit">
+                <Button
+                    disabled={loading}
+                    type="submit">
                     Pay now <BsCashCoin />
                 </Button>
                 {loading && <DotLoader />}

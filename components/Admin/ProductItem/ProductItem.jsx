@@ -21,8 +21,7 @@ const ProductItem = ({ product, openId, toggleDetailsById }) => {
                 </div>
                 <Button
                     style={!isActive ? "primary" : "danger"}
-                    onClick={() => toggleDetailsById(product._id)}
-                >
+                    onClick={() => toggleDetailsById(product._id)}>
                     {!isActive ? <BsChevronCompactDown /> : <AiOutlineClose />}
                 </Button>
             </div>

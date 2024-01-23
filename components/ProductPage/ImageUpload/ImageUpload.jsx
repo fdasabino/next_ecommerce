@@ -14,7 +14,12 @@ const ImageUpload = ({ handleChange, images, handleRemove }) => {
                     images.map((image, i) => (
                         <span key={i}>
                             <MdRemoveCircle onClick={() => handleRemove(image)} />
-                            <Image src={image} width={500} height={500} alt="uploaded_img" />
+                            <Image
+                                src={image}
+                                width={500}
+                                height={500}
+                                alt="uploaded_img"
+                            />
                         </span>
                     ))}
                 {images.length === 0 && <p>No images uploaded</p>}
@@ -31,8 +36,7 @@ const ImageUpload = ({ handleChange, images, handleRemove }) => {
             <Button
                 style="secondary"
                 disabled={images.length >= 3}
-                onClick={() => inputRef.current.click()}
-            >
+                onClick={() => inputRef.current.click()}>
                 <MdAddPhotoAlternate />
             </Button>
         </div>

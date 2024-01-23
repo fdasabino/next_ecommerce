@@ -47,11 +47,19 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         <>
             <Head>
                 <title>ShoppyFlow</title>
-                <meta name="description" content="ShoppyFlow - The best online store..." />
-                <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="description"
+                    content="ShoppyFlow - The best online store..."
+                />
+                <link
+                    rel="icon"
+                    href="/favicon.ico"
+                />
             </Head>
             <SessionProvider session={session}>
-                <PersistGate persistor={persistor} loading={null}>
+                <PersistGate
+                    persistor={persistor}
+                    loading={null}>
                     <Provider store={store}>
                         <RootLayout>
                             <PayPalScriptProvider>

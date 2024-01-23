@@ -213,7 +213,9 @@ const AdminCreateProduct = ({ categories, parents, user }) => {
     };
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.create_product}>
                 {loading ? (
                     <Loader />
@@ -234,8 +236,7 @@ const AdminCreateProduct = ({ categories, parents, user }) => {
                             styleInput: "",
                         }}
                         validationSchema={productValidationSchema}
-                        onSubmit={() => createProduct()}
-                    >
+                        onSubmit={() => createProduct()}>
                         {(formik) => (
                             <Form>
                                 {/* parent product */}
@@ -477,7 +478,9 @@ const AdminCreateProduct = ({ categories, parents, user }) => {
                                     )}
                                 </div>
 
-                                <Button type="submit" style="primary">
+                                <Button
+                                    type="submit"
+                                    style="primary">
                                     Create Product <AiOutlinePlus />
                                 </Button>
                             </Form>

@@ -40,8 +40,7 @@ const ProductsSection = ({ products, category }) => {
                         dynamicBullets: true,
                     }}
                     modules={[Navigation, Pagination, Mousewheel]}
-                    className={styles.flash_deals_swiper}
-                >
+                    className={styles.flash_deals_swiper}>
                     {products
                         ?.sort((a, b) => a.category.name.localeCompare(b.category.name))
                         .map((product) => (

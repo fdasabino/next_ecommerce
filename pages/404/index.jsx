@@ -15,7 +15,13 @@ const NotFound = () => {
     return (
         <div className={styles.not_found}>
             <div className={styles.not_found__container}>
-                <Image src={NotFoundImg} width={500} height={500} alt="notfound" priority />
+                <Image
+                    src={NotFoundImg}
+                    width={500}
+                    height={500}
+                    alt="notfound"
+                    priority
+                />
                 <h1>OOPs!</h1>
                 <h2>Page Not Found</h2>
                 <p>
@@ -23,7 +29,9 @@ const NotFound = () => {
                     <br />
                     <br />
                 </p>
-                <Button onClick={handleRedirect} style="primary">
+                <Button
+                    onClick={handleRedirect}
+                    style="primary">
                     <AiOutlineArrowLeft /> Take me back
                 </Button>
             </div>

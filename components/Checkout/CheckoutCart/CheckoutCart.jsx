@@ -23,7 +23,9 @@ const CheckoutCart = ({ cart }) => {
             <div className={styles.items}>
                 {products.map((product) => {
                     return (
-                        <div className={styles.item} key={product._id}>
+                        <div
+                            className={styles.item}
+                            key={product._id}>
                             <div className={styles.item_image}>
                                 <Image
                                     src={product.image}

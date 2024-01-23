@@ -51,8 +51,7 @@ const ProductDetails = ({ product }) => {
                             spaceBetween: 20,
                         },
                     }}
-                    className={styles.swiper_container}
-                >
+                    className={styles.swiper_container}>
                     {product.subProducts.map((sub, i) => {
                         const { images, sizes } = sub;
 
@@ -94,7 +93,9 @@ const ProductDetails = ({ product }) => {
                                         <Button onClick={editProduct}>
                                             <FiEdit />
                                         </Button>
-                                        <Button style="tertiary" onClick={() => viewProduct(i)}>
+                                        <Button
+                                            style="tertiary"
+                                            onClick={() => viewProduct(i)}>
                                             <BsEye />
                                         </Button>
                                         <Button style="danger">

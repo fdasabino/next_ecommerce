@@ -12,8 +12,7 @@ const ProductAccordion = ({ details }) => {
                     expandIcon={<BsChevronDown />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-                    className={styles.product_accordion__title}
-                >
+                    className={styles.product_accordion__title}>
                     <h3>Product details</h3>
                 </AccordionSummary>
 

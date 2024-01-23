@@ -29,7 +29,9 @@ const UserMenu = (props) => {
     };
 
     return (
-        <ul className={styles.user_menu} onMouseLeave={() => setVisible(false)}>
+        <ul
+            className={styles.user_menu}
+            onMouseLeave={() => setVisible(false)}>
             {session ? (
                 <div className={styles.user_menu__wrapper}>
                     <Image
@@ -47,7 +49,9 @@ const UserMenu = (props) => {
                             {user?.role === "admin" && <RiAdminLine />}
                         </span>
                         <small>{session?.user.email}</small>
-                        <Button onClick={handleSignOut} style="danger">
+                        <Button
+                            onClick={handleSignOut}
+                            style="danger">
                             Sign out
                         </Button>
                     </div>
@@ -55,7 +59,9 @@ const UserMenu = (props) => {
             ) : (
                 <div className={styles.user_menu__wrapper}>
                     <h3>Welcome to ShoppyFlow</h3>
-                    <Button onClick={handleSignIn} style="primary">
+                    <Button
+                        onClick={handleSignIn}
+                        style="primary">
                         Sign in <AiOutlineArrowRight />
                     </Button>
                 </div>

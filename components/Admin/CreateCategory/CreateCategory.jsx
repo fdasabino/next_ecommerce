@@ -42,8 +42,7 @@ const CreateCategory = ({ setData }) => {
                 enableReinitialize
                 initialValues={{ name }}
                 validationSchema={categoryValidation}
-                onSubmit={handleSubmit}
-            >
+                onSubmit={handleSubmit}>
                 {(formik) => (
                     <Form>
                         <AdminInput
@@ -54,7 +53,10 @@ const CreateCategory = ({ setData }) => {
                             icon="name"
                             onChange={handleChange}
                         />
-                        <Button type="submit" style="primary" disabled={!name}>
+                        <Button
+                            type="submit"
+                            style="primary"
+                            disabled={!name}>
                             Submit <AiOutlinePlus />
                         </Button>
                     </Form>

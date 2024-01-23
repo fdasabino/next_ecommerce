@@ -191,19 +191,23 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                                 title={
                                     inWishlist ? "Remove product from wishlist" : "Add to wishlist"
                                 }
-                                TransitionComponent={Zoom}
-                            >
+                                TransitionComponent={Zoom}>
                                 <IconButton
                                     onClick={() =>
                                         inWishlist
                                             ? removeFromWishlist(product._id, color)
                                             : addToWishlist(product._id, color)
-                                    }
-                                >
+                                    }>
                                     {inWishlist ? (
-                                        <BsHeartFill size={18} color={"red"} />
+                                        <BsHeartFill
+                                            size={18}
+                                            color={"red"}
+                                        />
                                     ) : (
-                                        <BsHeart size={18} color={"red"} />
+                                        <BsHeart
+                                            size={18}
+                                            color={"red"}
+                                        />
                                     )}
                                 </IconButton>
                             </Tooltip>
@@ -274,7 +278,9 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                     <div className={styles.wrapper}>
                         {colors.length > 0 &&
                             colors.map((c, i) => (
-                                <Tooltip title={getColorName(c.color)} key={i}>
+                                <Tooltip
+                                    title={getColorName(c.color)}
+                                    key={i}>
                                     <Link
                                         href={`/product/${slug}?color=${i}`}
                                         onClick={() => setSelectedColor(i)}
@@ -285,8 +291,7 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                                             setActiveImage(subProducts[i].images[0].url)
                                         }
                                         onMouseLeave={() => setActiveImage("")}
-                                        onTouchEnd={() => setActiveImage("")}
-                                    >
+                                        onTouchEnd={() => setActiveImage("")}>
                                         <div className={`${+color === i && styles.activeColor}`}>
                                             <Image
                                                 src={c.image}
@@ -323,13 +328,11 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                                     onTouchStart={() => setSelectedSize(i)}
                                     onClick={() => setSelectedSize(i)}
                                     key={i}
-                                    href={`/product/${slug}?color=${color}&size=${i}`}
-                                >
+                                    href={`/product/${slug}?color=${color}&size=${i}`}>
                                     <span
                                         className={`${styles.product_info__sizes_size} ${
                                             +size === i && styles.activeSize
-                                        }`}
-                                    >
+                                        }`}>
                                         {s.size}
                                     </span>
                                 </Link>
@@ -341,11 +344,15 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                 <div className={styles.product_info__add_to_cart}>
                     <h5>Select Quantity:</h5>
                     <div className={styles.wrapper}>
-                        <button onClick={decreaseCartQuantity} onTouchStart={decreaseCartQuantity}>
+                        <button
+                            onClick={decreaseCartQuantity}
+                            onTouchStart={decreaseCartQuantity}>
                             <TbMinus />
                         </button>
                         <span>{cartQuantity}</span>
-                        <button onClick={increaseCartQuantity} onTouchStart={increaseCartQuantity}>
+                        <button
+                            onClick={increaseCartQuantity}
+                            onTouchStart={increaseCartQuantity}>
                             <TbPlus />
                         </button>
                     </div>
@@ -356,8 +363,7 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
                     <Button
                         onClick={handleAddToCart}
                         style="tertiary"
-                        disabled={quantity < 1 || !size}
-                    >
+                        disabled={quantity < 1 || !size}>
                         Add to cart <BsCartPlus size={20} />
                     </Button>
                 </div>

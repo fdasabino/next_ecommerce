@@ -3,7 +3,9 @@ import styles from "./AdminOrderCard.module.scss";
 
 const AdminOrderCard = ({ order }) => {
     return (
-        <div key={order._id} className={styles.order}>
+        <div
+            key={order._id}
+            className={styles.order}>
             <h4>{order.user.name}</h4>
             <p>{order.createdAt.substring(0, 10)}</p>
             <p>${order.total.toFixed(2)}</p>
@@ -35,8 +37,7 @@ const AdminOrderCard = ({ order }) => {
                             ? "#6cc070"
                             : "",
                 }}
-                className={styles.status}
-            >
+                className={styles.status}>
                 {order.status}
             </div>
             <div className={styles.details}>

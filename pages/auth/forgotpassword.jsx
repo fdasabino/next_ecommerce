@@ -57,8 +57,7 @@ const ForgotPassword = () => {
                                     enableReinitialize
                                     initialValues={{ email_address: email }}
                                     validationSchema={emailValidation}
-                                    onSubmit={handleSubmit}
-                                >
+                                    onSubmit={handleSubmit}>
                                     {(form) => (
                                         <Form>
                                             <FormInput
@@ -68,7 +67,9 @@ const ForgotPassword = () => {
                                                 placeholder="Email address"
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
-                                            <Button type="submit" style="primary">
+                                            <Button
+                                                type="submit"
+                                                style="primary">
                                                 Send link <AiOutlineArrowRight />
                                             </Button>
                                         </Form>

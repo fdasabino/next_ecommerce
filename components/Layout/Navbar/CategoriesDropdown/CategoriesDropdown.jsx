@@ -11,7 +11,9 @@ const CategoriesDropdown = (props) => {
     const categoriesArray = Object.values(categories);
 
     return (
-        <div className={styles.categories_dropdown} onMouseLeave={() => setVisible(false)}>
+        <div
+            className={styles.categories_dropdown}
+            onMouseLeave={() => setVisible(false)}>
             <ul>
                 {categoriesArray.length > 0 ? (
                     <>
@@ -19,7 +21,9 @@ const CategoriesDropdown = (props) => {
                             .filter((item) => item.name) // Filter out items without a name
                             .sort((a, b) => a.name.localeCompare(b.name)) // Sort alphabetically by name
                             .map((item, i) => (
-                                <li key={item._id || i} onClick={() => setVisible(false)}>
+                                <li
+                                    key={item._id || i}
+                                    onClick={() => setVisible(false)}>
                                     <Link href={`/category/${item.slug}`}>
                                         <MdOutlineArrowRight /> {item.name}
                                     </Link>

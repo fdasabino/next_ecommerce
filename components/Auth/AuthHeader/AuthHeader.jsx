@@ -8,7 +8,9 @@ const AuthHeader = () => {
 
     return (
         <div className={styles.signin__header}>
-            <button className={styles.back__svg} onClick={() => router.push("/")}>
+            <button
+                className={styles.back__svg}
+                onClick={() => router.push("/")}>
                 <BiLeftArrowAlt />
             </button>
             <span>

@@ -18,13 +18,28 @@ const AdminLayout = ({ children, path, user }) => {
         <>
             <Head>
                 <title>Admin Dashboard {path === "/admin/dashboard" ? "" : path}</title>
-                <meta name="description" content="Admin Dashboard" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta
+                    name="description"
+                    content="Admin Dashboard"
+                />
+                <link
+                    rel="icon"
+                    href="/favicon.ico"
+                />
             </Head>
 
             <div className={styles.admin_layout}>
-                {isExpanded && <div className={styles.overlay} />}
-                <AdminSideBar isExpanded={isExpanded} toggleSidebar={toggleSidebar} path={path} />
+                {isExpanded && (
+                    <div
+                        className={styles.overlay}
+                        onClick={toggleSidebar}
+                    />
+                )}
+                <AdminSideBar
+                    isExpanded={isExpanded}
+                    toggleSidebar={toggleSidebar}
+                    path={path}
+                />
                 <AdminHeader
                     toggleSidebar={toggleSidebar}
                     isExpanded={isExpanded}

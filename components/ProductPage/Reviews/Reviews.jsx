@@ -88,7 +88,9 @@ const Reviews = ({ reviews, numReviews }) => {
                                     const starRating = parseInt(key);
                                     if (value > 0) {
                                         return (
-                                            <div key={key} className={styles.rating_stats}>
+                                            <div
+                                                key={key}
+                                                className={styles.rating_stats}>
                                                 <small>{`${value} ${
                                                     value === 1 ? "review" : "reviews"
                                                 }`}</small>
@@ -109,8 +111,12 @@ const Reviews = ({ reviews, numReviews }) => {
                             {Object.entries(ratingPercentage).map(([key, value]) => {
                                 if (value === "0") return null; // Exclude entries with review count 0
                                 return (
-                                    <div key={key} className={styles.rating_bar_wrapper}>
-                                        <div key={key} className={styles.rating_bar}>
+                                    <div
+                                        key={key}
+                                        className={styles.rating_bar_wrapper}>
+                                        <div
+                                            key={key}
+                                            className={styles.rating_bar}>
                                             <div
                                                 className={styles.rating_bar_fill}
                                                 style={{

@@ -54,7 +54,10 @@ const Footer = () => {
 
                     <h3>Subscribe to our newsletter</h3>
                     <div className={styles.footer__subscribe}>
-                        <input type="email" placeholder="Enter your email address" />
+                        <input
+                            type="email"
+                            placeholder="Enter your email address"
+                        />
                         <Button style="primary">
                             Send <BiMailSend />
                         </Button>
@@ -114,7 +117,10 @@ const Footer = () => {
                 </div>
             </div>
             <div className={styles.back_to_top}>
-                <Tooltip title="Back to top" placement="left" arrow>
+                <Tooltip
+                    title="Back to top"
+                    placement="left"
+                    arrow>
                     <IconButton onClick={scrollToTop}>
                         <GoMoveToTop />
                     </IconButton>

@@ -55,7 +55,9 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
                 categories
                     ?.sort((a, b) => a.name.localeCompare(b.name))
                     .map((category) => (
-                        <div className={styles.category} key={category._id}>
+                        <div
+                            className={styles.category}
+                            key={category._id}>
                             {/* category edit */}
                             <div className={styles.category_name}>
                                 {editCategoryId === category._id && (
@@ -75,14 +77,12 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
                                             <Button
                                                 style="primary"
                                                 onClick={() => handleUpdateCategory(category._id)}
-                                                disabled={!name}
-                                            >
+                                                disabled={!name}>
                                                 <AiOutlineCheck />
                                             </Button>
                                             <Button
                                                 style="danger"
-                                                onClick={() => editCategoryHandler(category._id)}
-                                            >
+                                                onClick={() => editCategoryHandler(category._id)}>
                                                 <AiOutlineStop />
                                             </Button>
                                         </div>
@@ -95,14 +95,12 @@ const CategoriesList = ({ data: categories, setData: setCategories }) => {
                                     <>
                                         <Button
                                             style="primary"
-                                            onClick={() => editCategoryHandler(category._id)}
-                                        >
+                                            onClick={() => editCategoryHandler(category._id)}>
                                             <FiEdit />
                                         </Button>
                                         <Button
                                             style="danger"
-                                            onClick={() => handleDeleteCategory(category._id)}
-                                        >
+                                            onClick={() => handleDeleteCategory(category._id)}>
                                             <BsTrash />
                                         </Button>
                                     </>

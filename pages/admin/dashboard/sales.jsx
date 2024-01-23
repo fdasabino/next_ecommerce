@@ -11,7 +11,9 @@ const AdminSales = ({ user }) => {
     const path = pathname.split("/admin/dashboard")[1];
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_sales}>
                 <h1>page under construction - apologies for any inconvenience</h1>
             </div>
