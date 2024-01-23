@@ -63,7 +63,11 @@ const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
                     name="description"
                     content="Complete your order"
                 />
-                <title>Complete order | {order?._id.substring(0, 10)}...</title>
+                <title>
+                    {order.isPaid
+                        ? `Order completed ✅`
+                        : `Complete order | ${order?._id.substring(0, 10)}...`}
+                </title>
             </Head>
             <div className={styles.order}>
                 <OrderHeader order={order} />

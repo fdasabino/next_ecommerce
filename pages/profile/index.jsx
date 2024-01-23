@@ -22,15 +22,12 @@ const Profile = ({ user, orders }) => {
                     </Tooltip>
                 </div>
                 <div className={styles.profile__orders}>
-                    {orders
-                        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                        .slice(0, 4)
-                        .map((order) => (
-                            <OrderCard
-                                key={order._id}
-                                order={order}
-                            />
-                        ))}
+                    {orders.map((order) => (
+                        <OrderCard
+                            key={order._id}
+                            order={order}
+                        />
+                    ))}
                 </div>
             </div>
         </ProfileLayout>
@@ -45,11 +42,14 @@ export async function getServerSideProps(context) {
     const { user } = session;
     const tab = query.tab || 0;
     const orders = await Order.find({ user: user._id });
+    const mostRecentOrders = orders
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 4);
 
     return {
         props: {
             user: JSON.parse(JSON.stringify(user)),
-            orders: JSON.parse(JSON.stringify(orders)),
+            orders: JSON.parse(JSON.stringify(mostRecentOrders)),
             tab,
         },
     };
