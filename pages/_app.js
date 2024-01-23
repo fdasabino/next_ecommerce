@@ -2,6 +2,7 @@ import Loader from "@/components/Layout/Loader/Loader";
 import RootLayout from "@/components/Layout/RootLayout/RootLayout";
 import store from "@/redux-store/index";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -62,7 +63,14 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
                     <Provider store={store}>
                         <RootLayout>
                             <PayPalScriptProvider>
-                                {loading ? <Loader /> : <Component {...pageProps} />}
+                                {loading ? (
+                                    <Loader />
+                                ) : (
+                                    <>
+                                        <Component {...pageProps} />
+                                        <Analytics />
+                                    </>
+                                )}
                                 <ToastContainer
                                     position="top-left"
                                     autoClose={2000}
