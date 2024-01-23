@@ -35,7 +35,9 @@ const AdminDashboard = ({ user, users, orders, products }) => {
     const recentOrders = orders.slice(0, 4);
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_dashboard}>
                 <div className={styles.heading}>
                     <h2>Admin Summary</h2>
@@ -46,10 +48,26 @@ const AdminDashboard = ({ user, users, orders, products }) => {
                         title="Earnings"
                         count={formattedEarnings}
                     />
-                    <AdminCard icon={<ImUsers />} title="Users" count={users.length} />
-                    <AdminCard icon={<SlHandbag />} title="Orders" count={orders.length} />
-                    <AdminCard icon={<FaThList />} title="Products" count={products.length} />
-                    <AdminCard icon={<FaThList />} title="Sub Products" count={subProductsCount} />
+                    <AdminCard
+                        icon={<ImUsers />}
+                        title="Users"
+                        count={users.length}
+                    />
+                    <AdminCard
+                        icon={<SlHandbag />}
+                        title="Orders"
+                        count={orders.length}
+                    />
+                    <AdminCard
+                        icon={<FaThList />}
+                        title="Products"
+                        count={products.length}
+                    />
+                    <AdminCard
+                        icon={<FaThList />}
+                        title="Sub Products"
+                        count={subProductsCount}
+                    />
                 </div>
 
                 <div className={styles.data}>
@@ -63,7 +81,10 @@ const AdminDashboard = ({ user, users, orders, products }) => {
                     {orders.length > 0 && (
                         <div className={styles.orders}>
                             {recentOrders.map((order) => (
-                                <AdminOrderCard key={order._id} order={order} />
+                                <AdminOrderCard
+                                    key={order._id}
+                                    order={order}
+                                />
                             ))}
                         </div>
                     )}
@@ -75,7 +96,10 @@ const AdminDashboard = ({ user, users, orders, products }) => {
                     {users.length > 0 && (
                         <div className={styles.users}>
                             {recentUsers.map((user) => (
-                                <AdminUserCard key={user._id} user={user} />
+                                <AdminUserCard
+                                    key={user._id}
+                                    user={user}
+                                />
                             ))}
                         </div>
                     )}

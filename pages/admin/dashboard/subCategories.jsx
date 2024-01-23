@@ -17,7 +17,9 @@ const AdminSubCategories = ({ subCategories, categories, user }) => {
     const [subData, setSubData] = useState(subCategories);
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_subcategories}>
                 <CreateSubCategory
                     subData={subData}

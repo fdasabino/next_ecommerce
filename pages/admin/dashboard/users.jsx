@@ -5,14 +5,15 @@ import styles from "@/styles/pages/AdminUsers.module.scss";
 import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
 const AdminUsers = ({ user, users }) => {
     const router = useRouter();
     const { pathname } = router;
     const path = pathname.split("/admin/dashboard")[1];
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.users}>
                 <UsersList rows={users} />
             </div>

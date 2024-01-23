@@ -10,7 +10,9 @@ const Select = (props) => {
     return (
         <div className={styles.select}>
             <h2>{text}:</h2>
-            <div className={styles.select__header} onClick={() => setVisible(!visible)}>
+            <div
+                className={styles.select__header}
+                onClick={() => setVisible(!visible)}>
                 <div>
                     {text === "size" ? (
                         <span>
@@ -18,7 +20,12 @@ const Select = (props) => {
                         </span>
                     ) : text === "color" && property.image ? (
                         <span>
-                            <Image src={property.image} width={300} height={300} alt="color" />
+                            <Image
+                                src={property.image}
+                                width={300}
+                                height={300}
+                                alt="color"
+                            />
                             <AiOutlineArrowDown />
                         </span>
                     ) : text === "fit" && property ? (
@@ -33,7 +40,9 @@ const Select = (props) => {
                 </div>
             </div>
             {visible && (
-                <ul onMouseLeave={() => setVisible(false)} className={styles.select__menu}>
+                <ul
+                    onMouseLeave={() => setVisible(false)}
+                    className={styles.select__menu}>
                     {data.map((item, i) => {
                         if (text === "size")
                             return (
@@ -43,8 +52,7 @@ const Select = (props) => {
                                         setVisible(false);
                                     }}
                                     key={i}
-                                    className={styles.select__menu__item}
-                                >
+                                    className={styles.select__menu__item}>
                                     <span>{item.size}</span>
                                 </li>
                             );
@@ -57,8 +65,7 @@ const Select = (props) => {
                                         setVisible(false);
                                     }}
                                     key={i}
-                                    className={styles.select__menu__item}
-                                >
+                                    className={styles.select__menu__item}>
                                     <span>
                                         <Image
                                             src={item.image}
@@ -77,8 +84,7 @@ const Select = (props) => {
                                         setVisible(false);
                                     }}
                                     key={i}
-                                    className={styles.select__menu__item}
-                                >
+                                    className={styles.select__menu__item}>
                                     <span>{item}</span>
                                 </li>
                             );

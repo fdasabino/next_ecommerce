@@ -47,8 +47,7 @@ const SizesInput = ({ sizes, product, setProduct }) => {
                         });
                         setProduct({ ...product, sizes: data });
                     }
-                }}
-            >
+                }}>
                 {noSize ? (
                     <>
                         Add size <AiOutlinePlus />
@@ -60,7 +59,9 @@ const SizesInput = ({ sizes, product, setProduct }) => {
                 )}
             </Button>
             {sizes.map((size, index) => (
-                <div className={styles.sizes} key={index}>
+                <div
+                    className={styles.sizes}
+                    key={index}>
                     {!noSize && (
                         <div className={styles.input_group}>
                             <label htmlFor="size">Size</label>
@@ -70,11 +71,12 @@ const SizesInput = ({ sizes, product, setProduct }) => {
                                 value={noSize ? "" : size.size}
                                 disabled={noSize}
                                 style={{ display: noSize ? "none" : "" }}
-                                onChange={(e) => handleSizeChange(e, index)}
-                            >
+                                onChange={(e) => handleSizeChange(e, index)}>
                                 <option value="">Size</option>
                                 {sizesList.map((size, index) => (
-                                    <option key={index} value={size}>
+                                    <option
+                                        key={index}
+                                        value={size}>
                                         {size}
                                     </option>
                                 ))}

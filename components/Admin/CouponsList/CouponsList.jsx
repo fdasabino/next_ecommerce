@@ -64,7 +64,9 @@ const SubCategoriesList = ({ data, setData }) => {
             </div>
 
             {data?.map((c) => (
-                <div className={styles.coupon} key={c._id}>
+                <div
+                    className={styles.coupon}
+                    key={c._id}>
                     {/* category edit */}
                     <div className={styles.coupon_name}>
                         {editCouponId === c._id && (
@@ -142,11 +144,12 @@ const SubCategoriesList = ({ data, setData }) => {
                                     <Button
                                         style="primary"
                                         onClick={() => handleUpdateCoupons(c._id)}
-                                        disabled={!coupon || !startDate || !endDate || !discount}
-                                    >
+                                        disabled={!coupon || !startDate || !endDate || !discount}>
                                         <AiOutlineCheck />
                                     </Button>
-                                    <Button style="danger" onClick={() => editCouponHandler(c._id)}>
+                                    <Button
+                                        style="danger"
+                                        onClick={() => editCouponHandler(c._id)}>
                                         <AiOutlineStop />
                                     </Button>
                                 </div>
@@ -157,10 +160,14 @@ const SubCategoriesList = ({ data, setData }) => {
                     <div className={styles.subcategory_actions}>
                         {editCouponId !== c._id && (
                             <>
-                                <Button style="primary" onClick={() => editCouponHandler(c._id)}>
+                                <Button
+                                    style="primary"
+                                    onClick={() => editCouponHandler(c._id)}>
                                     <FiEdit />
                                 </Button>
-                                <Button style="danger" onClick={() => handleDeleteCoupons(c._id)}>
+                                <Button
+                                    style="danger"
+                                    onClick={() => handleDeleteCoupons(c._id)}>
                                     <BsTrash />
                                 </Button>
                             </>

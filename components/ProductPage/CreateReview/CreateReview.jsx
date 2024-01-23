@@ -190,8 +190,7 @@ const CreateReview = ({ product, setReviews, setLoading }) => {
                                 !review || !rating || !color || !fit || !size || images.length === 0
                             }
                             style="tertiary"
-                            onClick={handleSubmit}
-                        >
+                            onClick={handleSubmit}>
                             Submit review <AiOutlineArrowRight />
                         </Button>
                     </div>

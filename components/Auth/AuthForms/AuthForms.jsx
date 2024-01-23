@@ -140,11 +140,16 @@ const AuthForms = (props) => {
                 enableReinitialize
                 initialValues={{ login_email, login_password }}
                 validationSchema={signInValidation}
-                onSubmit={handleSignIn}
-            >
+                onSubmit={handleSignIn}>
                 {(form) => (
-                    <Form method="post" action="/api/auth/signin/email">
-                        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+                    <Form
+                        method="post"
+                        action="/api/auth/signin/email">
+                        <input
+                            name="csrfToken"
+                            type="hidden"
+                            defaultValue={csrfToken}
+                        />
                         <FormInput
                             type="email"
                             icon="email"
@@ -159,7 +164,9 @@ const AuthForms = (props) => {
                             placeholder="Password"
                             onChange={handleChange}
                         />
-                        <Button type="submit" style="primary">
+                        <Button
+                            type="submit"
+                            style="primary">
                             Sign in <AiOutlineArrowRight />
                         </Button>
                         <div className={styles.forgot_password}>
@@ -182,8 +189,7 @@ const AuthForms = (props) => {
                     signup_confirm_password,
                 }}
                 validationSchema={signUpValidation}
-                onSubmit={handleSignUp}
-            >
+                onSubmit={handleSignUp}>
                 {(form) => (
                     <Form>
                         <FormInput
@@ -214,7 +220,9 @@ const AuthForms = (props) => {
                             placeholder="Confirm password"
                             onChange={handleChange}
                         />
-                        <Button type="submit" style="primary">
+                        <Button
+                            type="submit"
+                            style="primary">
                             Sign up <AiOutlineUserAdd />
                         </Button>
                     </Form>
@@ -231,10 +239,20 @@ const AuthForms = (props) => {
                     // skip credentials provider since we already have it above
                     if (provider.id === "credentials") return;
                     return (
-                        <div key={provider.id} className={styles.provider_container}>
-                            <form method="post" action={`/api/auth/signin/${provider.name}`}>
-                                <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                                <Button style="google" onClick={() => signIn(provider.id)}>
+                        <div
+                            key={provider.id}
+                            className={styles.provider_container}>
+                            <form
+                                method="post"
+                                action={`/api/auth/signin/${provider.name}`}>
+                                <input
+                                    name="csrfToken"
+                                    type="hidden"
+                                    defaultValue={csrfToken}
+                                />
+                                <Button
+                                    style="google"
+                                    onClick={() => signIn(provider.id)}>
                                     <FcGoogle /> Google account
                                 </Button>
                             </form>

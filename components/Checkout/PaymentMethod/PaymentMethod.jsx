@@ -133,8 +133,7 @@ const PaymentMethod = ({
                                 border: "1px solid #e7e7e7",
                             }}
                             color={!showCoupon ? "primary" : "error"}
-                            onClick={() => handleShowCouponForm()}
-                        >
+                            onClick={() => handleShowCouponForm()}>
                             {showCoupon ? <FaTimes /> : <FaPlus />}
                         </MuiButton>
                     </Tooltip>
@@ -161,8 +160,7 @@ const PaymentMethod = ({
                                 selectedPaymentMethod === method.name ? styles.active : ""
                             } ${styles.method}`}
                             key={method.id}
-                            onClick={() => setSelectedPaymentMethod(method.name)}
-                        >
+                            onClick={() => setSelectedPaymentMethod(method.name)}>
                             {selectedPaymentMethod === method.name && (
                                 <p>selected payment method</p>
                             )}
@@ -175,8 +173,7 @@ const PaymentMethod = ({
                                 />
                                 <label
                                     htmlFor={method.id}
-                                    onClick={() => setSelectedPaymentMethod(method.name)}
-                                >
+                                    onClick={() => setSelectedPaymentMethod(method.name)}>
                                     {method.name}
                                 </label>
                             </div>
@@ -214,8 +211,7 @@ const PaymentMethod = ({
             <Button
                 style="primary"
                 disabled={user?.address.length === 0 || !selectedPaymentMethod}
-                onClick={placeOrderHandler}
-            >
+                onClick={placeOrderHandler}>
                 {selectedPaymentMethod
                     ? `Pay with ${selectedPaymentMethod}`
                     : "Select a payment method"}{" "}

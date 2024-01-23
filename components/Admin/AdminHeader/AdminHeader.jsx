@@ -6,7 +6,6 @@ import { AiFillMessage } from "react-icons/ai";
 import { BsGraphUpArrow, BsPatchPlus } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
-import { IoCogSharp } from "react-icons/io5";
 import { MdOutlineCategory, MdSpaceDashboard } from "react-icons/md";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { SlHandbag } from "react-icons/sl";
@@ -130,7 +129,11 @@ const AdminHeader = ({ toggleSidebar, isExpanded, user, path }) => {
             </div>
             <div className={styles.bottom}>
                 <label htmlFor="admin_search">
-                    <input id="admin_search" type="text" placeholder="Search here..." />
+                    <input
+                        id="admin_search"
+                        type="text"
+                        placeholder="Search here..."
+                    />
                 </label>
             </div>
         </div>

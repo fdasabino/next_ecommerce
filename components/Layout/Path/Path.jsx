@@ -11,8 +11,7 @@ const Path = ({ path }) => {
                         className={`${styles.path__item}${
                             index === path.length - 1 ? " active" : ""
                         }`}
-                        aria-current={index === path.length - 1 ? "page" : undefined}
-                    >
+                        aria-current={index === path.length - 1 ? "page" : undefined}>
                         {index !== 0 && <span className={styles.path__separator}>/</span>}
                         {step.slug ? (
                             <Link href={`/category/${step?.slug}`}>{step.name}</Link>

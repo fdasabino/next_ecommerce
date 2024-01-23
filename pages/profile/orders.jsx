@@ -9,7 +9,9 @@ const Orders = ({ user }) => {
     const path = pathname;
 
     return (
-        <ProfileLayout user={user} path={path}>
+        <ProfileLayout
+            user={user}
+            path={path}>
             <div className={styles.profile}>Profile</div>
         </ProfileLayout>
     );

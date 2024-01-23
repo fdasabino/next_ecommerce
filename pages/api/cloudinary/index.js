@@ -1,4 +1,3 @@
-import adminMiddleware from "@/middleware/admin";
 import authMiddleware from "@/middleware/auth";
 import { imageMiddleware } from "@/middleware/image";
 import { uploadToCloudinaryHandler } from "@/utils/cloudinary";

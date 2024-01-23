@@ -21,8 +21,7 @@ const MainSwiper = () => {
                     disableOnInteraction: true,
                 }}
                 modules={[Pagination, Navigation, Autoplay]}
-                className={styles.main_swiper__container}
-            >
+                className={styles.main_swiper__container}>
                 {[...Array(isMobile ? 1 : 5).keys()].map((_, i) => (
                     <SwiperSlide key={i}>
                         <div className={styles.left}>

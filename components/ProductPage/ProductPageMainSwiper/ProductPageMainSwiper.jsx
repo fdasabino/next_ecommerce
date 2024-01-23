@@ -29,9 +29,13 @@ const ProductPageMainSwiper = ({ images, activeImage }) => {
                         className={`${styles.main_swiper_list__item} ${
                             index === active && styles.active
                         }`}
-                        onMouseOver={() => setActive(index)}
-                    >
-                        <Image src={image.url} width={1000} height={1000} alt="product" />
+                        onMouseOver={() => setActive(index)}>
+                        <Image
+                            src={image.url}
+                            width={1000}
+                            height={1000}
+                            alt="product"
+                        />
                     </div>
                 ))}
             </div>

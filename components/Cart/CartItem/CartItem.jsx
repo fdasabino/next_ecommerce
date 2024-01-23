@@ -79,11 +79,15 @@ const CartItem = ({ cartProducts }) => {
                 <small>
                     Qty:{" "}
                     <span>
-                        <button disabled={disableDecreaseButton()} onClick={decreaseCartQuantity}>
+                        <button
+                            disabled={disableDecreaseButton()}
+                            onClick={decreaseCartQuantity}>
                             <TbMinus />
                         </button>
                         <span>{cartQuantity}x</span>
-                        <button disabled={disableIncreaseButton()} onClick={increaseCartQuantity}>
+                        <button
+                            disabled={disableIncreaseButton()}
+                            onClick={increaseCartQuantity}>
                             <TbPlus />
                         </button>
                     </span>
@@ -138,8 +142,7 @@ const CartItem = ({ cartProducts }) => {
                         },
                     }}
                     modules={[Navigation, Pagination, Mousewheel]}
-                    className={styles.swiper_container}
-                >
+                    className={styles.swiper_container}>
                     {cartProducts.images.length > 0 &&
                         cartProducts.images.map((image, i) => (
                             <SwiperSlide key={i}>
@@ -157,7 +160,9 @@ const CartItem = ({ cartProducts }) => {
                 <hr />
                 <div className={styles.wrapper}>
                     <div className={styles.remove}>
-                        <Tooltip title="Remove from cart" placement="bottom">
+                        <Tooltip
+                            title="Remove from cart"
+                            placement="bottom">
                             <small onClick={handleRemoveItem}>Remove</small>
                         </Tooltip>
                     </div>

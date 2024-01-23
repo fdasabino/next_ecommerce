@@ -46,8 +46,7 @@ const CreateSubCategory = ({ setSubData, categories }) => {
                 enableReinitialize
                 initialValues={{ name, parent }}
                 validationSchema={subCategoryValidation}
-                onSubmit={handleSubmit}
-            >
+                onSubmit={handleSubmit}>
                 {(formik) => (
                     <Form>
                         <AdminInput
@@ -65,7 +64,10 @@ const CreateSubCategory = ({ setSubData, categories }) => {
                             placeholder="Select parent category"
                             onChange={handleChange}
                         />
-                        <Button type="submit" style="primary" disabled={!name || !parent}>
+                        <Button
+                            type="submit"
+                            style="primary"
+                            disabled={!name || !parent}>
                             Submit <AiOutlinePlus />
                         </Button>
                     </Form>

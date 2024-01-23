@@ -13,7 +13,9 @@ const AdminOrders = ({ user, orders }) => {
     const path = pathname.split("/admin/dashboard")[1];
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_orders}>
                 <OrderList orders={orders} />
             </div>

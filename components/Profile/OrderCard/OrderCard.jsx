@@ -1,6 +1,5 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
-import React from "react";
 import { MdOutlineReadMore } from "react-icons/md";
 import styles from "./OrderCard.module.scss";
 

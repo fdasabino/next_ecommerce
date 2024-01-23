@@ -13,7 +13,9 @@ const Notifications = () => {
     };
 
     return (
-        <div className={styles.dropdown} onClick={toggleShow}>
+        <div
+            className={styles.dropdown}
+            onClick={toggleShow}>
             <div className={styles.dropdown__svg}>
                 <AiOutlineBell />
             </div>
@@ -21,16 +23,19 @@ const Notifications = () => {
                 className={`${styles.dropdown__content} ${show ? styles.active : ""} ${
                     styles.scrollbar
                 }`}
-                onMouseLeave={toggleShow}
-            >
+                onMouseLeave={toggleShow}>
                 <div className={styles.dropdown__content_notifications}>
                     {notificationsData.map((n, i) => (
                         <div key={i}>
                             {n.type === "order" ? (
                                 <div
-                                    className={styles.dropdown__content_notifications_notification}
-                                >
-                                    <Image src={n.image} width={100} height={100} alt="" />
+                                    className={styles.dropdown__content_notifications_notification}>
+                                    <Image
+                                        src={n.image}
+                                        width={100}
+                                        height={100}
+                                        alt=""
+                                    />
                                     <p>
                                         <span>{n.user}</span> created a new order. Total of $
                                         {n.total}
@@ -38,9 +43,13 @@ const Notifications = () => {
                                 </div>
                             ) : (
                                 <div
-                                    className={styles.dropdown__content_notifications_notification}
-                                >
-                                    <Image src={n.image} width={100} height={100} alt="" />
+                                    className={styles.dropdown__content_notifications_notification}>
+                                    <Image
+                                        src={n.image}
+                                        width={100}
+                                        height={100}
+                                        alt=""
+                                    />
                                     <span>{n.user}</span> created a new account
                                 </div>
                             )}

@@ -65,7 +65,9 @@ const SubCategoriesList = ({
                 subCategories
                     ?.sort((a, b) => a.name.localeCompare(b.name))
                     .map((sub) => (
-                        <div className={styles.subcategory} key={sub._id}>
+                        <div
+                            className={styles.subcategory}
+                            key={sub._id}>
                             {/* category edit */}
                             <div className={styles.subcategory_name}>
                                 {editSubCategoryId === sub._id && (
@@ -109,10 +111,11 @@ const SubCategoriesList = ({
                                             }
                                             onChange={handleChange}
                                             disabled={!editSubCategoryId}
-                                            className={styles.select}
-                                        >
+                                            className={styles.select}>
                                             {categories?.map((cat) => (
-                                                <option key={cat._id} value={cat._id}>
+                                                <option
+                                                    key={cat._id}
+                                                    value={cat._id}>
                                                     {cat.name}
                                                 </option>
                                             ))}
@@ -121,14 +124,12 @@ const SubCategoriesList = ({
                                             <Button
                                                 style="primary"
                                                 onClick={() => handleUpdateSubCategory(sub._id)}
-                                                disabled={!name && !parent}
-                                            >
+                                                disabled={!name && !parent}>
                                                 <AiOutlineCheck />
                                             </Button>
                                             <Button
                                                 style="danger"
-                                                onClick={() => editSubCategoryHandler(sub._id)}
-                                            >
+                                                onClick={() => editSubCategoryHandler(sub._id)}>
                                                 <AiOutlineStop />
                                             </Button>
                                         </div>
@@ -141,14 +142,12 @@ const SubCategoriesList = ({
                                     <>
                                         <Button
                                             style="primary"
-                                            onClick={() => editSubCategoryHandler(sub._id)}
-                                        >
+                                            onClick={() => editSubCategoryHandler(sub._id)}>
                                             <FiEdit />
                                         </Button>
                                         <Button
                                             style="danger"
-                                            onClick={() => handleDeleteSubCategory(sub._id)}
-                                        >
+                                            onClick={() => handleDeleteSubCategory(sub._id)}>
                                             <BsTrash />
                                         </Button>
                                     </>

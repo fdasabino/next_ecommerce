@@ -59,7 +59,9 @@ const CartHeader = () => {
                 </div>
                 <div className={styles.right}>
                     {!session && (
-                        <Button onClick={handleSignIn} style="secondary">
+                        <Button
+                            onClick={handleSignIn}
+                            style="secondary">
                             Sign in to checkout <AiOutlineArrowRight />
                         </Button>
                     )}
@@ -70,13 +72,14 @@ const CartHeader = () => {
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
+                    aria-describedby="modal-modal-description">
                     <Box sx={style}>
                         <div className={styles.modal_body}>
                             <h2>Clear shopping cart?</h2>
                             <small>This action will remove your entire shopping cart.</small>
-                            <Button style="danger" onClick={handleClearCart}>
+                            <Button
+                                style="danger"
+                                onClick={handleClearCart}>
                                 Clear my cart
                             </Button>
                         </div>

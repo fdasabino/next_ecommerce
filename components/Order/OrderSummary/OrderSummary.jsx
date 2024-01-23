@@ -27,8 +27,7 @@ const OrderSummary = ({ order }) => {
                             fullWidth={isMedium}
                             style={{ border: "1px solid #e7e7e7" }}
                             color={!summaryVisible ? "primary" : "error"}
-                            onClick={() => setSummaryVisible(!summaryVisible)}
-                        >
+                            onClick={() => setSummaryVisible(!summaryVisible)}>
                             {summaryVisible ? "Hide Summary" : "Show Summary"}{" "}
                             <BsChevronBarExpand size={15} />
                         </MuiButton>
@@ -51,8 +50,7 @@ const OrderSummary = ({ order }) => {
                                             order.total < order.totalBeforeDiscount
                                                 ? { color: "#6CC082" }
                                                 : { color: "black" }
-                                        }
-                                    >
+                                        }>
                                         Order total: {order.total.toFixed(2)}
                                     </p>
                                 </>
@@ -72,7 +70,9 @@ const OrderSummary = ({ order }) => {
                 {summaryVisible && (
                     <>
                         {order.products.map((product) => (
-                            <div key={product._id} className={styles.product}>
+                            <div
+                                key={product._id}
+                                className={styles.product}>
                                 <div className={styles.product__image}>
                                     <Image
                                         src={product.image}

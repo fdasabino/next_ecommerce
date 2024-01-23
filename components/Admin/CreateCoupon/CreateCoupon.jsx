@@ -61,8 +61,7 @@ const CreateCoupon = ({ setData }) => {
                 enableReinitialize
                 initialValues={{ coupon, startDate, endDate, discount }}
                 validationSchema={couponValidation}
-                onSubmit={handleSubmit}
-            >
+                onSubmit={handleSubmit}>
                 {(formik) => (
                     <Form>
                         <AdminInput
@@ -100,8 +99,7 @@ const CreateCoupon = ({ setData }) => {
                         <Button
                             type="submit"
                             style="primary"
-                            disabled={!coupon || !setStartDate || !endDate || !discount}
-                        >
+                            disabled={!coupon || !setStartDate || !endDate || !discount}>
                             Submit <AiOutlinePlus />
                         </Button>
                     </Form>

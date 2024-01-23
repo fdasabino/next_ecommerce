@@ -23,10 +23,15 @@ const AdminCategories = ({ categories, user }) => {
     }, [data, dispatch]);
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_categories}>
                 <CreateCategory setData={setData} />
-                <CategoriesList setData={setData} data={data} />
+                <CategoriesList
+                    setData={setData}
+                    data={data}
+                />
             </div>
         </AdminLayout>
     );

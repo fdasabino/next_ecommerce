@@ -21,9 +21,14 @@ const AdminProducts = ({ products: productsFromDB, user, currentPage, totalPages
     };
 
     return (
-        <AdminLayout path={path} user={user}>
+        <AdminLayout
+            path={path}
+            user={user}>
             <div className={styles.admin_products}>
-                <ProductsList products={products} setProducts={setProducts} />
+                <ProductsList
+                    products={products}
+                    setProducts={setProducts}
+                />
             </div>
             <Pagination
                 currentPage={currentPage}

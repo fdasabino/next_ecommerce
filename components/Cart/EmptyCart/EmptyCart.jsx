@@ -13,9 +13,16 @@ const EmptyCart = () => {
 
     return (
         <div className={styles.empty__cart}>
-            <Image src={"/images/empty_cart.png"} width={500} height={500} alt="empty cart" />
+            <Image
+                src={"/images/empty_cart.png"}
+                width={500}
+                height={500}
+                alt="empty cart"
+            />
             <p>Your cart is empty, but it doesn&#8217;t have to be... </p>
-            <Button onClick={handleRedirect} style="primary">
+            <Button
+                onClick={handleRedirect}
+                style="primary">
                 <AiOutlineArrowLeft /> Take me shopping
             </Button>
         </div>

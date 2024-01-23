@@ -35,7 +35,9 @@ const DetailsInput = ({ details, product, setProduct }) => {
             )}
             {details &&
                 details.map((detail, index) => (
-                    <div className={styles.details} key={index}>
+                    <div
+                        className={styles.details}
+                        key={index}>
                         <div className={styles.input_group}>
                             <label htmlFor="name">Name</label>
                             <input

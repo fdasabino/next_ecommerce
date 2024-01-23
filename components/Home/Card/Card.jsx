@@ -8,7 +8,13 @@ const Card = ({ item }) => {
     const renderCard = () => {
         return (
             <div className={styles.card}>
-                <Image src={item.image} width={1000} height={1000} alt="placeholder" priority />
+                <Image
+                    src={item.image}
+                    width={1000}
+                    height={1000}
+                    alt="placeholder"
+                    priority
+                />
                 <div className={styles.overlay}>
                     <span>{(item.price - item.discount).toFixed(0)}$</span>
                     <small>

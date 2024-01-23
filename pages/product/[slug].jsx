@@ -68,7 +68,10 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
                 <Path path={path} />
                 <div className={styles.single_product_page__container}>
                     <div className={styles.single_product_page__main}>
-                        <ProductPageMainSwiper images={product?.images} activeImage={activeImage} />
+                        <ProductPageMainSwiper
+                            images={product?.images}
+                            activeImage={activeImage}
+                        />
                         <div className={styles.vertical_line} />
                         <ProductInfo
                             product={product}
@@ -87,7 +90,10 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
                         <Loader />
                     ) : (
                         <>
-                            <Reviews reviews={reviews} numReviews={product.numReviews} />
+                            <Reviews
+                                reviews={reviews}
+                                numReviews={product.numReviews}
+                            />
                             <div className={styles.single_product_page__create_review}>
                                 {session ? (
                                     <CreateReview
@@ -103,7 +109,9 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
                                                 <BsChatLeftQuote />
                                             </h2>
                                         )}
-                                        <Button onClick={signInRedirect} style="primary">
+                                        <Button
+                                            onClick={signInRedirect}
+                                            style="primary">
                                             Sign in to write a review <AiOutlineArrowRight />
                                         </Button>
                                     </div>
@@ -111,7 +119,10 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
                             </div>
                             {product.reviews.length > 0 && (
                                 <div className={styles.single_product_page__review_table}>
-                                    <ReviewTable reviews={reviews} productName={product.name} />
+                                    <ReviewTable
+                                        reviews={reviews}
+                                        productName={product.name}
+                                    />
                                 </div>
                             )}
                         </>

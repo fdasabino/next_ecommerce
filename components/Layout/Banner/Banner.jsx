@@ -12,7 +12,13 @@ const Banner = () => {
         <div className={styles.banner}>
             <div className={styles.main__logo}>
                 <Link href="/">
-                    <Image src={Logo} width={1000} height={1000} alt="logo" priority />
+                    <Image
+                        src={Logo}
+                        width={1000}
+                        height={1000}
+                        alt="logo"
+                        priority
+                    />
                 </Link>
             </div>
             <div className={styles.overlay} />
@@ -28,7 +34,9 @@ const Banner = () => {
                 </div>
             </div>
             <div className={styles.right}>
-                <Button onClick={() => router.push("/browse")} style="primary">
+                <Button
+                    onClick={() => router.push("/browse")}
+                    style="primary">
                     Shop now!
                 </Button>
             </div>

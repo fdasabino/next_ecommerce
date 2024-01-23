@@ -5,7 +5,9 @@ import styles from "./Pagination.module.scss";
 const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
     return (
         <div className={styles.pagination}>
-            <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+            <Button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}>
                 <FaArrowAltCircleLeft />
             </Button>
             <span>{currentPage}</span>

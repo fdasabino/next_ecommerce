@@ -35,8 +35,7 @@ const ShippingInput = ({ icon, placeholder, ...props }) => {
             <div
                 className={`${styles.form_input} ${
                     meta.touched && meta.error ? styles.wrapper_error : ""
-                }`}
-            >
+                }`}>
                 {icon && iconMap[icon]}
                 <input
                     className={`${meta.touched && meta.error ? styles.input_error : ""}`}

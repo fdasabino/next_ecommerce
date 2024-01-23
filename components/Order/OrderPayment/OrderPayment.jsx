@@ -82,7 +82,10 @@ const OrderPayment = ({ order, isPending, stripePublicKey, dispatch }) => {
                 )}
 
                 {order.paymentMethod === "Credit Card" && (
-                    <StripePayment order={order} stripePublicKey={stripePublicKey} />
+                    <StripePayment
+                        order={order}
+                        stripePublicKey={stripePublicKey}
+                    />
                 )}
             </div>
         </div>

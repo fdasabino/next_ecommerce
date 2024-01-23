@@ -1,5 +1,4 @@
 import ProductCard from "@/components/Home/ProductCard/ProductCard";
-import React from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Mousewheel, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -36,8 +35,7 @@ const SimilarProductsSwiper = ({ products, category }) => {
                 navigation={true}
                 pagination={{ dynamicBullets: true }}
                 modules={[Navigation, Pagination, Mousewheel]}
-                className={styles.similar_product_swiper__container}
-            >
+                className={styles.similar_product_swiper__container}>
                 {products.map((product) => (
                     <SwiperSlide key={product._id}>
                         <ProductCard product={product} />

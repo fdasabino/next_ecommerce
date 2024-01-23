@@ -26,8 +26,7 @@ const OrderList = ({ orders }) => {
                                     : null
                             }
                             className={styles.order}
-                            key={order._id}
-                        >
+                            key={order._id}>
                             <div
                                 style={
                                     orderBtnSwitch === order._id
@@ -37,8 +36,7 @@ const OrderList = ({ orders }) => {
                                           }
                                         : null
                                 }
-                                className={styles.order_heading}
-                            >
+                                className={styles.order_heading}>
                                 <div className={styles.order_id}>
                                     <span>Order ID:</span> {order._id}
                                 </div>
@@ -100,8 +98,7 @@ const OrderList = ({ orders }) => {
                                                 return (
                                                     <div
                                                         key={product._id}
-                                                        className={styles.product}
-                                                    >
+                                                        className={styles.product}>
                                                         <div className={styles.product_name}>
                                                             {product.name}
                                                         </div>

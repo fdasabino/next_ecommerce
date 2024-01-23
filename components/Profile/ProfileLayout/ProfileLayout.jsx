@@ -18,12 +18,24 @@ const ProfileLayout = ({ children, user, path }) => {
         <>
             <Head>
                 <title>{`Profile | ${user.name}`}</title>
-                <meta name="description" content={`${user.name}'s profile...`} />
+                <meta
+                    name="description"
+                    content={`${user.name}'s profile...`}
+                />
             </Head>
 
             <div className={styles.profile_layout}>
-                {isExpanded && <div className={styles.overlay} onClick={toggleSidebar} />}
-                <ProfileSideBar isExpanded={isExpanded} toggleSidebar={toggleSidebar} path={path} />
+                {isExpanded && (
+                    <div
+                        className={styles.overlay}
+                        onClick={toggleSidebar}
+                    />
+                )}
+                <ProfileSideBar
+                    isExpanded={isExpanded}
+                    toggleSidebar={toggleSidebar}
+                    path={path}
+                />
                 <ProfileHeader
                     user={user}
                     path={path}

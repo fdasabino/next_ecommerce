@@ -24,8 +24,7 @@ const Summary = ({ applyCouponHandler, coupon, cart, setCoupon, disabled, discou
                     enableReinitialize
                     initialValues={{ coupon }}
                     validationSchema={validateCoupon}
-                    onSubmit={applyCouponHandler}
-                >
+                    onSubmit={applyCouponHandler}>
                     {(form) => (
                         <Form>
                             <div className={styles.input_wrapper}>
@@ -57,8 +56,7 @@ const Summary = ({ applyCouponHandler, coupon, cart, setCoupon, disabled, discou
                                     }}
                                     color="success"
                                     type="submit"
-                                    disabled={disabled}
-                                >
+                                    disabled={disabled}>
                                     {disabled ? "Coupon applied" : "Apply coupon"}
                                 </MuiButton>
                             </div>

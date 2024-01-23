@@ -27,8 +27,7 @@ const OrderInfo = ({ order }) => {
                                 : order.status === "Completed"
                                 ? { color: "lightGreen" }
                                 : ""
-                        }
-                    >
+                        }>
                         {order.status}
                     </span>
                 </p>

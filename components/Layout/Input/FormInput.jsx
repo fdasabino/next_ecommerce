@@ -35,8 +35,7 @@ const FormInput = ({ icon, placeholder, ...props }) => {
             <div
                 className={`${styles.form_input} ${
                     meta.touched && meta.error ? styles.wrapper_error : ""
-                }`}
-            >
+                }`}>
                 {icon && iconMap[icon]}
                 <input
                     className={`${meta.touched && meta.error ? styles.input_error : ""}`}
@@ -46,7 +45,9 @@ const FormInput = ({ icon, placeholder, ...props }) => {
                     type={icon === "password" ? (isPasswordVisible ? "text" : "password") : "text"} // Adjust type based on password visibility
                 />
                 {icon === "password" && (
-                    <div className={styles.password_icon} onClick={togglePasswordVisibility}>
+                    <div
+                        className={styles.password_icon}
+                        onClick={togglePasswordVisibility}>
                         {isPasswordVisible ? <IoEyeOffOutline /> : <IoEyeOutline />}
                     </div>
                 )}

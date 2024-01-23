@@ -6,7 +6,6 @@ import styles from "@/styles/pages/CategoryPage.module.scss";
 import db from "@/utils/db";
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
 const CategoryPage = ({ productsWithSameCategory, slug }) => {
     const path = [
         { id: 1, name: "Home" },
@@ -34,7 +33,12 @@ const CategoryPage = ({ productsWithSameCategory, slug }) => {
                     {productsWithSameCategory.length ? (
                         <div className={styles.category_page__container__products}>
                             {productsWithSameCategory.map((product) => {
-                                return <ProductCard key={product._id} product={product} />;
+                                return (
+                                    <ProductCard
+                                        key={product._id}
+                                        product={product}
+                                    />
+                                );
                             })}
                         </div>
                     ) : (

@@ -161,8 +161,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                                     border: "1px solid #e7e7e7",
                                 }}
                                 color={!showForm ? "primary" : "error"}
-                                onClick={() => setShowForm(!showForm)}
-                            >
+                                onClick={() => setShowForm(!showForm)}>
                                 {showForm ? <FaTimes /> : <FaPlus />}
                             </MuiButton>
                         </Tooltip>
@@ -181,8 +180,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                             enableReinitialize
                             initialValues={newAddress}
                             validationSchema={validateAddress}
-                            onSubmit={handleSubmit}
-                        >
+                            onSubmit={handleSubmit}>
                             {(form) => (
                                 <Form>
                                     <h4>
@@ -279,8 +277,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                                     <Button
                                         style="primary"
                                         type="submit"
-                                        disabled={!isCountrySelected}
-                                    >
+                                        disabled={!isCountrySelected}>
                                         Save address
                                     </Button>
                                 </Form>
@@ -304,8 +301,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                 }}
                 grabCursor={true}
                 modules={[Pagination, Navigation]}
-                style={{ width: "100%", padding: "1.5rem 0" }}
-            >
+                style={{ width: "100%", padding: "1.5rem 0" }}>
                 {addresses.length > 0 ? (
                     addresses.map((item, i) => {
                         return (
@@ -316,13 +312,11 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                                         : null
                                 }
                                 className={styles.addresses}
-                                key={item._id || i}
-                            >
+                                key={item._id || i}>
                                 <div
                                     className={`${styles.address} ${
                                         selectedAddress?._id === item._id && styles.selected
-                                    }`}
-                                >
+                                    }`}>
                                     <div className={styles.left}>
                                         <div className={styles.img}>
                                             <Image
@@ -346,8 +340,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                                                             }
                                                             onClick={() =>
                                                                 handleSelectAddress(item)
-                                                            }
-                                                        >
+                                                            }>
                                                             <FaCheck />
                                                         </MuiButton>
                                                     </Tooltip>
@@ -361,8 +354,7 @@ const Shipping = ({ selectedAddress, setSelectedAddress, addresses, setAddresses
                                                         <MuiButton
                                                             style={{ border: "1px solid #e7e7e7" }}
                                                             color="error"
-                                                            onClick={() => handleDelete(item._id)}
-                                                        >
+                                                            onClick={() => handleDelete(item._id)}>
                                                             <FaTrash />
                                                         </MuiButton>
                                                     </Tooltip>

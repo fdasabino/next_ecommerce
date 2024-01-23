@@ -1,6 +1,6 @@
 import { Chip, FormControl, InputLabel, ListItemText, MenuItem, Select } from "@mui/material";
 import { ErrorMessage, useField } from "formik";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import styles from "./MultipleSelectInput.module.scss";
 
@@ -54,15 +54,19 @@ const MultipleSelectInput = ({
                     renderValue={(selected) => (
                         <div>
                             {selected.map((value) => (
-                                <Chip key={value} label={result[value]} />
+                                <Chip
+                                    key={value}
+                                    label={result[value]}
+                                />
                             ))}
                         </div>
-                    )}
-                >
+                    )}>
                     {result &&
                         Object.keys(result).map((id) => {
                             return (
-                                <MenuItem key={id} value={id}>
+                                <MenuItem
+                                    key={id}
+                                    value={id}>
                                     <ListItemText primary={result[id]} />
                                 </MenuItem>
                             );

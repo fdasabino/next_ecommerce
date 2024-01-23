@@ -32,9 +32,11 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
                     onChange={onChange}
                     className={`${styles.select} ${meta.touched && meta.error ? styles.error : ""}`}
                     disabled={props.disabled}
-                    error={meta.touched && meta.error ? true : false}
-                >
-                    <MenuItem style={{ fontFamily: "Mulish", fontSize: "0.9rem" }} key="" value="">
+                    error={meta.touched && meta.error ? true : false}>
+                    <MenuItem
+                        style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
+                        key=""
+                        value="">
                         {placeholder}
                     </MenuItem>
                     {data
@@ -43,8 +45,7 @@ const SingleSelectInput = ({ data, onChange, placeholder, ...props }) => {
                             <MenuItem
                                 style={{ fontFamily: "Mulish", fontSize: "0.9rem" }}
                                 key={option._id}
-                                value={option._id || option.name}
-                            >
+                                value={option._id || option.name}>
                                 {option.name}
                             </MenuItem>
                         ))}
