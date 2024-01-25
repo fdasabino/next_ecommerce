@@ -29,16 +29,34 @@
     }
 
     &__img {
-        width: 80px !important;
-        height: 80px !important;
-        object-fit: cover;
-        border-radius: 50%;
+        position: relative;
+        cursor: default !important;
+        img {
+            width: 80px !important;
+            height: 80px !important;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        svg {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            fill: $base-orange;
+            stroke: $base-orange;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 
     .col {
         display: flex;
         flex-direction: column;
         gap: 0.7rem;
+
+        a {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
 
         span {
             font-size: 0.8rem;

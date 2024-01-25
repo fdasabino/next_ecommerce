@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { RiAdminLine } from "react-icons/ri";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { toast } from "react-toastify";
 import Button from "../../Button/Button";
 import styles from "./UserMenu.module.scss";
@@ -34,19 +34,23 @@ const UserMenu = (props) => {
             onMouseLeave={() => setVisible(false)}>
             {session ? (
                 <div className={styles.user_menu__wrapper}>
-                    <Image
-                        src={session?.user.image}
-                        width={100}
-                        height={100}
-                        alt={session?.user.name}
-                        className={styles.user_menu__img}
-                    />
+                    <div className={styles.user_menu__img}>
+                        {user.role === "admin" && <MdAdminPanelSettings />}
+                        <Image
+                            src={session?.user.image}
+                            width={300}
+                            height={300}
+                            alt={session?.user.name}
+                        />
+                    </div>
                     <div className={styles.col}>
                         <span>
-                            {user?.role === "user"
-                                ? ` Welcome back, \n ${user?.name}!`
-                                : "Hello Admin"}
-                            {user?.role === "admin" && <RiAdminLine />}
+                            {user?.role === "user" && ` Welcome back, \n ${user?.name}!`}
+                            {user?.role === "admin" && (
+                                <>
+                                    <Link href="/admin/dashboard">Admin Panel</Link>
+                                </>
+                            )}
                         </span>
                         <small>{session?.user.email}</small>
                         <Button
@@ -65,13 +69,6 @@ const UserMenu = (props) => {
                         Sign in <AiOutlineArrowRight />
                     </Button>
                 </div>
-            )}
-            {user?.role === "admin" && (
-                <>
-                    <Link href="/admin/dashboard">
-                        <li>Admin Panel</li>
-                    </Link>
-                </>
             )}
             <Link href="/profile">
                 <li>Account</li>
