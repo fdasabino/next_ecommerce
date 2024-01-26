@@ -10,6 +10,20 @@ const CountDown = ({ date }) => {
     });
 
     useEffect(() => {
+        if (
+            remainingTime.seconds === 0 &&
+            remainingTime.minutes === 0 &&
+            remainingTime.hours === 0 &&
+            remainingTime.days === 0
+        ) {
+            setRemainingTime({
+                seconds: 0,
+                hours: 0,
+                minutes: 0,
+                days: 20,
+            });
+        }
+
         const interval = setInterval(() => {
             const now = new Date().getTime();
             const distance = date.getTime() - now;
@@ -28,7 +42,7 @@ const CountDown = ({ date }) => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [date]);
+    }, [date, remainingTime]);
 
     return (
         <div className={styles.countdown}>
