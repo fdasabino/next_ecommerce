@@ -47,9 +47,7 @@ const handler = async (req, res) => {
 
                 const updatedOrder = await order.save();
 
-                // Perform bulk updates only if the order is paid
                 if (order.isPaid) {
-                    console.log("Order has been paid, updating products quantity", order);
                     const bulkUpdateOperations = order.products.map(({ product, qty, size }) => ({
                         updateOne: {
                             filter: { _id: product, "subProducts.sizes.size": size },
