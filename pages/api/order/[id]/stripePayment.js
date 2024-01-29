@@ -1,6 +1,7 @@
 import authMiddleware from "@/middleware/auth";
 import Cart from "@/models/Cart";
 import Order from "@/models/Order";
+import Product from "@/models/Product";
 import User from "@/models/User";
 import db from "@/utils/db";
 import Stripe from "stripe";
@@ -33,6 +34,7 @@ const handler = async (req, res) => {
             });
 
             if (order) {
+                // Update the order details
                 order.isPaid = true;
                 order.paidAt = Date.now();
                 order.paymentResult = {
@@ -44,6 +46,32 @@ const handler = async (req, res) => {
                 };
 
                 const updatedOrder = await order.save();
+
+                // Perform bulk updates only if the order is paid
+                if (order.isPaid) {
+                    console.log("Order has been paid, updating products quantity", order);
+                    const bulkUpdateOperations = order.products.map(({ product, qty, size }) => ({
+                        updateOne: {
+                            filter: { _id: product, "subProducts.sizes.size": size },
+                            update: {
+                                $inc: {
+                                    "subProducts.$[].sizes.$[sizeElement].qty": -qty,
+                                },
+                            },
+                            arrayFilters: [{ "sizeElement.size": size }],
+                        },
+                    }));
+
+                    if (bulkUpdateOperations.length > 0) {
+                        try {
+                            await Product.bulkWrite(bulkUpdateOperations);
+                        } catch (bulkWriteError) {
+                            console.error("Bulk Write Error:", bulkWriteError);
+                        }
+                    }
+                }
+
+                // Remove the cart for the user
                 await cart.deleteOne({ user: req.user });
 
                 res.status(200).json({
