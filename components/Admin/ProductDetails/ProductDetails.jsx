@@ -73,6 +73,10 @@ const ProductDetails = ({ product }) => {
                                     </div>
                                     <div className={styles.sub_info}>
                                         <small>
+                                            Stock:
+                                            <span>{sizes[i].qty}</span>
+                                        </small>
+                                        <small>
                                             Color:
                                             <span>{getColorName(sub.color.color)}</span>
                                         </small>
