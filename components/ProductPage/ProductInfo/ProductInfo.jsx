@@ -40,9 +40,9 @@ const ProductInfo = ({ product, setActiveImage, inWishlist, setInWishlist }) => 
     const [selectedSize, setSelectedSize] = useState(parseInt(size));
     const [selectedColor, setSelectedColor] = useState(parseInt(color));
     const [cartQuantity, setCartQuantity] = useState(1);
-    const arrayOfRatings = reviews.map((review) => review.rating);
+    const arrayOfRatings = reviews?.map((review) => review.rating);
     const averageRating =
-        arrayOfRatings.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings.length || 0;
+        arrayOfRatings?.reduce((acc, curr) => acc + curr, 0) / arrayOfRatings?.length || 0;
     const selectedSizeValue = selectedSize || size;
     const selectedColorValue = selectedColor || color;
     const isColorSelected = selectedColorValue === 0;

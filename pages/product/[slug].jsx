@@ -103,7 +103,7 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
                                     />
                                 ) : (
                                     <div className={styles.not_signed_in}>
-                                        {product.reviews.length === 0 && (
+                                        {product.reviews?.length === 0 && (
                                             <h2>
                                                 Be the first to review this product{" "}
                                                 <BsChatLeftQuote />
@@ -117,7 +117,7 @@ const SingleProductPage = ({ product, productsWithSameCategory, productInWishlis
                                     </div>
                                 )}
                             </div>
-                            {product.reviews.length > 0 && (
+                            {product.reviews?.length > 0 && (
                                 <div className={styles.single_product_page__review_table}>
                                     <ReviewTable
                                         reviews={reviews}
