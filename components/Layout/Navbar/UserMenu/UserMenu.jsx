@@ -23,16 +23,11 @@ const UserMenu = (props) => {
         toast.success("Signing out...");
     };
 
-    // Sign in
-    const handleSignIn = async () => {
-        await signIn();
-    };
-
     return (
         <ul
             className={styles.user_menu}
             onMouseLeave={() => setVisible(false)}>
-            {session ? (
+            {session && (
                 <div className={styles.user_menu__wrapper}>
                     <div className={styles.user_menu__img}>
                         {user.role === "admin" && <MdAdminPanelSettings />}
@@ -59,32 +54,23 @@ const UserMenu = (props) => {
                             Sign out
                         </Button>
                     </div>
-                </div>
-            ) : (
-                <div className={styles.user_menu__wrapper}>
-                    <h3>Welcome to ShoppyFlow</h3>
-                    <Button
-                        onClick={handleSignIn}
-                        style="primary">
-                        Sign in <AiOutlineArrowRight />
-                    </Button>
+                    <Link href="/profile">
+                        <li>Account</li>
+                    </Link>
+                    <Link href="/profile/orders">
+                        <li>My Orders</li>
+                    </Link>
+                    <Link href="/profile/messages">
+                        <li>Message Center</li>
+                    </Link>
+                    <Link href="/profile/address">
+                        <li>Addresses</li>
+                    </Link>
+                    <Link href="/profile/wishlist">
+                        <li>Wishlist</li>
+                    </Link>
                 </div>
             )}
-            <Link href="/profile">
-                <li>Account</li>
-            </Link>
-            <Link href="/profile/orders">
-                <li>My Orders</li>
-            </Link>
-            <Link href="/profile/messages">
-                <li>Message Center</li>
-            </Link>
-            <Link href="/profile/address">
-                <li>Addresses</li>
-            </Link>
-            <Link href="/profile/wishlist">
-                <li>Wishlist</li>
-            </Link>
         </ul>
     );
 };

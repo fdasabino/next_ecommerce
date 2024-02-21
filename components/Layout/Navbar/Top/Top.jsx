@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,6 +12,7 @@ import {
 } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import Button from "../../Button/Button";
 import UserMenu from "../UserMenu/UserMenu";
 import styles from "./Top.module.scss";
 
@@ -33,6 +34,11 @@ const Top = () => {
         } else {
             setVisible(true);
         }
+    };
+
+    // Sign in
+    const handleSignIn = async () => {
+        await signIn();
     };
 
     return (
@@ -77,7 +83,7 @@ const Top = () => {
                         </>
                     )}
                     <div onClick={handleMenuClick}>
-                        {session ? (
+                        {session && (
                             <li>
                                 <Image
                                     src={session?.user.image}
@@ -89,16 +95,14 @@ const Top = () => {
                                     {user} <RiArrowDropDownFill />
                                 </span>
                             </li>
-                        ) : (
-                            <li>
-                                <RiAccountPinCircleLine />
-                                <span>
-                                    Account <RiArrowDropDownFill />
-                                </span>
-                            </li>
                         )}
                         {visible && <UserMenu setVisible={setVisible} />}
                     </div>
+                    {!session && (
+                        <li>
+                            <Button onClick={handleSignIn}>Sign in</Button>
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>
