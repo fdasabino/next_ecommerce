@@ -21,14 +21,20 @@ const Profile = ({ user, orders }) => {
                         <Button onClick={() => router.push("/profile/orders")}>View all</Button>
                     </Tooltip>
                 </div>
-                <div className={styles.profile__orders}>
-                    {orders.map((order) => (
-                        <OrderCard
-                            key={order._id}
-                            order={order}
-                        />
-                    ))}
-                </div>
+                {orders.length > 0 ? (
+                    <div className={styles.profile__orders}>
+                        {orders.map((order) => (
+                            <OrderCard
+                                key={order._id}
+                                order={order}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div className={styles.profile__orders__empty}>
+                        <h3>You have not placed any orders yet</h3>
+                    </div>
+                )}
             </div>
         </ProfileLayout>
     );
