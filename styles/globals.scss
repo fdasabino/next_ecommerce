@@ -38,9 +38,9 @@ body {
 }
 
 main {
-    padding-top: 1rem;
     min-height: 100vh;
-    margin: 0 0 5rem 0;
+    padding: 1rem 0 5rem 0;
+    background: $base-bg-grey;
 }
 
 h1,
