@@ -137,3 +137,15 @@
         0.98
     );
 }
+
+.btnLogin {
+    @include button-styles;
+    @include button-background(
+        transparent,
+        $base-dark,
+        transparent,
+        $base-dark-grey,
+        $base-white,
+        0.98
+    );
+}

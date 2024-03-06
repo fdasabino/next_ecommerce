@@ -100,7 +100,11 @@ const Top = () => {
                     </div>
                     {!session && (
                         <li>
-                            <Button onClick={handleSignIn}>Sign in</Button>
+                            <Button
+                                style="login"
+                                onClick={handleSignIn}>
+                                Sign in
+                            </Button>
                         </li>
                     )}
                 </ul>
