@@ -14,10 +14,8 @@ const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
     useLayoutEffect(() => {
         if (isExpanded) {
             document.body.style.overflow = "hidden";
-            console.log("scrolling disabled");
         } else {
             document.body.style.overflow = "visible";
-            console.log("scrolling enabled");
         }
     }, [isExpanded]);
 

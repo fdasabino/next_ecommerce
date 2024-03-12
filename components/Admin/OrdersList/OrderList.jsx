@@ -1,6 +1,8 @@
 import { Button, Tooltip } from "@mui/material";
 import Box from "@mui/material/Box";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Paper from "@mui/material/Paper";
+import Switch from "@mui/material/Switch";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -19,44 +21,50 @@ import styles from "./OrderList.module.scss";
 
 const headCells = [
     {
-        id: "1",
+        id: "user",
         numeric: false,
         disablePadding: true,
-        label: "Order Total",
+        label: "User",
     },
     {
-        id: "2",
+        id: "total",
+        numeric: false,
+        disablePadding: true,
+        label: "Total",
+    },
+    {
+        id: "payment",
         numeric: false,
         disablePadding: false,
-        label: "Payment method",
+        label: "Payment",
     },
     {
-        id: "3",
+        id: "paid",
         numeric: false,
         disablePadding: false,
-        label: "Paid",
+        label: "Paid ?",
     },
     {
-        id: "4",
+        id: "status",
         numeric: false,
         disablePadding: false,
         label: "Status",
     },
     {
-        id: "5",
+        id: "date",
         numeric: false,
         disablePadding: false,
-        label: "Order Date",
+        label: "Date",
     },
     {
-        id: "6",
+        id: "view",
         numeric: false,
         disablePadding: false,
-        label: "View Order",
+        label: "View",
     },
 ];
 
-const descendingComparator = (a, b, orderBy) => {
+function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
         return -1;
     }
@@ -64,15 +72,15 @@ const descendingComparator = (a, b, orderBy) => {
         return 1;
     }
     return 0;
-};
+}
 
-const getComparator = (order, orderBy) => {
+function getComparator(order, orderBy) {
     return order === "desc"
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
-};
+}
 
-const stableSort = (array, comparator) => {
+function stableSort(array, comparator) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
         const order = comparator(a[0], b[0]);
@@ -82,9 +90,9 @@ const stableSort = (array, comparator) => {
         return a[1] - b[1];
     });
     return stabilizedThis.map((el) => el[0]);
-};
+}
 
-const EnhancedTableHead = (props) => {
+function EnhancedTableHead(props) {
     const { order, orderBy, onRequestSort } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -96,9 +104,14 @@ const EnhancedTableHead = (props) => {
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        align={"center"}
-                        padding={"normal"}
-                        sortDirection={orderBy === headCell.id ? order : false}>
+                        align={headCell.numeric ? "right" : "left"}
+                        padding={headCell.disablePadding ? "none" : "normal"}
+                        sortDirection={orderBy === headCell.id ? order : false}
+                        sx={{
+                            borderBottom: "1px solid #000000",
+                            fontWeight: "bold",
+                            fontSize: "12px",
+                        }}>
                         <TableSortLabel
                             active={orderBy === headCell.id}
                             direction={orderBy === headCell.id ? order : "asc"}
@@ -117,31 +130,40 @@ const EnhancedTableHead = (props) => {
             </TableRow>
         </TableHead>
     );
-};
+}
 
 EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
     order: PropTypes.oneOf(["asc", "desc"]).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
 };
 
-const OrderList = ({ rows }) => {
+const UsersList = ({ rows }) => {
     const [order, setOrder] = useState("asc");
-    const [orderBy, setOrderBy] = useState("3");
+    const [orderBy, setOrderBy] = useState("date");
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
+    const [dense, setDense] = useState(true);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const router = useRouter();
 
-    const handleRequestSort = (property) => {
+    const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
         setOrder(isAsc ? "desc" : "asc");
         setOrderBy(property);
     };
 
-    const handleClick = (name) => {
+    const handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            const newSelected = rows.map((n) => n.name);
+            setSelected(newSelected);
+            return;
+        }
+        setSelected([]);
+    };
+
+    const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
 
@@ -161,7 +183,7 @@ const OrderList = ({ rows }) => {
         setSelected(newSelected);
     };
 
-    const handleChangePage = (newPage) => {
+    const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
 
@@ -170,9 +192,15 @@ const OrderList = ({ rows }) => {
         setPage(0);
     };
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
+    const handleChangeDense = (event) => {
+        setDense(event.target.checked);
+    };
 
+    const isSelected = (name) => selected.indexOf(name) !== -1;
     const goToORder = (id) => router.push(`/order/${id}`);
+
+    // Avoid a layout jump when reaching the last page with empty rows.
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     const visibleRows = React.useMemo(
         () =>
@@ -197,18 +225,19 @@ const OrderList = ({ rows }) => {
                             <Table
                                 sx={{ minWidth: 750 }}
                                 aria-labelledby="tableTitle"
+                                size={dense ? "small" : "medium"}
                                 className={styles.table}>
                                 <EnhancedTableHead
                                     numSelected={selected.length}
                                     order={order}
                                     orderBy={orderBy}
+                                    onSelectAllClick={handleSelectAllClick}
                                     onRequestSort={handleRequestSort}
                                     rowCount={rows.length}
                                 />
                                 <TableBody>
                                     {visibleRows.map((row, index) => {
                                         const isItemSelected = isSelected(row._id);
-                                        const labelId = `enhanced-table-checkbox-${index}`;
 
                                         return (
                                             <TableRow
@@ -220,11 +249,23 @@ const OrderList = ({ rows }) => {
                                                 key={row._id}
                                                 selected={isItemSelected}
                                                 sx={{ cursor: "pointer" }}>
+                                                {/* ordered by */}
+                                                <TableCell
+                                                    component="th"
+                                                    scope="row"
+                                                    sx={{
+                                                        fontSize: "12px",
+                                                    }}
+                                                    align={"center"}>
+                                                    {rows[index].user.email}
+                                                </TableCell>
                                                 {/* total */}
                                                 <TableCell
                                                     component="th"
-                                                    id={labelId}
                                                     scope="row"
+                                                    sx={{
+                                                        fontSize: "12px",
+                                                    }}
                                                     align={"center"}>
                                                     {new Intl.NumberFormat("en-US", {
                                                         style: "currency",
@@ -235,8 +276,10 @@ const OrderList = ({ rows }) => {
                                                 {/* payment method */}
                                                 <TableCell
                                                     component="th"
-                                                    id={labelId}
                                                     scope="row"
+                                                    sx={{
+                                                        fontSize: "12px",
+                                                    }}
                                                     align={"center"}>
                                                     {row.paymentMethod}
                                                 </TableCell>
@@ -244,8 +287,10 @@ const OrderList = ({ rows }) => {
                                                 {/* is paid */}
                                                 <TableCell
                                                     component="th"
-                                                    id={labelId}
                                                     scope="row"
+                                                    sx={{
+                                                        fontSize: "12px",
+                                                    }}
                                                     align={"center"}>
                                                     {row.isPaid ? (
                                                         <AiOutlineCheck color="green" />
@@ -257,7 +302,6 @@ const OrderList = ({ rows }) => {
                                                 {/* status */}
                                                 <TableCell
                                                     component="th"
-                                                    id={labelId}
                                                     scope="row"
                                                     align={"center"}
                                                     style={{
@@ -272,6 +316,7 @@ const OrderList = ({ rows }) => {
                                                             : order.status == "Completed"
                                                             ? "#6cc070"
                                                             : "",
+                                                        fontSize: "12px",
                                                     }}>
                                                     {row.status}
                                                 </TableCell>
@@ -279,8 +324,10 @@ const OrderList = ({ rows }) => {
                                                 {/* Date */}
                                                 <TableCell
                                                     component="th"
-                                                    id={labelId}
                                                     scope="row"
+                                                    sx={{
+                                                        fontSize: "12px",
+                                                    }}
                                                     align={"center"}>
                                                     {row.createdAt.substring(0, 10)}
                                                 </TableCell>
@@ -288,8 +335,10 @@ const OrderList = ({ rows }) => {
                                                 {/* View Order Button */}
                                                 <TableCell
                                                     component="th"
-                                                    id={labelId}
                                                     scope="row"
+                                                    sx={{
+                                                        fontSize: "12px",
+                                                    }}
                                                     align={"center"}>
                                                     <Tooltip title="View Order">
                                                         <Button onClick={() => goToORder(row._id)}>
@@ -300,6 +349,14 @@ const OrderList = ({ rows }) => {
                                             </TableRow>
                                         );
                                     })}
+                                    {emptyRows > 0 && (
+                                        <TableRow
+                                            style={{
+                                                height: (dense ? 33 : 53) * emptyRows,
+                                            }}>
+                                            <TableCell colSpan={6} />
+                                        </TableRow>
+                                    )}
                                 </TableBody>
                             </Table>
                         </TableContainer>
@@ -313,10 +370,19 @@ const OrderList = ({ rows }) => {
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
                     </Paper>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={dense}
+                                onChange={handleChangeDense}
+                            />
+                        }
+                        label="Dense padding"
+                    />
                 </Box>
             )}
         </div>
     );
 };
 
-export default OrderList;
+export default UsersList;
