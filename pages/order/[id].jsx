@@ -110,9 +110,10 @@ export async function getServerSideProps(context) {
         const order = await Order.findById(id).populate("user").lean().exec();
         let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
         let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
+        const admin_user = user.role === "admin";
 
         // Authorization check
-        const notAuthorized = !order || user._id.toString() !== order.user._id.toString();
+        const notAuthorized = !admin_user && order.user._id !== user._id;
         if (notAuthorized) {
             console.log("Not authorized to view this order" + id);
             db.disconnectDB();

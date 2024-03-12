@@ -17,7 +17,7 @@ const AdminOrders = ({ user, orders }) => {
             path={path}
             user={user}>
             <div className={styles.admin_orders}>
-                <OrderList orders={orders} />
+                <OrderList rows={orders} />
             </div>
         </AdminLayout>
     );
