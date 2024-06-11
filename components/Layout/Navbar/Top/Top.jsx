@@ -20,8 +20,6 @@ const Top = () => {
   const { data: session, status } = useSession();
   const user = session?.user.name.split(" ")[0];
 
-  console.log(status);
-
   // extract country from redux store
   const country = useSelector((state) => state.country);
   const cart = useSelector((state) => state.cart);
