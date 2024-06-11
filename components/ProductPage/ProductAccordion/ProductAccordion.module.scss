@@ -1,71 +1,71 @@
 .product_accordion {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 1rem;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none !important;
+    border: 1px solid rgba($color: $base-grey, $alpha: 0.5) !important;
+    border-radius: 0.5rem !important;
+  }
+
+  &__title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: $base-dark;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    &:active {
+      background: $base-grey;
+    }
+  }
+
+  &__details {
+    padding: 1.5rem 1rem 0 1rem;
+    font-size: 0.8rem;
+    color: $base-dark;
+    line-height: 1.5;
+    border-top: 1px solid rgba($color: $base-grey, $alpha: 0.5);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__details_left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
     width: 100%;
-    max-width: 300px;
-    margin-bottom: 1rem;
+    height: 100%;
 
-    &__wrapper {
-        display: flex;
-        flex-direction: column;
-        box-shadow: none !important;
-        border: 1px solid rgba($color: $base-grey, $alpha: 0.5) !important;
-        border-radius: 0.5rem !important;
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $base-dark;
     }
+  }
 
-    &__title {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: $base-dark;
-        text-transform: uppercase;
-        padding: 1rem 1.5rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
+  &__details_right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
 
-        &:active {
-            background: $base-grey;
-        }
+    h3 {
+      font-size: 0.9rem;
+      color: $base-dark;
     }
-
-    &__details {
-        padding: 1.5rem 1rem 0 1rem;
-        font-size: 0.8rem;
-        color: $base-dark;
-        line-height: 1.5;
-        border-top: 1px solid rgba($color: $base-grey, $alpha: 0.5);
-
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__details_left {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0.5rem;
-        width: 100%;
-        height: 100%;
-
-        h3 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: $base-dark;
-        }
-    }
-
-    &__details_right {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0.5rem;
-        width: 100%;
-        height: 100%;
-
-        h3 {
-            font-size: 0.9rem;
-            color: $base-dark;
-        }
-    }
+  }
 }

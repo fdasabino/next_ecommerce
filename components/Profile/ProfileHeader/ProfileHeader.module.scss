@@ -1,112 +1,112 @@
 .profile_header {
-    user-select: none;
+  user-select: none;
+  width: 100%;
+  max-width: 1000px;
+  height: fit-content;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.8rem;
+  }
+
+  .top {
     width: 100%;
-    max-width: 1000px;
-    height: fit-content;
-
+    max-width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 0.5rem 0;
 
-    margin: 0 auto;
-    padding: 0 2rem;
+    .col {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
-    @media (max-width: 768px) {
-        padding: 0 0.8rem;
-    }
-
-    .top {
-        width: 100%;
-        max-width: 100%;
+      .user {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
+        gap: 0.5rem;
 
-        .col {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-
-            .user {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-
-                img {
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    margin-right: 0.5rem;
-                }
-
-                .user_info {
-                    display: flex;
-                    flex-direction: column;
-                    white-space: nowrap;
-
-                    p {
-                        font-size: 0.8rem;
-                        font-weight: 600;
-                        color: $base-dark-secondary;
-                        text-transform: uppercase;
-                    }
-
-                    h4 {
-                        font-size: 1rem;
-                        font-weight: 600;
-                        color: $base-dark;
-                    }
-                }
-            }
-
-            h2 {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                color: $base-dark-secondary;
-                font-size: 1.1rem;
-                font-weight: 600;
-                text-transform: uppercase;
-                white-space: nowrap;
-
-                @media (max-width: 768px) {
-                    font-size: 1rem;
-                }
-                @media (max-width: 480px) {
-                    font-size: 0.9rem;
-                }
-            }
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-right: 0.5rem;
         }
-    }
 
-    .bottom {
-        width: 100%;
-        max-width: 100%;
+        .user_info {
+          display: flex;
+          flex-direction: column;
+          white-space: nowrap;
+
+          p {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: $base-dark-secondary;
+            text-transform: uppercase;
+          }
+
+          h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: $base-dark;
+          }
+        }
+      }
+
+      h2 {
         display: flex;
-        justify-content: center;
         align-items: center;
+        gap: 0.5rem;
+        color: $base-dark-secondary;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        white-space: nowrap;
 
-        label {
-            width: 100%;
-            max-width: 100%;
-            input {
-                width: 100%;
-                height: 40px;
-                border: 1px solid $base-dark-grey;
-                border-radius: 5px;
-                padding: 0 1rem;
-                font-size: 0.9rem;
-                font-weight: 500;
-                color: $base-dark-secondary;
-                outline: none;
-                transition: all 0.2s ease-in-out;
-                &:focus {
-                    border: 1px solid $base-grey;
-                    box-shadow: $base-shadow-1;
-                }
-            }
+        @media (max-width: 768px) {
+          font-size: 1rem;
         }
+        @media (max-width: 480px) {
+          font-size: 0.9rem;
+        }
+      }
     }
+  }
+
+  .bottom {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    label {
+      width: 100%;
+      max-width: 100%;
+      input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid $base-dark-grey;
+        border-radius: 5px;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $base-dark-secondary;
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        &:focus {
+          border: 1px solid $base-grey;
+          box-shadow: $base-shadow-1;
+        }
+      }
+    }
+  }
 }

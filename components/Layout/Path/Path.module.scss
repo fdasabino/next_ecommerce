@@ -1,36 +1,36 @@
 .path {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 480px) {
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  li {
+    list-style: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-left: 1rem;
-    margin-top: 1rem;
 
-    @media (max-width: 480px) {
-        justify-content: center;
-        margin-left: 0;
+    font-weight: 500;
+
+    a {
+      text-decoration: none;
+      transition: color 0.2s linear;
+      font-size: 0.7rem;
+      text-transform: capitalize;
+
+      @media (max-width: 480px) {
+        font-size: 0.6rem;
+      }
+
+      &:hover {
+        color: $base-orange;
+      }
     }
-
-    li {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-
-        font-weight: 500;
-
-        a {
-            text-decoration: none;
-            transition: color 0.2s linear;
-            font-size: 0.7rem;
-            text-transform: capitalize;
-
-            @media (max-width: 480px) {
-                font-size: 0.6rem;
-            }
-
-            &:hover {
-                color: $base-orange;
-            }
-        }
-    }
+  }
 }

@@ -1,75 +1,75 @@
 .banner {
-    background: url("/svgs/animated_shape_banner.svg");
-    background-repeat: center center;
-    background-color: $base-white;
-    opacity: 1;
-    height: 60px;
+  background: url("/svgs/animated_shape_banner.svg");
+  background-repeat: center center;
+  background-color: $base-white;
+  opacity: 1;
+  height: 60px;
+  width: 100%;
+  padding: 0rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 1;
+  position: relative;
+  border-bottom: 1px solid $base-grey;
+  box-shadow: $base-shadow-2;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+
+  // logo
+  .main__logo {
+    flex: 0.8;
     width: 100%;
-    padding: 0rem 2rem;
+    max-width: 250px;
+    z-index: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .overlay {
+    background-color: rgba(247, 245, 245, 0.5);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .left {
+    opacity: 1;
+    flex: 2;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-    opacity: 1;
-    position: relative;
-    border-bottom: 1px solid $base-grey;
-    box-shadow: $base-shadow-2;
+    gap: 1rem;
+    z-index: 0;
+    div {
+      color: $base-dark;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      text-transform: uppercase;
+      white-space: nowrap;
 
-    @media (max-width: 900px) {
-        display: none;
+      @media (min-width: 1000px) {
+        font-size: 1.5rem;
+      }
     }
+  }
 
-    // logo
-    .main__logo {
-        flex: 0.8;
-        width: 100%;
-        max-width: 250px;
-        z-index: 2;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    .overlay {
-        background-color: rgba(247, 245, 245, 0.5);
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        z-index: 1;
-    }
-
-    .left {
-        opacity: 1;
-        flex: 2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        z-index: 0;
-        div {
-            color: $base-dark;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-align: center;
-            text-transform: uppercase;
-            white-space: nowrap;
-
-            @media (min-width: 1000px) {
-                font-size: 1.5rem;
-            }
-        }
-    }
-
-    .right {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        max-width: 200px;
-        z-index: 5;
-    }
+  .right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    max-width: 200px;
+    z-index: 5;
+  }
 }

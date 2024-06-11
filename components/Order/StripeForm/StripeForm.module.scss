@@ -1,20 +1,20 @@
 .stripe__form {
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
-        padding: 0.5rem;
-        width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0.5rem;
+    width: 100%;
 
-        button {
-            width: 100% !important;
-            max-width: 100% !important;
+    button {
+      width: 100% !important;
+      max-width: 100% !important;
 
-            svg {
-                width: 0.9rem;
-                height: 0.9rem;
-                margin-top: 0.4rem;
-            }
-        }
+      svg {
+        width: 0.9rem;
+        height: 0.9rem;
+        margin-top: 0.4rem;
+      }
     }
+  }
 }

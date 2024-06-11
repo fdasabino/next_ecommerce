@@ -7,56 +7,56 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Profile = ({ user, orders }) => {
-    const router = useRouter();
-    const { pathname } = router;
-    const path = pathname;
-    return (
-        <ProfileLayout
-            user={user}
-            path={path}>
-            <div className={styles.profile}>
-                <div className={styles.profile__heading}>
-                    <h2>Latest orders {orders.length > 0 && `(${orders.length})`}</h2>
-                    <Tooltip title="View all orders">
-                        <Button onClick={() => router.push("/profile/orders")}>View all</Button>
-                    </Tooltip>
-                </div>
-                {orders.length > 0 ? (
-                    <div className={styles.profile__orders}>
-                        {orders.map((order) => (
-                            <OrderCard
-                                key={order._id}
-                                order={order}
-                            />
-                        ))}
-                    </div>
-                ) : (
-                    <div className={styles.profile__orders__empty}>
-                        <h3>You have not placed any orders yet</h3>
-                    </div>
-                )}
-            </div>
-        </ProfileLayout>
-    );
+  const router = useRouter();
+  const { pathname } = router;
+  const path = pathname;
+  return (
+    <ProfileLayout
+      user={user}
+      path={path}>
+      <div className={styles.profile}>
+        <div className={styles.profile__heading}>
+          <h2>Latest orders {orders.length > 0 && `(${orders.length})`}</h2>
+          <Tooltip title="View all orders">
+            <Button onClick={() => router.push("/profile/orders")}>View all</Button>
+          </Tooltip>
+        </div>
+        {orders.length > 0 ? (
+          <div className={styles.profile__orders}>
+            {orders.map((order) => (
+              <OrderCard
+                key={order._id}
+                order={order}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.profile__orders__empty}>
+            <h3>You have not placed any orders yet</h3>
+          </div>
+        )}
+      </div>
+    </ProfileLayout>
+  );
 };
 
 export default Profile;
 
 export async function getServerSideProps(context) {
-    const { query, req } = context;
-    const session = await getSession({ req });
-    const { user } = session;
-    const tab = query.tab || 0;
-    const orders = await Order.find({ user: user._id });
-    const mostRecentOrders = orders
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 4);
+  const { query, req } = context;
+  const session = await getSession({ req });
+  const { user } = session;
+  const tab = query.tab || 0;
+  const orders = await Order.find({ user: user._id });
+  const mostRecentOrders = orders
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 4);
 
-    return {
-        props: {
-            user: JSON.parse(JSON.stringify(user)),
-            orders: JSON.parse(JSON.stringify(mostRecentOrders)),
-            tab,
-        },
-    };
+  return {
+    props: {
+      user: JSON.parse(JSON.stringify(user)),
+      orders: JSON.parse(JSON.stringify(mostRecentOrders)),
+      tab,
+    },
+  };
 }

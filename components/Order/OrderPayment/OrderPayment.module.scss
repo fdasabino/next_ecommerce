@@ -1,50 +1,50 @@
 .order_payment {
+  width: 100%;
+  max-width: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  z-index: 0 !important;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  .header {
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        margin-right: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .wrapper {
     width: 100%;
-    max-width: 50%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1rem;
-
-    z-index: 0 !important;
-
-    @media (max-width: 768px) {
-        max-width: 100%;
-    }
-
-    .header {
-        h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-
-            svg {
-                width: 1.1rem;
-                height: 1.1rem;
-                margin-right: 0.5rem;
-            }
-
-            @media (max-width: 768px) {
-                font-size: 1rem;
-            }
-
-            @media (max-width: 480px) {
-                font-size: 0.9rem;
-            }
-        }
-    }
-
-    .wrapper {
-        width: 100%;
-        max-width: 100%;
-        min-height: 185px;
-        padding: 1rem;
-        box-shadow: $base-shadow-3;
-        border-radius: 10px;
-        border: 1px solid rgba($color: $base-dark, $alpha: 0.3);
-    }
+    max-width: 100%;
+    min-height: 185px;
+    padding: 1rem;
+    box-shadow: $base-shadow-3;
+    border-radius: 10px;
+    border: 1px solid rgba($color: $base-dark, $alpha: 0.3);
+  }
 }

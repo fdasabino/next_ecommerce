@@ -1,94 +1,94 @@
 .card {
-    user-select: none;
+  user-select: none;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 150px;
+  max-height: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba($color: $base-grey, $alpha: 0.5);
+  transition: color 0.3s ease 0s;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid $base-grey;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  overflow: hidden;
+  z-index: 1;
+
+  @media (max-width: 480px) {
+    min-height: 200px;
+    padding: 0.5rem;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  @media (max-width: 390px) {
+    min-height: 180px;
+    flex-direction: column;
+  }
+
+  &__icon {
     width: 100%;
     max-width: 100%;
     height: 100%;
-    min-height: 150px;
-    max-height: 220px;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    background-color: rgba($color: $base-grey, $alpha: 0.5);
-    transition: color 0.3s ease 0s;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    border: 1px solid $base-grey;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-    overflow: hidden;
     z-index: 1;
 
-    @media (max-width: 480px) {
-        min-height: 200px;
-        padding: 0.5rem;
-        flex-direction: row;
-        justify-content: center;
+    svg {
+      width: 40px;
+      height: 40px;
+      fill: $base-dark-secondary;
+
+      @media (max-width: 480px) {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  &__info {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 1;
+
+    h4 {
+      font-size: 1.1rem;
+      @media (max-width: 850px) {
+        font-size: 1.2rem;
+      }
     }
 
-    @media (max-width: 390px) {
-        min-height: 180px;
-        flex-direction: column;
+    span {
+      width: 100%;
+      font-size: 0.8rem;
+      font-weight: 500;
     }
+  }
 
-    &__icon {
-        width: 100%;
-        max-width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1;
-
-        svg {
-            width: 40px;
-            height: 40px;
-            fill: $base-dark-secondary;
-
-            @media (max-width: 480px) {
-                width: 40px;
-                height: 40px;
-            }
-        }
-    }
-
-    &__info {
-        width: 100%;
-        max-width: 100%;
-        text-align: center;
-        text-transform: uppercase;
-        z-index: 1;
-
-        h4 {
-            font-size: 1.1rem;
-            @media (max-width: 850px) {
-                font-size: 1.2rem;
-            }
-        }
-
-        span {
-            width: 100%;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-    }
-
+  &::before {
+    content: "";
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 50%;
+    background-image: linear-gradient(to bottom right, $base-white, $base-blue);
+    position: absolute;
+    top: 0;
+    left: -50%;
+    transform: scale(0);
+    transition: transform 0.8s ease 0s;
+  }
+  &:hover {
     &::before {
-        content: "";
-        width: 100%;
-        padding-top: 100%;
-        border-radius: 50%;
-        background-image: linear-gradient(to bottom right, $base-white, $base-blue);
-        position: absolute;
-        top: 0;
-        left: -50%;
-        transform: scale(0);
-        transition: transform 0.8s ease 0s;
+      transform: scale(3);
     }
-    &:hover {
-        &::before {
-            transform: scale(3);
-        }
-    }
+  }
 }

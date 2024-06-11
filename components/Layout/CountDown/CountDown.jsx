@@ -2,77 +2,77 @@ import { useEffect, useState } from "react";
 import styles from "./CountDown.module.scss";
 
 const CountDown = ({ date }) => {
-    const [remainingTime, setRemainingTime] = useState({
+  const [remainingTime, setRemainingTime] = useState({
+    seconds: 0,
+    hours: 0,
+    minutes: 0,
+    days: 0,
+  });
+
+  useEffect(() => {
+    if (
+      remainingTime.seconds === 0 &&
+      remainingTime.minutes === 0 &&
+      remainingTime.hours === 0 &&
+      remainingTime.days === 0
+    ) {
+      setRemainingTime({
         seconds: 0,
         hours: 0,
         minutes: 0,
-        days: 0,
-    });
+        days: 20,
+      });
+    }
 
-    useEffect(() => {
-        if (
-            remainingTime.seconds === 0 &&
-            remainingTime.minutes === 0 &&
-            remainingTime.hours === 0 &&
-            remainingTime.days === 0
-        ) {
-            setRemainingTime({
-                seconds: 0,
-                hours: 0,
-                minutes: 0,
-                days: 20,
-            });
-        }
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = date.getTime() - now;
 
-        const interval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = date.getTime() - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      setRemainingTime({
+        seconds,
+        hours,
+        minutes,
+        days,
+      });
+    }, 1000);
 
-            setRemainingTime({
-                seconds,
-                hours,
-                minutes,
-                days,
-            });
-        }, 1000);
+    return () => clearInterval(interval);
+  }, [date, remainingTime]);
 
-        return () => clearInterval(interval);
-    }, [date, remainingTime]);
+  return (
+    <div className={styles.countdown}>
+      <div className={styles.countdown__days}>
+        <span>{remainingTime.days}</span>
+        <span>Days</span>
+      </div>
 
-    return (
-        <div className={styles.countdown}>
-            <div className={styles.countdown__days}>
-                <span>{remainingTime.days}</span>
-                <span>Days</span>
-            </div>
+      <b>:</b>
 
-            <b>:</b>
+      <div className={styles.countdown__hours}>
+        <span>{remainingTime.hours.toString().padStart(2, "0")}</span>
+        <span>Hours</span>
+      </div>
 
-            <div className={styles.countdown__hours}>
-                <span>{remainingTime.hours.toString().padStart(2, "0")}</span>
-                <span>Hours</span>
-            </div>
+      <b>:</b>
 
-            <b>:</b>
+      <div className={styles.countdown__minutes}>
+        <span>{remainingTime.minutes.toString().padStart(2, "0")}</span>
+        <span>Minutes</span>
+      </div>
 
-            <div className={styles.countdown__minutes}>
-                <span>{remainingTime.minutes.toString().padStart(2, "0")}</span>
-                <span>Minutes</span>
-            </div>
+      <b>:</b>
 
-            <b>:</b>
-
-            <div className={styles.countdown__seconds}>
-                <span>{remainingTime.seconds.toString().padStart(2, "0")}</span>
-                <span>Seconds</span>
-            </div>
-        </div>
-    );
+      <div className={styles.countdown__seconds}>
+        <span>{remainingTime.seconds.toString().padStart(2, "0")}</span>
+        <span>Seconds</span>
+      </div>
+    </div>
+  );
 };
 
 export default CountDown;

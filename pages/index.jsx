@@ -13,69 +13,69 @@ import { useDispatch } from "react-redux";
 import Product from "../models/Product";
 
 const HomePage = ({ country, products, categories }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    // Set categories in redux store
-    const setCategoriesToStore = useCallback(() => {
-        dispatch(setCategories(categories));
-    }, [dispatch, categories]);
+  // Set categories in redux store
+  const setCategoriesToStore = useCallback(() => {
+    dispatch(setCategories(categories));
+  }, [dispatch, categories]);
 
-    // Set country in redux store
-    const setCountryToStore = useCallback(() => {
-        dispatch(setCountry(country));
-    }, [country, dispatch]);
+  // Set country in redux store
+  const setCountryToStore = useCallback(() => {
+    dispatch(setCountry(country));
+  }, [country, dispatch]);
 
-    // Set country in redux store on page load
-    useEffect(() => {
-        setCountryToStore();
-        setCategoriesToStore();
-    }, [setCountryToStore, setCategoriesToStore]);
+  // Set country in redux store on page load
+  useEffect(() => {
+    setCountryToStore();
+    setCategoriesToStore();
+  }, [setCountryToStore, setCategoriesToStore]);
 
-    return (
-        <>
-            <Head>
-                <title> ShoppyFlow | Home</title>
-            </Head>
-            <div className={styles.home}>
-                <div className={styles.container}>
-                    <MainSection products={products} />
-                    <FlashDeals />
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <Head>
+        <title> ShoppyFlow | Home</title>
+      </Head>
+      <div className={styles.home}>
+        <div className={styles.container}>
+          <MainSection products={products} />
+          <FlashDeals />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default HomePage;
 
 export async function getServerSideProps() {
-    await db.connectDB();
+  await db.connectDB();
 
-    try {
-        const products = await Product.find({})
-            .sort({ createdAt: -1 })
-            .populate({ path: "category", model: Category })
-            .populate({ path: "subCategories", model: SubCategory })
-            .lean()
-            .exec();
-        const categories = await Category.find({}).lean().exec();
-        const { data } = await axios.get(
-            `https://api.ipregistry.co/?key=${process.env.NEXT_APP_IP_REGISTRY_API}`
-        );
+  try {
+    const products = await Product.find({})
+      .sort({ createdAt: -1 })
+      .populate({ path: "category", model: Category })
+      .populate({ path: "subCategories", model: SubCategory })
+      .lean()
+      .exec();
+    const categories = await Category.find({}).lean().exec();
+    const { data } = await axios.get(
+      `https://api.ipregistry.co/?key=${process.env.NEXT_APP_IP_REGISTRY_API}`
+    );
 
-        return {
-            props: {
-                products: JSON.parse(JSON.stringify(products)),
-                categories: JSON.parse(JSON.stringify(categories)),
-                country: data.location.country,
-            },
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            props: {},
-        };
-    } finally {
-        db.disconnectDB();
-    }
+    return {
+      props: {
+        products: JSON.parse(JSON.stringify(products)),
+        categories: JSON.parse(JSON.stringify(categories)),
+        country: data.location.country,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: {},
+    };
+  } finally {
+    db.disconnectDB();
+  }
 }

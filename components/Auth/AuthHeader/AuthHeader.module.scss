@@ -1,58 +1,58 @@
 .signin__header {
-    user-select: none;
-    max-width: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
+  user-select: none;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
 
-    text-align: center;
-    margin-top: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  .back__svg {
+    width: 35px;
+    height: 35px;
+    border: 1px solid $base-grey;
+    border-radius: 50%;
+
+    transition: all 0.2s linear;
+
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background: $base-blue;
+      border-color: transparent;
+      svg {
+        fill: $base-white;
+      }
+    }
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: $base-blue;
+    }
+  }
+  span {
+    font-weight: 600;
+    font-size: 0.8rem;
 
     @media (max-width: 768px) {
-        max-width: 100%;
+      font-size: 0.7rem;
     }
 
-    .back__svg {
-        width: 35px;
-        height: 35px;
-        border: 1px solid $base-grey;
-        border-radius: 50%;
-
-        transition: all 0.2s linear;
-
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-
-        &:hover {
-            background: $base-blue;
-            border-color: transparent;
-            svg {
-                fill: $base-white;
-            }
-        }
-        svg {
-            width: 20px;
-            height: 20px;
-            fill: $base-blue;
-        }
+    @media (max-width: 480px) {
+      font-size: 0.6rem;
     }
-    span {
-        font-weight: 600;
-        font-size: 0.8rem;
 
-        @media (max-width: 768px) {
-            font-size: 0.7rem;
-        }
-
-        @media (max-width: 480px) {
-            font-size: 0.6rem;
-        }
-
-        a {
-            color: $base-blue;
-            text-decoration: underline;
-        }
+    a {
+      color: $base-blue;
+      text-decoration: underline;
     }
+  }
 }

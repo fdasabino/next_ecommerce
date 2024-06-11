@@ -1,107 +1,107 @@
 .admin_dashboard {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 1rem 0;
+    text-transform: uppercase;
+
+    h2 {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+  }
+
+  .cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .data {
+    position: relative;
     width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
+    max-width: 100%;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 2fr, 1fr;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
 
     .heading {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 2rem 0;
+      text-transform: uppercase;
+
+      h2 {
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      a {
+        position: relative;
+        padding: 5px 10px;
+        border: 1px solid $base-info;
+        color: $base-info;
+        border-radius: 4px;
         text-transform: uppercase;
-
-        h2 {
-            font-weight: 600;
-            font-size: 1rem;
+        transition: all 0.3s ease 0s;
+        &:hover {
+          background: $base-blue;
+          color: $base-white;
         }
+      }
     }
 
-    .cards {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        align-items: center;
-        justify-items: center;
-        gap: 1rem;
-        padding: 1.5rem;
+    .orders {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
 
-        @media (max-width: 768px) {
-            grid-template-columns: repeat(2, 1fr);
-        }
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-        @media (max-width: 480px) {
-            grid-template-columns: 1fr;
-        }
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .data {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        padding: 0 1.5rem;
-        display: grid;
-        grid-template-columns: 2fr, 1fr;
-        gap: 1rem;
+    .users {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
 
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-        }
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-        .heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: 2rem 0;
-            text-transform: uppercase;
-
-            h2 {
-                font-weight: 600;
-                font-size: 1rem;
-            }
-
-            a {
-                position: relative;
-                padding: 5px 10px;
-                border: 1px solid $base-info;
-                color: $base-info;
-                border-radius: 4px;
-                text-transform: uppercase;
-                transition: all 0.3s ease 0s;
-                &:hover {
-                    background: $base-blue;
-                    color: $base-white;
-                }
-            }
-        }
-
-        .orders {
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-
-            @media (max-width: 768px) {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            @media (max-width: 480px) {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .users {
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-
-            @media (max-width: 768px) {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            @media (max-width: 480px) {
-                grid-template-columns: 1fr;
-            }
-        }
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
     }
+  }
 }

@@ -1,62 +1,62 @@
 .empty__cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  width: 100%;
+  background-image: url("/svgs/animated_shape.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 2rem;
+
+  @media screen and (max-width: 500px) {
+    max-width: 350px;
+  }
+
+  border: 2px solid $base-grey;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: $base-shadow-3;
+
+  img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  p {
+    font-size: 1.3rem;
+    white-space: nowrap;
+    margin: 1rem 0;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      white-space: pre-wrap;
+    }
+  }
+
+  a {
+    text-decoration-line: underline;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 500px;
-    width: 100%;
-    background-image: url("/svgs/animated_shape.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-top: 2rem;
+    gap: 0.5rem;
 
-    @media screen and (max-width: 500px) {
-        max-width: 350px;
+    svg {
+      width: 2rem;
+      height: 2rem;
+      color: $base-dark;
+      border: 2px solid $base-dark;
+      border-radius: 50%;
+      padding: 0.2rem;
+
+      @media screen and (max-width: 500px) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
     }
-
-    border: 2px solid $base-grey;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: $base-shadow-3;
-
-    img {
-        width: 100%;
-        max-width: 300px;
-        height: auto;
-        object-fit: cover;
-    }
-
-    p {
-        font-size: 1.3rem;
-        white-space: nowrap;
-        margin: 1rem 0;
-        text-align: center;
-
-        @media (max-width: 768px) {
-            font-size: 1.2rem;
-            white-space: pre-wrap;
-        }
-    }
-
-    a {
-        text-decoration-line: underline;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-
-        svg {
-            width: 2rem;
-            height: 2rem;
-            color: $base-dark;
-            border: 2px solid $base-dark;
-            border-radius: 50%;
-            padding: 0.2rem;
-
-            @media screen and (max-width: 500px) {
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-        }
-    }
+  }
 }

@@ -11,173 +11,154 @@ import { SlHandbag } from "react-icons/sl";
 import styles from "./AdminSideBar.module.scss";
 
 const AdminSideBar = ({ isExpanded, toggleSidebar, path }) => {
-    useLayoutEffect(() => {
-        if (isExpanded) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "visible";
-        }
-    }, [isExpanded]);
+  useLayoutEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [isExpanded]);
 
-    return (
-        <div className={`${styles.admin_sidebar} ${isExpanded ? styles.expanded : ""}`}>
-            <div className={styles.header}>
-                <h4>Admin Panel</h4>
-                <AiOutlineClose onClick={toggleSidebar} />
-            </div>
-            <hr />
+  return (
+    <div className={`${styles.admin_sidebar} ${isExpanded ? styles.expanded : ""}`}>
+      <div className={styles.header}>
+        <h4>Admin Panel</h4>
+        <AiOutlineClose onClick={toggleSidebar} />
+      </div>
+      <hr />
 
-            {/* Links */}
-            <ul className={styles.nav_list}>
-                <li
-                    className={`${styles.nav_item} ${
-                        path === "/admin/dashboard" ? styles.active : ""
-                    }`}>
-                    <Link
-                        onClick={toggleSidebar}
-                        href="/admin/dashboard">
-                        <MdSpaceDashboard /> Dashboard
-                    </Link>
-                </li>
-                <li className={`${styles.nav_item} ${path === "/sales" ? styles.active : ""}`}>
-                    <Link
-                        onClick={toggleSidebar}
-                        href="/admin/dashboard/sales">
-                        <BsGraphUpArrow /> Sales
-                    </Link>
-                </li>
-                <li className={`${styles.nav_item} ${path === "/orders" ? styles.active : ""}`}>
-                    <Link
-                        onClick={toggleSidebar}
-                        href="/admin/dashboard/orders">
-                        <SlHandbag /> Orders
-                    </Link>
-                </li>
-                <li className={`${styles.nav_item} ${path === "/users" ? styles.active : ""}`}>
-                    <Link
-                        onClick={toggleSidebar}
-                        href="/admin/dashboard/users">
-                        <ImUsers /> Users
-                    </Link>
-                </li>
-                <li className={`${styles.nav_item} ${path === "/messages" ? styles.active : ""}`}>
-                    <Link
-                        onClick={toggleSidebar}
-                        href="/admin/dashboard/messages">
-                        <AiFillMessage /> Messages
-                    </Link>
-                </li>
-            </ul>
+      {/* Links */}
+      <ul className={styles.nav_list}>
+        <li className={`${styles.nav_item} ${path === "/admin/dashboard" ? styles.active : ""}`}>
+          <Link
+            onClick={toggleSidebar}
+            href="/admin/dashboard">
+            <MdSpaceDashboard /> Dashboard
+          </Link>
+        </li>
+        <li className={`${styles.nav_item} ${path === "/sales" ? styles.active : ""}`}>
+          <Link
+            onClick={toggleSidebar}
+            href="/admin/dashboard/sales">
+            <BsGraphUpArrow /> Sales
+          </Link>
+        </li>
+        <li className={`${styles.nav_item} ${path === "/orders" ? styles.active : ""}`}>
+          <Link
+            onClick={toggleSidebar}
+            href="/admin/dashboard/orders">
+            <SlHandbag /> Orders
+          </Link>
+        </li>
+        <li className={`${styles.nav_item} ${path === "/users" ? styles.active : ""}`}>
+          <Link
+            onClick={toggleSidebar}
+            href="/admin/dashboard/users">
+            <ImUsers /> Users
+          </Link>
+        </li>
+        <li className={`${styles.nav_item} ${path === "/messages" ? styles.active : ""}`}>
+          <Link
+            onClick={toggleSidebar}
+            href="/admin/dashboard/messages">
+            <AiFillMessage /> Messages
+          </Link>
+        </li>
+      </ul>
 
-            {/* dropdown */}
-            <div className={styles.admin_sidebar__dropdown}>
-                <hr />
-                <div className={styles.header}>
-                    <span>Products</span>
-                </div>
-                <ul className={styles.nav_list}>
-                    <li
-                        className={`${styles.nav_item} ${
-                            path === "/products" ? styles.active : ""
-                        }`}>
-                        <Link
-                            onClick={toggleSidebar}
-                            href="/admin/dashboard/products">
-                            <FaThList /> Products
-                        </Link>
-                    </li>
-                    <li
-                        className={`${styles.nav_item} ${
-                            path === "/create-product" ? styles.active : ""
-                        }`}>
-                        <Link
-                            onClick={toggleSidebar}
-                            href="/admin/dashboard/create-product">
-                            <BsPatchPlus /> Create Product
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
-            {/* dropdown */}
-            <div className={styles.admin_sidebar__dropdown}>
-                <hr />
-                <div className={styles.header}>
-                    <span>Categories</span>
-                </div>
-                <ul className={styles.nav_list}>
-                    <li
-                        className={`${styles.nav_item} ${
-                            path === "/categories" ? styles.active : ""
-                        }`}>
-                        <Link
-                            onClick={toggleSidebar}
-                            href="/admin/dashboard/categories">
-                            <MdOutlineCategory /> Categories
-                        </Link>
-                    </li>
-                    <li
-                        className={`${styles.nav_item} ${
-                            path === "/subCategories" ? styles.active : ""
-                        }`}>
-                        <Link
-                            onClick={toggleSidebar}
-                            href="/admin/dashboard/subCategories">
-                            <MdOutlineCategory style={{ transform: "rotate(90deg)" }} /> Sub
-                            Categories
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
-            {/* dropdown */}
-            <div className={styles.admin_sidebar__dropdown}>
-                <hr />
-                <div className={styles.header}>
-                    <span>Coupons</span>
-                </div>
-                <ul className={styles.nav_list}>
-                    <li
-                        className={`${styles.nav_item} ${
-                            path === "/coupons" ? styles.active : ""
-                        }`}>
-                        <Link
-                            onClick={toggleSidebar}
-                            href="/admin/dashboard/coupons">
-                            <RiCoupon3Fill /> Coupons
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-
-            <hr />
-            {/* Bottom nav */}
-            <nav className={styles.admin_sidebar__bottom_nav}>
-                <ul className={styles.bottom_item}>
-                    <li>
-                        <Link href="/">
-                            <RiSettings2Fill />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/">
-                            <IoNotificationsCircleSharp />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/">
-                            <AiFillMessage />
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/">
-                            <RiLogoutCircleFill />
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+      {/* dropdown */}
+      <div className={styles.admin_sidebar__dropdown}>
+        <hr />
+        <div className={styles.header}>
+          <span>Products</span>
         </div>
-    );
+        <ul className={styles.nav_list}>
+          <li className={`${styles.nav_item} ${path === "/products" ? styles.active : ""}`}>
+            <Link
+              onClick={toggleSidebar}
+              href="/admin/dashboard/products">
+              <FaThList /> Products
+            </Link>
+          </li>
+          <li className={`${styles.nav_item} ${path === "/create-product" ? styles.active : ""}`}>
+            <Link
+              onClick={toggleSidebar}
+              href="/admin/dashboard/create-product">
+              <BsPatchPlus /> Create Product
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* dropdown */}
+      <div className={styles.admin_sidebar__dropdown}>
+        <hr />
+        <div className={styles.header}>
+          <span>Categories</span>
+        </div>
+        <ul className={styles.nav_list}>
+          <li className={`${styles.nav_item} ${path === "/categories" ? styles.active : ""}`}>
+            <Link
+              onClick={toggleSidebar}
+              href="/admin/dashboard/categories">
+              <MdOutlineCategory /> Categories
+            </Link>
+          </li>
+          <li className={`${styles.nav_item} ${path === "/subCategories" ? styles.active : ""}`}>
+            <Link
+              onClick={toggleSidebar}
+              href="/admin/dashboard/subCategories">
+              <MdOutlineCategory style={{ transform: "rotate(90deg)" }} /> Sub Categories
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* dropdown */}
+      <div className={styles.admin_sidebar__dropdown}>
+        <hr />
+        <div className={styles.header}>
+          <span>Coupons</span>
+        </div>
+        <ul className={styles.nav_list}>
+          <li className={`${styles.nav_item} ${path === "/coupons" ? styles.active : ""}`}>
+            <Link
+              onClick={toggleSidebar}
+              href="/admin/dashboard/coupons">
+              <RiCoupon3Fill /> Coupons
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      <hr />
+      {/* Bottom nav */}
+      <nav className={styles.admin_sidebar__bottom_nav}>
+        <ul className={styles.bottom_item}>
+          <li>
+            <Link href="/">
+              <RiSettings2Fill />
+            </Link>
+          </li>
+          <li>
+            <Link href="/">
+              <IoNotificationsCircleSharp />
+            </Link>
+          </li>
+          <li>
+            <Link href="/">
+              <AiFillMessage />
+            </Link>
+          </li>
+          <li>
+            <Link href="/">
+              <RiLogoutCircleFill />
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
 export default AdminSideBar;

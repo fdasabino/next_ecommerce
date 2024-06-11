@@ -1,151 +1,151 @@
 // Mixins
 @mixin button-styles {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 
-    width: fit-content;
-    height: fit-content;
+  width: fit-content;
+  height: fit-content;
 
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 
-    border-radius: 4px;
-    letter-spacing: 1px;
+  border-radius: 4px;
+  letter-spacing: 1px;
 
-    cursor: pointer;
-    border: none;
-    color: inherit;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    padding: 0.5em 1.5rem;
+  cursor: pointer;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.5em 1.5rem;
 
-    -webkit-transition: all 0.2s ease-in-out 0s;
-    transition: all 0.2s ease-in-out 0s;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 
-    @media (max-width: 800px) {
-        font-size: 0.7rem;
-        margin: 0 auto;
-    }
+  @media (max-width: 800px) {
+    font-size: 0.7rem;
+    margin: 0 auto;
+  }
 
-    &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        touch-action: none;
-        box-shadow: none;
-    }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    touch-action: none;
+    box-shadow: none;
+  }
 
-    @media (max-width: 768px) {
-        font-size: 0.8rem;
-        margin: 0 auto;
-    }
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+    margin: 0 auto;
+  }
 
-    svg {
-        margin-right: 5px;
-        margin-left: 5px;
-        width: 1.2em;
-        height: 1.2em;
-        min-width: 1.2em;
-        min-height: 1.2em;
-    }
+  svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    width: 1.2em;
+    height: 1.2em;
+    min-width: 1.2em;
+    min-height: 1.2em;
+  }
 }
 
 @mixin button-background(
-    $bgColor,
-    $textColor,
-    $borderColor,
-    $hoverBgColor,
-    $hoverTextColor,
-    $activeScale
+  $bgColor,
+  $textColor,
+  $borderColor,
+  $hoverBgColor,
+  $hoverTextColor,
+  $activeScale
 ) {
-    background-color: $bgColor;
-    border: 1px solid $borderColor;
-    color: $textColor;
+  background-color: $bgColor;
+  border: 1px solid $borderColor;
+  color: $textColor;
 
-    &:hover {
-        background-color: $hoverBgColor;
-        color: $hoverTextColor;
+  &:hover {
+    background-color: $hoverBgColor;
+    color: $hoverTextColor;
 
-        &:disabled {
-            background-color: $bgColor;
-            color: $textColor;
-            box-shadow: none;
-            transform: none;
-        }
+    &:disabled {
+      background-color: $bgColor;
+      color: $textColor;
+      box-shadow: none;
+      transform: none;
     }
+  }
 
-    &:active {
-        transform: scale($activeScale);
-    }
+  &:active {
+    transform: scale($activeScale);
+  }
 }
 
 // Buttons
 .btnPrimary {
-    @include button-styles;
-    @include button-background($base-info, $base-white, $base-info, $base-blue, $base-white, 0.98);
+  @include button-styles;
+  @include button-background($base-info, $base-white, $base-info, $base-blue, $base-white, 0.98);
 }
 
 .btnSecondary {
-    @include button-styles;
-    @include button-background(
-        $base-dark-secondary,
-        $base-white,
-        $base-dark-secondary,
-        $base-dark,
-        $base-white,
-        0.98
-    );
+  @include button-styles;
+  @include button-background(
+    $base-dark-secondary,
+    $base-white,
+    $base-dark-secondary,
+    $base-dark,
+    $base-white,
+    0.98
+  );
 }
 
 .btnTertiary {
-    @include button-styles;
-    @include button-background(
-        $base-success,
-        $base-white,
-        $base-success,
-        $base-green,
-        $base-white,
-        0.98
-    );
+  @include button-styles;
+  @include button-background(
+    $base-success,
+    $base-white,
+    $base-success,
+    $base-green,
+    $base-white,
+    0.98
+  );
 }
 
 .btnDanger {
-    @include button-styles;
-    @include button-background(
-        $base-error,
-        $base-white,
-        $base-error,
-        $base-error-secondary,
-        $base-white,
-        0.98
-    );
+  @include button-styles;
+  @include button-background(
+    $base-error,
+    $base-white,
+    $base-error,
+    $base-error-secondary,
+    $base-white,
+    0.98
+  );
 }
 
 .btnGoogle {
-    @include button-styles;
-    @include button-background(
-        $base-white,
-        $base-dark-blue,
-        $base-dark-blue,
-        $base-dark-blue,
-        $base-white,
-        0.98
-    );
+  @include button-styles;
+  @include button-background(
+    $base-white,
+    $base-dark-blue,
+    $base-dark-blue,
+    $base-dark-blue,
+    $base-white,
+    0.98
+  );
 }
 
 .btnLogin {
-    @include button-styles;
-    @include button-background(
-        transparent,
-        $base-dark,
-        transparent,
-        $base-dark-grey,
-        $base-white,
-        0.98
-    );
+  @include button-styles;
+  @include button-background(
+    transparent,
+    $base-dark,
+    transparent,
+    $base-dark-grey,
+    $base-white,
+    0.98
+  );
 }

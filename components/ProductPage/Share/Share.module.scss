@@ -1,36 +1,36 @@
 .share {
-    position: absolute;
-    top: 12rem;
-    right: 10px;
+  position: absolute;
+  top: 12rem;
+  right: 10px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    position: relative;
+    top: 0;
+    right: 0;
     margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+  }
 
-    @media (max-width: 768px) {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        flex-direction: row;
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    transition: transform 0.1s linear;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
     }
 
-    button {
-        border: none;
-        background: none;
-        cursor: pointer;
-        outline: none;
-        transition: transform 0.1s linear;
-
-        svg {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-
-        &:hover {
-            transform: scale(1.1);
-        }
+    &:hover {
+      transform: scale(1.1);
     }
+  }
 }

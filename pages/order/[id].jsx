@@ -13,135 +13,135 @@ import Head from "next/head";
 import { useEffect, useReducer } from "react";
 
 const reducer = (state, action) => {
-    switch (action.type) {
-        case "PAYMENT_REQUEST":
-            return { ...state, loading: true };
-        case "PAYMENT_SUCCESS":
-            return { ...state, loading: false, success: true };
-        case "PAYMENT_FAIL":
-            return { ...state, loading: false, error: action.payload };
-        case "PAYMENT_RESET":
-            return { ...state, loading: false, success: false, error: null };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case "PAYMENT_REQUEST":
+      return { ...state, loading: true };
+    case "PAYMENT_SUCCESS":
+      return { ...state, loading: false, success: true };
+    case "PAYMENT_FAIL":
+      return { ...state, loading: false, error: action.payload };
+    case "PAYMENT_RESET":
+      return { ...state, loading: false, success: false, error: null };
+    default:
+      return state;
+  }
 };
 
 const OrderPage = ({ order, paypalClientID, stripePublicKey, user }) => {
-    const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-    const [{ loading, success, error }, dispatch] = useReducer(reducer, {
-        loading: true,
-        order: {},
-        error: null,
-    });
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const [{ loading, success, error }, dispatch] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: null,
+  });
 
-    useEffect(() => {
-        if (!order._id || success) {
-            if (success) {
-                dispatch({ type: "PAYMENT_RESET" });
-            }
-        } else {
-            paypalDispatch({
-                type: "resetOptions",
-                value: {
-                    "client-id": paypalClientID,
-                    currency: "USD",
-                },
-            });
-            paypalDispatch({ type: "setLoadingStatus", value: "pending" });
-        }
-    }, [order, success, paypalClientID, paypalDispatch]);
+  useEffect(() => {
+    if (!order._id || success) {
+      if (success) {
+        dispatch({ type: "PAYMENT_RESET" });
+      }
+    } else {
+      paypalDispatch({
+        type: "resetOptions",
+        value: {
+          "client-id": paypalClientID,
+          currency: "USD",
+        },
+      });
+      paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+    }
+  }, [order, success, paypalClientID, paypalDispatch]);
 
-    return (
-        <>
-            <Head>
-                <meta
-                    name="robots"
-                    content="noindex"
-                />
-                <meta
-                    name="description"
-                    content="Complete your order"
-                />
-                <title>
-                    {order.isPaid
-                        ? `Order completed ✅`
-                        : `Complete order | ${order?._id.substring(0, 10)}...`}
-                </title>
-            </Head>
-            <div className={styles.order}>
-                <OrderHeader order={order} />
-                <div className={styles.order__wrapper}>
-                    <OrderInfo order={order} />
-                    <div className={styles.order__main}>
-                        <OrderAddress
-                            order={order}
-                            user={user}
-                        />
-                        {!order.isPaid && (
-                            <OrderPayment
-                                order={order}
-                                isPending={isPending}
-                                stripePublicKey={stripePublicKey}
-                                dispatch={dispatch}
-                            />
-                        )}
-                    </div>
-                    <OrderSummary order={order} />
+  return (
+    <>
+      <Head>
+        <meta
+          name="robots"
+          content="noindex"
+        />
+        <meta
+          name="description"
+          content="Complete your order"
+        />
+        <title>
+          {order.isPaid
+            ? `Order completed ✅`
+            : `Complete order | ${order?._id.substring(0, 10)}...`}
+        </title>
+      </Head>
+      <div className={styles.order}>
+        <OrderHeader order={order} />
+        <div className={styles.order__wrapper}>
+          <OrderInfo order={order} />
+          <div className={styles.order__main}>
+            <OrderAddress
+              order={order}
+              user={user}
+            />
+            {!order.isPaid && (
+              <OrderPayment
+                order={order}
+                isPending={isPending}
+                stripePublicKey={stripePublicKey}
+                dispatch={dispatch}
+              />
+            )}
+          </div>
+          <OrderSummary order={order} />
 
-                    <div className={styles.order__info__right}></div>
-                </div>
-            </div>
-        </>
-    );
+          <div className={styles.order__info__right}></div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default OrderPage;
 
 // server side
 export async function getServerSideProps(context) {
-    try {
-        db.connectDB();
-        const { query } = context;
-        const session = await getSession(context);
-        const id = query?.id;
+  try {
+    db.connectDB();
+    const { query } = context;
+    const session = await getSession(context);
+    const id = query?.id;
 
-        const user = await User.findOne({ _id: session.user._id }).lean();
-        const order = await Order.findById(id).populate("user").lean().exec();
-        let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
-        let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
-        const admin_user = user.role === "admin";
+    const user = await User.findOne({ _id: session.user._id }).lean();
+    const order = await Order.findById(id).populate("user").lean().exec();
+    let paypal_client_id = process.env.PAYPAL_CLIENT_ID;
+    let stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
+    const admin_user = user.role === "admin";
 
-        // Authorization check
-        const notAuthorized = !admin_user && order.user._id !== user._id;
-        if (notAuthorized) {
-            console.log("Not authorized to view this order" + id);
-            db.disconnectDB();
+    // Authorization check
+    const notAuthorized = !admin_user && order.user._id !== user._id;
+    if (notAuthorized) {
+      console.log("Not authorized to view this order" + id);
+      db.disconnectDB();
 
-            return {
-                redirect: {
-                    destination: "/profile",
-                    permanent: false,
-                },
-            };
-        }
-
-        db.disconnectDB();
-        return {
-            props: {
-                user: JSON.parse(JSON.stringify(user)),
-                order: JSON.parse(JSON.stringify(order)),
-                paypalClientID: paypal_client_id,
-                stripePublicKey: stripe_public_key,
-            },
-        };
-    } catch (error) {
-        console.error("Error in getServerSideProps:", error);
-        return {
-            redirect: {
-                destination: "/error", // Redirect to an error page
-                permanent: false,
-            },
-        };
+      return {
+        redirect: {
+          destination: "/profile",
+          permanent: false,
+        },
+      };
     }
+
+    db.disconnectDB();
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify(user)),
+        order: JSON.parse(JSON.stringify(order)),
+        paypalClientID: paypal_client_id,
+        stripePublicKey: stripe_public_key,
+      },
+    };
+  } catch (error) {
+    console.error("Error in getServerSideProps:", error);
+    return {
+      redirect: {
+        destination: "/error", // Redirect to an error page
+        permanent: false,
+      },
+    };
+  }
 }

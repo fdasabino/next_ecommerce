@@ -1,46 +1,46 @@
 .style_input {
-    margin: 1rem 0;
+  margin: 1rem 0;
 
-    .header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: 0 1rem;
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
 
-        h2 {
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            padding: 0.5rem;
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.5rem;
 
-            @media (max-width: 480px) {
-                font-size: 0.7rem;
-            }
-        }
-
-        svg {
-            width: 25px;
-            height: 25px;
-            fill: $base-white;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            background: $base-info;
-            padding: 0.2rem;
-            border-radius: 50%;
-
-            @media (max-width: 480px) {
-                width: 25px;
-                height: 25px;
-            }
-
-            &:hover {
-                scale: 1.1;
-            }
-        }
-
-        button {
-            margin: 0 !important;
-        }
+      @media (max-width: 480px) {
+        font-size: 0.7rem;
+      }
     }
+
+    svg {
+      width: 25px;
+      height: 25px;
+      fill: $base-white;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      background: $base-info;
+      padding: 0.2rem;
+      border-radius: 50%;
+
+      @media (max-width: 480px) {
+        width: 25px;
+        height: 25px;
+      }
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+
+    button {
+      margin: 0 !important;
+    }
+  }
 }

@@ -6,44 +6,44 @@ import db from "@/utils/db";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 const AdminUsers = ({ user, users }) => {
-    const router = useRouter();
-    const { pathname } = router;
-    const path = pathname.split("/admin/dashboard")[1];
+  const router = useRouter();
+  const { pathname } = router;
+  const path = pathname.split("/admin/dashboard")[1];
 
-    return (
-        <AdminLayout
-            path={path}
-            user={user}>
-            <div className={styles.users}>
-                <UsersList rows={users} />
-            </div>
-        </AdminLayout>
-    );
+  return (
+    <AdminLayout
+      path={path}
+      user={user}>
+      <div className={styles.users}>
+        <UsersList rows={users} />
+      </div>
+    </AdminLayout>
+  );
 };
 
 export default AdminUsers;
 
 // server side code
 export async function getServerSideProps(context) {
-    await db.connectDB();
-    const session = await getSession(context);
-    try {
-        const user = await User.findOne({ _id: session.user._id }).lean();
-        const users = await User.find({}).sort({ createdAt: -1 }).lean();
+  await db.connectDB();
+  const session = await getSession(context);
+  try {
+    const user = await User.findOne({ _id: session.user._id }).lean();
+    const users = await User.find({}).sort({ createdAt: -1 }).lean();
 
-        return {
-            props: {
-                user: JSON.parse(JSON.stringify(user)),
-                users: JSON.parse(JSON.stringify(users)),
-            },
-        };
-    } catch (error) {
-        return {
-            props: {
-                error: "Something went wrong",
-            },
-        };
-    } finally {
-        await db.disconnectDB();
-    }
+    return {
+      props: {
+        user: JSON.parse(JSON.stringify(user)),
+        users: JSON.parse(JSON.stringify(users)),
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: "Something went wrong",
+      },
+    };
+  } finally {
+    await db.disconnectDB();
+  }
 }
